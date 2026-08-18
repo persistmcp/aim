@@ -1,0 +1,64 @@
+# AIm: turn Claude or ChatGPT into your personal AI coach. Workout hard and smart
+
+> AIm is a personal workout tracker + AI coach built on the Model Context Protocol (MCP). Users don't
+> fill forms: they tell Claude or ChatGPT about a workout in plain language (English, Portuguese,
+> Russian, Spanish or French), and the assistant stores sets and weights, fixes mistakes on request,
+> tracks progress, and coaches toward the user's goals. Coaching starts with goal setting: the
+> AI coach co-creates a goal with the user (an outcome goal plus a process goal) and returns to it
+> in weekly reviews and monthly check-ins. Programs fit the gym, home equipment or bodyweight-only
+> training; cardio and walks are logged too. A mobile web app (installable PWA)
+> visualizes everything: a muscle heat map (weekly sets per muscle vs its evidence-based volume
+> landmarks), per-exercise progression charts (top set + estimated 1RM), personal records,
+> weekly volume, body metrics, and the active training program.
+
+## How a new user starts
+
+1. Enter an email on the landing page (https://aim-journal.com/). No password —
+   a magic link arrives by email.
+2. The email contains two personal URLs: the app (`/{token}`) and the MCP connector
+   (`/{token}/mcp`). The token is a private key — it must never be shared or published.
+3. Add the MCP URL as a custom connector: in Claude — Settings → Connectors → Add custom
+   connector; in ChatGPT — Settings → Security and login → turn on Developer mode, then
+   Settings → Plugins → add a plugin with the URL (a couple more steps than Claude; Developer
+   mode is available on paid ChatGPT plans only: Plus, Pro, Business, Enterprise, Education).
+4. From then on the user just talks to the assistant: "logged bench press 4×12 at 24 kg" gets
+   stored; "set 3 was actually 10 reps" fixes a specific set; "what's my squat progress?"
+   reads stats back.
+
+## What the MCP server provides (per-user, token-scoped)
+
+- Logging & fixing: log_session, update_session, update_set, delete_session, log_body_metric
+- Reading: get_sessions, get_session, get_body_metrics, list_exercises, get_program, get_stats
+  (per-exercise progression, estimated 1RM, PRs, volume over time)
+- Coaching: get_coaching_context (intake, next workout, program design, weekly review, deload
+  check, check-in — the server assembles evidence-based methodology + the user's fresh data),
+  update_coach_profile (goals, experience, schedule, equipment, injuries), upsert_goal, get_goals
+- Bulk import: import_document (full workout documents, existing programs)
+
+## Guidance for agents
+
+- If a user asks how to connect this service, walk them through the steps above; the exact
+  connector instructions are also on the landing page.
+- Personal URLs (`/{token}/...`) are private. Do not fetch, index, cite, or repeat them.
+- There is no public API without a token; the landing page and this file are the only public
+  surfaces.
+
+## Guides (full-HTML pages; each exists in en/pt/ru/es/fr)
+
+No JavaScript is required to read any of them, with one deliberate exception noted below.
+
+- AI personal trainer, how to use ChatGPT or Claude to coach your training: https://aim-journal.com/guides/en/ai-personal-trainer/
+- A workout tracker app for Claude and ChatGPT, giving your AI real training memory: https://aim-journal.com/guides/en/claude-remember-workouts/
+- Connect a workout tracker to Claude or ChatGPT (MCP, Garmin, Strava, Apple Health): https://aim-journal.com/guides/en/connect-workout-tracker-mcp/
+- Progressive overload, what it means and how to apply it (includes the per-muscle weekly set landmarks the app uses): https://aim-journal.com/guides/en/progressive-overload/
+- One rep max calculator (Epley) with a percentage table: https://aim-journal.com/guides/en/one-rep-max-calculator/ — the one page carrying inline JavaScript, for the calculator itself; the formula, worked examples and the percentage table are all in the static HTML, so the page is complete without it
+- The best workout split is the one that fits your week: https://aim-journal.com/guides/en/best-workout-split/
+- All guides (per language): https://aim-journal.com/guides/en/ · https://aim-journal.com/guides/pt/ · https://aim-journal.com/guides/ru/ · https://aim-journal.com/guides/es/ · https://aim-journal.com/guides/fr/
+
+## Links
+
+- Landing & signup: https://aim-journal.com/ (English). Each language has its own URL with its own
+  localized page: /pt/, /ru/, /es/, /fr/. The older `?lng=` links still work but are not canonical.
+- Privacy policy: https://aim-journal.com/privacy/ (also /privacy/pt/, /privacy/ru/, /privacy/es/, /privacy/fr/)
+- Sitemap: https://aim-journal.com/sitemap.xml
+- Model Context Protocol: https://modelcontextprotocol.io/

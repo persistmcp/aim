@@ -1,0 +1,33 @@
+{
+  "title": "Conectar com a IA",
+  "subtitle": "Adicione este endereço ao Claude ou ao ChatGPT para que a IA registre os seus treinos.",
+  "urlLabel": "O seu endereço de conexão",
+  "status": {
+    "waiting": "Aguardando a sua primeira mensagem",
+    "waitingHint": "Diga algo ao seu assistente para testar a conexão, por exemplo:",
+    "testPrompt": "Mostre os meus treinos",
+    "connected": "Assistente conectado",
+    "lastActive": "Última atividade: {{when}}"
+  },
+  "copy": "Copiar",
+  "copied": "Copiado",
+  "guideTitle": "Passo a passo",
+  "guideStep1": "Abra o menu do Claude e escolha Customize",
+  "guideStep2": "Escolha Connectors",
+  "guideStep3": "Toque no mais acima da lista de conectores",
+  "guideStep4": "Escolha Add custom connector",
+  "guideStep5": "Escreva um nome, por exemplo Aim workout journal, cole o seu endereço e toque em Add",
+  "guideStep6": "Abra o conector que acabou de adicionar: em Tool permissions escolha Always allow para que o Claude não pergunte antes de cada registro",
+  "guideStep7": "No chat toque no mais, abra Connectors e ative o seu conector",
+  "mobileNote": "Pelo celular: abra Settings → Connectors no app do Claude e adicione o conector ali. As telas são um pouco diferentes, mas os campos são os mesmos dos passos 5 e 6.",
+  "guideNote": "As capturas são da versão web do Claude.",
+  "guideStepChatgpt1": "Abra o menu de perfil (embaixo à esquerda) e escolha Settings",
+  "guideStepChatgpt2": "Vá em Security and login e ative o Developer mode",
+  "guideStepChatgpt3": "No menu à esquerda, abra Plugins",
+  "guideStepChatgpt4": "Toque no botão mais ao lado de Search plugins",
+  "guideStepChatgpt5": "Escreva um nome, por exemplo Aim, cole o seu endereço em Server URL, deixe Authentication como No Auth, aceite o aviso de risco e toque em Create",
+  "guideStepChatgpt6": "Recarregue a página, depois toque no mais ao lado do campo de mensagem e confira se o Aim está ativado",
+  "chatgptDevModeNote": "O ChatGPT chama isso de Developer mode e mostra um aviso vermelho de «elevated risk»: é normal para qualquer conector personalizado, não é algo específico do AIm.",
+  "guideNoteChatgpt": "As capturas são da versão web do ChatGPT.",
+  "warning": "Não compartilhe este link: ele dá acesso completo ao seu diário."
+}

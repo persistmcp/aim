@@ -1,0 +1,29 @@
+{
+  "title": "Programa atual",
+  "daysAria": "Dias do programa",
+  "superset": "Bissérie {{n}}",
+  "duration": "~{{n}} min",
+  "setsShort": "{{n}} séries",
+  "kg": "{{n}} kg",
+  "noInstructions": "Ainda não há notas de técnica.",
+  "empty": "Ainda não há um programa ativo. Crie um conversando com a sua IA.",
+  "note": "Nota: {{text}}",
+  "video": "Vídeo demonstrativo",
+  "focus": {
+    "full_body": "corpo inteiro",
+    "upper": "superiores",
+    "lower": "inferiores",
+    "push": "empurrar",
+    "pull": "puxar",
+    "legs": "pernas",
+    "arms": "braços",
+    "core": "core",
+    "cardio": "cardio",
+    "mobility": "mobilidade"
+  },
+  "frame": "{{name}}, posição {{n}}",
+  "doseUnit": {
+    "seconds": "seg",
+    "minutes": "min"
+  }
+}

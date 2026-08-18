@@ -1,0 +1,43 @@
+{
+  "title": "Tools",
+  "subtitle": "Pick a tool.",
+  "back": "Tools",
+  "backAria": "Back to tools",
+  "connect": {
+    "label": "AI connection",
+    "hint": "Connection address"
+  },
+  "stopwatch": {
+    "title": "Stopwatch",
+    "hint": "Timing with laps",
+    "lap": "Lap",
+    "lapN": "Lap {{n}}"
+  },
+  "timer": {
+    "title": "Timer",
+    "hint": "Rest countdown",
+    "done": "Done!",
+    "minus": "−{{n}} sec",
+    "plus": "+{{n}} sec",
+    "length": "length {{value}}"
+  },
+  "controls": {
+    "start": "Start",
+    "pause": "Pause",
+    "reset": "Reset"
+  },
+  "export": {
+    "title": "Data export",
+    "hint": "Download your training history and profile as an Excel spreadsheet.",
+    "period": "Period",
+    "periods": {
+      "all": "All time",
+      "1m": "Month",
+      "3m": "3 months",
+      "6m": "6 months",
+      "year": "Year"
+    },
+    "download": "Download Excel",
+    "downloadJson": "JSON for backup"
+  }
+}

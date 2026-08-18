@@ -1,0 +1,33 @@
+{
+  "title": "Подключение к ИИ",
+  "subtitle": "Добавьте этот адрес в Claude или ChatGPT, и ИИ сможет записывать ваши тренировки.",
+  "urlLabel": "Ваш адрес для подключения",
+  "status": {
+    "waiting": "Ждём первое сообщение",
+    "waitingHint": "Скажите что-нибудь ассистенту, чтобы проверить подключение, например:",
+    "testPrompt": "Покажи мои тренировки",
+    "connected": "Ассистент подключён",
+    "lastActive": "Последняя активность: {{when}}"
+  },
+  "copy": "Скопировать",
+  "copied": "Скопировано",
+  "guideTitle": "Подключение по шагам",
+  "guideStep1": "Откройте меню Claude и выберите Customize",
+  "guideStep2": "Выберите Connectors",
+  "guideStep3": "Нажмите плюс над списком коннекторов",
+  "guideStep4": "Выберите Add custom connector",
+  "guideStep5": "Впишите название, например Aim workout journal, вставьте ваш адрес и нажмите Add",
+  "guideStep6": "Откройте добавленный коннектор: в разделе Tool permissions выберите Always allow, чтобы Claude не спрашивал разрешение на каждую запись",
+  "guideStep7": "В чате нажмите плюс, откройте Connectors и включите свой коннектор",
+  "mobileNote": "С телефона: в приложении Claude откройте Settings → Connectors и добавьте коннектор там. Экраны выглядят немного иначе, но поля те же, что в шагах 5 и 6.",
+  "guideNote": "Скриншоты из веб-версии Claude.",
+  "guideStepChatgpt1": "Откройте меню профиля (внизу слева) и выберите Settings",
+  "guideStepChatgpt2": "Перейдите в Security and login и включите Developer mode",
+  "guideStepChatgpt3": "В левом меню откройте Plugins",
+  "guideStepChatgpt4": "Нажмите кнопку плюс рядом с Search plugins",
+  "guideStepChatgpt5": "Впишите название, например Aim, вставьте ваш адрес в поле Server URL, оставьте Authentication как No Auth, примите предупреждение о риске и нажмите Create",
+  "guideStepChatgpt6": "Перезагрузите страницу, затем нажмите плюс рядом с полем сообщения и убедитесь, что Aim включён",
+  "chatgptDevModeNote": "ChatGPT называет это Developer mode и показывает красное предупреждение «elevated risk» — это обычное поведение для любого стороннего коннектора, не что-то специфичное для AIm.",
+  "guideNoteChatgpt": "Скриншоты из веб-версии ChatGPT.",
+  "warning": "Не делитесь этой ссылкой: она даёт полный доступ к вашему журналу."
+}

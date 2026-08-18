@@ -1,0 +1,29 @@
+# Only the landing is public. Every other path is a personal, token-scoped page
+# (/{token}, /{token}/api, /{token}/mcp) that must never be crawled or indexed —
+# the token in the URL is the user's private key. Longest-match rules: the
+# specific Allows below beat the blanket Disallow.
+
+User-agent: *
+Allow: /$
+Allow: /?lng=
+Allow: /pt/
+Allow: /ru/
+Allow: /es/
+Allow: /fr/
+Allow: /guides/
+Allow: /privacy/
+Allow: /index.html
+Allow: /assets/
+Allow: /icon.svg
+Allow: /icon-maskable.svg
+Allow: /apple-touch-icon.png
+Allow: /pwa-192.png
+Allow: /pwa-512.png
+Allow: /pwa-512-maskable.png
+Allow: /og-cover.png
+Allow: /manifest.webmanifest
+Allow: /llms.txt
+Allow: /sitemap.xml
+Disallow: /
+
+Sitemap: https://aim-journal.com/sitemap.xml

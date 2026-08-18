@@ -1,0 +1,8 @@
+{
+  "title": "History",
+  "monthFilterLabel": "Filter by month",
+  "allMonths": "All months",
+  "emptyTitle": "No workouts yet",
+  "emptyHint": "Log your first one via chat with your AI.",
+  "noSessionsForMonth": "No workouts for the selected month"
+}

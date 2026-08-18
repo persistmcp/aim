@@ -1,0 +1,917 @@
+[
+  {
+    "slug": "ez_bar_curl",
+    "names": {
+      "ru": "Подъём на бицепс с EZ-грифом",
+      "en": "EZ-Bar Curl",
+      "pt": "Rosca direta com barra W",
+      "es": "Curl con barra Z",
+      "fr": "Curl à la barre EZ"
+    },
+    "aliases": [
+      "сгибание рук с ez-грифом",
+      "подъём штанги на бицепс",
+      "бицепс со штангой",
+      "barbell curl",
+      "ez curl"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "ez_bar",
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Локти прижаты к бокам и не уезжают вперёд. Поднимай до сокращения бицепса, опускай медленно до почти прямых рук. Корпус неподвижен.",
+      "en": "Elbows pinned to your sides and not drifting forward. Curl to a full contraction and lower slowly to nearly straight arms. Torso still."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_curl",
+    "names": {
+      "ru": "Сгибание рук с гантелями",
+      "en": "Dumbbell Curl",
+      "pt": "Rosca alternada com halteres",
+      "es": "Curl con mancuernas",
+      "fr": "Curl aux haltères"
+    },
+    "aliases": [
+      "подъём гантелей на бицепс",
+      "бицепс с гантелями",
+      "dumbbell bicep curl"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Разворачивай кисть наружу по ходу подъёма. Локоть остаётся на месте, работает только предплечье.",
+      "en": "Rotate the palm up as you lift. The elbow stays put; only the forearm moves."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "hammer_curl",
+    "names": {
+      "ru": "Молотки с гантелями",
+      "en": "Hammer Curl",
+      "pt": "Rosca martelo",
+      "es": "Curl martillo",
+      "fr": "Curl marteau"
+    },
+    "aliases": [
+      "молотковые сгибания",
+      "молот",
+      "hammer curls"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps",
+      "forearms"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Кисти нейтрально, ладони смотрят друг на друга всё движение. Нагружает брахиалис и предплечье сильнее обычного подъёма.",
+      "en": "Neutral grip, palms facing each other the whole way. Loads the brachialis and forearm more than a supinated curl."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "incline_db_curl",
+    "names": {
+      "ru": "Сгибания на бицепс на наклонной скамье",
+      "en": "Incline Dumbbell Curl",
+      "pt": "Rosca inclinada",
+      "es": "Curl inclinado",
+      "fr": "Curl incliné"
+    },
+    "aliases": [
+      "бицепс на наклонной",
+      "подъём гантелей лёжа на наклонной",
+      "incline curl"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Скамья 45-60 градусов, руки свободно висят за корпусом. Бицепс работает в растянутом положении, поэтому вес меньше обычного.",
+      "en": "Bench at 45-60 degrees with the arms hanging behind the torso. The biceps work in a stretched position, so use less weight than usual."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_curl",
+    "names": {
+      "ru": "Сгибание рук на нижнем блоке",
+      "en": "Cable Curl",
+      "pt": "Rosca na polia baixa",
+      "es": "Curl en polea baja",
+      "fr": "Curl à la poulie basse"
+    },
+    "aliases": [
+      "бицепс на блоке",
+      "сгибание рук на блоке",
+      "cable bicep curl"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Трос натянут уже в нижней точке, поэтому бицепс под нагрузкой всю амплитуду. Локти держи у корпуса.",
+      "en": "The cable keeps tension even at the bottom, so the biceps are loaded through the whole range. Keep the elbows at your sides."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "preacher_curl",
+    "names": {
+      "ru": "Сгибание рук на скамье Скотта",
+      "en": "Preacher Curl",
+      "pt": "Rosca scott",
+      "es": "Curl en banco Scott",
+      "fr": "Curl au pupitre"
+    },
+    "aliases": [
+      "скамья скотта",
+      "парта",
+      "preacher"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "ez_bar",
+      "bench",
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Плечи плотно лежат на подушке. Не разгибай руки в замок в нижней точке — держи небольшой сгиб, чтобы не тянуть локтевой сустав.",
+      "en": "Upper arms flat on the pad. Do not lock out at the bottom; keep a slight bend so you are not yanking the elbow joint."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "close_grip_bench_press",
+    "names": {
+      "ru": "Жим лёжа узким хватом",
+      "en": "Close-Grip Bench Press",
+      "pt": "Supino com pegada fechada",
+      "es": "Press de banca con agarre estrecho",
+      "fr": "Développé couché prise serrée"
+    },
+    "aliases": [
+      "узкий жим",
+      "жим узким хватом",
+      "close grip bench"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 10,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Хват на ширине плеч, не уже — иначе страдают запястья. Локти идут близко к корпусу, гриф опускается к нижней части груди.",
+      "en": "Grip at shoulder width, no narrower, or the wrists take it. Elbows stay close to the torso and the bar comes to the lower chest."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "triceps_pushdown",
+    "names": {
+      "ru": "Разгибание рук на блоке",
+      "en": "Triceps Pushdown",
+      "pt": "Tríceps na polia",
+      "es": "Extensión de tríceps en polea",
+      "fr": "Extension triceps à la poulie"
+    },
+    "aliases": [
+      "pushdown",
+      "rope pushdown",
+      "разгибание рук на блоке на трицепс",
+      "разгибания на трицепс",
+      "разгибания на трицепс на блоке",
+      "трицепс на блоке",
+      "французский на блоке"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Локти прижаты к бокам и неподвижны. Разгибай до полного выпрямления, в конце можно развести канат в стороны. Корпус не наклоняй вперёд под вес.",
+      "en": "Elbows pinned to the sides and still. Extend fully and, with a rope, spread it apart at the bottom. Do not lean forward onto the weight."
+    },
+    "tags": [
+      "gym",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "overhead_db_triceps_extension",
+    "names": {
+      "ru": "Разгибание гантели из-за головы",
+      "en": "Overhead Dumbbell Triceps Extension",
+      "pt": "Tríceps francês com halter",
+      "es": "Extensión de tríceps sobre la cabeza",
+      "fr": "Extension triceps au-dessus de la tête"
+    },
+    "aliases": [
+      "французский жим гантелью",
+      "трицепс из-за головы",
+      "overhead extension"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "abs",
+      "front_delts"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Локти смотрят вверх и не разъезжаются. Опускай гантель за голову до растяжения трицепса, разгибай без рывка. Длинная головка любит именно это положение.",
+      "en": "Elbows point up and stay in. Lower the dumbbell behind the head into a triceps stretch and extend without jerking. The long head responds to exactly this position."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "skull_crusher",
+    "names": {
+      "ru": "Французский жим лёжа",
+      "en": "Skull Crusher",
+      "pt": "Tríceps testa",
+      "es": "Press francés",
+      "fr": "Barre au front"
+    },
+    "aliases": [
+      "французский жим",
+      "жим на трицепс лёжа",
+      "lying triceps extension"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "ez_bar",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Опускай гриф ко лбу или чуть за голову, плечо остаётся под небольшим наклоном назад. Локти не разводи в стороны.",
+      "en": "Lower the bar to the forehead or just past it, keeping the upper arms angled slightly back. Do not let the elbows flare."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bench_dip",
+    "names": {
+      "ru": "Обратные отжимания от скамьи",
+      "en": "Bench Dip",
+      "pt": "Mergulho no banco",
+      "es": "Fondos en banco",
+      "fr": "Dips sur banc"
+    },
+    "aliases": [
+      "обратные отжимания",
+      "трицепсовые отжимания от скамьи",
+      "reverse push up"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "front_delts",
+      "chest"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "bench",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ладони на краю скамьи, таз идёт вплотную вдоль неё. Опускайся до угла 90 градусов в локте, не глубже — плечи этого не любят.",
+      "en": "Palms on the edge of the bench, hips travelling close to it. Descend to about 90 degrees at the elbow and no deeper; the shoulders do not like it."
+    },
+    "tags": [
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "triceps_dip",
+    "names": {
+      "ru": "Отжимания на брусьях на трицепс",
+      "en": "Triceps Dip",
+      "pt": "Mergulho para tríceps",
+      "es": "Fondos para tríceps",
+      "fr": "Dips triceps"
+    },
+    "aliases": [
+      "брусья на трицепс",
+      "отжимания на брусьях вертикально",
+      "triceps dips"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "dip_bars",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Корпус держи вертикально, локти близко к телу — так нагрузка идёт в трицепс, а не в грудь. Опускайся до 90 градусов.",
+      "en": "Keep the torso upright with the elbows close to the body so the triceps take it rather than the chest. Descend to about 90 degrees."
+    },
+    "tags": [
+      "gym",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "wrist_curl",
+    "names": {
+      "ru": "Сгибание запястий",
+      "en": "Wrist Curl",
+      "pt": "Rosca de punho",
+      "es": "Curl de muñeca",
+      "fr": "Curl poignet"
+    },
+    "aliases": [
+      "предплечья",
+      "сгибания запястий",
+      "forearm curl"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "forearms"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "barbell",
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Предплечья лежат на скамье или бёдрах, кисти свисают. Опускай штангу до раскрытия пальцев и сгибай обратно. Амплитуда маленькая, вес умеренный.",
+      "en": "Forearms resting on a bench or your thighs with the hands hanging off. Let the bar roll to the fingers and curl it back. Small range, moderate weight."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "reverse_curl",
+    "names": {
+      "ru": "Сгибание рук обратным хватом",
+      "en": "Reverse Curl",
+      "pt": "Rosca inversa",
+      "es": "Curl inverso",
+      "fr": "Curl inversé"
+    },
+    "aliases": [
+      "обратный подъём на бицепс",
+      "обратные сгибания"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "forearms"
+    ],
+    "secondary_muscles": [
+      "biceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "ez_bar",
+      "barbell",
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Хват сверху, кисти зафиксированы прямо. Вес заметно меньше обычного подъёма, работают разгибатели предплечья и брахиорадиалис.",
+      "en": "Overhand grip with the wrists held straight. Much lighter than a normal curl; the forearm extensors and brachioradialis do the work."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "spider_curl",
+    "names": {
+      "ru": "Паучьи сгибания",
+      "en": "Spider Curl",
+      "pt": "Rosca spider",
+      "es": "Curl spider",
+      "fr": "Curl spider"
+    },
+    "aliases": [
+      "спайдер керл",
+      "сгибания лёжа грудью на наклонной"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "ez_bar",
+      "incline_bench",
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Грудью на наклонной скамье, руки свободно висят вниз. Читинг невозможен физически, поэтому вес маленький, а сокращение чистое.",
+      "en": "Chest on the incline bench, arms hanging straight down. Cheating is physically impossible, so the weight is small and the contraction clean."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "concentration_curl",
+    "names": {
+      "ru": "Концентрированный подъём на бицепс",
+      "en": "Concentration Curl",
+      "pt": "Rosca concentrada",
+      "es": "Curl concentrado",
+      "fr": "Curl concentré"
+    },
+    "aliases": [
+      "концентрированные сгибания",
+      "бицепс сидя с упором в бедро"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Сидя, локоть упирается во внутреннюю поверхность бедра. Поднимай гантель до полного сокращения, разворачивая мизинец к плечу.",
+      "en": "Seated with the elbow braced against the inner thigh. Curl to a full contraction, turning the pinky toward the shoulder."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_rope_hammer_curl",
+    "names": {
+      "ru": "Молотки с канатом на блоке",
+      "en": "Cable Rope Hammer Curl",
+      "pt": "Rosca martelo na polia com corda",
+      "es": "Curl martillo en polea con cuerda",
+      "fr": "Curl marteau à la poulie avec corde"
+    },
+    "aliases": [
+      "молотки на блоке",
+      "канат на бицепс"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps",
+      "forearms"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Канат на нижнем блоке, хват нейтральный. Нагрузка держится и внизу, в отличие от гантелей.",
+      "en": "Rope on the low pulley, neutral grip. Unlike dumbbells, tension holds at the bottom too."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_curl",
+    "names": {
+      "ru": "Сгибание рук в тренажёре",
+      "en": "Machine Curl",
+      "pt": "Rosca na máquina",
+      "es": "Curl en máquina",
+      "fr": "Curl à la machine"
+    },
+    "aliases": [
+      "бицепс в тренажёре",
+      "тренажёр на бицепс"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "forearms"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Плечи лежат на подушке, ось совпадает с локтем. Удобно добивать бицепс в конце тренировки.",
+      "en": "Upper arms on the pad, machine axis at the elbow. Convenient for finishing the biceps at the end of a session."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "diamond_push_up",
+    "names": {
+      "ru": "Отжимания узким хватом",
+      "en": "Diamond Push-Up",
+      "pt": "Flexão diamante",
+      "es": "Flexiones diamante",
+      "fr": "Pompes diamant"
+    },
+    "aliases": [
+      "алмазные отжимания",
+      "отжимания на трицепс"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ладони под грудью, большие и указательные пальцы образуют треугольник. Локти вдоль корпуса, не в стороны.",
+      "en": "Hands under the chest, thumbs and index fingers forming a triangle. Elbows stay along the torso, not flared."
+    },
+    "tags": [
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "reverse_grip_pushdown",
+    "names": {
+      "ru": "Разгибание на блоке обратным хватом",
+      "en": "Reverse-Grip Triceps Pushdown",
+      "pt": "Tríceps na polia com pegada supinada",
+      "es": "Extensión de tríceps supino en polea",
+      "fr": "Extension triceps en supination"
+    },
+    "aliases": [
+      "трицепс обратным хватом",
+      "разгибания обратным хватом"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ладони вверх, локти прижаты. Смещает акцент на медиальную головку трицепса. Вес меньше, чем в прямом хвате.",
+      "en": "Palms up, elbows pinned. Shifts the emphasis onto the medial head. Lighter than the overhand version."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_triceps_extension",
+    "names": {
+      "ru": "Разгибание рук в тренажёре",
+      "en": "Machine Triceps Extension",
+      "pt": "Tríceps na máquina",
+      "es": "Extensión de tríceps en máquina",
+      "fr": "Extension triceps à la machine"
+    },
+    "aliases": [
+      "трицепс в тренажёре",
+      "тренажёр на трицепс"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "triceps"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Спина прижата, локти на подушке. Разгибай до конца и возвращай подконтрольно.",
+      "en": "Back against the pad, elbows supported. Extend fully and return under control."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "wrist_extension",
+    "names": {
+      "ru": "Разгибание запястий",
+      "en": "Wrist Extension",
+      "pt": "Extensão de punho",
+      "es": "Extensión de muñeca",
+      "fr": "Extension du poignet"
+    },
+    "aliases": [
+      "разгибания запястий",
+      "предплечья обратным хватом"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "forearms"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "barbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Предплечья на скамье ладонями вниз, кисти свисают. Поднимай кисть вверх и опускай медленно. Помогает при боли в локте от хвата.",
+      "en": "Forearms on the bench palms down, hands hanging off. Lift the hand up and lower slowly. Helps with grip-related elbow pain."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  }
+]

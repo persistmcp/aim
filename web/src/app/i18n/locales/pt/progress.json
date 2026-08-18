@@ -1,0 +1,40 @@
+{
+  "title": "Progresso",
+  "exercise": "Exercício",
+  "periods": {
+    "1m": "1M",
+    "3m": "3M",
+    "6m": "6M",
+    "year": "Ano",
+    "week": "Semana",
+    "month": "Mês"
+  },
+  "chart": {
+    "title": "Progresso",
+    "topSet": "Melhor série",
+    "est1rm": "1RM (est.)",
+    "noData": "Sem dados no período"
+  },
+  "stats": {
+    "bestSet": "Melhor série",
+    "est1rm": "1RM est.",
+    "trend": "Tendência"
+  },
+  "pr": {
+    "title": "Recorde pessoal",
+    "empty": "Ainda sem recorde"
+  },
+  "counts": {
+    "title": "Nº de treinos",
+    "barName": "Treinos",
+    "noData": "Ainda sem dados"
+  },
+  "bodyWeight": {
+    "title": "Peso corporal",
+    "empty": "Sem medições. Informe o seu peso conversando com a sua IA."
+  },
+  "units": {
+    "kg": "{{n}} kg",
+    "kgEmpty": "·"
+  }
+}

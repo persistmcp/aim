@@ -1,0 +1,43 @@
+{
+  "title": "Outils",
+  "subtitle": "Choisissez un outil.",
+  "back": "Outils",
+  "backAria": "Retour aux outils",
+  "connect": {
+    "label": "Connexion à l'IA",
+    "hint": "Adresse de connexion"
+  },
+  "stopwatch": {
+    "title": "Chronomètre",
+    "hint": "Mesure avec tours",
+    "lap": "Tour",
+    "lapN": "Tour {{n}}"
+  },
+  "timer": {
+    "title": "Minuteur",
+    "hint": "Compte à rebours de repos",
+    "done": "Terminé !",
+    "minus": "−{{n}} s",
+    "plus": "+{{n}} s",
+    "length": "durée {{value}}"
+  },
+  "controls": {
+    "start": "Démarrer",
+    "pause": "Pause",
+    "reset": "Réinitialiser"
+  },
+  "export": {
+    "title": "Export des données",
+    "hint": "Téléchargez votre historique d'entraînement et votre profil sous forme de tableau Excel.",
+    "period": "Période",
+    "periods": {
+      "all": "Tout l'historique",
+      "1m": "Mois",
+      "3m": "3 mois",
+      "6m": "6 mois",
+      "year": "Année"
+    },
+    "download": "Télécharger Excel",
+    "downloadJson": "JSON pour sauvegarde"
+  }
+}

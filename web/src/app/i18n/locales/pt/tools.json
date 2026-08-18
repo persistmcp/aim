@@ -1,0 +1,43 @@
+{
+  "title": "Ferramentas",
+  "subtitle": "Escolha uma ferramenta.",
+  "back": "Ferramentas",
+  "backAria": "Voltar às ferramentas",
+  "connect": {
+    "label": "Conexão com a IA",
+    "hint": "Endereço de conexão"
+  },
+  "stopwatch": {
+    "title": "Cronômetro",
+    "hint": "Medição com voltas",
+    "lap": "Volta",
+    "lapN": "Volta {{n}}"
+  },
+  "timer": {
+    "title": "Temporizador",
+    "hint": "Contagem regressiva de descanso",
+    "done": "Pronto!",
+    "minus": "−{{n}} s",
+    "plus": "+{{n}} s",
+    "length": "duração {{value}}"
+  },
+  "controls": {
+    "start": "Iniciar",
+    "pause": "Pausar",
+    "reset": "Reiniciar"
+  },
+  "export": {
+    "title": "Exportar dados",
+    "hint": "Baixe o seu histórico de treinos e o seu perfil como uma planilha do Excel.",
+    "period": "Período",
+    "periods": {
+      "all": "Todo o período",
+      "1m": "Mês",
+      "3m": "3 meses",
+      "6m": "6 meses",
+      "year": "Ano"
+    },
+    "download": "Baixar Excel",
+    "downloadJson": "JSON para backup"
+  }
+}

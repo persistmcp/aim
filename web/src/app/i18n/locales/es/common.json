@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "aria": "Navegación principal",
+    "home": "Inicio",
+    "history": "Historial",
+    "progress": "Progreso",
+    "tools": "Herramientas"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "rotateToken": "Reemitir enlace",
+    "rotateConfirmTitle": "¿Reemitir su enlace?",
+    "rotateConfirmBody": "El enlace anterior dejará de funcionar en todas partes, incluido el conector en la configuración de Claude o ChatGPT: deberá pegarlo de nuevo desde el correo nuevo.",
+    "rotateConfirmAction": "Reemitir",
+    "rotateCancel": "Cancelar",
+    "rotateSuccessTitle": "Revise su correo",
+    "rotateSuccessBody": "Enviamos un nuevo enlace a su correo. Esta página ya no funciona.",
+    "rotateNoEmail": "No se pudo reemitir: no hay un correo asociado a esta cuenta.",
+    "rotateError": "No se pudo reemitir el enlace. Inténtelo de nuevo."
+  },
+  "home": {
+    "greeting": "Su diario de entrenamientos",
+    "greetingName": "Diario de entrenamientos · {{name}}",
+    "lastWorkout": "Último entrenamiento: {{when}} · {{n}} en 4 semanas",
+    "ago": {
+      "today": "hoy",
+      "yesterday": "ayer",
+      "days_one": "hace {{count}} día",
+      "days_other": "hace {{count}} días"
+    },
+    "stats": {
+      "workoutsWeek": "Entrenamientos esta semana",
+      "volumeWeek": "Volumen esta semana",
+      "bodyweight": "Peso corporal",
+      "topE1rm": "Mejor 1RM",
+      "bodyweightDelta": "Peso, 30 días"
+    },
+    "goal": "Objetivo: {{goal}}",
+    "adherence": {
+      "title": "Constancia",
+      "count": "{{done}} de {{target}}",
+      "weekCaption": "esta semana",
+      "met": "Objetivo semanal cumplido ✅",
+      "day": {
+        "done": "{{date}}: entrenado",
+        "today": "{{date}}: hoy",
+        "future": "{{date}}: próximo",
+        "rest": "{{date}}: descanso"
+      },
+      "tense": "Quedan pocos días esta semana"
+    },
+    "editWeight": {
+      "title": "Peso corporal",
+      "hint": "Se guarda con la fecha de hoy.",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "error": "No se pudo guardar. Revise el valor e inténtelo de nuevo."
+    },
+    "featuredGoal": {
+      "setsThisWeek": "{{n}} series esta semana",
+      "targetRange": "objetivo {{min}}–{{max}}",
+      "weeklyStatus": {
+        "under": "Por debajo",
+        "in_range": "En rango",
+        "over": "Por encima"
+      },
+      "weeklyHistoryPill": "{{week}}: {{n}} series, {{status}}",
+      "weeklyHistoryPillNoData": "{{week}}: {{n}} series",
+      "trending": {
+        "up": "En aumento",
+        "down": "En descenso",
+        "flat": "Estable"
+      },
+      "trendChangeCaption": "frente al mes pasado",
+      "maintenanceOk": "Dentro del rango",
+      "maintenanceWarn": "{{pct}}% por debajo del valor base",
+      "milestone": {
+        "towardCaption": "hacia {{target}}",
+        "toGo": "hasta {{target}}",
+        "overGoal": "por encima de la meta",
+        "stage": {
+          "early": "en marcha",
+          "half": "más de la mitad",
+          "almost": "casi en la meta",
+          "beaten": "meta superada"
+        }
+      },
+      "fab": {
+        "connected": "Hablarlo con su entrenador",
+        "disconnected": "Conectar para hablar con su entrenador"
+      },
+      "discussPrompt": "Hablemos de mi objetivo: «{{title}}»",
+      "copied": "Copiado",
+      "achievedNext": "Coméntalo con tu entrenador: nueva meta o pasar a mantenimiento",
+      "trendNoData": "Aún faltan datos: sigue registrando entrenamientos",
+      "noLandmark": "sin norma de volumen para este músculo",
+      "openDetails": "Detalles de la meta",
+      "achievedAnnounce": "¡Meta lograda!",
+      "details": {
+        "title": "Meta",
+        "description": "Detalles y progreso de la meta",
+        "statusActive": "Activa",
+        "target": "Objetivo",
+        "current": "Actual",
+        "deadline": "Fecha límite",
+        "reviewDate": "Revisión",
+        "editHint": "Cambia la meta en una conversación con tu entrenador"
+      },
+      "goalType": {
+        "milestone": "Hito",
+        "weekly_volume": "Volumen semanal",
+        "trend": "Tendencia",
+        "maintenance": "Mantenimiento",
+        "frequency": "Frecuencia"
+      },
+      "weeksAxis_one": "última semana",
+      "weeksAxis_other": "últimas {{count}} semanas",
+      "unitLabel": {
+        "kg": "kg",
+        "cm": "cm"
+      }
+    },
+    "goalHistory": {
+      "title": "Objetivos anteriores",
+      "back": "Atrás",
+      "empty": "Todavía no hay nada aquí",
+      "status": {
+        "achieved": "Alcanzado",
+        "abandoned": "Abandonado",
+        "revised": "Revisado"
+      },
+      "grewFrom": "Surgió de «{{title}}»",
+      "replacedBy": "Sustituida por «{{title}}»"
+    },
+    "newPr": {
+      "title": "¡Nuevo récord!",
+      "dismissAll": "Descartar todo"
+    },
+    "streak": {
+      "countWindow": "entrenamientos en 4 semanas",
+      "weight": "Peso",
+      "workoutsWeek": "Sesiones · sem",
+      "volumeWeek": "Volumen · sem",
+      "levelTooltip": "Nivel {{level}} de 6"
+    },
+    "lastWorkoutShort": "Último entrenamiento: {{when}}"
+  },
+  "units": {
+    "tons": "{{value}} t",
+    "kg": "{{value}} kg"
+  },
+  "states": {
+    "loading": "Cargando…",
+    "errorTitle": "No se pudieron cargar los datos",
+    "errorHint": "Compruebe su conexión.",
+    "retry": "Reintentar"
+  },
+  "format": {
+    "week": "Sem {{n}}"
+  },
+  "cardio": {
+    "run": "Correr",
+    "walk": "Caminar",
+    "bike": "Bici",
+    "row": "Remo",
+    "elliptical": "Elíptica",
+    "swim": "Natación",
+    "other": "Cardio"
+  },
+  "defaultWorkout": "Entrenamiento",
+  "errors": {
+    "rateLimit": "Demasiados intentos. Inténtelo más tarde.",
+    "emailSend": "No se pudo enviar el correo. Revise el email e inténtelo de nuevo."
+  },
+  "install": {
+    "title": "Instale la aplicación",
+    "body": "Añada AIm a su pantalla de inicio: se abre al instante y muestra sus datos incluso sin conexión.",
+    "action": "Instalar",
+    "dismiss": "Ahora no",
+    "iosHint": "En Safari toque Compartir y luego “Añadir a pantalla de inicio”: la app se abre al instante y funciona sin conexión.",
+    "gotIt": "Entendido"
+  },
+  "app": {
+    "updating": "Actualizando la app…"
+  }
+}

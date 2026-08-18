@@ -1,0 +1,29 @@
+{
+  "title": "Current program",
+  "daysAria": "Program days",
+  "superset": "Superset {{n}}",
+  "duration": "~{{n}} min",
+  "setsShort": "{{n}} sets",
+  "kg": "{{n}} kg",
+  "noInstructions": "No technique notes yet.",
+  "empty": "No active program yet. Build one via chat with your AI.",
+  "note": "Note: {{text}}",
+  "video": "Video demo",
+  "focus": {
+    "full_body": "full body",
+    "upper": "upper body",
+    "lower": "lower body",
+    "push": "push",
+    "pull": "pull",
+    "legs": "legs",
+    "arms": "arms",
+    "core": "core",
+    "cardio": "cardio",
+    "mobility": "mobility"
+  },
+  "frame": "{{name}}, position {{n}}",
+  "doseUnit": {
+    "seconds": "sec",
+    "minutes": "min"
+  }
+}

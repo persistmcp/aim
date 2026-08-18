@@ -1,0 +1,700 @@
+[
+  {
+    "slug": "plank",
+    "names": {
+      "ru": "Планка",
+      "en": "Plank",
+      "pt": "Prancha",
+      "es": "Plancha",
+      "fr": "Gainage planche"
+    },
+    "aliases": [
+      "планка на локтях",
+      "передняя планка",
+      "front plank"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "front_delts",
+      "glutes",
+      "lower_back"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 30,
+    "default_rep_max": 60,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Локти под плечами, корпус прямой линией. Подверни таз и сожми ягодицы, поясница не провисает. Считай в секундах, а не в повторениях.",
+      "en": "Elbows under the shoulders, body in one line. Tuck the pelvis and squeeze the glutes so the lower back does not sag. Counted in seconds, not reps."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "side_plank",
+    "names": {
+      "ru": "Боковая планка",
+      "en": "Side Plank",
+      "pt": "Prancha lateral",
+      "es": "Plancha lateral",
+      "fr": "Gainage latéral"
+    },
+    "aliases": [
+      "планка на боку",
+      "боковая планка на локте",
+      "side plank hold"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs",
+      "abductors"
+    ],
+    "tertiary_muscles": [
+      "side_delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 20,
+    "default_rep_max": 45,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Локоть под плечом, таз поднят до прямой линии, не заваливайся вперёд или назад. Держи время, потом смени сторону.",
+      "en": "Elbow under the shoulder, hips lifted to a straight line, not rotating forward or back. Hold for time, then switch sides."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "hanging_leg_raise",
+    "names": {
+      "ru": "Подъём ног в висе",
+      "en": "Hanging Leg Raise",
+      "pt": "Elevação de pernas na barra",
+      "es": "Elevación de piernas colgado",
+      "fr": "Relevé de jambes suspendu"
+    },
+    "aliases": [
+      "подъём прямых ног в висе",
+      "подъёмы ног на турнике"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "forearms",
+      "quads"
+    ],
+    "equipment": [
+      "pull_up_bar",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Не раскачивайся: начинай движение с подкручивания таза, а не с махов ногами. Опускай ноги медленно.",
+      "en": "No swinging: start by curling the pelvis rather than kicking the legs up. Lower slowly."
+    },
+    "tags": [
+      "gym",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "lying_leg_raise",
+    "names": {
+      "ru": "Подъём ног лёжа",
+      "en": "Lying Leg Raise",
+      "pt": "Elevação de pernas no solo",
+      "es": "Elevación de piernas tumbado",
+      "fr": "Relevé de jambes au sol"
+    },
+    "aliases": [
+      "подъёмы ног лёжа",
+      "подъём прямых ног",
+      "leg raises"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "quads",
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Поясница прижата к полу всё время — если отрывается, опускай ноги не так низко. Руки под таз для опоры.",
+      "en": "Keep the lower back pressed into the floor the whole set; if it lifts, do not lower the legs as far. Hands under the hips for support."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_crunch",
+    "names": {
+      "ru": "Скручивания на блоке",
+      "en": "Cable Crunch",
+      "pt": "Abdominal na polia",
+      "es": "Crunch en polea",
+      "fr": "Crunch à la poulie"
+    },
+    "aliases": [
+      "молитва",
+      "скручивания на верхнем блоке",
+      "kneeling cable crunch"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Стоя на коленях, канат у головы. Скручивайся прессом, приближая рёбра к тазу, а не наклоняйся всем корпусом от бедра.",
+      "en": "Kneeling with the rope at your head. Crunch by bringing the ribs toward the pelvis rather than hinging the whole torso from the hips."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_crunch",
+    "names": {
+      "ru": "Скручивания в тренажёре",
+      "en": "Machine Crunch",
+      "pt": "Abdominal na máquina",
+      "es": "Crunch en máquina",
+      "fr": "Crunch à la machine"
+    },
+    "aliases": [
+      "пресс в тренажёре",
+      "скручивание в тренажёре",
+      "ab machine"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ось тренажёра на уровне пояса. Скручивайся до сокращения пресса, возвращайся медленно и не разгибайся полностью между повторениями.",
+      "en": "Line the machine's axis up with your waist. Crunch to a full contraction, return slowly and do not fully extend between reps."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "crunch",
+    "names": {
+      "ru": "Скручивания на пресс",
+      "en": "Crunch",
+      "pt": "Abdominal supra",
+      "es": "Encogimientos abdominales",
+      "fr": "Crunch"
+    },
+    "aliases": [
+      "скручивания",
+      "crunches",
+      "sit up"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 25,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Отрывай от пола только лопатки, поясница остаётся прижатой. Не тяни себя за шею руками.",
+      "en": "Lift only the shoulder blades off the floor with the lower back staying down. Do not pull on your neck."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "dead_bug",
+    "names": {
+      "ru": "Мёртвый жук",
+      "en": "Dead Bug",
+      "pt": "Dead bug",
+      "es": "Bicho muerto",
+      "fr": "Dead bug"
+    },
+    "aliases": [
+      "мертвый жук",
+      "дэд баг",
+      "dead bugs"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "lower_back"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 16,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Лёжа на спине, руки вверх, колени над тазом. Опускай противоположные руку и ногу, удерживая поясницу прижатой к полу. Как только она отрывается — амплитуда закончилась.",
+      "en": "On your back, arms up, knees over the hips. Lower the opposite arm and leg while keeping the lower back flat on the floor. The moment it lifts, that is your range."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe",
+      "back_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bicycle_crunch",
+    "names": {
+      "ru": "Воздушный велосипед",
+      "en": "Bicycle Crunch",
+      "pt": "Abdominal bicicleta",
+      "es": "Crunch bicicleta",
+      "fr": "Crunch bicyclette"
+    },
+    "aliases": [
+      "велосипед",
+      "скручивания велосипед",
+      "bicycle crunches"
+    ],
+    "category": "core",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "quads"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 16,
+    "default_rep_max": 30,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Локоть к противоположному колену, вторая нога вытягивается почти до пола. Движение медленное, скручивание корпусом, а не рывок шеей.",
+      "en": "Elbow to the opposite knee while the other leg extends nearly to the floor. Move slowly and rotate the torso instead of yanking the neck."
+    },
+    "tags": [
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "ab_wheel_rollout",
+    "names": {
+      "ru": "Ролик для пресса",
+      "en": "Ab Wheel Rollout",
+      "pt": "Rolo abdominal",
+      "es": "Rueda abdominal",
+      "fr": "Roulette abdominale"
+    },
+    "aliases": [
+      "колесо для пресса",
+      "раскатка ролика",
+      "ab rollout"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques",
+      "lats"
+    ],
+    "tertiary_muscles": [
+      "front_delts",
+      "lower_back"
+    ],
+    "equipment": [
+      "other",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 12,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "С коленей, таз подкручен. Раскатывайся ровно настолько, насколько удерживаешь поясницу от прогиба. Возвращайся прессом, а не руками.",
+      "en": "From the knees with the pelvis tucked. Roll out only as far as you can keep the lower back from arching. Pull back with the abs, not the arms."
+    },
+    "tags": [
+      "home",
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "pallof_press",
+    "names": {
+      "ru": "Жим Паллофа",
+      "en": "Pallof Press",
+      "pt": "Pallof press",
+      "es": "Press Pallof",
+      "fr": "Pallof press"
+    },
+    "aliases": [
+      "антиротация на блоке",
+      "паллоф",
+      "pallof"
+    ],
+    "category": "core",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "glutes",
+      "front_delts"
+    ],
+    "equipment": [
+      "cable",
+      "resistance_band"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Встань боком к блоку, рукоять у груди. Выжимай руки вперёд и не давай корпусу развернуться к тренажёру. Задача — сопротивляться вращению.",
+      "en": "Stand side-on to the pulley with the handle at your chest. Press the hands straight out and refuse to let the torso rotate toward the stack. The point is resisting rotation."
+    },
+    "tags": [
+      "gym",
+      "back_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "reverse_crunch",
+    "names": {
+      "ru": "Обратные скручивания",
+      "en": "Reverse Crunch",
+      "pt": "Abdominal invertido",
+      "es": "Crunch inverso",
+      "fr": "Crunch inversé"
+    },
+    "aliases": [
+      "обратные скручивания на пресс",
+      "подъём таза лёжа"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Колени над тазом, руки вдоль корпуса. Подкручивай таз к рёбрам, отрывая копчик от пола. Работает низ пресса, амплитуда маленькая.",
+      "en": "Knees over the hips, arms by your sides. Curl the pelvis toward the ribs, lifting the tailbone off the floor. Small range, lower abs."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "hanging_knee_raise",
+    "names": {
+      "ru": "Подъём коленей в висе",
+      "en": "Hanging Knee Raise",
+      "pt": "Elevação de joelhos na barra",
+      "es": "Elevación de rodillas colgado",
+      "fr": "Relevé de genoux suspendu"
+    },
+    "aliases": [
+      "подъём колен в висе",
+      "колени к груди на турнике"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "forearms",
+      "quads"
+    ],
+    "equipment": [
+      "pull_up_bar",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Более лёгкая версия подъёма прямых ног. Подтягивай колени к груди с подкруткой таза, не раскачиваясь.",
+      "en": "The easier version of the straight-leg raise. Draw the knees to the chest with a pelvic tuck, without swinging."
+    },
+    "tags": [
+      "gym",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_side_bend",
+    "names": {
+      "ru": "Наклоны в сторону с гантелью",
+      "en": "Dumbbell Side Bend",
+      "pt": "Flexão lateral com halter",
+      "es": "Inclinación lateral con mancuerna",
+      "fr": "Flexion latérale à l'haltère"
+    },
+    "aliases": [
+      "наклоны с гантелей",
+      "боковые наклоны"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "lower_back"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Гантель в одной руке, вторая на поясе. Наклоняйся строго вбок, без разворота корпуса и без наклона вперёд.",
+      "en": "Dumbbell in one hand, the other on your hip. Bend straight sideways with no rotation and no forward lean."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_woodchop",
+    "names": {
+      "ru": "Дровосек на блоке",
+      "en": "Cable Woodchop",
+      "pt": "Lenhador na polia",
+      "es": "Leñador en polea",
+      "fr": "Bûcheron à la poulie"
+    },
+    "aliases": [
+      "дровосек",
+      "диагональная тяга на блоке",
+      "woodchopper"
+    ],
+    "category": "core",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "obliques"
+    ],
+    "secondary_muscles": [
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "glutes",
+      "front_delts"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Тяни рукоять по диагонали от плеча к противоположному бедру, поворот идёт от корпуса, а не от рук. Стопы стоят на месте.",
+      "en": "Pull the handle diagonally from shoulder to opposite hip, rotating from the torso rather than the arms. Feet stay planted."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "copenhagen_plank",
+    "names": {
+      "ru": "Копенгагенская планка",
+      "en": "Copenhagen Plank",
+      "pt": "Prancha de Copenhague",
+      "es": "Plancha de Copenhague",
+      "fr": "Planche de Copenhague"
+    },
+    "aliases": [
+      "копенгаген",
+      "боковая планка с приводящими"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "adductors"
+    ],
+    "secondary_muscles": [
+      "obliques",
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight",
+      "bench"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 15,
+    "default_rep_max": 40,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Боковая планка, верхняя нога лежит на скамье. Удерживай таз поднятым за счёт приводящих. Начинай с согнутой нижней ноги, так значительно легче.",
+      "en": "Side plank with the top leg on a bench. Hold the hips up with the adductors. Start with the bottom leg bent, which is far easier."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  }
+]

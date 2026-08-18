@@ -1,0 +1,671 @@
+{
+  "schema_version": "1.0.0",
+  "exercises": [
+    {
+      "id": "ex_lat_pulldown",
+      "name": "Тяга верхнего блока",
+      "aliases": [
+        "lat pulldown",
+        "тяга блока сверху"
+      ],
+      "category": "compound",
+      "movement_pattern": "vertical_pull",
+      "primary_muscles": [
+        "lats"
+      ],
+      "secondary_muscles": [
+        "biceps",
+        "upper_back"
+      ],
+      "equipment": [
+        "lat_pulldown",
+        "cable"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Хват чуть шире плеч, грудь подай вверх, корпус слегка назад.\n• Тяни локтями вниз к карманам, веди ручку до верха груди.\n• Лопатки вниз-назад, без рывка корпусом.\n• Вверху подконтрольно растяни широчайшие.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_chest_press_machine",
+      "name": "Жим от груди в тренажёре",
+      "aliases": [
+        "chest press",
+        "жим в тренажёре"
+      ],
+      "category": "compound",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": [
+        "chest"
+      ],
+      "secondary_muscles": [
+        "front_delts",
+        "triceps"
+      ],
+      "equipment": [
+        "machine"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Спина и таз прижаты, ручки на уровне середины груди.\n• Жми вперёд, не до жёсткого замка локтя.\n• Локти примерно под 45° к корпусу.\n• Назад медленно, чувствуй растяжение груди.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_seated_row",
+      "name": "Тяга нижнего блока сидя",
+      "aliases": [],
+      "category": "compound",
+      "movement_pattern": "horizontal_pull",
+      "primary_muscles": [
+        "upper_back",
+        "lats"
+      ],
+      "secondary_muscles": [
+        "biceps",
+        "rear_delts"
+      ],
+      "equipment": [
+        "seated_row",
+        "cable"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Спина прямая, лёгкий наклон, грудь вверх.\n• Тяни к низу живота, локти ведёшь вдоль корпуса.\n• В конце сведи лопатки, короткая пауза.\n• Возврат подконтрольно, без округления спины.",
+      "default_rep_range": {
+        "min": 10,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_cable_crossover_htl",
+      "name": "Сведение в кроссовере сверху-вниз",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": [
+        "lower_chest",
+        "chest"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "cable_crossover",
+        "cable"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Блоки сверху, лёгкий наклон вперёд, шаг вперёд.\n• Веди руки по дуге вниз-внутрь к низу груди.\n• Локти чуть согнуты и зафиксированы.\n• Внизу сведи и сожми грудь, пауза.",
+      "default_rep_range": {
+        "min": 12,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_face_pull",
+      "name": "Лицевая тяга",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "horizontal_pull",
+      "primary_muscles": [
+        "rear_delts"
+      ],
+      "secondary_muscles": [
+        "lower_traps",
+        "rotator_cuff"
+      ],
+      "equipment": [
+        "cable"
+      ],
+      "is_unilateral": false,
+      "tags": [
+        "posture"
+      ],
+      "instructions": "• Канат на уровне лица, хват нейтральный.\n• Тяни к лицу, разводя кисти в стороны.\n• Локти держи высоко, акцент на задние дельты.\n• Пауза в сокращении, медленно назад.",
+      "default_rep_range": {
+        "min": 15,
+        "max": 20
+      }
+    },
+    {
+      "id": "ex_lateral_raise",
+      "name": "Махи гантелями в стороны",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "side_delts"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "dumbbell"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Лёгкий наклон вперёд, локти чуть согнуты.\n• Поднимай через стороны до уровня плеч.\n• Веди мизинцем чуть вверх, без заброса весом.\n• Опускай медленно, без раскачки.",
+      "default_rep_range": {
+        "min": 12,
+        "max": 20
+      }
+    },
+    {
+      "id": "ex_ez_curl",
+      "name": "Подъём на бицепс с EZ-грифом",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "biceps"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "ez_bar"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Локти прижаты к корпусу, не выводи вперёд.\n• Поднимай только за счёт предплечья, без раскачки.\n• Вверху сожми бицепс.\n• Опускай медленно до полного выпрямления.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_triceps_pushdown",
+      "name": "Разгибания на трицепс на блоке",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "triceps"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "cable"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Локти прижаты к бокам, корпус чуть вперёд.\n• Разгибай до полного выпрямления, сожми трицепс.\n• Назад только до угла ~90° в локте.\n• Без рывков плечами.",
+      "default_rep_range": {
+        "min": 10,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_bicycle_crunch",
+      "name": "Воздушный велосипед",
+      "aliases": [],
+      "category": "core",
+      "movement_pattern": "core",
+      "primary_muscles": [
+        "abs",
+        "obliques"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "bodyweight"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Поясница прижата к полу.\n• Локоть к противоположному колену, скручивай корпус.\n• Вторую ногу выпрямляй, не клади на пол.\n• Медленно и подконтрольно, ровно дыши."
+    },
+    {
+      "id": "ex_plank",
+      "name": "Планка",
+      "aliases": [],
+      "category": "core",
+      "movement_pattern": "core",
+      "primary_muscles": [
+        "abs"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "bodyweight"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Локти под плечами, тело в прямую линию.\n• Таз не провисает и не задирается.\n• Напряги пресс и ягодицы, дыши ровно.\n• Держи заданное время."
+    },
+    {
+      "id": "ex_db_incline_press",
+      "name": "Жим гантелей на наклонной",
+      "aliases": [],
+      "category": "compound",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": [
+        "upper_chest",
+        "chest"
+      ],
+      "secondary_muscles": [
+        "front_delts",
+        "triceps"
+      ],
+      "equipment": [
+        "dumbbell",
+        "incline_bench"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Скамья ~30°, лопатки сведены, стопы в пол.\n• Гантели на уровне верха груди.\n• Жми вверх-внутрь, не стукай гантели наверху.\n• Опускай медленно до растяжения груди.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_db_row_one_arm",
+      "name": "Тяга гантели одной рукой",
+      "aliases": [],
+      "category": "compound",
+      "movement_pattern": "horizontal_pull",
+      "primary_muscles": [
+        "upper_back",
+        "lats"
+      ],
+      "secondary_muscles": [
+        "biceps",
+        "rear_delts"
+      ],
+      "equipment": [
+        "dumbbell"
+      ],
+      "is_unilateral": true,
+      "tags": [],
+      "instructions": "• Колено и рука в скамью, спина параллельно полу.\n• Тяни гантель к поясу, локоть вдоль тела.\n• Вверху сведи лопатку, пауза.\n• Опускай подконтрольно, без скручивания корпуса.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_pec_deck",
+      "name": "Сведение в бабочке (pec deck)",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": [
+        "chest"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "pec_deck",
+        "machine"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Спина прижата, предплечья на упорах.\n• Своди до касания/почти, сожми грудь.\n• Не помогай плечами вперёд.\n• Разводи медленно до растяжения.",
+      "default_rep_range": {
+        "min": 12,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_y_raise",
+      "name": "Y-подъёмы на наклонной",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "lower_traps",
+        "rear_delts"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "dumbbell",
+        "incline_bench"
+      ],
+      "is_unilateral": false,
+      "tags": [
+        "posture"
+      ],
+      "instructions": "• Лёжа грудью на наклонной, лёгкие гантели.\n• Поднимай прямые руки в форме буквы Y (вверх-в стороны).\n• Большие пальцы вверх, акцент на низ трапеций.\n• Без рывка, короткая пауза вверху.",
+      "default_rep_range": {
+        "min": 12,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_db_shoulder_press",
+      "name": "Жим гантелей сидя",
+      "aliases": [],
+      "category": "compound",
+      "movement_pattern": "vertical_push",
+      "primary_muscles": [
+        "front_delts",
+        "side_delts"
+      ],
+      "secondary_muscles": [
+        "triceps"
+      ],
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Спина опёрта, гантели на уровне ушей.\n• Жми вверх, не до жёсткого замка локтя.\n• Локти не разводи строго в стороны.\n• Опускай медленно, контролируй.",
+      "default_rep_range": {
+        "min": 10,
+        "max": 12
+      }
+    },
+    {
+      "id": "ex_hammer_curl",
+      "name": "Молотковые сгибания",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "biceps",
+        "forearms"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "dumbbell"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Нейтральный хват — ладони друг к другу.\n• Локти прижаты, поднимай без раскачки.\n• Вверху короткая пауза.\n• Опускай медленно, прорабатывая плечелучевую.",
+      "default_rep_range": {
+        "min": 10,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_overhead_triceps",
+      "name": "Французский жим гантелью",
+      "aliases": [],
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": [
+        "triceps"
+      ],
+      "secondary_muscles": [],
+      "equipment": [
+        "dumbbell"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Гантель над головой в двух руках.\n• Опускай за голову, локти смотрят вперёд.\n• Локти неподвижны — двигается только предплечье.\n• Разгибай до выпрямления, сожми трицепс.",
+      "default_rep_range": {
+        "min": 10,
+        "max": 15
+      }
+    },
+    {
+      "id": "ex_db_bench_press",
+      "name": "Жим гантелей лёжа",
+      "aliases": [],
+      "category": "compound",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": [
+        "chest"
+      ],
+      "secondary_muscles": [
+        "front_delts",
+        "triceps"
+      ],
+      "equipment": [
+        "dumbbell",
+        "bench"
+      ],
+      "is_unilateral": false,
+      "tags": [],
+      "instructions": "• Лопатки сведены, стопы в пол.\n• Гантели на уровне груди, локти ~45°.\n• Жми вверх-внутрь, без стука.\n• Опускай медленно до растяжения.",
+      "default_rep_range": {
+        "min": 8,
+        "max": 12
+      }
+    }
+  ],
+  "programs": [
+    {
+      "id": "prog_upper_pp",
+      "name": "Верх тела — Тяга/Жим (суперсеты)",
+      "goal": "Гипертрофия верха, 2 дня/нед",
+      "frequency_per_week": 2,
+      "split_type": "push_pull",
+      "day_template_ids": [
+        "tpl_day_a",
+        "tpl_day_b"
+      ],
+      "status": "active"
+    }
+  ],
+  "day_templates": [
+    {
+      "id": "tpl_day_a",
+      "name": "День A",
+      "program_id": "prog_upper_pp",
+      "focus": "Тяга/Жим — суперсеты",
+      "estimated_duration_min": 52,
+      "blocks": [
+        {
+          "label": "Суперсет 1",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_lat_pulldown",
+              "target_sets": 4,
+              "target_reps": {
+                "min": 10,
+                "max": 12
+              },
+              "target_weight_kg": 55
+            },
+            {
+              "exercise_id": "ex_chest_press_machine",
+              "target_sets": 4,
+              "target_reps": {
+                "min": 8,
+                "max": 10
+              },
+              "target_weight_kg": 55
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 2",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_seated_row",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 12
+              },
+              "target_weight_kg": 55
+            },
+            {
+              "exercise_id": "ex_cable_crossover_htl",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 12
+              },
+              "target_weight_kg": 7.5
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 3",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_face_pull",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 15,
+                "max": 15
+              },
+              "target_weight_kg": 12.5
+            },
+            {
+              "exercise_id": "ex_lateral_raise",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 15
+              },
+              "target_weight_kg": 5
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 4",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_ez_curl",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 15
+              },
+              "target_weight_kg": 22.5
+            },
+            {
+              "exercise_id": "ex_triceps_pushdown",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 12
+              },
+              "target_weight_kg": 20
+            }
+          ]
+        },
+        {
+          "label": "Пресс",
+          "type": "straight",
+          "items": [
+            {
+              "exercise_id": "ex_bicycle_crunch",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 15,
+                "max": 20
+              }
+            },
+            {
+              "exercise_id": "ex_plank",
+              "target_sets": 3,
+              "notes": "≈30 сек в подходе"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tpl_day_b",
+      "name": "День B",
+      "program_id": "prog_upper_pp",
+      "focus": "Тяга/Жим — гантели",
+      "estimated_duration_min": 55,
+      "blocks": [
+        {
+          "label": "Суперсет 1",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_lat_pulldown",
+              "target_sets": 4,
+              "target_reps": {
+                "min": 12,
+                "max": 12
+              },
+              "target_weight_kg": 50,
+              "notes": "обратный хват"
+            },
+            {
+              "exercise_id": "ex_db_incline_press",
+              "target_sets": 4,
+              "target_reps": {
+                "min": 12,
+                "max": 12
+              },
+              "target_weight_kg": 18,
+              "notes": "цель — поднять с 16 до 18 кг"
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 2",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_db_row_one_arm",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 10,
+                "max": 10
+              },
+              "target_weight_kg": 20
+            },
+            {
+              "exercise_id": "ex_pec_deck",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 15,
+                "max": 15
+              },
+              "target_weight_kg": 15
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 3",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_y_raise",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 15,
+                "max": 15
+              },
+              "target_weight_kg": 3.5
+            },
+            {
+              "exercise_id": "ex_db_shoulder_press",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 10,
+                "max": 12
+              },
+              "target_weight_kg": 14
+            }
+          ]
+        },
+        {
+          "label": "Суперсет 4",
+          "type": "superset",
+          "items": [
+            {
+              "exercise_id": "ex_hammer_curl",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 10,
+                "max": 12
+              },
+              "target_weight_kg": 14
+            },
+            {
+              "exercise_id": "ex_overhead_triceps",
+              "target_sets": 3,
+              "target_reps": {
+                "min": 12,
+                "max": 15
+              },
+              "target_weight_kg": 16
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

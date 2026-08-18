@@ -1,0 +1,40 @@
+{
+  "title": "Progress",
+  "exercise": "Exercise",
+  "periods": {
+    "1m": "1M",
+    "3m": "3M",
+    "6m": "6M",
+    "year": "Year",
+    "week": "Week",
+    "month": "Month"
+  },
+  "chart": {
+    "title": "Progress",
+    "topSet": "Top set",
+    "est1rm": "1RM (est.)",
+    "noData": "No data for this period"
+  },
+  "stats": {
+    "bestSet": "Top set",
+    "est1rm": "Est. 1RM",
+    "trend": "Trend"
+  },
+  "pr": {
+    "title": "Personal record",
+    "empty": "No record yet"
+  },
+  "counts": {
+    "title": "Workout count",
+    "barName": "Workouts",
+    "noData": "No data yet"
+  },
+  "bodyWeight": {
+    "title": "Body weight",
+    "empty": "No measurements. Add your weight via chat with your AI."
+  },
+  "units": {
+    "kg": "{{n}} kg",
+    "kgEmpty": "·"
+  }
+}

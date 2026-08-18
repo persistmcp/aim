@@ -1,0 +1,92 @@
+{
+  "title": "Muscle load",
+  "subtitle": "How much recent work each muscle is still carrying.",
+  "view": {
+    "front": "Front",
+    "back": "Back"
+  },
+  "focus": "Focus",
+  "computing": "Calculating load…",
+  "empty": "Log a workout and the muscles you train will light up here.",
+  "legend": {
+    "low": "clear",
+    "mid": "fading",
+    "high": "loaded"
+  },
+  "status": {
+    "low": "low",
+    "ok": "on target",
+    "high": "high"
+  },
+  "unitSets": "sets",
+  "unitReps": "reps",
+  "label": {
+    "chest": "Chest",
+    "upper_chest": "Upper chest",
+    "lower_chest": "Lower chest",
+    "lats": "Lats",
+    "upper_back": "Upper back",
+    "traps": "Traps",
+    "lower_traps": "Lower traps",
+    "rhomboids": "Rhomboids",
+    "rear_delts": "Rear delts",
+    "side_delts": "Side delts",
+    "front_delts": "Front delts",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "forearms": "Forearms",
+    "abs": "Abs",
+    "obliques": "Obliques",
+    "lower_back": "Lower back",
+    "glutes": "Glutes",
+    "quads": "Quads",
+    "hamstrings": "Hamstrings",
+    "adductors": "Adductors",
+    "abductors": "Abductors",
+    "calves": "Calves",
+    "neck": "Neck",
+    "rotator_cuff": "Rotator cuff",
+    "full_body": "Full body",
+    "other": "Other"
+  },
+  "group": {
+    "chest": "Chest",
+    "back": "Back",
+    "shoulders": "Shoulders",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "abs": "Abs",
+    "quads": "Quads",
+    "hamstrings": "Hamstrings",
+    "glutes": "Glutes",
+    "calves": "Calves"
+  },
+  "showAll": "All muscles ({{n}})",
+  "collapse": "Show less",
+  "detail": {
+    "description": "Load and recent work for this muscle",
+    "indirect": "helped out",
+    "noWork": "Nothing logged for this muscle yet",
+    "load": "{{pct}}% loaded",
+    "recovered": "No load left",
+    "historyHeading": "Where this load came from",
+    "thisWeek_one": "{{count}} set straight at it, last 7 days",
+    "thisWeek_other": "{{count}} sets straight at it, last 7 days",
+    "onlyIndirect": "Nothing aimed straight at it — the work below did it",
+    "setsShort_one": "{{count}} set",
+    "setsShort_other": "{{count}} sets",
+    "clearIn_one": "clear in about {{count}} day",
+    "clearIn_other": "clear in about {{count}} days",
+    "clearInHours": "clear in about {{count}} h",
+    "weekTarget": "aim for {{min}}–{{max}} a week",
+    "recoveryNote": "The harder the sets, the longer the load stays."
+  },
+  "loadTooltip": "{{pct}}% of a hard session still in this muscle",
+  "recoveredTooltip": "No load left",
+  "readyIn": {
+    "hours": "fades in ~{{n}} h",
+    "days": "fades in ~{{n}} d"
+  },
+  "readyAria": "No load left",
+  "readyNext": "Least loaded right now:"
+}

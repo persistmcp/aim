@@ -1,0 +1,8 @@
+{
+  "title": "Historique",
+  "monthFilterLabel": "Filtrer par mois",
+  "allMonths": "Tous les mois",
+  "emptyTitle": "Aucune séance pour le moment",
+  "emptyHint": "Enregistrez la première via le chat avec votre IA.",
+  "noSessionsForMonth": "Aucune séance pour le mois sélectionné"
+}

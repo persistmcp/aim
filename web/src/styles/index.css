@@ -1,0 +1,37 @@
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./theme.css";
+
+/* Mobile PWA optimizations */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Safe area support */
+  .safe-area-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+  }
+
+  .safe-area-top {
+    padding-top: max(env(safe-area-inset-top), 0.5rem);
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

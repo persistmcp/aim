@@ -1,0 +1,962 @@
+[
+  {
+    "slug": "treadmill_incline_walk",
+    "names": {
+      "ru": "Ходьба в горку на дорожке",
+      "en": "Incline Treadmill Walk",
+      "pt": "Caminhada inclinada na esteira",
+      "es": "Caminata inclinada en cinta",
+      "fr": "Marche inclinée sur tapis"
+    },
+    "aliases": [
+      "ходьба в горку",
+      "дорожка в наклоне",
+      "incline walk"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "calves"
+    ],
+    "tertiary_muscles": [
+      "quads",
+      "hamstrings"
+    ],
+    "equipment": [
+      "treadmill"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 40,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Наклон 8-12 процентов, скорость такая, чтобы можно было говорить короткими фразами. За поручни не держись — это снимает половину нагрузки. Считается в минутах.",
+      "en": "Incline 8-12 percent at a pace where you can still talk in short sentences. Do not hold the rails; that removes half the work. Measured in minutes."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed",
+      "low_impact"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "treadmill_run",
+    "names": {
+      "ru": "Бег на дорожке",
+      "en": "Treadmill Run",
+      "pt": "Corrida na esteira",
+      "es": "Carrera en cinta",
+      "fr": "Course sur tapis"
+    },
+    "aliases": [
+      "running"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "calves",
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "hamstrings",
+      "glutes"
+    ],
+    "equipment": [
+      "treadmill"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 45,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Держи ровный темп, при котором дыхание контролируемое. Записывай минуты.",
+      "en": "Hold a steady pace where your breathing stays under control. Measured in minutes or kilometres."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "stationary_bike",
+    "names": {
+      "ru": "Велотренажёр",
+      "en": "Stationary Bike",
+      "pt": "Bicicleta ergométrica",
+      "es": "Bicicleta estática",
+      "fr": "Vélo d'appartement"
+    },
+    "aliases": [
+      "велик",
+      "велотренажер",
+      "сайкл",
+      "cycling"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "glutes",
+      "calves",
+      "hamstrings"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 45,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Высота седла такая, чтобы в нижней точке колено оставалось чуть согнутым. Считается в минутах.",
+      "en": "Set the saddle so the knee keeps a slight bend at the bottom of the stroke. Measured in minutes."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "cardio",
+      "timed",
+      "low_impact"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "rowing_machine",
+    "names": {
+      "ru": "Гребной тренажёр",
+      "en": "Rowing Machine",
+      "pt": "Remo ergométrico",
+      "es": "Remo ergómetro",
+      "fr": "Rameur"
+    },
+    "aliases": [
+      "гребля",
+      "гребной",
+      "rower",
+      "erg"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "upper_back",
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "lats",
+      "hamstrings",
+      "biceps"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 30,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Порядок гребка: ноги, корпус, руки. Возврат в обратном порядке. Спина прямая, тянуть спиной вместо ног — самая частая ошибка.",
+      "en": "Sequence: legs, then torso, then arms; reverse it on the recovery. Flat back. Pulling with the back instead of the legs is the classic mistake."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "elliptical",
+    "names": {
+      "ru": "Эллиптический тренажёр",
+      "en": "Elliptical Trainer",
+      "pt": "Elíptico",
+      "es": "Elíptica",
+      "fr": "Vélo elliptique"
+    },
+    "aliases": [
+      "эллипс",
+      "орбитрек",
+      "cross trainer"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "tertiary_muscles": [
+      "calves",
+      "hamstrings"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 40,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Мягкий для суставов вариант кардио. Работай и руками тоже, не повисай на поручнях. Считается в минутах.",
+      "en": "A joint-friendly cardio option. Use the arms too instead of hanging on the handles. Measured in minutes."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed",
+      "low_impact"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "jump_rope",
+    "names": {
+      "ru": "Скакалка",
+      "en": "Jump Rope",
+      "pt": "Corda de pular",
+      "es": "Comba",
+      "fr": "Corde à sauter"
+    },
+    "aliases": [
+      "прыжки на скакалке",
+      "скипинг",
+      "skipping"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "calves"
+    ],
+    "tertiary_muscles": [
+      "quads"
+    ],
+    "equipment": [
+      "other"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 15,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Прыжки низкие, приземление на подушечки стоп, вращение из запястий. Записывай минуты.",
+      "en": "Small hops, landing on the balls of the feet, rope turned from the wrists. Measured in minutes or rounds."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "warmup_cardio",
+    "names": {
+      "ru": "Лёгкое кардио для разминки",
+      "en": "Easy Cardio Warm-Up",
+      "pt": "Aquecimento cardiovascular leve",
+      "es": "Cardio suave de calentamiento",
+      "fr": "Échauffement cardio léger"
+    },
+    "aliases": [
+      "разминка",
+      "лёгкое кардио",
+      "кардио разминка",
+      "warm up"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [],
+    "equipment": [
+      "treadmill",
+      "machine",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 10,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "5-10 минут на любом кардио в лёгком темпе, чтобы поднять пульс и температуру перед работой с весами. Не должно утомлять.",
+      "en": "5-10 minutes of easy cardio to raise the heart rate and temperature before lifting. It should not tire you out."
+    },
+    "tags": [
+      "warmup",
+      "cardio",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "farmer_carry",
+    "names": {
+      "ru": "Прогулка фермера",
+      "en": "Farmer's Carry",
+      "pt": "Caminhada do fazendeiro",
+      "es": "Paseo del granjero",
+      "fr": "Marche du fermier"
+    },
+    "aliases": [
+      "фермерская прогулка",
+      "прогулка с гантелями",
+      "farmers walk"
+    ],
+    "category": "compound",
+    "movement_pattern": "carry",
+    "primary_muscles": [
+      "forearms",
+      "traps"
+    ],
+    "secondary_muscles": [
+      "abs",
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "glutes",
+      "quads",
+      "upper_back"
+    ],
+    "equipment": [
+      "dumbbell",
+      "kettlebell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 30,
+    "default_rep_max": 60,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Тяжёлые гантели по бокам, плечи назад, корпус жёсткий. Иди ровным шагом, не заваливаясь. Записывай секунды под нагрузкой.",
+      "en": "Heavy dumbbells at your sides, shoulders back, torso braced. Walk with an even stride and no leaning. Measured in seconds or metres."
+    },
+    "tags": [
+      "gym",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "cat_cow",
+    "names": {
+      "ru": "Кошка-корова",
+      "en": "Cat-Cow",
+      "pt": "Gato e vaca",
+      "es": "Gato-vaca",
+      "fr": "Chat-vache"
+    },
+    "aliases": [
+      "кошка корова",
+      "прогибы стоя на четвереньках",
+      "cat camel"
+    ],
+    "category": "mobility",
+    "movement_pattern": "mobility",
+    "primary_muscles": [
+      "lower_back"
+    ],
+    "secondary_muscles": [
+      "abs"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 30,
+    "instructions": {
+      "ru": "На четвереньках поочерёдно круглить и прогибать спину, двигаясь позвонок за позвонком. Дыши в такт движению.",
+      "en": "On all fours, alternate rounding and arching the spine, moving segment by segment. Breathe with the movement."
+    },
+    "tags": [
+      "warmup",
+      "mobility",
+      "home",
+      "back_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bird_dog",
+    "names": {
+      "ru": "Птица-собака",
+      "en": "Bird Dog",
+      "pt": "Bird dog",
+      "es": "Bird dog",
+      "fr": "Bird dog"
+    },
+    "aliases": [
+      "берд дог",
+      "вытягивание руки и ноги на четвереньках",
+      "bird-dog"
+    ],
+    "category": "mobility",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "lower_back"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "abs"
+    ],
+    "tertiary_muscles": [
+      "rear_delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 30,
+    "instructions": {
+      "ru": "На четвереньках вытяни противоположные руку и ногу до прямой линии, таз не разворачивается. Задержись на пару секунд.",
+      "en": "On all fours, extend the opposite arm and leg to a straight line without letting the hips rotate. Hold a couple of seconds."
+    },
+    "tags": [
+      "warmup",
+      "mobility",
+      "home",
+      "back_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "hip_flexor_stretch",
+    "names": {
+      "ru": "Растяжка сгибателей бедра",
+      "en": "Hip Flexor Stretch",
+      "pt": "Alongamento do flexor do quadril",
+      "es": "Estiramiento del flexor de cadera",
+      "fr": "Étirement des fléchisseurs de hanche"
+    },
+    "aliases": [
+      "растяжка бедра",
+      "выпад для растяжки",
+      "couch stretch"
+    ],
+    "category": "mobility",
+    "movement_pattern": "mobility",
+    "primary_muscles": [
+      "quads"
+    ],
+    "secondary_muscles": [
+      "glutes"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 30,
+    "default_rep_max": 60,
+    "default_rest_sec": 15,
+    "instructions": {
+      "ru": "Колено сзади на полу, таз подкручен вперёд. Тянет по передней поверхности бедра, а не в пояснице. Держи время на каждую сторону.",
+      "en": "Rear knee on the floor with the pelvis tucked under. You should feel the front of the thigh, not the lower back. Hold for time on each side."
+    },
+    "tags": [
+      "mobility",
+      "home",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "y_raise",
+    "names": {
+      "ru": "Y-подъёмы на наклонной скамье",
+      "en": "Prone Y-Raise",
+      "pt": "Elevação em Y",
+      "es": "Elevación en Y",
+      "fr": "Élévation en Y"
+    },
+    "aliases": [
+      "y raises",
+      "y подъёмы",
+      "y подъёмы на наклонной",
+      "y-подъёмы на наклонной",
+      "игрек подъёмы"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "lower_traps"
+    ],
+    "secondary_muscles": [
+      "rear_delts",
+      "rotator_cuff"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "dumbbell",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Лёжа грудью на наклонной скамье, подними прямые руки вверх буквой Y, большие пальцы вверх. Вес совсем маленький, работает низ трапеции.",
+      "en": "Lying chest-down on an incline bench, raise straight arms into a Y with the thumbs up. Very light weight; the lower traps do the work."
+    },
+    "tags": [
+      "gym",
+      "shoulder_health",
+      "warmup"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "burpee",
+    "names": {
+      "ru": "Бёрпи",
+      "en": "Burpee",
+      "pt": "Burpee",
+      "es": "Burpee",
+      "fr": "Burpee"
+    },
+    "aliases": [
+      "берпи",
+      "бурпи"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "quads",
+      "chest"
+    ],
+    "tertiary_muscles": [
+      "triceps",
+      "abs",
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Присед, уход в упор лёжа, отжимание, прыжок в присед и выпрыгивание. Темп ровный: бёрпи ломает дыхание быстрее, чем кажется.",
+      "en": "Squat, kick back to a plank, push-up, jump the feet in and jump up. Keep an even pace; burpees wreck your breathing faster than expected."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "mountain_climber",
+    "names": {
+      "ru": "Скалолаз",
+      "en": "Mountain Climber",
+      "pt": "Escalador",
+      "es": "Escalador",
+      "fr": "Mountain climber"
+    },
+    "aliases": [
+      "альпинист",
+      "бег в упоре лёжа"
+    ],
+    "category": "core",
+    "movement_pattern": "core",
+    "primary_muscles": [
+      "abs"
+    ],
+    "secondary_muscles": [
+      "obliques",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "quads",
+      "chest"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 20,
+    "default_rep_max": 40,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Из упора лёжа поочерёдно подтягивай колени к груди. Таз не подпрыгивает, плечи над кистями.",
+      "en": "From a plank, drive the knees to the chest alternately. Hips stay level, shoulders over the wrists."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "stair_climber",
+    "names": {
+      "ru": "Степпер",
+      "en": "Stair Climber",
+      "pt": "Simulador de escada",
+      "es": "Escaladora",
+      "fr": "Simulateur d'escalier"
+    },
+    "aliases": [
+      "степ мельница",
+      "stairmaster"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "calves",
+      "hamstrings"
+    ],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 40,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Не виси на поручнях — это снимает большую часть работы. Ставь стопу на ступень целиком. Считается в минутах.",
+      "en": "Do not hang on the rails; that removes most of the work. Place the whole foot on each step. Measured in minutes."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed",
+      "low_impact"
+    ],
+    "long_length": false,
+    "dose_unit": "minutes"
+  },
+  {
+    "slug": "sled_push",
+    "names": {
+      "ru": "Толкание саней",
+      "en": "Sled Push",
+      "pt": "Empurrada de trenó",
+      "es": "Empuje de trineo",
+      "fr": "Poussée de traîneau"
+    },
+    "aliases": [
+      "сани",
+      "прowler",
+      "prowler push"
+    ],
+    "category": "compound",
+    "movement_pattern": "carry",
+    "primary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "secondary_muscles": [
+      "calves",
+      "hamstrings"
+    ],
+    "tertiary_muscles": [
+      "abs",
+      "front_delts",
+      "triceps"
+    ],
+    "equipment": [
+      "other"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 20,
+    "default_rep_max": 60,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Корпус наклонён вперёд, руки прямые, толкай ногами короткими мощными шагами. Почти нет эксцентрики, поэтому крепатуры почти не бывает.",
+      "en": "Torso leaning in, arms straight, driving with short powerful steps. Almost no eccentric, so it rarely leaves you sore."
+    },
+    "tags": [
+      "gym",
+      "cardio",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "hamstring_stretch",
+    "names": {
+      "ru": "Растяжка задней поверхности бедра",
+      "en": "Hamstring Stretch",
+      "pt": "Alongamento de isquiotibiais",
+      "es": "Estiramiento de isquiotibiales",
+      "fr": "Étirement des ischio-jambiers"
+    },
+    "aliases": [
+      "растяжка бицепса бедра",
+      "наклон к ноге"
+    ],
+    "category": "mobility",
+    "movement_pattern": "mobility",
+    "primary_muscles": [
+      "hamstrings"
+    ],
+    "secondary_muscles": [
+      "calves"
+    ],
+    "tertiary_muscles": [
+      "lower_back"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 30,
+    "default_rep_max": 60,
+    "default_rest_sec": 15,
+    "instructions": {
+      "ru": "Нога вперёд на пятку, таз отводи назад, спина прямая. Тянет под коленом и по бедру, а не в пояснице. Держи время на каждую сторону.",
+      "en": "Front leg out on the heel, hips pushed back, back flat. You should feel it behind the knee and thigh, not in the lower back. Hold for time each side."
+    },
+    "tags": [
+      "mobility",
+      "home",
+      "timed"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  },
+  {
+    "slug": "thoracic_rotation",
+    "names": {
+      "ru": "Ротация грудного отдела",
+      "en": "Thoracic Rotation",
+      "pt": "Rotação torácica",
+      "es": "Rotación torácica",
+      "fr": "Rotation thoracique"
+    },
+    "aliases": [
+      "раскрытие грудного отдела",
+      "открытая книга",
+      "open book"
+    ],
+    "category": "mobility",
+    "movement_pattern": "rotation",
+    "primary_muscles": [
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "obliques"
+    ],
+    "tertiary_muscles": [
+      "rear_delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 30,
+    "instructions": {
+      "ru": "Лёжа на боку, колени согнуты, руки вытянуты вперёд. Раскрывай верхнюю руку в сторону, поворачиваясь грудным отделом. Таз держи неподвижным.",
+      "en": "Lying on your side with knees bent and arms out front. Open the top arm across, rotating through the mid back. Hips stay still."
+    },
+    "tags": [
+      "warmup",
+      "mobility",
+      "home",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "outdoor_run",
+    "names": {
+      "ru": "Бег на улице",
+      "en": "Outdoor Run",
+      "pt": "Corrida ao ar livre",
+      "es": "Carrera al aire libre",
+      "fr": "Course en extérieur"
+    },
+    "aliases": [
+      "бег",
+      "пробежка",
+      "бег на улице"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "calves",
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "hamstrings",
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "minutes",
+    "default_rep_min": 15,
+    "default_rep_max": 45,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Темп такой, чтобы можно было говорить короткими фразами. Записывай минуты; дистанцию, если нужно, добавь в заметку.",
+      "en": "A pace where you can still talk in short sentences. Record the minutes; put the distance in a note if you want it."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "timed"
+    ]
+  },
+  {
+    "slug": "outdoor_walk",
+    "names": {
+      "ru": "Ходьба",
+      "en": "Walk",
+      "pt": "Caminhada",
+      "es": "Caminata",
+      "fr": "Marche"
+    },
+    "aliases": [
+      "прогулка",
+      "ходьба на улице",
+      "шаги"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "calves"
+    ],
+    "tertiary_muscles": [
+      "quads",
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "minutes",
+    "default_rep_min": 20,
+    "default_rep_max": 60,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Бодрый шаг, дыхание слегка учащённое. Самая недооценённая нагрузка: её можно делать в любой день, она почти не мешает восстановлению.",
+      "en": "A brisk pace with breathing slightly up. The most underrated work there is: it fits any day and barely competes with recovery."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "timed",
+      "low_impact"
+    ]
+  },
+  {
+    "slug": "stair_climb",
+    "names": {
+      "ru": "Подъём по лестнице",
+      "en": "Stair Climb",
+      "pt": "Subida de escadas",
+      "es": "Subir escaleras",
+      "fr": "Montée d'escaliers"
+    },
+    "aliases": [
+      "лестница",
+      "подъём по ступенькам"
+    ],
+    "category": "cardio",
+    "movement_pattern": "cardio",
+    "primary_muscles": [
+      "full_body"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "quads"
+    ],
+    "tertiary_muscles": [
+      "calves",
+      "hamstrings"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "minutes",
+    "default_rep_min": 10,
+    "default_rep_max": 30,
+    "default_rest_sec": 0,
+    "instructions": {
+      "ru": "Ставь стопу на ступень целиком, за перила не тянись. Дома или в подъезде заменяет степпер один в один.",
+      "en": "Whole foot on each step, no hauling on the rail. At home or in a stairwell this replaces the stair machine exactly."
+    },
+    "tags": [
+      "home",
+      "cardio",
+      "timed"
+    ]
+  }
+]

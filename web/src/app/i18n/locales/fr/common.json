@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "aria": "Navigation principale",
+    "home": "Accueil",
+    "history": "Historique",
+    "progress": "Progression",
+    "tools": "Outils"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "theme": "Thème",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "rotateToken": "Réémettre le lien",
+    "rotateConfirmTitle": "Réémettre votre lien ?",
+    "rotateConfirmBody": "L'ancien lien cessera de fonctionner partout, y compris le connecteur dans les paramètres de Claude ou ChatGPT — il faudra le recoller depuis le nouvel e-mail.",
+    "rotateConfirmAction": "Réémettre",
+    "rotateCancel": "Annuler",
+    "rotateSuccessTitle": "Consultez votre boîte mail",
+    "rotateSuccessBody": "Nous avons envoyé un nouveau lien à votre e-mail. Cette page ne fonctionne plus.",
+    "rotateNoEmail": "Impossible de réémettre : aucun e-mail associé à ce compte.",
+    "rotateError": "Impossible de réémettre le lien. Réessayez."
+  },
+  "home": {
+    "greeting": "Votre journal d'entraînement",
+    "greetingName": "Journal d'entraînement · {{name}}",
+    "lastWorkout": "Dernière séance : {{when}} · {{n}} sur 4 semaines",
+    "ago": {
+      "today": "aujourd'hui",
+      "yesterday": "hier",
+      "days_one": "il y a {{count}} jour",
+      "days_other": "il y a {{count}} jours"
+    },
+    "stats": {
+      "workoutsWeek": "Séances cette semaine",
+      "volumeWeek": "Volume cette semaine",
+      "bodyweight": "Poids du corps",
+      "topE1rm": "Meilleur 1RM",
+      "bodyweightDelta": "Poids, 30 jours"
+    },
+    "goal": "Objectif : {{goal}}",
+    "adherence": {
+      "title": "Régularité",
+      "count": "{{done}} sur {{target}}",
+      "weekCaption": "cette semaine",
+      "met": "Objectif hebdomadaire atteint ✅",
+      "day": {
+        "done": "{{date}}: entraînement",
+        "today": "{{date}}: aujourd'hui",
+        "future": "{{date}}: à venir",
+        "rest": "{{date}}: repos"
+      },
+      "tense": "Il ne reste que quelques jours cette semaine"
+    },
+    "editWeight": {
+      "title": "Poids corporel",
+      "hint": "Enregistré avec la date du jour.",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "error": "Impossible d'enregistrer. Vérifiez la valeur et réessayez."
+    },
+    "featuredGoal": {
+      "setsThisWeek": "{{n}} séries cette semaine",
+      "targetRange": "objectif {{min}}–{{max}}",
+      "weeklyStatus": {
+        "under": "En dessous",
+        "in_range": "Dans la plage",
+        "over": "Au-dessus"
+      },
+      "weeklyHistoryPill": "{{week}} : {{n}} séries, {{status}}",
+      "weeklyHistoryPillNoData": "{{week}} : {{n}} séries",
+      "trending": {
+        "up": "En hausse",
+        "down": "En baisse",
+        "flat": "Stable"
+      },
+      "trendChangeCaption": "par rapport au mois dernier",
+      "maintenanceOk": "Dans la plage",
+      "maintenanceWarn": "{{pct}}% en dessous du niveau de référence",
+      "milestone": {
+        "towardCaption": "vers {{target}}",
+        "toGo": "jusqu'à {{target}}",
+        "overGoal": "au-delà de l'objectif",
+        "stage": {
+          "early": "en route",
+          "half": "plus de la moitié",
+          "almost": "presque au but",
+          "beaten": "objectif dépassé"
+        }
+      },
+      "fab": {
+        "connected": "En discuter avec votre coach",
+        "disconnected": "Se connecter pour en discuter"
+      },
+      "discussPrompt": "Parlons de mon objectif : « {{title}} »",
+      "copied": "Copié",
+      "achievedNext": "Voyez avec votre coach : nouvel objectif ou passage en maintien",
+      "trendNoData": "Pas encore assez de données — continue d'enregistrer tes séances",
+      "noLandmark": "pas de repère de volume pour ce muscle",
+      "openDetails": "Détails de l'objectif",
+      "achievedAnnounce": "Objectif atteint !",
+      "details": {
+        "title": "Objectif",
+        "description": "Détails et progression de l'objectif",
+        "statusActive": "Actif",
+        "target": "Cible",
+        "current": "Actuel",
+        "deadline": "Échéance",
+        "reviewDate": "Révision",
+        "editHint": "Modifie l'objectif dans une conversation avec ton coach"
+      },
+      "goalType": {
+        "milestone": "Jalon",
+        "weekly_volume": "Volume hebdomadaire",
+        "trend": "Tendance",
+        "maintenance": "Maintien",
+        "frequency": "Fréquence"
+      },
+      "weeksAxis_one": "dernière semaine",
+      "weeksAxis_other": "{{count}} dernières semaines",
+      "unitLabel": {
+        "kg": "kg",
+        "cm": "cm"
+      }
+    },
+    "goalHistory": {
+      "title": "Objectifs précédents",
+      "back": "Retour",
+      "empty": "Rien ici pour l'instant",
+      "status": {
+        "achieved": "Atteint",
+        "abandoned": "Abandonné",
+        "revised": "Révisé"
+      },
+      "grewFrom": "Issu de « {{title}} »",
+      "replacedBy": "Remplacée par « {{title}} »"
+    },
+    "newPr": {
+      "title": "Nouveau record !",
+      "dismissAll": "Tout masquer"
+    },
+    "streak": {
+      "countWindow": "séances sur 4 semaines",
+      "weight": "Poids",
+      "workoutsWeek": "Séances · sem",
+      "volumeWeek": "Volume · sem",
+      "levelTooltip": "Niveau {{level}} sur 6"
+    },
+    "lastWorkoutShort": "Dernière séance : {{when}}"
+  },
+  "units": {
+    "tons": "{{value}} t",
+    "kg": "{{value}} kg"
+  },
+  "states": {
+    "loading": "Chargement…",
+    "errorTitle": "Impossible de charger les données",
+    "errorHint": "Vérifiez votre connexion.",
+    "retry": "Réessayer"
+  },
+  "format": {
+    "week": "Sem {{n}}"
+  },
+  "cardio": {
+    "run": "Course",
+    "walk": "Marche",
+    "bike": "Vélo",
+    "row": "Rameur",
+    "elliptical": "Elliptique",
+    "swim": "Natation",
+    "other": "Cardio"
+  },
+  "defaultWorkout": "Séance",
+  "errors": {
+    "rateLimit": "Trop de tentatives. Réessayez plus tard.",
+    "emailSend": "Impossible d'envoyer l'e-mail. Vérifiez l'adresse et réessayez."
+  },
+  "install": {
+    "title": "Installez l'application",
+    "body": "Ajoutez AIm à votre écran d'accueil : ouverture instantanée et vos données visibles même hors ligne.",
+    "action": "Installer",
+    "dismiss": "Pas maintenant",
+    "iosHint": "Dans Safari, touchez Partager puis “Sur l'écran d'accueil” : l'app s'ouvre instantanément et fonctionne hors ligne.",
+    "gotIt": "Compris"
+  },
+  "app": {
+    "updating": "Mise à jour de l'app…"
+  }
+}

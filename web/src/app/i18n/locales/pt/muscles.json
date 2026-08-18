@@ -1,0 +1,92 @@
+{
+  "title": "Carga muscular",
+  "subtitle": "Quanto trabalho recente cada músculo ainda carrega.",
+  "view": {
+    "front": "Frente",
+    "back": "Costas"
+  },
+  "focus": "Em foco",
+  "computing": "Calculando a carga…",
+  "empty": "Registre um treino e os músculos trabalhados vão acender aqui.",
+  "legend": {
+    "low": "limpo",
+    "mid": "caindo",
+    "high": "carregado"
+  },
+  "status": {
+    "low": "pouco",
+    "ok": "no alvo",
+    "high": "muito"
+  },
+  "unitSets": "séries",
+  "unitReps": "reps",
+  "label": {
+    "chest": "Peito",
+    "upper_chest": "Peito superior",
+    "lower_chest": "Peito inferior",
+    "lats": "Dorsais",
+    "upper_back": "Costas altas",
+    "traps": "Trapézio",
+    "lower_traps": "Trapézio inferior",
+    "rhomboids": "Romboides",
+    "rear_delts": "Deltoides posteriores",
+    "side_delts": "Deltoides laterais",
+    "front_delts": "Deltoides anteriores",
+    "biceps": "Bíceps",
+    "triceps": "Tríceps",
+    "forearms": "Antebraços",
+    "abs": "Abdômen",
+    "obliques": "Oblíquos",
+    "lower_back": "Lombar",
+    "glutes": "Glúteos",
+    "quads": "Quadríceps",
+    "hamstrings": "Posteriores de coxa",
+    "adductors": "Adutores",
+    "abductors": "Abdutores",
+    "calves": "Panturrilhas",
+    "neck": "Pescoço",
+    "rotator_cuff": "Manguito rotador",
+    "full_body": "Corpo inteiro",
+    "other": "Outro"
+  },
+  "group": {
+    "chest": "Peito",
+    "back": "Costas",
+    "shoulders": "Ombros",
+    "biceps": "Bíceps",
+    "triceps": "Tríceps",
+    "abs": "Abdômen",
+    "quads": "Quadríceps",
+    "hamstrings": "Posteriores de coxa",
+    "glutes": "Glúteos",
+    "calves": "Panturrilhas"
+  },
+  "showAll": "Todos os músculos ({{n}})",
+  "collapse": "Mostrar menos",
+  "detail": {
+    "description": "Carga e trabalho recente deste músculo",
+    "indirect": "ajudou",
+    "noWork": "Nada registado para este músculo ainda",
+    "load": "{{pct}}% de carga",
+    "recovered": "Sem carga restante",
+    "historyHeading": "De onde vem esta carga",
+    "thisWeek_one": "{{count}} série direta nos últimos 7 dias",
+    "thisWeek_other": "{{count}} séries diretas nos últimos 7 dias",
+    "onlyIndirect": "Nada direto — a carga veio do trabalho abaixo",
+    "setsShort_one": "{{count}} série",
+    "setsShort_other": "{{count}} séries",
+    "clearIn_one": "livre em cerca de {{count}} dia",
+    "clearIn_other": "livre em cerca de {{count}} dias",
+    "clearInHours": "livre em cerca de {{count}} h",
+    "weekTarget": "objetivo {{min}}–{{max}} por semana",
+    "recoveryNote": "Quanto mais pesadas as séries, mais tempo a carga fica."
+  },
+  "loadTooltip": "Ainda resta {{pct}}% de um treino pesado neste músculo",
+  "recoveredTooltip": "Sem carga restante",
+  "readyIn": {
+    "hours": "cai em ~{{n}} h",
+    "days": "cai em ~{{n}} d"
+  },
+  "readyAria": "Sem carga restante",
+  "readyNext": "Agora com menos carga:"
+}

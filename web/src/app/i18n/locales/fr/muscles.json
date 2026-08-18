@@ -1,0 +1,92 @@
+{
+  "title": "Charge musculaire",
+  "subtitle": "Combien de travail récent chaque muscle porte encore.",
+  "view": {
+    "front": "Face",
+    "back": "Dos"
+  },
+  "focus": "En focus",
+  "computing": "Calcul de la charge…",
+  "empty": "Enregistre une séance et les muscles travaillés s'allumeront ici.",
+  "legend": {
+    "low": "net",
+    "mid": "en baisse",
+    "high": "chargé"
+  },
+  "status": {
+    "low": "peu",
+    "ok": "dans la cible",
+    "high": "beaucoup"
+  },
+  "unitSets": "séries",
+  "unitReps": "reps",
+  "label": {
+    "chest": "Pectoraux",
+    "upper_chest": "Haut des pectoraux",
+    "lower_chest": "Bas des pectoraux",
+    "lats": "Grand dorsal",
+    "upper_back": "Haut du dos",
+    "traps": "Trapèzes",
+    "lower_traps": "Bas des trapèzes",
+    "rhomboids": "Rhomboïdes",
+    "rear_delts": "Deltoïdes postérieurs",
+    "side_delts": "Deltoïdes latéraux",
+    "front_delts": "Deltoïdes antérieurs",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "forearms": "Avant-bras",
+    "abs": "Abdominaux",
+    "obliques": "Obliques",
+    "lower_back": "Bas du dos",
+    "glutes": "Fessiers",
+    "quads": "Quadriceps",
+    "hamstrings": "Ischio-jambiers",
+    "adductors": "Adducteurs",
+    "abductors": "Abducteurs",
+    "calves": "Mollets",
+    "neck": "Cou",
+    "rotator_cuff": "Coiffe des rotateurs",
+    "full_body": "Corps entier",
+    "other": "Autre"
+  },
+  "group": {
+    "chest": "Pectoraux",
+    "back": "Dos",
+    "shoulders": "Épaules",
+    "biceps": "Biceps",
+    "triceps": "Triceps",
+    "abs": "Abdominaux",
+    "quads": "Quadriceps",
+    "hamstrings": "Ischio-jambiers",
+    "glutes": "Fessiers",
+    "calves": "Mollets"
+  },
+  "showAll": "Tous les muscles ({{n}})",
+  "collapse": "Réduire",
+  "detail": {
+    "description": "Charge et travail récent de ce muscle",
+    "indirect": "a aidé",
+    "noWork": "Rien d'enregistré pour ce muscle pour l'instant",
+    "load": "{{pct}} % de charge",
+    "recovered": "Plus de charge",
+    "historyHeading": "D'où vient cette charge",
+    "thisWeek_one": "{{count}} série directe sur 7 jours",
+    "thisWeek_other": "{{count}} séries directes sur 7 jours",
+    "onlyIndirect": "Rien en direct : la charge vient du travail ci-dessous",
+    "setsShort_one": "{{count}} série",
+    "setsShort_other": "{{count}} séries",
+    "clearIn_one": "libre dans environ {{count}} jour",
+    "clearIn_other": "libre dans environ {{count}} jours",
+    "clearInHours": "libre dans environ {{count}} h",
+    "weekTarget": "objectif {{min}}–{{max}} par semaine",
+    "recoveryNote": "Plus les séries sont lourdes, plus la charge dure."
+  },
+  "loadTooltip": "Il reste {{pct}} % d'une séance difficile dans ce muscle",
+  "recoveredTooltip": "Plus de charge",
+  "readyIn": {
+    "hours": "retombe en ~{{n}} h",
+    "days": "retombe en ~{{n}} j"
+  },
+  "readyAria": "Plus de charge",
+  "readyNext": "Le moins chargé en ce moment :"
+}

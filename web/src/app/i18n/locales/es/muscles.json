@@ -1,0 +1,92 @@
+{
+  "title": "Carga muscular",
+  "subtitle": "Cuánto trabajo reciente sigue cargando cada músculo.",
+  "view": {
+    "front": "Frente",
+    "back": "Espalda"
+  },
+  "focus": "En foco",
+  "computing": "Calculando carga…",
+  "empty": "Registra un entrenamiento y aquí se encenderán los músculos trabajados.",
+  "legend": {
+    "low": "limpio",
+    "mid": "bajando",
+    "high": "cargado"
+  },
+  "status": {
+    "low": "poco",
+    "ok": "en objetivo",
+    "high": "mucho"
+  },
+  "unitSets": "series",
+  "unitReps": "reps",
+  "label": {
+    "chest": "Pecho",
+    "upper_chest": "Pecho superior",
+    "lower_chest": "Pecho inferior",
+    "lats": "Dorsales",
+    "upper_back": "Espalda alta",
+    "traps": "Trapecios",
+    "lower_traps": "Trapecio inferior",
+    "rhomboids": "Romboides",
+    "rear_delts": "Deltoides posteriores",
+    "side_delts": "Deltoides laterales",
+    "front_delts": "Deltoides anteriores",
+    "biceps": "Bíceps",
+    "triceps": "Tríceps",
+    "forearms": "Antebrazos",
+    "abs": "Abdominales",
+    "obliques": "Oblicuos",
+    "lower_back": "Zona lumbar",
+    "glutes": "Glúteos",
+    "quads": "Cuádriceps",
+    "hamstrings": "Isquiotibiales",
+    "adductors": "Aductores",
+    "abductors": "Abductores",
+    "calves": "Gemelos",
+    "neck": "Cuello",
+    "rotator_cuff": "Manguito rotador",
+    "full_body": "Cuerpo completo",
+    "other": "Otro"
+  },
+  "group": {
+    "chest": "Pecho",
+    "back": "Espalda",
+    "shoulders": "Hombros",
+    "biceps": "Bíceps",
+    "triceps": "Tríceps",
+    "abs": "Abdominales",
+    "quads": "Cuádriceps",
+    "hamstrings": "Isquiotibiales",
+    "glutes": "Glúteos",
+    "calves": "Gemelos"
+  },
+  "showAll": "Todos los músculos ({{n}})",
+  "collapse": "Mostrar menos",
+  "detail": {
+    "description": "Carga y trabajo reciente de este músculo",
+    "indirect": "ayudó",
+    "noWork": "Aún no hay nada registrado para este músculo",
+    "load": "{{pct}}% de carga",
+    "recovered": "No queda carga",
+    "historyHeading": "De dónde viene esta carga",
+    "thisWeek_one": "{{count}} serie directa en los últimos 7 días",
+    "thisWeek_other": "{{count}} series directas en los últimos 7 días",
+    "onlyIndirect": "Nada directo: la carga viene del trabajo de abajo",
+    "setsShort_one": "{{count}} serie",
+    "setsShort_other": "{{count}} series",
+    "clearIn_one": "libre en unos {{count}} día",
+    "clearIn_other": "libre en unos {{count}} días",
+    "clearInHours": "libre en unas {{count}} h",
+    "weekTarget": "objetivo {{min}}–{{max}} por semana",
+    "recoveryNote": "Cuanto más duras las series, más dura la carga."
+  },
+  "loadTooltip": "Queda un {{pct}}% de una sesión dura en este músculo",
+  "recoveredTooltip": "No queda carga",
+  "readyIn": {
+    "hours": "baja en ~{{n}} h",
+    "days": "baja en ~{{n}} d"
+  },
+  "readyAria": "No queda carga",
+  "readyNext": "Ahora mismo con menos carga:"
+}

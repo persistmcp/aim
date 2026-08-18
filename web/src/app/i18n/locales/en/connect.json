@@ -1,0 +1,33 @@
+{
+  "title": "Connect to AI",
+  "subtitle": "Add this address to Claude or ChatGPT so the AI can log your workouts.",
+  "urlLabel": "Your connection address",
+  "status": {
+    "waiting": "Waiting for your first message",
+    "waitingHint": "Say something to your assistant to test the connection, for example:",
+    "testPrompt": "Show my workouts",
+    "connected": "Assistant connected",
+    "lastActive": "Last activity: {{when}}"
+  },
+  "copy": "Copy",
+  "copied": "Copied",
+  "guideTitle": "Step by step",
+  "guideStep1": "Open the Claude menu and choose Customize",
+  "guideStep2": "Choose Connectors",
+  "guideStep3": "Click the plus above the connector list",
+  "guideStep4": "Choose Add custom connector",
+  "guideStep5": "Type a name, for example Aim workout journal, paste your address and press Add",
+  "guideStep6": "Open the connector you just added: under Tool permissions choose Always allow so Claude does not ask before every entry",
+  "guideStep7": "In a chat press plus, open Connectors and switch your connector on",
+  "mobileNote": "On your phone: open Settings → Connectors in the Claude app and add the connector there. The screens look a bit different, but the fields are the same as in steps 5 and 6.",
+  "guideNote": "Screenshots are from the Claude web version.",
+  "guideStepChatgpt1": "Open the profile menu (bottom left) and choose Settings",
+  "guideStepChatgpt2": "Go to Security and login and turn on Developer mode",
+  "guideStepChatgpt3": "In the left menu, open Plugins",
+  "guideStepChatgpt4": "Click the plus button next to Search plugins",
+  "guideStepChatgpt5": "Type a name, for example Aim, paste your address into Server URL, leave Authentication as No Auth, accept the risk notice and click Create",
+  "guideStepChatgpt6": "Reload the page, then press plus next to the message box and make sure Aim is turned on",
+  "chatgptDevModeNote": "ChatGPT calls this Developer mode and shows a red \"elevated risk\" warning — that's normal for any custom connector, not specific to AIm.",
+  "guideNoteChatgpt": "Screenshots are from the ChatGPT web version.",
+  "warning": "Don't share this link: it grants full access to your journal."
+}

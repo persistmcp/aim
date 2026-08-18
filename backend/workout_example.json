@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "generated_at": "2026-06-13T00:00:00+04:00",
+    "generator": "example",
+    "note": "Пример заполнения. ID — псевдо-UUID для наглядности."
+  },
+  "athletes": [
+    {
+      "id": "ath_example",
+      "name": "Alex",
+      "sex": "male",
+      "height_cm": 178,
+      "bodyweight_kg": 80,
+      "body_fat_pct": 18,
+      "experience_level": "intermediate",
+      "goals": ["hypertrophy", "posture", "upper_body"],
+      "preferred_units": "metric",
+      "timezone": "Europe/Lisbon",
+      "custom_fields": { "no_barbell_bench": true }
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lat_pulldown",
+      "name": "Тяга верхнего блока",
+      "aliases": ["lat pulldown", "тяга блока сверху"],
+      "category": "compound",
+      "movement_pattern": "vertical_pull",
+      "primary_muscles": ["lats"],
+      "secondary_muscles": ["biceps", "upper_back"],
+      "equipment": ["lat_pulldown", "cable"],
+      "is_unilateral": false,
+      "default_rep_range": { "min": 8, "max": 12 }
+    },
+    {
+      "id": "ex_chest_press_machine",
+      "name": "Жим от груди в тренажёре",
+      "aliases": ["chest press", "жим в тренажёре"],
+      "category": "compound",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": ["chest"],
+      "secondary_muscles": ["front_delts", "triceps"],
+      "equipment": ["machine"],
+      "default_rep_range": { "min": 8, "max": 12 }
+    },
+    {
+      "id": "ex_seated_row",
+      "name": "Тяга нижнего блока сидя",
+      "category": "compound",
+      "movement_pattern": "horizontal_pull",
+      "primary_muscles": ["upper_back", "lats"],
+      "secondary_muscles": ["biceps", "rear_delts"],
+      "equipment": ["seated_row", "cable"],
+      "default_rep_range": { "min": 10, "max": 12 }
+    },
+    {
+      "id": "ex_cable_crossover_htl",
+      "name": "Сведение в кроссовере сверху-вниз",
+      "category": "isolation",
+      "movement_pattern": "horizontal_push",
+      "primary_muscles": ["lower_chest", "chest"],
+      "equipment": ["cable_crossover", "cable"],
+      "default_rep_range": { "min": 12, "max": 15 }
+    },
+    {
+      "id": "ex_face_pull",
+      "name": "Лицевая тяга",
+      "category": "isolation",
+      "movement_pattern": "horizontal_pull",
+      "primary_muscles": ["rear_delts"],
+      "secondary_muscles": ["lower_traps", "rotator_cuff"],
+      "equipment": ["cable"],
+      "tags": ["posture"],
+      "default_rep_range": { "min": 15, "max": 20 }
+    },
+    {
+      "id": "ex_lateral_raise",
+      "name": "Махи гантелями в стороны",
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": ["side_delts"],
+      "equipment": ["dumbbell"],
+      "default_rep_range": { "min": 12, "max": 20 }
+    },
+    {
+      "id": "ex_ez_curl",
+      "name": "Подъём на бицепс с EZ-грифом",
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": ["biceps"],
+      "equipment": ["ez_bar"],
+      "default_rep_range": { "min": 8, "max": 12 }
+    },
+    {
+      "id": "ex_triceps_pushdown",
+      "name": "Разгибания на трицепс на блоке",
+      "category": "isolation",
+      "movement_pattern": "isolation",
+      "primary_muscles": ["triceps"],
+      "equipment": ["cable"],
+      "default_rep_range": { "min": 10, "max": 15 }
+    },
+    {
+      "id": "ex_bicycle_crunch",
+      "name": "Воздушный велосипед",
+      "category": "core",
+      "movement_pattern": "core",
+      "primary_muscles": ["abs", "obliques"],
+      "equipment": ["bodyweight"]
+    },
+    {
+      "id": "ex_plank",
+      "name": "Планка",
+      "category": "core",
+      "movement_pattern": "core",
+      "primary_muscles": ["abs"],
+      "equipment": ["bodyweight"]
+    }
+  ],
+  "programs": [
+    {
+      "id": "prog_upper_pp",
+      "name": "Верх тела — Тяга/Жим (суперсеты)",
+      "goal": "hypertrophy",
+      "frequency_per_week": 4,
+      "split_type": "push_pull",
+      "day_template_ids": ["tpl_day_a"],
+      "status": "active",
+      "custom_fields": { "rotation": "A-B-A-B" }
+    }
+  ],
+  "day_templates": [
+    {
+      "id": "tpl_day_a",
+      "name": "День A",
+      "program_id": "prog_upper_pp",
+      "focus": "весь верх; акцент низ груди",
+      "estimated_duration_min": 45,
+      "blocks": [
+        {
+          "label": "Суперсет 1",
+          "type": "superset",
+          "rounds": 4,
+          "items": [
+            { "exercise_id": "ex_lat_pulldown", "target_sets": 4, "target_reps": { "min": 8, "max": 12 }, "target_weight_kg": 55 },
+            { "exercise_id": "ex_chest_press_machine", "target_sets": 4, "target_reps": { "min": 8, "max": 12 }, "target_weight_kg": 55 }
+          ]
+        },
+        {
+          "label": "Суперсет 2",
+          "type": "superset",
+          "rounds": 3,
+          "items": [
+            { "exercise_id": "ex_seated_row", "target_sets": 3, "target_reps": { "min": 10, "max": 12 }, "target_weight_kg": 55 },
+            { "exercise_id": "ex_cable_crossover_htl", "target_sets": 3, "target_reps": { "min": 12, "max": 15 }, "target_weight_kg": 20 }
+          ]
+        }
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess_0003",
+      "athlete_id": "ath_example",
+      "program_id": "prog_upper_pp",
+      "day_template_id": "tpl_day_a",
+      "day_label": "День A",
+      "date": "2026-06-06",
+      "start_time": "2026-06-06T16:50:00+04:00",
+      "end_time": "2026-06-06T17:41:00+04:00",
+      "duration_sec": 3118,
+      "bodyweight_kg": 80,
+      "session_rpe": 7,
+      "energy_level": 4,
+      "status": "completed",
+      "cardio": [
+        { "type": "run", "distance_m": 500, "duration_sec": 300, "timing": "warmup" }
+      ],
+      "entries": [
+        {
+          "exercise_id": "ex_lat_pulldown",
+          "order": 1,
+          "superset_group": "SS1",
+          "sets": [
+            { "set_number": 1, "weight_kg": 55, "reps": 12, "rir": 2 },
+            { "set_number": 2, "weight_kg": 55, "reps": 12, "rir": 1 },
+            { "set_number": 3, "weight_kg": 55, "reps": 10, "rir": 1 },
+            { "set_number": 4, "weight_kg": 55, "reps": 10, "rir": 0 }
+          ]
+        },
+        {
+          "exercise_id": "ex_chest_press_machine",
+          "order": 2,
+          "superset_group": "SS1",
+          "notes": "1-й подход взял 60, тяжело — сбросил до 55",
+          "sets": [
+            { "set_number": 1, "weight_kg": 60, "reps": 10 },
+            { "set_number": 2, "weight_kg": 55, "reps": 10 },
+            { "set_number": 3, "weight_kg": 55, "reps": 10 },
+            { "set_number": 4, "weight_kg": 55, "reps": 8, "rir": 0 }
+          ]
+        },
+        {
+          "exercise_id": "ex_seated_row",
+          "order": 3,
+          "superset_group": "SS2",
+          "sets": [
+            { "set_number": 1, "weight_kg": 55, "reps": 12 },
+            { "set_number": 2, "weight_kg": 55, "reps": 12 },
+            { "set_number": 3, "weight_kg": 55, "reps": 12 }
+          ]
+        },
+        {
+          "exercise_id": "ex_face_pull",
+          "order": 5,
+          "superset_group": "SS3",
+          "sets": [
+            { "set_number": 1, "weight_kg": 12.5, "reps": 15 },
+            { "set_number": 2, "weight_kg": 12.5, "reps": 15 },
+            { "set_number": 3, "weight_kg": 12.5, "reps": 15 }
+          ]
+        },
+        {
+          "exercise_id": "ex_ez_curl",
+          "order": 7,
+          "superset_group": "SS4",
+          "sets": [
+            { "set_number": 1, "weight_kg": 22.5, "reps": 15 },
+            { "set_number": 2, "weight_kg": 22.5, "reps": 12 },
+            { "set_number": 3, "weight_kg": 22.5, "reps": 12 }
+          ]
+        },
+        {
+          "exercise_id": "ex_plank",
+          "order": 9,
+          "sets": [
+            { "set_number": 1, "weight_kg": null, "reps": null, "duration_sec": 30 },
+            { "set_number": 2, "weight_kg": null, "reps": null, "duration_sec": 30 },
+            { "set_number": 3, "weight_kg": null, "reps": null, "duration_sec": 30 }
+          ]
+        }
+      ],
+      "metrics": {
+        "source": "whoop",
+        "strain": 12.0,
+        "max_hr": 148,
+        "cardio_load_pct": 32,
+        "muscular_load_pct": 68,
+        "hr_zones": [
+          { "zone": 4, "name": "Zone 4", "min_bpm": 161, "max_bpm": 173, "time_sec": 0, "pct": 0 },
+          { "zone": 3, "name": "Zone 3", "min_bpm": 148, "max_bpm": 160, "time_sec": 5, "pct": 0 }
+        ]
+      },
+      "tags": ["day_a", "supersets"],
+      "notes": "Вернул темп (52 мин), объём +22% к первому Дню A."
+    }
+  ],
+  "body_metrics": [
+    {
+      "id": "bm_0001",
+      "athlete_id": "ath_example",
+      "date": "2026-06-01",
+      "bodyweight_kg": 80,
+      "body_fat_pct": 18,
+      "measurements": { "chest_cm": 105, "arm_cm": 38, "waist_cm": 85 },
+      "source": "manual"
+    }
+  ]
+}

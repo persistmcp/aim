@@ -1,0 +1,311 @@
+{
+  "_comment": "Shared parity fixture for the muscle-load model. Read by BOTH suites: web/src/app/lib/muscle.test.ts + muscleVolume.test.ts and backend/tests/unit/test_landmarks.py + test_stats.py. Comparing constants alone never caught the client silently handling only two of five categories, and the first version of this fixture covered only the recovery multiplier — which is why the tier weights, the non-dosing categories and the axial rule drifted unnoticed until a review found them. Every rule duplicated across the two languages belongs here. `cases` pin exerciseRecoveryMult, `setCreditCases` the intensity term, `creditCases` the per-tier credit a single set deposits including the axial promotion.",
+  "cases": [
+    {
+      "category": "compound",
+      "pattern": "hinge",
+      "muscles": 2,
+      "expected": 1.2,
+      "long_length": null
+    },
+    {
+      "category": "compound",
+      "pattern": "lunge",
+      "muscles": 3,
+      "expected": 1.2,
+      "long_length": null
+    },
+    {
+      "category": "isolation",
+      "pattern": "hinge",
+      "muscles": 1,
+      "expected": 1.2,
+      "long_length": null
+    },
+    {
+      "category": "compound",
+      "pattern": "squat",
+      "muscles": 3,
+      "expected": 1.05,
+      "long_length": null
+    },
+    {
+      "category": "compound",
+      "pattern": "horizontal_push",
+      "muscles": 3,
+      "expected": 1.05,
+      "long_length": null
+    },
+    {
+      "category": "compound",
+      "pattern": null,
+      "muscles": 1,
+      "expected": 1.05,
+      "long_length": null
+    },
+    {
+      "category": "isolation",
+      "pattern": "isolation",
+      "muscles": 1,
+      "expected": 0.85,
+      "long_length": null
+    },
+    {
+      "category": "isolation",
+      "pattern": "horizontal_pull",
+      "muscles": 3,
+      "expected": 0.85,
+      "long_length": null
+    },
+    {
+      "category": "core",
+      "pattern": "core",
+      "muscles": 3,
+      "expected": 0.85,
+      "long_length": null
+    },
+    {
+      "category": "core",
+      "pattern": null,
+      "muscles": 2,
+      "expected": 0.85,
+      "long_length": null
+    },
+    {
+      "category": "cardio",
+      "pattern": "cardio",
+      "muscles": 4,
+      "expected": 1.0,
+      "long_length": null
+    },
+    {
+      "category": "mobility",
+      "pattern": null,
+      "muscles": 4,
+      "expected": 1.0,
+      "long_length": null
+    },
+    {
+      "category": null,
+      "pattern": null,
+      "muscles": 4,
+      "expected": 1.05,
+      "long_length": null
+    },
+    {
+      "category": null,
+      "pattern": null,
+      "muscles": 3,
+      "expected": 1.05,
+      "long_length": null
+    },
+    {
+      "category": null,
+      "pattern": null,
+      "muscles": 2,
+      "expected": 1.0,
+      "long_length": null
+    },
+    {
+      "category": null,
+      "pattern": "other",
+      "muscles": 1,
+      "expected": 1.0,
+      "long_length": null
+    },
+    {
+      "category": "compound",
+      "pattern": "hinge",
+      "muscles": 2,
+      "long_length": false,
+      "expected": 1.05,
+      "_why": "hip thrust: a hinge whose peak tension is at full extension, not a stretcher"
+    },
+    {
+      "category": "isolation",
+      "pattern": "isolation",
+      "muscles": 2,
+      "long_length": true,
+      "expected": 1.2,
+      "_why": "nordic curl: catalogued isolation, is the canonical long-length eccentric"
+    },
+    {
+      "category": "isolation",
+      "pattern": "squat",
+      "muscles": 1,
+      "long_length": true,
+      "expected": 1.2,
+      "_why": "sissy squat"
+    },
+    {
+      "category": "cardio",
+      "pattern": "cardio",
+      "muscles": 3,
+      "long_length": false,
+      "expected": 1.0,
+      "_why": "not resistance work"
+    }
+  ],
+  "setCreditCases": [
+    {
+      "reps": 3,
+      "rir": null,
+      "rpe": null,
+      "expected": 1.15
+    },
+    {
+      "reps": 5,
+      "rir": null,
+      "rpe": null,
+      "expected": 1.15
+    },
+    {
+      "reps": 8,
+      "rir": null,
+      "rpe": null,
+      "expected": 1.0
+    },
+    {
+      "reps": 14,
+      "rir": null,
+      "rpe": null,
+      "expected": 1.0
+    },
+    {
+      "reps": 15,
+      "rir": null,
+      "rpe": null,
+      "expected": 0.9
+    },
+    {
+      "reps": 20,
+      "rir": null,
+      "rpe": null,
+      "expected": 0.9
+    },
+    {
+      "reps": 25,
+      "rir": null,
+      "rpe": null,
+      "expected": 0.8
+    },
+    {
+      "reps": null,
+      "rir": null,
+      "rpe": null,
+      "expected": 1.0
+    },
+    {
+      "reps": 8,
+      "rir": 0,
+      "rpe": null,
+      "expected": 1.3
+    },
+    {
+      "reps": 8,
+      "rir": 2,
+      "rpe": null,
+      "expected": 1.0
+    },
+    {
+      "reps": 8,
+      "rir": 4,
+      "rpe": null,
+      "expected": 0.7
+    },
+    {
+      "reps": 20,
+      "rir": null,
+      "rpe": 9.5,
+      "expected": 1.3
+    },
+    {
+      "reps": 3,
+      "rir": null,
+      "rpe": 6,
+      "expected": 0.7
+    }
+  ],
+  "creditCases": [
+    {
+      "_why": "primary mover gets a full set",
+      "category": "compound",
+      "pattern": "horizontal_push",
+      "primary": ["chest"],
+      "secondary": [],
+      "tertiary": [],
+      "muscle": "chest",
+      "expected": 1.0
+    },
+    {
+      "_why": "secondary mover gets half",
+      "category": "compound",
+      "pattern": "horizontal_push",
+      "primary": ["chest"],
+      "secondary": ["triceps"],
+      "tertiary": [],
+      "muscle": "triceps",
+      "expected": 0.5
+    },
+    {
+      "_why": "tertiary mover gets a quarter",
+      "category": "compound",
+      "pattern": "horizontal_push",
+      "primary": ["chest"],
+      "secondary": [],
+      "tertiary": ["upper_back"],
+      "muscle": "upper_back",
+      "expected": 0.25
+    },
+    {
+      "_why": "a muscle listed twice is paid once, at its highest tier",
+      "category": "compound",
+      "pattern": "horizontal_push",
+      "primary": ["chest"],
+      "secondary": ["chest"],
+      "tertiary": ["chest"],
+      "muscle": "chest",
+      "expected": 1.0
+    },
+    {
+      "_why": "axial promotion: erectors as a synergist on a hinge get a full set",
+      "category": "compound",
+      "pattern": "hinge",
+      "primary": ["glutes"],
+      "secondary": ["lower_back"],
+      "tertiary": [],
+      "muscle": "lower_back",
+      "expected": 1.0
+    },
+    {
+      "_why": "axial promotion stops at the dosed tiers: a stabiliser listing stays a quarter",
+      "category": "isolation",
+      "pattern": "hinge",
+      "primary": ["glutes"],
+      "secondary": [],
+      "tertiary": ["lower_back"],
+      "muscle": "lower_back",
+      "expected": 0.25
+    },
+    {
+      "_why": "mobility deposits nothing at all",
+      "category": "mobility",
+      "pattern": "hinge",
+      "primary": ["lower_back"],
+      "secondary": [],
+      "tertiary": [],
+      "muscle": "lower_back",
+      "expected": 0.0
+    },
+    {
+      "_why": "cardio deposits nothing at all",
+      "category": "cardio",
+      "pattern": "cardio",
+      "primary": ["full_body"],
+      "secondary": ["quads"],
+      "tertiary": [],
+      "muscle": "quads",
+      "expected": 0.0
+    }
+  ]
+}

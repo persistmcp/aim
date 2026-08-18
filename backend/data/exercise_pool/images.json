@@ -1,0 +1,209 @@
+{
+  "_doc": {
+    "what": "Hand-authored map: our pool slug -> the source movement whose illustration we ship.",
+    "source": "github.com/everkinetic/data (Everkinetic, everkinetic.com), CC BY-SA 4.0",
+    "why_hand_mapped": "Names do not line up mechanically ('Barbell Bench Press' vs 'bench-press', 'Pec Deck Fly' vs 'butterfly-machine'), and a wrong illustration is worse than none — it teaches the wrong movement. Anything not listed here simply ships without an image.",
+    "pipeline": "scripts/import_pool_images.py downloads, trims, resizes and converts to webp under web/public/exercises/<slug>-N.webp. We host our own copies; nothing is hotlinked. CC BY-SA requires attribution wherever the image is shown and keeps our processed copies under the same licence.",
+    "frames": "Two per movement: start and end position.",
+    "removed_2026_08_09": "A multi-persona review viewed all 96 illustrations against their captions; these 12 showed a different movement and were dropped rather than remapped, because the source has no correct frame for them: t_bar_row (shows a stability-ball plank/knee-tuck); smith_incline_press (byte-identical to t_bar_row; same stability-ball plank); plank (shows a rounded-back quadruped knee-tuck, not a plank); bb_overhead_press (drawn seated; this entry is the standing press); cable_external_rotation (shows a straight-arm horizontal pull-in, not a rotation); hack_squat (both frames are the same file, so no range of motion is shown); ab_wheel_rollout (shows a barbell rollout; the entry (and its Russian name) is the wheel); arnold_press (plain dumbbell press without the rotation that defines the Arnold); bent_over_db_reverse_fly (drawn prone on a bench; this entry is the standing hinge version); reverse_lunge (same drawing as walking_lunge; shows neither direction of travel); band_pull_apart (band runs to an external anchor; a pull-apart is held at both ends)",
+    "upstream_defects": "The source repository itself ships wrong files for some movements, verified by hash: t-bar-rows-1.png and smith-machine-incline-bench-press-1.png are byte-identical upstream (both a stability-ball plank), and hack-squat-machine-1/2 are one file, so those entries have no recoverable illustration at all. `duplicate_image_errors` in the build script exists because of this.",
+    "sources": {
+      "everkinetic-repo": "github.com/everkinetic/data — CC BY-SA 4.0. A bare string value uses this.",
+      "commons": "commons.wikimedia.org — the same artist, uploaded per file and CC BY-SA 3.0 there. Used where the repo's file is wrong: it serves byte-identical images for t-bar-rows and smith-machine-incline-bench-press, and one file for both frames of hack-squat-machine. Value is {\"source\": \"commons\", \"files\": [...]}.",
+      "wger": "wger.de — community-contributed, so it covers movements Everkinetic has no vocabulary for (face pull, kettlebell swing, chest-supported row) but mixes several visual styles. Only two families are taken: the grey anatomical render with a red highlight, and plain line art. Photographs, dark-background renders and flat cartoons are refused, as is any drawing showing different equipment than the entry names. Each image carries its own author and licence, because CC BY-SA credits a person, not a site. Value is {\"source\": \"wger\", \"urls\": [...], \"author\": \"...\", \"license\": \"...\", \"style\": \"photo\"}."
+    }
+  },
+  "map": {
+    "arnold_press": {
+      "source": "commons",
+      "files": [
+        "File:Arnold-press-1.png",
+        "File:Arnold-press-2.png"
+      ]
+    },
+    "back_extension": "hyperextensions",
+    "band_chest_fly": "crossover-bands",
+    "bb_back_squat": "barbell-squat",
+    "bb_bench_press": "bench-press",
+    "bb_shrug": "barbell-shrugs",
+    "bb_upright_row": "upright-barbell-rows",
+    "bench_dip": "bench-dips",
+    "bent_over_cable_lateral_raise": "bent-over-lateral-cable-raises",
+    "bicycle_crunch": "air-bike",
+    "cable_crossover": "cable-crossover",
+    "cable_crunch": "seated-ab-crunch-with-cable",
+    "cable_curl": "standing-biceps-curl-with-cable",
+    "cable_front_raise": "front-cable-raises",
+    "cable_glute_kickback": "one-legged-cable-kickback",
+    "cable_pullover": "straight-arm-push-down",
+    "cable_rope_hammer_curl": "hammer-curls-with-rope-and-cable",
+    "cable_upright_row": "upright-cable-row",
+    "calf_press_on_leg_press": "calves-press-on-leg-machine",
+    "chest_dip": "chest-dips",
+    "chest_supported_db_row": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/1283/e7262f70-7512-408a-8d00-4c499ef632fc.jpg"
+      ],
+      "author": "carlos3c",
+      "license": "CC BY-SA 4.0",
+      "style": "photo",
+      "wger_name": "Incline Chest-Supported Dumbbell Row"
+    },
+    "chin_up": "chin-ups",
+    "close_grip_bench_press": "close-grip-barbell-bench-press",
+    "close_grip_pulldown": "v-bar-pull-down",
+    "concentration_curl": {
+      "source": "commons",
+      "files": [
+        "File:Concentration-curls-1.png",
+        "File:Concentration-curls-2.png"
+      ]
+    },
+    "conventional_deadlift": "barbell-dead-lifts",
+    "crunch": "crunches",
+    "db_bench_press": "bench-press-dumbbell",
+    "db_curl": "biceps-curl-with-dumbbell",
+    "db_fly": "dumbbell-flys",
+    "db_front_raise": "front-dumbbell-raise",
+    "db_lateral_raise": "lateral-dumbbell-raises",
+    "db_pullover": "straight-arm-dumbbell-pullover",
+    "db_shoulder_press": "dumbbell-shoulder-press",
+    "db_shrug": "shoulder-shrugs",
+    "db_side_bend": "side-bend-with-dumbbell",
+    "decline_bench_press": "decline-barbell-bench-press",
+    "decline_push_up": "push-up-feet-elevated-2",
+    "diamond_push_up": "close-triceps-pushup",
+    "ez_bar_curl": "ez-bar-curl-with-barbell",
+    "face_pull": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/1639/8927346e-f5ca-4795-bdf1-5ac9309401e7.webp"
+      ],
+      "author": "AlucardEvil40",
+      "license": "CC BY-SA 4.0",
+      "style": "photo",
+      "wger_name": "Dumbbell Bent Over Face Pull"
+    },
+    "flat_cable_fly": "flat-bench-cable-flys",
+    "front_squat": "front-squat-with-barbell",
+    "glute_bridge": "bridging",
+    "goblet_squat": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/203/300a44ac-4368-48e2-8b18-beea32ab915d.gif",
+        "https://wger.de/media/exercise-images/203/1c052351-2af0-4227-aeb0-244008e4b0a8.jpeg"
+      ],
+      "author": "philip",
+      "license": "CC BY-SA 4.0",
+      "style": "photo",
+      "wger_name": "Dumbbell Goblet Squat"
+    },
+    "good_morning": "barbell-good-mornings",
+    "hack_squat": {
+      "source": "commons",
+      "files": [
+        "File:Hack squat machine 1.svg",
+        "File:Hack squat machine 2.svg"
+      ]
+    },
+    "hammer_curl": "biceps-hammer-curl-with-dumbbell",
+    "hip_abduction_machine": "thigh-abductor",
+    "hip_adduction_machine": "thigh-adductor",
+    "incline_bb_press": "incline-bench-press",
+    "incline_cable_fly": "incline-cable-flys",
+    "incline_db_press": "incline-dumbbell-press",
+    "inverted_row": "body-row",
+    "kettlebell_swing": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/960/da4d0560-da89-4bb5-b91f-746458fb04ad.png"
+      ],
+      "author": "wger contributors",
+      "license": "CC BY-SA 4.0",
+      "style": "ink",
+      "wger_name": "Kettlebell Swing"
+    },
+    "lat_pulldown": "wide-grip-lat-pull-down",
+    "leg_extension": "leg-extensions",
+    "leg_press": "leg-press",
+    "lying_leg_curl": "lying-leg-curl-machine",
+    "lying_leg_raise": "flat-bench-leg-raises",
+    "machine_chest_press": "machine-bench-press",
+    "machine_incline_press": "incline-chest-press",
+    "machine_lateral_raise": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/1654/aa724a58-b3b5-4522-b278-1155416236a5.jpg"
+      ],
+      "author": "roneydya",
+      "license": "CC BY-SA 4.0",
+      "style": "photo",
+      "wger_name": "Machine Lateral Raise"
+    },
+    "machine_row": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/1725/f0ebd44e-b8e1-400c-b598-ca371f3a07af.png"
+      ],
+      "author": "barry",
+      "license": "CC BY-SA 4.0",
+      "style": "photo",
+      "wger_name": "Seated Row (Machine)"
+    },
+    "machine_shoulder_press": "seated-shoulder-press-machine",
+    "machine_triceps_extension": "triceps-extensions-using-machine",
+    "neck_isometric": "static-neck-flexion-extension",
+    "neutral_grip_pull_up": "narrow-parallel-grip-chin-ups",
+    "overhead_db_triceps_extension": "seated-triceps-press-with-dumbbell",
+    "pec_deck_fly": "butterfly-machine",
+    "preacher_curl": "preacher-curl-with-barbell",
+    "pull_up": "pull-ups",
+    "push_up": "push-ups",
+    "reverse_crunch": "bent-knee-hip-raise",
+    "reverse_curl": "biceps-curl-reverse-with-dumbbells",
+    "reverse_grip_bb_row": "reverse-grips-bent-over-barbell-rows",
+    "reverse_grip_pushdown": "reverse-grip-triceps-pushdown",
+    "romanian_deadlift": "romanian-dead-lift",
+    "seated_bb_shoulder_press": "seated-military-press",
+    "seated_cable_row": "seated-cable-rows",
+    "seated_calf_raise": "seated-calf-raise-with-barbell",
+    "seated_leg_curl": "seated-leg-curl",
+    "side_plank": "side-plank",
+    "sissy_squat": "weighted-sissy-squat-with-weight-plate",
+    "skull_crusher": "lying-triceps-press-with-barbell",
+    "smith_incline_press": {
+      "source": "commons",
+      "files": [
+        "File:Smith machine incline bench press 1.svg",
+        "File:Smith machine incline bench press 2.svg"
+      ]
+    },
+    "smith_squat": "smith-machine-squats",
+    "spider_curl": "spider-curl-with-barbell",
+    "standing_calf_raise": "standing-calf-raises-using-machine",
+    "step_up": "step-ups-with-dumbbells",
+    "superman": "supermans",
+    "t_bar_row": {
+      "source": "commons",
+      "files": [
+        "File:T-bar-row-1.png",
+        "File:T-bar-row-2.png"
+      ]
+    },
+    "triceps_dip": "tricep-dips-using-body-weight",
+    "triceps_pushdown": "triceps-pushdown-with-rope-and-cable",
+    "underhand_pulldown": "underhand-pull-down",
+    "walking_lunge": "walking-lunges",
+    "wrist_curl": {
+      "source": "wger",
+      "urls": [
+        "https://wger.de/media/exercise-images/51/f1730f56-7aca-4566-8338-3e42b1bee6e1.webp"
+      ],
+      "author": "wger contributors",
+      "license": "CC BY-SA 4.0",
+      "style": "ink",
+      "wger_name": "Barbell Wrist Curl"
+    }
+  }
+}

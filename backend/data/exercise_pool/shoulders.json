@@ -1,0 +1,823 @@
+[
+  {
+    "slug": "bb_overhead_press",
+    "names": {
+      "ru": "Жим штанги стоя",
+      "en": "Standing Barbell Overhead Press",
+      "pt": "Desenvolvimento militar com barra",
+      "es": "Press militar de pie",
+      "fr": "Développé militaire debout"
+    },
+    "aliases": [
+      "армейский жим",
+      "жим стоя",
+      "жим над головой",
+      "overhead press",
+      "ohp",
+      "military press"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back",
+      "abs",
+      "traps"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 8,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Гриф лежит на передних дельтах, хват чуть шире плеч. Сожми ягодицы и пресс, чтобы не прогибать поясницу. Убери голову назад и проведи штангу над макушкой.",
+      "en": "Bar resting on the front delts, grip just wider than shoulders. Brace the glutes and abs so the lower back does not arch. Move the head back and press the bar over the crown."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_shoulder_press",
+    "names": {
+      "ru": "Жим гантелей сидя",
+      "en": "Seated Dumbbell Shoulder Press",
+      "pt": "Desenvolvimento com halteres sentado",
+      "es": "Press de hombros con mancuernas",
+      "fr": "Développé épaules aux haltères"
+    },
+    "aliases": [
+      "жим гантелей на плечи",
+      "жим гантелей вверх",
+      "shoulder press",
+      "db press"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back",
+      "traps"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Спинка почти вертикально, поясница прижата. Опускай гантели до уровня ушей, локти чуть впереди корпуса, а не строго в стороны.",
+      "en": "Backrest nearly vertical, lower back against the pad. Lower the dumbbells to ear level with the elbows slightly in front of the body rather than straight out."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "arnold_press",
+    "names": {
+      "ru": "Жим Арнольда",
+      "en": "Arnold Press",
+      "pt": "Desenvolvimento Arnold",
+      "es": "Press Arnold",
+      "fr": "Développé Arnold"
+    },
+    "aliases": [
+      "арнольд пресс",
+      "жим арнольда с гантелями",
+      "arnold"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Старт с ладонями к себе у груди. По ходу подъёма разворачивай кисти наружу, наверху ладони смотрят вперёд. Вес меньше обычного жима.",
+      "en": "Start with the palms facing you at chest level. Rotate the hands outward as you press so the palms face forward at the top. Lighter than a straight press."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_shoulder_press",
+    "names": {
+      "ru": "Жим на плечи в тренажёре",
+      "en": "Machine Shoulder Press",
+      "pt": "Desenvolvimento na máquina",
+      "es": "Press de hombros en máquina",
+      "fr": "Développé épaules à la machine"
+    },
+    "aliases": [
+      "жим сидя в тренажёре",
+      "жим на дельты в тренажёре",
+      "shoulder press machine"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Сиденье выставь так, чтобы ручки были на уровне плеч. Не выпрямляй локти в замок наверху.",
+      "en": "Set the seat so the handles sit at shoulder height. Stop short of locking the elbows at the top."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_lateral_raise",
+    "names": {
+      "ru": "Махи гантелями в стороны",
+      "en": "Dumbbell Lateral Raise",
+      "pt": "Elevação lateral com halteres",
+      "es": "Elevaciones laterales",
+      "fr": "Élévations latérales"
+    },
+    "aliases": [
+      "махи в стороны",
+      "разведение гантелей стоя",
+      "махи гантелей",
+      "lateral raise",
+      "side raise"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "side_delts"
+    ],
+    "secondary_muscles": [
+      "traps"
+    ],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Локти чуть согнуты, поднимай до уровня плеч, не выше. Веди локтями, мизинец чуть выше большого пальца. Не подкидывай вес корпусом.",
+      "en": "Elbows slightly bent, raise to shoulder height and no higher. Lead with the elbows, pinky a touch above the thumb. No swinging from the torso."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_lateral_raise",
+    "names": {
+      "ru": "Махи в стороны на нижнем блоке",
+      "en": "Cable Lateral Raise",
+      "pt": "Elevação lateral no cabo",
+      "es": "Elevación lateral en polea",
+      "fr": "Élévation latérale à la poulie"
+    },
+    "aliases": [
+      "махи на блоке",
+      "отведение руки в сторону на блоке",
+      "cable side raise"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "side_delts"
+    ],
+    "secondary_muscles": [
+      "traps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Блок в нижнем положении, трос проходит перед корпусом. Нагрузка есть уже в нижней точке, в отличие от гантелей.",
+      "en": "Pulley set low, cable running across the front of the body. Unlike dumbbells, the load is on from the very bottom."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_front_raise",
+    "names": {
+      "ru": "Подъём гантелей перед собой",
+      "en": "Dumbbell Front Raise",
+      "pt": "Elevação frontal com halteres",
+      "es": "Elevaciones frontales",
+      "fr": "Élévations frontales"
+    },
+    "aliases": [
+      "подъёмы гантелей стоя",
+      "фронтальные подъёмы",
+      "front raise"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "upper_chest",
+      "abs"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Поднимай прямыми руками до уровня глаз, без раскачки. Передние дельты и так работают во всех жимах, поэтому объём здесь нужен небольшой.",
+      "en": "Raise with straight arms to eye level without swinging. The front delts already work in every press, so keep the volume here modest."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "reverse_pec_deck",
+    "names": {
+      "ru": "Обратная бабочка",
+      "en": "Reverse Pec Deck",
+      "pt": "Crucifixo inverso na máquina",
+      "es": "Contractor inverso",
+      "fr": "Écarté inversé à la machine"
+    },
+    "aliases": [
+      "обратные разведения в тренажёре",
+      "задние дельты в тренажёре",
+      "reverse fly machine"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "rear_delts"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "traps"
+    ],
+    "equipment": [
+      "pec_deck",
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Грудь прижата к подушке, руки почти прямые. Разводи назад по дуге до уровня плеч, не сводя лопатки сильно, иначе работу заберёт середина спины.",
+      "en": "Chest on the pad, arms nearly straight. Sweep back to shoulder level without heavily squeezing the shoulder blades, or the mid back takes over."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bent_over_db_reverse_fly",
+    "names": {
+      "ru": "Разводка гантелей в наклоне",
+      "en": "Bent-Over Dumbbell Reverse Fly",
+      "pt": "Crucifixo inverso com halteres",
+      "es": "Pájaros con mancuernas",
+      "fr": "Oiseau aux haltères"
+    },
+    "aliases": [
+      "разводка на задние дельты",
+      "махи в наклоне",
+      "rear delt fly"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "rear_delts"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "lower_back",
+      "traps"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Наклонись почти параллельно полу, спина прямая. Разводи гантели в стороны локтями, а не кистями. Вес маленький.",
+      "en": "Hinge to nearly parallel with a flat back. Open the dumbbells out by leading with the elbows, not the hands. Keep it light."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_upright_row",
+    "names": {
+      "ru": "Протяжка на блоке",
+      "en": "Cable Upright Row",
+      "pt": "Remada alta no cabo",
+      "es": "Remo al mentón en polea",
+      "fr": "Rowing menton à la poulie"
+    },
+    "aliases": [
+      "тяга к подбородку",
+      "протяжка",
+      "upright row"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "side_delts"
+    ],
+    "secondary_muscles": [
+      "traps",
+      "biceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Хват шире плеч, тяни только до уровня груди — выше начинается защемление в плече. Локти выше кистей.",
+      "en": "Grip wider than shoulders and pull only to chest height; going higher pinches the shoulder. Elbows stay above the wrists."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_external_rotation",
+    "names": {
+      "ru": "Наружная ротация плеча на блоке",
+      "en": "Cable External Rotation",
+      "pt": "Rotação externa na polia",
+      "es": "Rotación externa en polea",
+      "fr": "Rotation externe à la poulie"
+    },
+    "aliases": [
+      "ротация плеча",
+      "внешняя ротация",
+      "вращательная манжета",
+      "external rotation"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "rotator_cuff"
+    ],
+    "secondary_muscles": [
+      "rear_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable",
+      "resistance_band"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Локоть прижат к боку и согнут на 90 градусов, можно подложить полотенце. Разворачивай предплечье наружу, плечо не двигается. Вес символический.",
+      "en": "Elbow pinned to your side at 90 degrees, a rolled towel underneath helps. Rotate the forearm outward while the upper arm stays still. Very light weight."
+    },
+    "tags": [
+      "gym",
+      "shoulder_health",
+      "warmup"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "band_pull_apart",
+    "names": {
+      "ru": "Разведение резины перед собой",
+      "en": "Band Pull-Apart",
+      "pt": "Abertura com elástico",
+      "es": "Aperturas con banda elástica",
+      "fr": "Écarté à l'élastique"
+    },
+    "aliases": [
+      "разведение резинки",
+      "растягивание резины",
+      "pull apart"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "rear_delts"
+    ],
+    "secondary_muscles": [
+      "upper_back",
+      "rotator_cuff"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "resistance_band"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 25,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Руки прямые на уровне груди. Растягивай ленту в стороны до касания груди, лопатки сводятся. Хорошо идёт в разминку перед жимами.",
+      "en": "Straight arms at chest height. Stretch the band out until it touches the chest, letting the shoulder blades come together. Good as a warm-up before pressing."
+    },
+    "tags": [
+      "home",
+      "warmup",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "seated_bb_shoulder_press",
+    "names": {
+      "ru": "Жим штанги сидя",
+      "en": "Seated Barbell Shoulder Press",
+      "pt": "Desenvolvimento com barra sentado",
+      "es": "Press militar sentado",
+      "fr": "Développé militaire assis"
+    },
+    "aliases": [
+      "жим штанги сидя на плечи",
+      "военный жим сидя",
+      "seated military press"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "side_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back",
+      "traps"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Спинка почти вертикальная, поясница прижата. Сидя корпус не помогает ногами, поэтому вес меньше, чем в жиме стоя.",
+      "en": "Backrest near vertical, lower back on the pad. Seated you cannot help with the legs, so the weight drops below a standing press."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bb_upright_row",
+    "names": {
+      "ru": "Протяжка со штангой",
+      "en": "Barbell Upright Row",
+      "pt": "Remada alta com barra",
+      "es": "Remo al mentón con barra",
+      "fr": "Rowing menton à la barre"
+    },
+    "aliases": [
+      "тяга штанги к подбородку",
+      "протяжка штангой"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "side_delts"
+    ],
+    "secondary_muscles": [
+      "traps",
+      "biceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Хват шире плеч, тяни до уровня груди, не выше. Если в плече щёлкает или тянет, замени махами.",
+      "en": "Grip wider than shoulders and pull only to chest height. If the shoulder pinches, swap it for lateral raises."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_front_raise",
+    "names": {
+      "ru": "Подъём перед собой на блоке",
+      "en": "Cable Front Raise",
+      "pt": "Elevação frontal no cabo",
+      "es": "Elevación frontal en polea",
+      "fr": "Élévation frontale à la poulie"
+    },
+    "aliases": [
+      "фронтальный подъём на блоке",
+      "подъём рук перед собой на блоке"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "upper_chest",
+      "abs"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Трос между ног от нижнего блока. Поднимай прямыми руками до уровня глаз, без раскачки корпусом.",
+      "en": "Cable from the low pulley between the legs. Raise with straight arms to eye level without swinging."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bent_over_cable_lateral_raise",
+    "names": {
+      "ru": "Разведение на блоках в наклоне",
+      "en": "Bent-Over Cable Lateral Raise",
+      "pt": "Crucifixo inverso no cabo",
+      "es": "Pájaros en polea",
+      "fr": "Oiseau à la poulie"
+    },
+    "aliases": [
+      "задние дельты на блоках",
+      "разводка в наклоне на блоке"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "rear_delts"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "traps"
+    ],
+    "equipment": [
+      "cable_crossover",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Тросы перекрещены перед корпусом, наклон вперёд. Разводи руки назад по дуге, нагрузка ровная по всей амплитуде.",
+      "en": "Cables crossed in front of you, torso hinged forward. Sweep the arms back along an arc with even tension throughout."
+    },
+    "tags": [
+      "gym",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_lateral_raise",
+    "names": {
+      "ru": "Махи в стороны в тренажёре",
+      "en": "Machine Lateral Raise",
+      "pt": "Elevação lateral na máquina",
+      "es": "Elevaciones laterales en máquina",
+      "fr": "Élévations latérales à la machine"
+    },
+    "aliases": [
+      "средние дельты в тренажёре",
+      "отведение рук в тренажёре"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "side_delts"
+    ],
+    "secondary_muscles": [
+      "traps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ось тренажёра на уровне плечевого сустава. Фиксированная траектория позволяет спокойно доводить до отказа.",
+      "en": "Machine axis lined up with the shoulder joint. The fixed path makes taking it to failure straightforward."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "landmine_press",
+    "names": {
+      "ru": "Жим лендмайн",
+      "en": "Landmine Press",
+      "pt": "Desenvolvimento landmine",
+      "es": "Press landmine",
+      "fr": "Développé landmine"
+    },
+    "aliases": [
+      "жим штанги в углу",
+      "landmine"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_push",
+    "primary_muscles": [
+      "front_delts"
+    ],
+    "secondary_muscles": [
+      "upper_chest",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "abs",
+      "obliques"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Конец грифа закреплён в углу или в лендмайне. Жми вперёд-вверх по дуге. Плечо не выходит в крайнее верхнее положение, поэтому вариант удобен при больном плече.",
+      "en": "One end of the bar anchored in a corner or landmine. Press forward and up along an arc. The shoulder never reaches full overhead, which is why it suits a cranky one."
+    },
+    "tags": [
+      "gym",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "neck_isometric",
+    "names": {
+      "ru": "Изометрия для шеи",
+      "en": "Isometric Neck Hold",
+      "pt": "Isometria de pescoço",
+      "es": "Isométrico de cuello",
+      "fr": "Isométrie du cou"
+    },
+    "aliases": [
+      "шея изометрия",
+      "удержание шеи рукой"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "neck"
+    ],
+    "secondary_muscles": [],
+    "tertiary_muscles": [
+      "traps"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 30,
+    "default_rest_sec": 30,
+    "instructions": {
+      "ru": "Ладонь на лбу, виске или затылке, дави головой в руку без движения. Усилие умеренное, держи время на каждое направление.",
+      "en": "Palm on the forehead, temple or back of the head; push into it without moving. Moderate effort, held for time in each direction."
+    },
+    "tags": [
+      "home",
+      "timed",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "seconds"
+  }
+]

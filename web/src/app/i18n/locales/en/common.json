@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "aria": "Main navigation",
+    "home": "Home",
+    "history": "History",
+    "progress": "Progress",
+    "tools": "Tools"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "rotateToken": "Reissue link",
+    "rotateConfirmTitle": "Reissue your link?",
+    "rotateConfirmBody": "The old link stops working everywhere, including the connector in Claude or ChatGPT settings — you'll need to paste it again from the new email.",
+    "rotateConfirmAction": "Reissue",
+    "rotateCancel": "Cancel",
+    "rotateSuccessTitle": "Check your inbox",
+    "rotateSuccessBody": "We sent a new link to your email. This page no longer works.",
+    "rotateNoEmail": "Couldn't reissue: no email is on file for this account.",
+    "rotateError": "Couldn't reissue the link. Please try again."
+  },
+  "home": {
+    "greeting": "Your workout journal",
+    "greetingName": "Workout journal · {{name}}",
+    "lastWorkout": "Last workout: {{when}} · {{n}} in the last 4 weeks",
+    "ago": {
+      "today": "today",
+      "yesterday": "yesterday",
+      "days_one": "{{count}} day ago",
+      "days_other": "{{count}} days ago"
+    },
+    "stats": {
+      "workoutsWeek": "Workouts this week",
+      "volumeWeek": "Volume this week",
+      "bodyweight": "Body weight",
+      "topE1rm": "Best e1RM",
+      "bodyweightDelta": "Weight, 30 days"
+    },
+    "goal": "Goal: {{goal}}",
+    "adherence": {
+      "title": "Consistency",
+      "count": "{{done}} of {{target}}",
+      "weekCaption": "this week",
+      "met": "Weekly target met ✅",
+      "day": {
+        "done": "{{date}}: trained",
+        "today": "{{date}}: today",
+        "future": "{{date}}: upcoming",
+        "rest": "{{date}}: rest"
+      },
+      "tense": "Only a couple of days left this week"
+    },
+    "editWeight": {
+      "title": "Body weight",
+      "hint": "Saved with today's date.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "error": "Couldn't save. Check the value and try again."
+    },
+    "featuredGoal": {
+      "setsThisWeek": "{{n}} sets this week",
+      "targetRange": "target {{min}}–{{max}}",
+      "weeklyStatus": {
+        "under": "Under",
+        "in_range": "In range",
+        "over": "Over"
+      },
+      "weeklyHistoryPill": "{{week}}: {{n}} sets, {{status}}",
+      "weeklyHistoryPillNoData": "{{week}}: {{n}} sets",
+      "trending": {
+        "up": "Trending up",
+        "down": "Trending down",
+        "flat": "Holding steady"
+      },
+      "trendChangeCaption": "vs last month",
+      "maintenanceOk": "Within range",
+      "maintenanceWarn": "{{pct}}% below baseline",
+      "milestone": {
+        "towardCaption": "toward {{target}}",
+        "toGo": "to {{target}}",
+        "overGoal": "over the goal",
+        "stage": {
+          "early": "under way",
+          "half": "past halfway",
+          "almost": "almost there",
+          "beaten": "goal beaten"
+        }
+      },
+      "fab": {
+        "connected": "Talk this over with your coach",
+        "disconnected": "Connect to chat with your coach"
+      },
+      "discussPrompt": "Let's talk about my goal: \"{{title}}\"",
+      "copied": "Copied",
+      "achievedNext": "Talk it over with your coach: a new target, or switch to maintaining",
+      "trendNoData": "Not enough data yet — keep logging workouts",
+      "noLandmark": "no volume guideline for this muscle",
+      "openDetails": "Goal details",
+      "achievedAnnounce": "Goal achieved!",
+      "details": {
+        "title": "Goal",
+        "description": "Goal details and progress",
+        "statusActive": "Active",
+        "target": "Target",
+        "current": "Current",
+        "deadline": "Deadline",
+        "reviewDate": "Review",
+        "editHint": "Change the goal in a conversation with your coach"
+      },
+      "goalType": {
+        "milestone": "Milestone",
+        "weekly_volume": "Weekly volume",
+        "trend": "Trend",
+        "maintenance": "Maintenance",
+        "frequency": "Frequency"
+      },
+      "weeksAxis_one": "last week",
+      "weeksAxis_other": "last {{count}} weeks",
+      "unitLabel": {
+        "kg": "kg",
+        "cm": "cm"
+      }
+    },
+    "goalHistory": {
+      "title": "Past goals",
+      "back": "Back",
+      "empty": "Nothing here yet",
+      "status": {
+        "achieved": "Achieved",
+        "abandoned": "Abandoned",
+        "revised": "Revised"
+      },
+      "grewFrom": "Grew from \"{{title}}\"",
+      "replacedBy": "Replaced by “{{title}}”"
+    },
+    "newPr": {
+      "title": "New PR!",
+      "dismissAll": "Dismiss all"
+    },
+    "streak": {
+      "countWindow": "workouts in the last 4 weeks",
+      "weight": "Weight",
+      "workoutsWeek": "Sessions · wk",
+      "volumeWeek": "Volume · wk",
+      "levelTooltip": "Level {{level}} of 6"
+    },
+    "lastWorkoutShort": "Last workout: {{when}}"
+  },
+  "units": {
+    "tons": "{{value}} t",
+    "kg": "{{value}} kg"
+  },
+  "states": {
+    "loading": "Loading…",
+    "errorTitle": "Couldn't load data",
+    "errorHint": "Check your connection.",
+    "retry": "Retry"
+  },
+  "format": {
+    "week": "Wk {{n}}"
+  },
+  "cardio": {
+    "run": "Run",
+    "walk": "Walk",
+    "bike": "Bike",
+    "row": "Row",
+    "elliptical": "Elliptical",
+    "swim": "Swim",
+    "other": "Cardio"
+  },
+  "defaultWorkout": "Workout",
+  "errors": {
+    "rateLimit": "Too many attempts. Try again later.",
+    "emailSend": "Couldn't send the email. Check the address and try again."
+  },
+  "install": {
+    "title": "Install the app",
+    "body": "Add AIm to your home screen: opens instantly and shows your data even offline.",
+    "action": "Install",
+    "dismiss": "Not now",
+    "iosHint": "In Safari tap Share, then “Add to Home Screen” — the app opens instantly and works offline.",
+    "gotIt": "Got it"
+  },
+  "app": {
+    "updating": "Updating the app…"
+  }
+}

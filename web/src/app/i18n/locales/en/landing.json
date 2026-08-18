@@ -1,0 +1,195 @@
+{
+  "brand": "AIm",
+  "meta": {
+    "title": "AIm: turn Claude or ChatGPT into your AI personal trainer",
+    "description": "AIm turns Claude or ChatGPT into an AI personal trainer with a real workout tracker behind it: it builds your program, logs workouts from your words and tracks progressive overload and estimated 1RM. Free."
+  },
+  "nav": {
+    "cta": "Get your link"
+  },
+  "hero": {
+    "badge": "Free · Sign up in a minute",
+    "title": "Turn Claude or ChatGPT",
+    "titleAccent": "into your AI personal trainer",
+    "subtitle": "The AI coach builds a workout for the gym or home around your goal. A real workout tracker sits behind the chat: describe the session by voice or text and it records your sets, shows progress and helps you move toward the result."
+  },
+  "form": {
+    "placeholder": "Your email",
+    "submit": "Get my personal link",
+    "submitting": "Sending…",
+    "success": "Check your inbox ✉️ Inside is the app link and the address to connect your AI. If nothing arrives in a couple of minutes, check your Spam folder.",
+    "micro": "We'll email your personal link, it is your login.",
+    "invalid": "Enter a valid email",
+    "errorGeneric": "Something went wrong."
+  },
+  "chat": {
+    "assistantName": "Claude",
+    "chip": "AIm connected",
+    "user1": "12 12 12 at 25kg, 12 12 12 at 25kg. Weight 92.9kg",
+    "assistant1": "Logged ✅ Volume 11,140 kg, another record. Saving your weight and shifting the goals.",
+    "cardName": "Workout volume",
+    "cardValue": "11,140",
+    "cardSub": "kg · Record ↑",
+    "assistant2": "All in the tracker ✅ Workout, weight 92.9, goals shifted. The debrief: great work, record volume of 11,140 kg, and a bunch of lifts moved up a level."
+  },
+  "benefits": {
+    "b1": "The AI turns your freeform workout story into a structured record",
+    "b2": "Goals are visualized and highlighted: you see your progress on charts and the muscle map",
+    "b3": "AI chats lose context, AIm keeps it: your full history lives in the app"
+  },
+  "showcase": {
+    "title": "From goal to result with an AI coach",
+    "subtitle": "How the app works and what you get",
+    "coach": {
+      "title": "An AI coach in your chat",
+      "text": "The coach is your own Claude or ChatGPT: AIm hands it coaching instructions and your history. It helps you set a goal, builds a program for your level and conditions, then runs your plan and reviews progress regularly: the next workout plan, a weekly review, a monthly check-in.",
+      "q1": "What's the goal: muscle, strength, endurance or just staying in shape?",
+      "a1": "Muscle. I train at home, have dumbbells up to 32 kg",
+      "q2": "Got it ✅ I'll factor that in. Two questions left: how many days a week can you realistically train?"
+    },
+    "muscle": {
+      "title": "Muscle map",
+      "text": "The silhouette shows how much load each muscle is still carrying and how fast it fades. You instantly see what is recovered and ready, and what is still working through a hard session.",
+      "caption": "Muscle map · current load"
+    },
+    "progress": {
+      "title": "Progress for every exercise",
+      "text": "Results in plain terms: your strongest sets, estimated 1RM as the measure of your max strength, records with dates and week-by-week progressive overload. Plus the goal you set with the coach and the consistency flame, straight from the home screen.",
+      "exercise": "Lat pulldown",
+      "caption": "Top set · 3 mo",
+      "value": "60",
+      "valueSub": "kg · record",
+      "m1": "Jan",
+      "m2": "Mar",
+      "m3": "Sep",
+      "legendTop": "top set",
+      "legend1rm": "est. 1RM",
+      "goalLabel": "Goal",
+      "goalValue": "70 kg",
+      "streakWindow": "workouts in the last 4 weeks"
+    },
+    "program": {
+      "title": "Your program on the home screen",
+      "text": "The day's plan with target sets and weights: supersets, rep ranges, technique cues for every exercise.",
+      "caption": "Day A · Home",
+      "r1Tag": "Superset 1",
+      "r1Name": "Push-ups",
+      "r1Target": "4×10-15",
+      "r2Tag": "Superset 1",
+      "r2Name": "Seated band row",
+      "r2Target": "4×12-15",
+      "r3Tag": "Legs",
+      "r3Name": "Dumbbell squats",
+      "r3Target": "3×12 · 10 kg",
+      "r4Tag": "Core",
+      "r4Name": "Plank",
+      "r4Target": "3×30 sec"
+    }
+  },
+  "steps": {
+    "title": "Three steps to your first logged workout",
+    "subtitle": "Takes less than five minutes",
+    "s1": {
+      "title": "Leave your email",
+      "text": "We'll send your personal link. That's your login, no passwords.",
+      "emailFrom": "AIm",
+      "emailSubject": "Your personal link",
+      "emailButton": "→ Open AIm",
+      "emailLink": "…/a7k2xf…"
+    },
+    "s2": {
+      "title": "Connect your AI",
+      "text": "Copy your address from the email and paste it into Claude or ChatGPT, like a regular link. Instructions come in the email, takes two minutes.",
+      "path": "Settings → Connectors",
+      "url": "…/a7k2xf…/mcp",
+      "hint": "← your address from the email"
+    },
+    "s3": {
+      "title": "Train and talk",
+      "text": "Say the first phrase and the AI coach will get to know you, set a goal with you and build your program. From then on just tell it what you did after training.",
+      "tile1Label": "Workouts",
+      "tile1Value": "4",
+      "tile2Label": "Volume",
+      "tile2Value": "12.5 t",
+      "promptLead": "First thing to say",
+      "prompt": "Build me a training program"
+    }
+  },
+  "connect": {
+    "title": "How to connect",
+    "claudeQ": "Claude (phone or web)",
+    "claudeA": "Settings → Connectors → Add custom connector → paste your address from the email → done. Works in the Claude app on iPhone and Android, including the free plan.",
+    "chatgptQ": "ChatGPT (Developer mode)",
+    "chatgptA": "Settings → Security and login → turn on Developer mode. Then Settings → Plugins → add a plugin with your address from the email. Works on the paid plans (Plus, Pro, Business, Enterprise, Education) on the web; the free tier does not support custom connectors.",
+    "pwaTitle": "Add AIm to your home screen",
+    "pwaText": "In the browser: Share → Add to Home Screen (iOS) or the install button in the address bar (Android). The app updates itself."
+  },
+  "faq": {
+    "title": "Questions & answers",
+    "f1": {
+      "q": "Is it free?",
+      "a": "Yes, every feature is free. AIm works inside the Claude or ChatGPT you already use, so there is no separate AI subscription to pay for."
+    },
+    "f2": {
+      "q": "Do I need a paid Claude subscription?",
+      "a": "No. Custom connectors work even on Claude's free plan."
+    },
+    "f3": {
+      "q": "Is my data safe?",
+      "a": "Your data lives in personal storage: access only via your secret link, with automatic daily backups. Download an Excel file from Tools in the app, or ask your assistant to export your history right into the chat."
+    },
+    "f4": {
+      "q": "I made a mistake in a log, what do I do?",
+      "a": "Just tell the assistant that the third set was 10 reps and it fixes that exact set, weight or note."
+    },
+    "f5": {
+      "q": "Why does the AI coach ask so many questions?",
+      "a": "Because results start with a well-set goal. The AI coach helps you shape one that fits your experience and schedule, then keeps coming back to it in the weekly review and the monthly check-in."
+    },
+    "f6": {
+      "q": "What if I train at home with no equipment?",
+      "a": "The AI coach asks what you have and builds the plan around it: dumbbells, bands, a pull-up bar, or nothing but your bodyweight. Cardio and walks get logged too."
+    },
+    "f7": {
+      "q": "How does it work?",
+      "a": "The app is built on MCP (Model Context Protocol), an open protocol that lets AI assistants connect to external services. Your personal link contains the address of an MCP server with a secret key. When you add that address to Claude as a connector, the assistant gets a set of tools: log a workout, fix a specific set, read your history, compute stats and progress, request coaching instructions to build a program. Your data lives in your personal database on the server: the assistant reads and writes it directly, with no middlemen, and the app shows the same data as your program, charts and the muscle map."
+    },
+    "f8": {
+      "q": "How is this better than a plain AI chat?",
+      "a": "A chat forgets: history drowns in the thread and context gets lost. AIm stores every set in your personal database, so the AI coach sees your whole journey. You can talk freely, and the app turns it into structure, clear charts and a plan, without walls of text."
+    },
+    "f9": {
+      "q": "Why no password?",
+      "a": "Your personal link is the login: it contains a secret key only you know. Open the link from the email and you are in your journal from any device. Just don't share it."
+    },
+    "f10": {
+      "q": "Does it work with ChatGPT?",
+      "a": "Yes, via ChatGPT's Developer mode on the web. It is available on the paid plans: Plus, Pro, Business, Enterprise and Education. The free tier does not support custom connectors, so with free ChatGPT the simpler path is Claude: custom connectors work even on its free plan."
+    },
+    "f11": {
+      "q": "I already track workouts in another app, can I bring my history?",
+      "a": "Yes. Export your history from the old app (Hevy, Strong, a spreadsheet or even plain notes) and hand the file or text to the assistant in the chat. It turns the export into structured records and saves them to AIm, so your charts, records and muscle map continue from where you really are instead of starting from zero."
+    },
+    "f12": {
+      "q": "What kinds of goals can I set?",
+      "a": "Five kinds: a milestone such as a target weight in a lift or a target body weight, weekly volume for a muscle you want to grow, a trend where a lift should simply keep climbing, maintenance of a level you have reached, and training frequency. The main goal lives on the home screen as a card with live progress, and every reached or revised goal stays in the goal history."
+    },
+    "f13": {
+      "q": "Will I lose my streak if I miss a day?",
+      "a": "There is no fragile streak here. The flame shows how regularly you have trained over the last 4 weeks, always against your own usual rhythm. Skip a few days and it slowly fades; come back and it burns tall again. One rest day never resets anything."
+    }
+  },
+  "cta": {
+    "title": "Just tell the AI coach about your next workout",
+    "subtitle": "AIm will log it, review it and show your progress."
+  },
+  "footer": {
+    "copyright": "AIm © 2026",
+    "how": "How to connect",
+    "guides": "Guides",
+    "calc": "1RM calculator",
+    "privacy": "Privacy",
+    "contact": "Contact"
+  },
+  "slogan": "Workout hard and smart"
+}

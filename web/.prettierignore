@@ -1,0 +1,11 @@
+dist
+test-results
+playwright-report
+blob-report
+coverage
+public
+ATTRIBUTIONS.md
+
+# pytest leaves this behind when the backend suite is run from this directory; it is gitignored,
+# so CI never sees it, but it makes the local format check noisy.
+.pytest_cache/

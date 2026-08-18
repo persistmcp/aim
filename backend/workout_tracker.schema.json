@@ -1,0 +1,352 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/workout_tracker.schema.json",
+  "title": "Workout Tracker",
+  "description": "Расширяемая схема для хранения тренировок, программ, замеров и метрик с носимых устройств. Нормализована для БД: каталог упражнений отделён от залогированных подходов, шаблоны программ — от фактических сессий. Каждая сущность содержит custom_fields для расширения без миграции схемы.",
+  "type": "object",
+  "required": ["schema_version"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Версия схемы (semver), напр. '1.0.0'. Меняй при несовместимых изменениях.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "athletes":      { "type": "array", "items": { "$ref": "#/$defs/Athlete" } },
+    "exercises":     { "type": "array", "items": { "$ref": "#/$defs/Exercise" }, "description": "Глобальный каталог упражнений. На них ссылаются шаблоны и сессии по exercise_id." },
+    "programs":      { "type": "array", "items": { "$ref": "#/$defs/Program" } },
+    "day_templates": { "type": "array", "items": { "$ref": "#/$defs/DayTemplate" }, "description": "Шаблоны тренировочных дней (День A, День B). Описывают план, а не факт." },
+    "sessions":      { "type": "array", "items": { "$ref": "#/$defs/Session" }, "description": "Фактически выполненные тренировки." },
+    "body_metrics":  { "type": "array", "items": { "$ref": "#/$defs/BodyMetric" }, "description": "История веса тела, % жира, обмеров." },
+    "metadata":      { "type": "object", "additionalProperties": true, "description": "Служебные поля: generated_at, generator, source и т.п." }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "description": "Уникальный ID (рекомендуется UUIDv4). Строка для совместимости с любой БД.",
+      "minLength": 1
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Метка времени в ISO 8601 с таймзоной, напр. '2026-06-09T13:11:00+04:00'."
+    },
+    "Date": {
+      "type": "string",
+      "format": "date",
+      "description": "Дата в ISO 8601, напр. '2026-06-09'."
+    },
+    "CustomFields": {
+      "type": "object",
+      "description": "Произвольные дополнительные поля. Главный механизм расширения без изменения схемы.",
+      "additionalProperties": true,
+      "default": {}
+    },
+
+    "MuscleGroup": {
+      "type": "string",
+      "description": "Целевая мышечная группа. Список можно расширять; 'other' как запасной вариант.",
+      "enum": [
+        "chest", "upper_chest", "lower_chest",
+        "lats", "upper_back", "traps", "lower_traps", "rhomboids",
+        "rear_delts", "side_delts", "front_delts",
+        "biceps", "triceps", "forearms",
+        "abs", "obliques", "lower_back",
+        "glutes", "quads", "hamstrings", "adductors", "abductors", "calves",
+        "neck", "rotator_cuff", "full_body", "other"
+      ]
+    },
+    "Equipment": {
+      "type": "string",
+      "description": "Оборудование. Расширяй по мере необходимости.",
+      "enum": [
+        "barbell", "ez_bar", "dumbbell", "kettlebell",
+        "cable", "cable_crossover", "lat_pulldown", "seated_row",
+        "machine", "smith_machine", "pec_deck",
+        "bodyweight", "resistance_band", "bench", "incline_bench",
+        "pull_up_bar", "dip_bars", "treadmill", "other"
+      ]
+    },
+    "MovementPattern": {
+      "type": "string",
+      "enum": [
+        "horizontal_push", "vertical_push",
+        "horizontal_pull", "vertical_pull",
+        "squat", "hinge", "lunge", "carry", "rotation",
+        "isolation", "core", "cardio", "mobility", "other"
+      ]
+    },
+
+    "Athlete": {
+      "type": "object",
+      "description": "Профиль спортсмена. bodyweight_kg/body_fat здесь — текущие значения; историю смотри в body_metrics.",
+      "required": ["id"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "type": "string" },
+        "birth_date": { "$ref": "#/$defs/Date" },
+        "sex": { "type": "string", "enum": ["male", "female", "other", "unspecified"] },
+        "height_cm": { "type": "number", "minimum": 0 },
+        "bodyweight_kg": { "type": "number", "minimum": 0 },
+        "body_fat_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "experience_level": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+        "goals": { "type": "array", "items": { "type": "string" }, "description": "напр. ['hypertrophy','posture','fat_loss']" },
+        "preferred_units": { "type": "string", "enum": ["metric", "imperial"], "default": "metric" },
+        "timezone": { "type": "string", "description": "IANA TZ, напр. 'Europe/Lisbon'." },
+        "created_at": { "$ref": "#/$defs/Timestamp" },
+        "updated_at": { "$ref": "#/$defs/Timestamp" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "Exercise": {
+      "type": "object",
+      "description": "Запись каталога упражнений.",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" }, "description": "Альтернативные названия/языки для поиска." },
+        "category": { "type": "string", "enum": ["compound", "isolation", "cardio", "core", "mobility", "other"] },
+        "movement_pattern": { "$ref": "#/$defs/MovementPattern" },
+        "primary_muscles": { "type": "array", "items": { "$ref": "#/$defs/MuscleGroup" } },
+        "secondary_muscles": { "type": "array", "items": { "$ref": "#/$defs/MuscleGroup" } },
+        "equipment": { "type": "array", "items": { "$ref": "#/$defs/Equipment" } },
+        "is_unilateral": { "type": "boolean", "default": false, "description": "true если выполняется на одну сторону (напр. тяга гантели одной рукой)." },
+        "default_rep_range": { "$ref": "#/$defs/RepRange" },
+        "default_rest_sec": { "type": "integer", "minimum": 0 },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "instructions": { "type": "string" },
+        "video_url": { "type": "string", "format": "uri" },
+        "image_url": { "type": "string", "format": "uri" },
+        "created_at": { "$ref": "#/$defs/Timestamp" },
+        "updated_at": { "$ref": "#/$defs/Timestamp" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "RepRange": {
+      "type": "object",
+      "description": "Целевой диапазон повторов.",
+      "properties": {
+        "min": { "type": "integer", "minimum": 0 },
+        "max": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+
+    "Program": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "goal": { "type": "string" },
+        "frequency_per_week": { "type": "integer", "minimum": 0 },
+        "split_type": { "type": "string", "enum": ["push_pull", "upper_lower", "full_body", "bro_split", "ppl", "custom"] },
+        "day_template_ids": { "type": "array", "items": { "$ref": "#/$defs/Identifier" }, "description": "Порядок дней в ротации (напр. [DayA, DayB])." },
+        "start_date": { "$ref": "#/$defs/Date" },
+        "end_date": { "$ref": "#/$defs/Date" },
+        "status": { "type": "string", "enum": ["active", "paused", "completed", "archived"], "default": "active" },
+        "created_at": { "$ref": "#/$defs/Timestamp" },
+        "updated_at": { "$ref": "#/$defs/Timestamp" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "DayTemplate": {
+      "type": "object",
+      "description": "План тренировочного дня. Состоит из блоков (суперсеты/обычные подходы).",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "name": { "type": "string", "description": "напр. 'День A'." },
+        "program_id": { "$ref": "#/$defs/Identifier" },
+        "focus": { "type": "string", "description": "напр. 'весь верх тела, акцент на низ груди'." },
+        "estimated_duration_min": { "type": "integer", "minimum": 0 },
+        "blocks": { "type": "array", "items": { "$ref": "#/$defs/Block" } },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "Block": {
+      "type": "object",
+      "description": "Группа упражнений: обычный подход, суперсет, кругово́й и т.д.",
+      "required": ["items"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "label": { "type": "string", "description": "напр. 'Суперсет 1'." },
+        "type": { "type": "string", "enum": ["straight", "superset", "circuit", "giant_set", "dropset"], "default": "straight" },
+        "rounds": { "type": "integer", "minimum": 1, "description": "Сколько кругов выполнить." },
+        "rest_after_block_sec": { "type": "integer", "minimum": 0 },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/BlockItem" } }
+      },
+      "additionalProperties": false
+    },
+
+    "BlockItem": {
+      "type": "object",
+      "description": "Запланированное упражнение внутри блока (цель, не факт).",
+      "required": ["exercise_id"],
+      "properties": {
+        "exercise_id": { "$ref": "#/$defs/Identifier" },
+        "target_sets": { "type": "integer", "minimum": 0 },
+        "target_reps": { "$ref": "#/$defs/RepRange" },
+        "target_weight_kg": { "type": ["number", "null"] },
+        "target_rir": { "type": ["number", "null"], "description": "Целевой запас повторов (reps in reserve)." },
+        "rest_sec": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "Session": {
+      "type": "object",
+      "description": "Фактически выполненная тренировка.",
+      "required": ["id", "date"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "athlete_id": { "$ref": "#/$defs/Identifier" },
+        "program_id": { "$ref": "#/$defs/Identifier" },
+        "day_template_id": { "$ref": "#/$defs/Identifier" },
+        "day_label": { "type": "string", "description": "Снимок названия дня на момент тренировки (напр. 'День A (лайт)')." },
+        "date": { "$ref": "#/$defs/Date" },
+        "start_time": { "$ref": "#/$defs/Timestamp" },
+        "end_time": { "$ref": "#/$defs/Timestamp" },
+        "duration_sec": { "type": "integer", "minimum": 0 },
+        "location": { "type": "string" },
+        "bodyweight_kg": { "type": "number", "minimum": 0 },
+        "session_rpe": { "type": ["number", "null"], "minimum": 0, "maximum": 10, "description": "Субъективная тяжесть всей сессии (0–10)." },
+        "energy_level": { "type": ["integer", "null"], "minimum": 1, "maximum": 5, "description": "Самочувствие/энергия (1–5)." },
+        "status": { "type": "string", "enum": ["completed", "partial", "skipped"], "default": "completed" },
+        "entries": { "type": "array", "items": { "$ref": "#/$defs/SessionEntry" } },
+        "cardio": { "type": "array", "items": { "$ref": "#/$defs/CardioActivity" } },
+        "metrics": { "$ref": "#/$defs/Metrics" },
+        "notes": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "created_at": { "$ref": "#/$defs/Timestamp" },
+        "updated_at": { "$ref": "#/$defs/Timestamp" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "SessionEntry": {
+      "type": "object",
+      "description": "Залогированное упражнение в сессии со списком подходов.",
+      "required": ["exercise_id", "sets"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "exercise_id": { "$ref": "#/$defs/Identifier" },
+        "order": { "type": "integer", "description": "Порядок выполнения в тренировке." },
+        "superset_group": { "type": ["string", "null"], "description": "Метка суперсета (напр. 'SS1'); упражнения с одной меткой делаются в паре." },
+        "sets": { "type": "array", "items": { "$ref": "#/$defs/SetEntry" } },
+        "total_volume_kg": { "type": ["number", "null"], "description": "Опц. кэш: сумма weight*reps по рабочим подходам. Можно считать на лету." },
+        "notes": { "type": "string" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "SetEntry": {
+      "type": "object",
+      "description": "Один подход. weight_kg=null для упражнений с весом тела; для статики/кардио используй duration_sec/distance_m.",
+      "required": ["set_number"],
+      "properties": {
+        "set_number": { "type": "integer", "minimum": 1 },
+        "type": { "type": "string", "enum": ["working", "warmup", "dropset", "backoff", "amrap", "failure"], "default": "working" },
+        "weight_kg": { "type": ["number", "null"] },
+        "reps": { "type": ["integer", "null"], "minimum": 0 },
+        "rir": { "type": ["number", "null"], "description": "Reps in reserve — запас повторов до отказа." },
+        "rpe": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+        "tempo": { "type": ["string", "null"], "description": "напр. '3-1-1-0' (эксцентрика-пауза-концентрика-пауза)." },
+        "rest_sec": { "type": ["integer", "null"], "minimum": 0 },
+        "duration_sec": { "type": ["integer", "null"], "description": "Для статики (планка) и таймовых подходов." },
+        "distance_m": { "type": ["number", "null"], "description": "Для кардио-подходов." },
+        "is_per_side": { "type": "boolean", "default": false, "description": "true если reps/вес указаны на одну сторону (унилатерально)." },
+        "completed": { "type": "boolean", "default": true },
+        "notes": { "type": "string" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "CardioActivity": {
+      "type": "object",
+      "description": "Кардио-активность (бег, ходьба и т.д.), привязанная к сессии или отдельная.",
+      "required": ["type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "type": { "type": "string", "enum": ["run", "walk", "bike", "row", "elliptical", "swim", "other"] },
+        "distance_m": { "type": ["number", "null"] },
+        "duration_sec": { "type": ["integer", "null"] },
+        "avg_pace_sec_per_km": { "type": ["number", "null"] },
+        "avg_hr": { "type": ["integer", "null"] },
+        "calories": { "type": ["number", "null"] },
+        "timing": { "type": "string", "enum": ["warmup", "pre", "post", "standalone"], "description": "Когда относительно силовой." },
+        "notes": { "type": "string" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    },
+
+    "Metrics": {
+      "type": "object",
+      "description": "Метрики с носимого устройства (WHOOP/Garmin/часы) или ручные.",
+      "properties": {
+        "source": { "type": "string", "enum": ["whoop", "garmin", "apple_watch", "polar", "coros", "manual", "other"] },
+        "avg_hr": { "type": ["integer", "null"] },
+        "max_hr": { "type": ["integer", "null"] },
+        "min_hr": { "type": ["integer", "null"] },
+        "strain": { "type": ["number", "null"], "description": "Напр. WHOOP Strain (0–21)." },
+        "calories": { "type": ["number", "null"] },
+        "cardio_load_pct": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "muscular_load_pct": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "hr_zones": { "type": "array", "items": { "$ref": "#/$defs/HRZone" } },
+        "raw": { "type": "object", "additionalProperties": true, "description": "Сырой ответ устройства/API для будущего парсинга." }
+      },
+      "additionalProperties": false
+    },
+
+    "HRZone": {
+      "type": "object",
+      "properties": {
+        "zone": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "name": { "type": "string" },
+        "min_bpm": { "type": ["integer", "null"] },
+        "max_bpm": { "type": ["integer", "null"] },
+        "time_sec": { "type": ["integer", "null"] },
+        "pct": { "type": ["number", "null"], "minimum": 0, "maximum": 100 }
+      },
+      "additionalProperties": false
+    },
+
+    "BodyMetric": {
+      "type": "object",
+      "description": "Замер тела на дату. measurements — гибкий объект под любые обхваты.",
+      "required": ["id", "date"],
+      "properties": {
+        "id": { "$ref": "#/$defs/Identifier" },
+        "athlete_id": { "$ref": "#/$defs/Identifier" },
+        "date": { "$ref": "#/$defs/Date" },
+        "bodyweight_kg": { "type": ["number", "null"] },
+        "body_fat_pct": { "type": ["number", "null"] },
+        "measurements": {
+          "type": "object",
+          "description": "Обхваты в см: chest_cm, waist_cm, arm_cm, thigh_cm, calf_cm и любые свои.",
+          "additionalProperties": { "type": "number" }
+        },
+        "source": { "type": "string" },
+        "notes": { "type": "string" },
+        "custom_fields": { "$ref": "#/$defs/CustomFields" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Supabase project blueprint. Used by the Supabase CLI for remote commands
+# (`supabase db push`, `supabase db reset --linked`). Not used to run a local instance.
+
+project_id = "workout-storage"
+
+[db]
+major_version = 17
+
+[db.migrations]
+enabled = true
+schema_paths = []
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]

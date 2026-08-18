@@ -1,0 +1,61 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "cd web && npm install && npm run build",
+  "outputDirectory": "web/dist",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60
+    }
+  },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "workout-storage.vercel.app" }],
+      "destination": "https://aim-journal.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.aim-journal.com" }],
+      "destination": "https://aim-journal.com/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/_cron/backup", "destination": "/api/index" },
+    { "source": "/_cron/reset-demo", "destination": "/api/index" },
+    { "source": "/api/public/:path*", "destination": "/api/index" },
+    { "source": "/:token/mcp", "destination": "/api/index" },
+    { "source": "/:token/mcp/:path*", "destination": "/api/index" },
+    { "source": "/:token/api", "destination": "/api/index" },
+    { "source": "/:token/api/:path*", "destination": "/api/index" },
+    { "source": "/.well-known/:path*", "destination": "/api/index" },
+    { "source": "/register", "destination": "/api/index" },
+    { "source": "/:token/.well-known/:path*", "destination": "/api/index" },
+    { "source": "/:token/register", "destination": "/api/index" },
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/:token/mcp",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/:token/mcp/:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/:token/api",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/:token/api/:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ],
+  "crons": [
+    { "path": "/_cron/backup", "schedule": "0 3 * * *" },
+    { "path": "/_cron/reset-demo", "schedule": "0 4 * * *" }
+  ]
+}

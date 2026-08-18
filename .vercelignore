@@ -1,0 +1,12 @@
+# Hide the local Python project metadata so Vercel builds the static SPA (web/dist) and treats
+# api/*.py as zero-config Python functions (installing from requirements.txt) — instead of detecting
+# the whole repo as a Python app.
+pyproject.toml
+uv.lock
+.venv
+tests
+.pytest_cache
+.ruff_cache
+docs
+web/node_modules
+web/dist

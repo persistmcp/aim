@@ -1,0 +1,195 @@
+{
+  "brand": "AIm",
+  "meta": {
+    "title": "AIm: transforme o Claude ou o ChatGPT no seu personal trainer com IA",
+    "description": "Conecte o AIm ao Claude ou ao ChatGPT: uma IA que monta o seu treino para a academia ou para casa, registra as séries com as suas palavras, acompanha a sobrecarga progressiva e o 1RM estimado. Grátis."
+  },
+  "nav": {
+    "cta": "Receber link"
+  },
+  "hero": {
+    "badge": "Grátis · Cadastro em um minuto",
+    "title": "Transforme o Claude ou o ChatGPT",
+    "titleAccent": "no seu personal trainer com IA",
+    "subtitle": "A IA monta um treino para a academia ou para casa de acordo com a sua meta. Mantenha o diário por voz ou texto: ele registra as séries, mostra o progresso e ajuda você a avançar até o resultado."
+  },
+  "form": {
+    "placeholder": "Seu e-mail",
+    "submit": "Receber meu link pessoal",
+    "submitting": "Enviando…",
+    "success": "Confira o seu e-mail ✉️ Dentro está o link do app e o endereço para conectar a sua IA. Se não chegar em alguns minutos, olhe a pasta de spam.",
+    "micro": "Enviaremos o seu link pessoal por e-mail, esse link é o seu acesso.",
+    "invalid": "Digite um e-mail válido",
+    "errorGeneric": "Algo deu errado."
+  },
+  "chat": {
+    "assistantName": "Claude",
+    "chip": "AIm conectado",
+    "user1": "12 12 12 com 25kg, 12 12 12 com 25kg. Peso 92.9kg",
+    "assistant1": "Registrado ✅ Volume 11 140 kg, mais um recorde. Salvo o peso e atualizo as metas.",
+    "cardName": "Volume do treino",
+    "cardValue": "11 140",
+    "cardSub": "kg · Recorde ↑",
+    "assistant2": "Tudo no tracker ✅ Treino, peso 92.9, metas atualizadas. O resumo: ótimo trabalho, volume recorde de 11 140 kg e vários exercícios subiram de nível."
+  },
+  "benefits": {
+    "b1": "A IA transforma o seu relato livre do treino em um registro estruturado",
+    "b2": "As metas ficam visíveis e em destaque: o progresso aparece nos gráficos e no mapa muscular",
+    "b3": "O chat de IA perde o contexto, o AIm guarda: todo o seu histórico vive no app"
+  },
+  "showcase": {
+    "title": "Da meta ao resultado com um treinador AI",
+    "subtitle": "Como o app funciona e o que você recebe",
+    "coach": {
+      "title": "Um treinador AI no seu chat",
+      "text": "O treinador é o seu próprio Claude ou ChatGPT: o AIm entrega a ele as instruções de treinador e o seu histórico. Ele ajuda a definir uma meta, monta um programa para o seu nível e condições, depois conduz o seu plano e revisa o progresso com regularidade: o plano do próximo treino, a revisão da semana e o check-in mensal.",
+      "q1": "Qual é o objetivo: músculo, força, resistência ou só manter a forma?",
+      "a1": "Músculo. Treino em casa, tenho halteres de até 32 kg",
+      "q2": "Anotado ✅ Vou considerar isso. Faltam duas perguntas: quantos dias por semana você consegue treinar de verdade?"
+    },
+    "muscle": {
+      "title": "Mapa muscular",
+      "text": "A silhueta mostra quanta carga cada músculo ainda carrega e com que rapidez ela se dissipa. Dá para ver na hora o que está recuperado e pronto, e o que ainda está absorvendo um treino pesado.",
+      "caption": "Mapa muscular · carga atual"
+    },
+    "progress": {
+      "title": "Progresso de cada exercício",
+      "text": "Resultados em termos claros: as suas melhores séries, o 1RM estimado como medida da sua força máxima, recordes com datas e a sobrecarga progressiva semana a semana. Mais a meta definida com o treinador e a chama de regularidade, igual à da tela inicial.",
+      "exercise": "Puxada frontal",
+      "caption": "Melhor série · 3 meses",
+      "value": "60",
+      "valueSub": "kg · recorde",
+      "m1": "Jan",
+      "m2": "Mar",
+      "m3": "Set",
+      "legendTop": "melhor série",
+      "legend1rm": "1RM est.",
+      "goalLabel": "Meta",
+      "goalValue": "70 kg",
+      "streakWindow": "treinos em 4 semanas"
+    },
+    "program": {
+      "title": "O programa na tela inicial",
+      "text": "O plano do dia com séries e pesos alvo: bisséries, faixas de repetições, dicas de técnica para cada exercício.",
+      "caption": "Dia A · Em casa",
+      "r1Tag": "Bissérie 1",
+      "r1Name": "Flexões",
+      "r1Target": "4×10-15",
+      "r2Tag": "Bissérie 1",
+      "r2Name": "Remada sentada com elástico",
+      "r2Target": "4×12-15",
+      "r3Tag": "Pernas",
+      "r3Name": "Agachamento com halteres",
+      "r3Target": "3×12 · 10 kg",
+      "r4Tag": "Core",
+      "r4Name": "Prancha",
+      "r4Target": "3×30 seg"
+    }
+  },
+  "steps": {
+    "title": "Três passos até o seu primeiro treino registrado",
+    "subtitle": "Menos de cinco minutos",
+    "s1": {
+      "title": "Deixe o seu e-mail",
+      "text": "Enviaremos o seu link pessoal. Ele é o seu acesso, sem senhas.",
+      "emailFrom": "AIm",
+      "emailSubject": "Seu link pessoal",
+      "emailButton": "→ Abrir o AIm",
+      "emailLink": "…/a7k2xf…"
+    },
+    "s2": {
+      "title": "Conecte a sua IA",
+      "text": "Copie o seu endereço do e-mail e cole no Claude ou no ChatGPT, como um link comum. As instruções chegam no e-mail, dois minutos.",
+      "path": "Settings → Connectors",
+      "url": "…/a7k2xf…/mcp",
+      "hint": "← seu endereço do e-mail"
+    },
+    "s3": {
+      "title": "Treine e conte",
+      "text": "Diga a primeira frase e o treinador AI vai conhecer você, definir a meta junto e montar o seu programa. Depois é só contar o que você fez depois do treino.",
+      "tile1Label": "Treinos",
+      "tile1Value": "4",
+      "tile2Label": "Volume",
+      "tile2Value": "12,5 t",
+      "promptLead": "A primeira frase",
+      "prompt": "Monte um programa de treino para mim"
+    }
+  },
+  "connect": {
+    "title": "Como conectar",
+    "claudeQ": "Claude (celular ou web)",
+    "claudeA": "Settings → Connectors → Add custom connector → cole o seu endereço do e-mail → pronto. Funciona no app do Claude no iPhone e no Android, inclusive no plano gratuito.",
+    "chatgptQ": "ChatGPT (modo desenvolvedor)",
+    "chatgptA": "Settings → Security and login → ative o Developer mode. Depois Settings → Plugins → adicione um plugin com o seu endereço do e-mail. Funciona nos planos pagos (Plus, Pro, Business, Enterprise, Education) na web; o plano gratuito não aceita conectores personalizados.",
+    "pwaTitle": "Adicione o AIm à tela de início",
+    "pwaText": "No navegador: Compartilhar → Adicionar à Tela de Início (iOS) ou o botão de instalação na barra de endereços (Android). O app se atualiza sozinho."
+  },
+  "faq": {
+    "title": "Perguntas e respostas",
+    "f1": {
+      "q": "É grátis?",
+      "a": "Sim, todos os recursos são gratuitos. O AIm funciona dentro do Claude ou ChatGPT que você já usa, sem outra assinatura de IA para pagar."
+    },
+    "f2": {
+      "q": "Preciso de uma assinatura paga do Claude?",
+      "a": "Não. Os conectores personalizados funcionam mesmo no plano gratuito do Claude."
+    },
+    "f3": {
+      "q": "Meus dados estão seguros?",
+      "a": "Os seus dados vivem em um armazenamento pessoal: acesso apenas pelo seu link secreto, com backups automáticos todo dia. Baixe um arquivo Excel em Ferramentas no app, ou peça ao seu assistente no chat."
+    },
+    "f4": {
+      "q": "Errei em um registro, e agora?",
+      "a": "É só dizer ao assistente que na terceira série foram 10 repetições e ele corrige aquela série, o peso ou a nota."
+    },
+    "f5": {
+      "q": "Por que o treinador AI pergunta tanto?",
+      "a": "Porque o resultado começa com uma meta bem colocada. O treinador AI ajuda você a formulá-la conforme a sua experiência e a sua agenda, e depois volta a ela na revisão semanal e na checagem mensal."
+    },
+    "f6": {
+      "q": "E se eu treinar em casa sem equipamento?",
+      "a": "O treinador AI vai perguntar o que você tem e montar o plano com isso: halteres, elásticos, barra fixa ou só o peso do corpo. Cardio e caminhadas também são registrados."
+    },
+    "f7": {
+      "q": "Como funciona?",
+      "a": "O app é construído sobre o MCP (Model Context Protocol), um protocolo aberto que permite aos assistentes de IA se conectarem a serviços externos. O seu link pessoal contém o endereço de um servidor MCP com uma chave secreta. Ao adicionar esse endereço ao Claude como conector, o assistente recebe um conjunto de ferramentas: registrar um treino, corrigir uma série específica, ler o histórico, calcular estatísticas e progresso, pedir instruções de treinador para montar um programa. Os seus dados vivem na sua base pessoal no servidor: o assistente lê e escreve diretamente, sem intermediários, e o app mostra os mesmos dados como programa, gráficos e mapa muscular."
+    },
+    "f8": {
+      "q": "Em que isso é melhor que um chat de IA comum?",
+      "a": "Um chat esquece: a história se perde na conversa e o contexto desaparece. O AIm guarda cada série na sua base pessoal, então o treinador AI vê todo o seu caminho. Você pode contar livremente e o app transforma isso em estrutura, gráficos claros e um plano, sem paredes de texto."
+    },
+    "f9": {
+      "q": "Por que sem senha?",
+      "a": "O seu link pessoal é o acesso: ele contém uma chave secreta que só você conhece. Abra o link do e-mail e você estará no seu diário a partir de qualquer dispositivo. Só não compartilhe."
+    },
+    "f10": {
+      "q": "Funciona com o ChatGPT?",
+      "a": "Sim, pelo modo desenvolvedor do ChatGPT na versão web. Ele está disponível nos planos pagos: Plus, Pro, Business, Enterprise e Education. O plano gratuito não aceita conectores personalizados, então com o ChatGPT gratuito o caminho mais simples é o Claude: conectores personalizados funcionam até no plano gratuito dele."
+    },
+    "f11": {
+      "q": "Já registro meus treinos em outro app, dá para trazer meu histórico?",
+      "a": "Sim. Exporte seu histórico do app antigo (Hevy, Strong, uma planilha ou até anotações simples) e entregue o arquivo ou o texto ao assistente no chat. Ele transforma a exportação em registros estruturados e salva no AIm: seus gráficos, recordes e o mapa muscular continuam de onde você realmente está, não do zero."
+    },
+    "f12": {
+      "q": "Que tipos de meta posso definir?",
+      "a": "Cinco tipos: um marco, como uma carga alvo em um exercício ou um peso corporal alvo; volume semanal para um músculo que você quer desenvolver; uma tendência, quando um exercício deve simplesmente continuar subindo; manutenção de um nível já alcançado; e frequência de treino. A meta principal fica na tela inicial como um cartão com progresso ao vivo, e as metas alcançadas ou revisadas ficam no histórico de metas."
+    },
+    "f13": {
+      "q": "Perco minha sequência se pular um dia?",
+      "a": "Aqui não existe sequência frágil. A chama mostra o quanto você treinou com regularidade nas últimas 4 semanas, sempre em relação ao seu próprio ritmo. Pule alguns dias e ela vai baixando aos poucos; volte e ela cresce de novo. Um dia de descanso nunca zera nada."
+    }
+  },
+  "cta": {
+    "title": "O seu próximo treino, é só contar ao treinador AI",
+    "subtitle": "O AIm registra, analisa e mostra o seu progresso."
+  },
+  "footer": {
+    "copyright": "AIm © 2026",
+    "how": "Como conectar",
+    "guides": "Guias",
+    "calc": "Calculadora de 1RM",
+    "privacy": "Privacidade",
+    "contact": "Contato"
+  },
+  "slogan": "Workout hard and smart"
+}

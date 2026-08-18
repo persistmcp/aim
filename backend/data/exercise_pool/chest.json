@@ -1,0 +1,959 @@
+[
+  {
+    "slug": "bb_bench_press",
+    "names": {
+      "ru": "Жим штанги лёжа",
+      "en": "Barbell Bench Press",
+      "pt": "Supino reto com barra",
+      "es": "Press de banca con barra",
+      "fr": "Développé couché à la barre"
+    },
+    "aliases": [
+      "жим лёжа",
+      "жим штанги",
+      "bench press",
+      "flat bench"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 8,
+    "default_rest_sec": 180,
+    "instructions": {
+      "ru": "Лопатки сведены и прижаты к скамье, стопы плотно на полу. Опусти штангу к нижней части груди, локти под углом около 45 градусов к корпусу. Жми вверх, не отрывая таз от скамьи.",
+      "en": "Shoulder blades pinched and pressed into the bench, feet flat. Lower the bar to the lower chest with elbows about 45 degrees from the torso. Press up without lifting your hips."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_bench_press",
+    "names": {
+      "ru": "Жим гантелей лёжа",
+      "en": "Dumbbell Bench Press",
+      "pt": "Supino reto com halteres",
+      "es": "Press de banca con mancuernas",
+      "fr": "Développé couché aux haltères"
+    },
+    "aliases": [
+      "жим гантелей",
+      "жим гантель лёжа",
+      "dumbbell press",
+      "db bench"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Гантели на уровне груди, запястья над локтями. Опускай до лёгкого растяжения груди, не роняя плечи вперёд. В верхней точке не стукай гантели друг о друга, оставляй напряжение.",
+      "en": "Dumbbells at chest level, wrists stacked over elbows. Lower until you feel a light stretch, keeping the shoulders back. Do not clang them at the top, keep tension."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "incline_bb_press",
+    "names": {
+      "ru": "Жим штанги на наклонной скамье",
+      "en": "Incline Barbell Press",
+      "pt": "Supino inclinado com barra",
+      "es": "Press inclinado con barra",
+      "fr": "Développé incliné à la barre"
+    },
+    "aliases": [
+      "жим на наклонной",
+      "наклонный жим штанги",
+      "incline bench press"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "barbell",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Наклон скамьи 30-45 градусов, выше делает движение плечевым. Опускай штангу к ключицам, локти не разводи в стороны до конца.",
+      "en": "Bench at 30-45 degrees; steeper turns it into a shoulder press. Lower the bar toward the collarbones and keep the elbows from flaring fully."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "incline_db_press",
+    "names": {
+      "ru": "Жим гантелей на наклонной скамье",
+      "en": "Incline Dumbbell Press",
+      "pt": "Supino inclinado com halteres",
+      "es": "Press inclinado con mancuernas",
+      "fr": "Développé incliné aux haltères"
+    },
+    "aliases": [
+      "жим гантелей на наклонной",
+      "наклонный жим гантелей",
+      "incline db press"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "dumbbell",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Скамья 30 градусов. Гантели опускаются шире, чем в жиме штанги, до растяжения верха груди. Плечи прижаты к спинке всё время.",
+      "en": "Bench at 30 degrees. Dumbbells travel wider than a barbell, down to a stretch across the upper chest. Keep the shoulders pinned to the pad."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "smith_incline_press",
+    "names": {
+      "ru": "Жим в Смите на наклонной скамье",
+      "en": "Smith Machine Incline Press",
+      "pt": "Supino inclinado no Smith",
+      "es": "Press inclinado en multipower",
+      "fr": "Développé incliné à la Smith"
+    },
+    "aliases": [
+      "жим в смите на наклонной",
+      "жим в смите",
+      "smith incline"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "smith_machine",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Поставь скамью так, чтобы гриф опускался на верх груди, а не на горло. Фиксированная траектория позволяет работать ближе к отказу без страхующего.",
+      "en": "Set the bench so the bar tracks to the upper chest, not the throat. The fixed path lets you work closer to failure without a spotter."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_chest_press",
+    "names": {
+      "ru": "Жим от груди в тренажёре",
+      "en": "Machine Chest Press",
+      "pt": "Supino na máquina",
+      "es": "Press de pecho en máquina",
+      "fr": "Développé poitrine à la machine"
+    },
+    "aliases": [
+      "жим в тренажёре",
+      "жим от груди",
+      "chest press machine"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Отрегулируй сиденье так, чтобы ручки были на уровне середины груди. Не выпрямляй локти в замок, держи напряжение в грудных.",
+      "en": "Set the seat so the handles sit at mid-chest. Stop short of locking the elbows and keep the tension on the chest."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "pec_deck_fly",
+    "names": {
+      "ru": "Сведения в тренажёре бабочка",
+      "en": "Pec Deck Fly",
+      "pt": "Crucifixo na máquina",
+      "es": "Contractor de pecho",
+      "fr": "Écarté à la machine"
+    },
+    "aliases": [
+      "butterfly",
+      "pec deck",
+      "бабочка",
+      "пек дек",
+      "сведение в бабочке",
+      "сведение рук в пек дек",
+      "сведение рук в тренажёре",
+      "сведения в пек-дек"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "pec_deck"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Локти чуть согнуты и зафиксированы. Своди руки за счёт груди, а не плеч, в конце задержись на секунду.",
+      "en": "Elbows slightly bent and locked in that angle. Bring the arms together with the chest, not the shoulders, and pause a second at the squeeze."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_crossover",
+    "names": {
+      "ru": "Сведения в кроссовере",
+      "en": "Cable Crossover",
+      "pt": "Crossover no cabo",
+      "es": "Cruce de poleas",
+      "fr": "Écarté à la poulie"
+    },
+    "aliases": [
+      "cable fly",
+      "кроссовер",
+      "сведение в кроссовере сверху-вниз",
+      "сведение рук в кроссовере",
+      "сведения в кроссовере сверху вниз"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "cable_crossover",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Шаг вперёд, корпус слегка наклонён. Веди руки по дуге вниз-внутрь и скрещивай кисти. Обратно отпускай медленно, до растяжения.",
+      "en": "Step forward with a slight forward lean. Sweep the arms down and in until the wrists cross. Return slowly into the stretch."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "low_to_high_cable_fly",
+    "names": {
+      "ru": "Сведения в кроссовере снизу вверх",
+      "en": "Low-to-High Cable Fly",
+      "pt": "Crucifixo no cabo de baixo para cima",
+      "es": "Cruce de poleas de abajo a arriba",
+      "fr": "Écarté à la poulie basse"
+    },
+    "aliases": [
+      "сведение снизу вверх",
+      "кроссовер снизу",
+      "low to high fly"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable_crossover",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Ручки в нижнем положении блоков. Веди руки вверх и внутрь, к уровню ключиц, будто обнимаешь. Локти держи в одном согнутом положении.",
+      "en": "Handles set low. Sweep up and in toward collarbone height as if hugging. Keep the elbows at one fixed bend."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_fly",
+    "names": {
+      "ru": "Разводка гантелей лёжа",
+      "en": "Dumbbell Fly",
+      "pt": "Crucifixo com halteres",
+      "es": "Aperturas con mancuernas",
+      "fr": "Écarté aux haltères"
+    },
+    "aliases": [
+      "разводка гантелей",
+      "разведение гантелей лёжа",
+      "dumbbell flye"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Локти слегка согнуты и не меняют угол. Разводи до уровня плеч, чувствуя растяжение, и своди по той же дуге. Вес заметно меньше, чем в жиме.",
+      "en": "Elbows softly bent at a fixed angle. Open to shoulder level into the stretch and return along the same arc. Much lighter than a press."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "push_up",
+    "names": {
+      "ru": "Отжимания от пола",
+      "en": "Push-Up",
+      "pt": "Flexão de braço",
+      "es": "Flexiones",
+      "fr": "Pompes"
+    },
+    "aliases": [
+      "отжимания",
+      "push ups",
+      "pushup"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs",
+      "obliques"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Корпус прямой линией от пяток до головы, таз не провисает. Локти назад под 45 градусов, грудь почти касается пола.",
+      "en": "Body in one line from heels to head, hips not sagging. Elbows back at about 45 degrees, chest nearly touching the floor."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "chest_dip",
+    "names": {
+      "ru": "Отжимания на брусьях",
+      "en": "Chest Dip",
+      "pt": "Mergulho nas paralelas",
+      "es": "Fondos en paralelas",
+      "fr": "Dips aux barres parallèles"
+    },
+    "aliases": [
+      "брусья",
+      "отжимания на брусьях с наклоном",
+      "dips"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "lower_chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "dip_bars",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Наклони корпус вперёд и разведи локти чуть в стороны, чтобы нагрузка ушла в грудь. Опускайся до угла 90 градусов в локте, глубже только если плечи это позволяют.",
+      "en": "Lean the torso forward and let the elbows travel slightly out to bias the chest. Descend to about 90 degrees at the elbow, deeper only if your shoulders allow."
+    },
+    "tags": [
+      "gym",
+      "bodyweight"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "cable_pullover",
+    "names": {
+      "ru": "Пуловер на верхнем блоке",
+      "en": "Cable Pullover",
+      "pt": "Pullover na polia",
+      "es": "Pullover en polea",
+      "fr": "Pullover à la poulie"
+    },
+    "aliases": [
+      "пуловер на блоке",
+      "пуловер",
+      "straight arm pulldown"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "chest",
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Руки почти прямые, лёгкий наклон корпуса вперёд. Тяни рукоять по дуге к бёдрам за счёт широчайших, локти не сгибаются.",
+      "en": "Arms nearly straight, slight forward lean. Sweep the handle to the thighs with the lats; the elbows stay unbent."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "decline_bench_press",
+    "names": {
+      "ru": "Жим штанги на наклонной вниз",
+      "en": "Decline Barbell Bench Press",
+      "pt": "Supino declinado com barra",
+      "es": "Press declinado con barra",
+      "fr": "Développé décliné à la barre"
+    },
+    "aliases": [
+      "жим вниз головой",
+      "жим на отрицательном наклоне",
+      "decline bench"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "lower_chest"
+    ],
+    "secondary_muscles": [
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "front_delts"
+    ],
+    "equipment": [
+      "barbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Скамья с наклоном вниз 15-30 градусов, ноги зафиксированы. Гриф опускается к низу груди. Плечи нагружаются меньше, чем в горизонтальном жиме.",
+      "en": "Bench declined 15-30 degrees with the legs secured. The bar comes to the lower chest. Easier on the shoulders than a flat press."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "incline_cable_fly",
+    "names": {
+      "ru": "Сведения на блоках на наклонной скамье",
+      "en": "Incline Cable Fly",
+      "pt": "Crucifixo inclinado no cabo",
+      "es": "Aperturas inclinadas en polea",
+      "fr": "Écarté incliné à la poulie"
+    },
+    "aliases": [
+      "сведение на блоках на наклонной",
+      "разводка на блоке наклонная"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Скамья между блоками, наклон 30 градусов. Трос держит нагрузку и в растянутом положении, чего гантели не дают.",
+      "en": "Bench set between the pulleys at 30 degrees. The cable keeps tension in the stretched position, which dumbbells cannot."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "flat_cable_fly",
+    "names": {
+      "ru": "Сведения на блоках лёжа",
+      "en": "Flat Bench Cable Fly",
+      "pt": "Crucifixo reto no cabo",
+      "es": "Aperturas en polea tumbado",
+      "fr": "Écarté couché à la poulie"
+    },
+    "aliases": [
+      "разводка на блоках лёжа",
+      "сведение рук на блоках лёжа"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "cable",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Скамья по центру между блоками. Локти зафиксированы под небольшим углом, руки сводятся над грудью по дуге.",
+      "en": "Bench centred between the pulleys. Elbows locked at a slight bend, hands meeting over the chest along an arc."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_pullover",
+    "names": {
+      "ru": "Пуловер с гантелью",
+      "en": "Dumbbell Pullover",
+      "pt": "Pullover com halter",
+      "es": "Pullover con mancuerna",
+      "fr": "Pullover à l'haltère"
+    },
+    "aliases": [
+      "пуловер лёжа",
+      "пуловер с гантелей"
+    ],
+    "category": "compound",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "triceps"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Лёжа поперёк или вдоль скамьи, гантель в обеих ладонях. Опускай за голову до растяжения грудной клетки, руки почти прямые. Поясницу не прогибай.",
+      "en": "Lying along or across the bench with the dumbbell in both hands. Lower behind the head into a rib-cage stretch with near-straight arms. Do not arch the lower back."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "decline_push_up",
+    "names": {
+      "ru": "Отжимания с ногами на возвышении",
+      "en": "Decline Push-Up",
+      "pt": "Flexão com pés elevados",
+      "es": "Flexiones con pies elevados",
+      "fr": "Pompes pieds surélevés"
+    },
+    "aliases": [
+      "отжимания ноги на скамье",
+      "отжимания с возвышения"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "bodyweight",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Стопы на скамье, руки на полу. Чем выше ноги, тем больше нагрузки на верх груди и плечи. Корпус остаётся прямой линией.",
+      "en": "Feet on the bench, hands on the floor. The higher the feet, the more the upper chest and shoulders take. Body stays in one line."
+    },
+    "tags": [
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "band_chest_fly",
+    "names": {
+      "ru": "Сведения с резиной",
+      "en": "Band Chest Fly",
+      "pt": "Crucifixo com elástico",
+      "es": "Aperturas de pecho con banda",
+      "fr": "Écarté pectoraux à l'élastique"
+    },
+    "aliases": [
+      "сведение рук с резиной",
+      "разводка с эспандером"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "resistance_band"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 15,
+    "default_rep_max": 20,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Лента закреплена за спиной на уровне груди. Своди руки перед собой по дуге, сопротивление растёт к концу движения.",
+      "en": "Band anchored behind you at chest height. Bring the hands together along an arc; the resistance peaks at the end."
+    },
+    "tags": [
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_incline_press",
+    "names": {
+      "ru": "Жим в тренажёре на наклонной",
+      "en": "Incline Machine Press",
+      "pt": "Supino inclinado na máquina",
+      "es": "Press inclinado en máquina",
+      "fr": "Développé incliné à la machine"
+    },
+    "aliases": [
+      "жим верх груди в тренажёре",
+      "наклонный жим в тренажёре"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "upper_chest"
+    ],
+    "secondary_muscles": [
+      "front_delts",
+      "triceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Ручки на уровне ключиц, спина прижата. Хороший вариант, когда свободный вес неудобен для плеча.",
+      "en": "Handles at collarbone height, back against the pad. A good option when free weight bothers the shoulder."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "knee_push_up",
+    "names": {
+      "ru": "Отжимания с колен",
+      "en": "Knee Push-Up",
+      "pt": "Flexão com os joelhos no chão",
+      "es": "Flexiones de rodillas",
+      "fr": "Pompes sur les genoux"
+    },
+    "aliases": [
+      "отжимания на коленях",
+      "облегчённые отжимания"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "reps",
+    "default_rep_min": 8,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Колени на полу, корпус прямой от колен до головы — таз не подламывай. Ступень к обычным отжиманиям, а не отдельное упражнение навсегда.",
+      "en": "Knees on the floor with the body straight from knees to head; do not break at the hips. A step toward full push-ups, not a permanent substitute."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ]
+  },
+  {
+    "slug": "incline_push_up",
+    "names": {
+      "ru": "Отжимания от возвышения",
+      "en": "Incline Push-Up",
+      "pt": "Flexão inclinada",
+      "es": "Flexiones inclinadas",
+      "fr": "Pompes inclinées"
+    },
+    "aliases": [
+      "отжимания от скамьи",
+      "отжимания от стены",
+      "отжимания с упором на возвышение"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_push",
+    "primary_muscles": [
+      "chest"
+    ],
+    "secondary_muscles": [
+      "triceps",
+      "front_delts"
+    ],
+    "tertiary_muscles": [
+      "abs"
+    ],
+    "equipment": [
+      "bodyweight",
+      "bench"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "reps",
+    "default_rep_min": 10,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Руки на скамье, подоконнике или стене — чем выше опора, тем легче. Самый управляемый способ подвести человека к отжиманиям от пола.",
+      "en": "Hands on a bench, a windowsill or a wall — the higher the support, the easier it is. The most controllable way to build up to a floor push-up."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ]
+  }
+]

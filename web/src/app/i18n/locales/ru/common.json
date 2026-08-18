@@ -1,0 +1,193 @@
+{
+  "nav": {
+    "aria": "Основная навигация",
+    "home": "Главная",
+    "history": "История",
+    "progress": "Прогресс",
+    "tools": "Инструменты"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "theme": "Тема",
+    "themeLight": "Светлая",
+    "themeDark": "Тёмная",
+    "rotateToken": "Перевыпустить ссылку",
+    "rotateConfirmTitle": "Перевыпустить ссылку?",
+    "rotateConfirmBody": "Старая ссылка перестанет работать везде, включая коннектор в настройках Claude или ChatGPT — его нужно будет вставить заново из нового письма.",
+    "rotateConfirmAction": "Перевыпустить",
+    "rotateCancel": "Отмена",
+    "rotateSuccessTitle": "Проверьте почту",
+    "rotateSuccessBody": "Мы отправили новую ссылку на вашу почту. Эта страница больше не работает.",
+    "rotateNoEmail": "Не удалось перевыпустить: к аккаунту не привязана почта.",
+    "rotateError": "Не получилось перевыпустить ссылку. Попробуйте ещё раз."
+  },
+  "home": {
+    "greeting": "Ваш журнал тренировок",
+    "greetingName": "Журнал тренировок · {{name}}",
+    "lastWorkout": "Последняя тренировка: {{when}} · {{n}} за 4 недели",
+    "ago": {
+      "today": "сегодня",
+      "yesterday": "вчера",
+      "days_one": "{{count}} день назад",
+      "days_few": "{{count}} дня назад",
+      "days_many": "{{count}} дней назад"
+    },
+    "stats": {
+      "workoutsWeek": "Тренировок за неделю",
+      "volumeWeek": "Объём за неделю",
+      "bodyweight": "Вес тела",
+      "topE1rm": "Лучший 1ПМ",
+      "bodyweightDelta": "Вес за 30 дней"
+    },
+    "goal": "Цель: {{goal}}",
+    "adherence": {
+      "title": "Регулярность",
+      "count": "{{done}} из {{target}}",
+      "weekCaption": "на этой неделе",
+      "met": "Цель недели выполнена ✅",
+      "day": {
+        "done": "{{date}}: тренировка",
+        "today": "{{date}}: сегодня",
+        "future": "{{date}}: впереди",
+        "rest": "{{date}}: отдых"
+      },
+      "tense": "Осталось мало дней на этой неделе"
+    },
+    "editWeight": {
+      "title": "Вес тела",
+      "hint": "Сохранится с сегодняшней датой.",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "error": "Не получилось сохранить. Проверьте значение и попробуйте ещё раз."
+    },
+    "featuredGoal": {
+      "setsThisWeek": "{{n}} подх. на этой неделе",
+      "targetRange": "цель {{min}}–{{max}}",
+      "weeklyStatus": {
+        "under": "Ниже нормы",
+        "in_range": "В норме",
+        "over": "Выше нормы"
+      },
+      "weeklyHistoryPill": "{{week}}: {{n}} подх., {{status}}",
+      "weeklyHistoryPillNoData": "{{week}}: {{n}} подх.",
+      "trending": {
+        "up": "Растёт",
+        "down": "Снижается",
+        "flat": "Стабильно"
+      },
+      "trendChangeCaption": "за последний месяц",
+      "maintenanceOk": "В пределах нормы",
+      "maintenanceWarn": "Ниже базового уровня на {{pct}}%",
+      "milestone": {
+        "towardCaption": "к {{target}}",
+        "toGo": "до {{target}}",
+        "overGoal": "сверх цели",
+        "stage": {
+          "early": "путь начат",
+          "half": "больше половины пути",
+          "almost": "почти у цели",
+          "beaten": "цель взята"
+        }
+      },
+      "fab": {
+        "connected": "Обсудить с тренером",
+        "disconnected": "Подключиться, чтобы обсудить"
+      },
+      "discussPrompt": "Обсудим мою цель: «{{title}}»",
+      "copied": "Скопировано",
+      "achievedNext": "Обсуди с тренером: новая цель или переход на поддержание",
+      "trendNoData": "Мало данных — продолжай логировать тренировки",
+      "noLandmark": "норма для этой мышцы неизвестна",
+      "openDetails": "Подробнее о цели",
+      "achievedAnnounce": "Цель достигнута!",
+      "details": {
+        "title": "Цель",
+        "description": "Детали и прогресс цели",
+        "statusActive": "Активна",
+        "target": "Цель",
+        "current": "Сейчас",
+        "deadline": "Дедлайн",
+        "reviewDate": "Пересмотр",
+        "editHint": "Изменить цель можно в разговоре с тренером"
+      },
+      "goalType": {
+        "milestone": "Веха",
+        "weekly_volume": "Недельный объём",
+        "trend": "Тренд",
+        "maintenance": "Поддержание",
+        "frequency": "Частота"
+      },
+      "weeksAxis_one": "последняя неделя",
+      "weeksAxis_few": "последние {{count}} недели",
+      "weeksAxis_many": "последние {{count}} недель",
+      "weeksAxis_other": "последние {{count}} недели",
+      "unitLabel": {
+        "kg": "кг",
+        "cm": "см"
+      }
+    },
+    "goalHistory": {
+      "title": "Прошлые цели",
+      "back": "Назад",
+      "empty": "Пока пусто",
+      "status": {
+        "achieved": "Достигнута",
+        "abandoned": "Отменена",
+        "revised": "Изменена"
+      },
+      "grewFrom": "Выросла из «{{title}}»",
+      "replacedBy": "Сменилась на «{{title}}»"
+    },
+    "newPr": {
+      "title": "Новый рекорд!",
+      "dismissAll": "Скрыть все"
+    },
+    "streak": {
+      "countWindow": "тренировок за 4 недели",
+      "weight": "Вес",
+      "workoutsWeek": "Трен · нед",
+      "volumeWeek": "Объём · нед",
+      "levelTooltip": "Уровень {{level}} из 6"
+    },
+    "lastWorkoutShort": "Последняя тренировка: {{when}}"
+  },
+  "units": {
+    "tons": "{{value}} т",
+    "kg": "{{value}} кг"
+  },
+  "states": {
+    "loading": "Загрузка…",
+    "errorTitle": "Не удалось загрузить данные",
+    "errorHint": "Проверьте соединение.",
+    "retry": "Повторить"
+  },
+  "format": {
+    "week": "Нед {{n}}"
+  },
+  "cardio": {
+    "run": "Бег",
+    "walk": "Ходьба",
+    "bike": "Вело",
+    "row": "Гребля",
+    "elliptical": "Эллипс",
+    "swim": "Плавание",
+    "other": "Кардио"
+  },
+  "defaultWorkout": "Тренировка",
+  "errors": {
+    "rateLimit": "Слишком много попыток. Попробуйте позже.",
+    "emailSend": "Не удалось отправить письмо. Проверьте email и попробуйте ещё раз."
+  },
+  "install": {
+    "title": "Установите приложение",
+    "body": "Добавьте AIm на главный экран: открывается мгновенно и показывает данные даже офлайн.",
+    "action": "Установить",
+    "dismiss": "Не сейчас",
+    "iosHint": "В Safari нажмите «Поделиться», затем «На экран “Домой”» — приложение открывается мгновенно и работает офлайн.",
+    "gotIt": "Понятно"
+  },
+  "app": {
+    "updating": "Обновляю приложение…"
+  }
+}

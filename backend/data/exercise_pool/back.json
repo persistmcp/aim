@@ -1,0 +1,1079 @@
+[
+  {
+    "slug": "lat_pulldown",
+    "names": {
+      "ru": "Тяга верхнего блока",
+      "en": "Lat Pulldown",
+      "pt": "Puxada alta",
+      "es": "Jalón al pecho",
+      "fr": "Tirage vertical"
+    },
+    "aliases": [
+      "тяга блока сверху",
+      "верхняя тяга",
+      "тяга широким хватом",
+      "pulldown"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "rear_delts"
+    ],
+    "equipment": [
+      "lat_pulldown",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Хват чуть шире плеч, грудь подана вперёд, корпус отклонён градусов на десять. Тяни рукоять к верху груди локтями вниз, а не руками.",
+      "en": "Grip slightly wider than shoulders, chest up, torso leaning back about ten degrees. Pull the bar to the upper chest by driving the elbows down, not by pulling with the hands."
+    },
+    "tags": [
+      "gym",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "close_grip_pulldown",
+    "names": {
+      "ru": "Тяга верхнего блока узким хватом",
+      "en": "Close-Grip Lat Pulldown",
+      "pt": "Puxada com pegada fechada",
+      "es": "Jalón con agarre estrecho",
+      "fr": "Tirage vertical prise serrée"
+    },
+    "aliases": [
+      "тяга узким хватом",
+      "тяга параллельным хватом",
+      "close grip pulldown",
+      "v-bar pulldown"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "lat_pulldown",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Параллельный или узкий хват. Тяни к низу груди, в конце сведи лопатки. Амплитуда длиннее, чем в широком хвате.",
+      "en": "Neutral or narrow grip. Pull to the lower chest and squeeze the shoulder blades at the bottom. Longer range than the wide grip."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "pull_up",
+    "names": {
+      "ru": "Подтягивания",
+      "en": "Pull-Up",
+      "pt": "Barra fixa",
+      "es": "Dominadas",
+      "fr": "Tractions"
+    },
+    "aliases": [
+      "подтягивания прямым хватом",
+      "подтягивание",
+      "pullup",
+      "pull ups"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "forearms",
+      "abs"
+    ],
+    "equipment": [
+      "pull_up_bar",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Хват прямой, чуть шире плеч. Начинай с опускания лопаток, тяни грудью к перекладине. Внизу распрямляй руки полностью, но не расслабляй плечи.",
+      "en": "Overhand grip a bit wider than shoulders. Start by pulling the shoulder blades down, then drive the chest to the bar. Straighten the arms at the bottom without letting the shoulders go slack."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "chin_up",
+    "names": {
+      "ru": "Подтягивания обратным хватом",
+      "en": "Chin-Up",
+      "pt": "Barra fixa com pegada supinada",
+      "es": "Dominadas supinas",
+      "fr": "Tractions en supination"
+    },
+    "aliases": [
+      "подтягивания узким обратным хватом",
+      "chinup"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats",
+      "biceps"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "forearms",
+      "abs"
+    ],
+    "equipment": [
+      "pull_up_bar",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Обратный хват на ширине плеч. Бицепс включается сильнее, чем в прямом хвате, поэтому обычно получается на пару повторений больше.",
+      "en": "Underhand grip at shoulder width. The biceps contribute more than in a pull-up, so most people get a couple of extra reps."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "bodyweight"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "assisted_pull_up",
+    "names": {
+      "ru": "Подтягивания в гравитроне",
+      "en": "Assisted Pull-Up",
+      "pt": "Barra assistida",
+      "es": "Dominadas asistidas",
+      "fr": "Tractions assistées"
+    },
+    "aliases": [
+      "гравитрон",
+      "подтягивания с противовесом",
+      "assisted chin up"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Противовес подбирается так, чтобы последние два повторения давались тяжело. Уменьшай его по мере прогресса, а не увеличивай число повторений бесконечно.",
+      "en": "Set the counterweight so the last two reps are hard. Reduce the assistance as you progress instead of endlessly adding reps."
+    },
+    "tags": [
+      "gym",
+      "beginner_safe",
+      "machine_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bb_bent_over_row",
+    "names": {
+      "ru": "Тяга штанги в наклоне",
+      "en": "Barbell Bent-Over Row",
+      "pt": "Remada curvada com barra",
+      "es": "Remo con barra",
+      "fr": "Rowing barre buste penché"
+    },
+    "aliases": [
+      "тяга штанги",
+      "тяга в наклоне",
+      "barbell row",
+      "bent over row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [
+      "lower_back",
+      "hamstrings",
+      "forearms"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 6,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Наклон корпуса около 45 градусов, спина прямая, колени слегка согнуты. Тяни штангу к низу живота, локти вдоль корпуса. Не выпрямляйся рывком.",
+      "en": "Hinge to about 45 degrees with a flat back and soft knees. Row the bar to the lower abdomen with the elbows tracking along the torso. Do not jerk upright."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "one_arm_db_row",
+    "names": {
+      "ru": "Тяга гантели в наклоне одной рукой",
+      "en": "One-Arm Dumbbell Row",
+      "pt": "Remada unilateral com halter",
+      "es": "Remo con mancuerna a una mano",
+      "fr": "Rowing haltère à un bras"
+    },
+    "aliases": [
+      "dumbbell row",
+      "тяга гантели",
+      "тяга гантели в наклоне с упором на скамью",
+      "тяга гантели одной рукой",
+      "тяга гантели с упором на скамью"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "tertiary_muscles": [
+      "rear_delts",
+      "lower_back",
+      "forearms"
+    ],
+    "equipment": [
+      "dumbbell",
+      "bench"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Колено и рука на скамье, спина параллельна полу. Тяни гантель к бедру, а не к плечу, локоть идёт назад вдоль корпуса. Не разворачивай корпус вслед за весом.",
+      "en": "Knee and hand on the bench, back parallel to the floor. Row the dumbbell toward the hip, not the shoulder, with the elbow travelling back along the torso. Do not twist the torso to follow the weight."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "chest_supported_db_row",
+    "names": {
+      "ru": "Тяга гантелей с упором на наклонную скамью",
+      "en": "Chest-Supported Dumbbell Row",
+      "pt": "Remada com apoio no banco",
+      "es": "Remo con apoyo en banco",
+      "fr": "Rowing buste appuyé"
+    },
+    "aliases": [
+      "тяга с упором в скамью",
+      "тяга лёжа на наклонной",
+      "chest supported row",
+      "incline row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "rear_delts",
+      "biceps"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "dumbbell",
+      "incline_bench"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Грудь прижата к наклонной скамье, поясница выключена из работы. Тяни локтями назад и своди лопатки в верхней точке.",
+      "en": "Chest pinned to the incline bench, which takes the lower back out of it. Row with the elbows and squeeze the shoulder blades at the top."
+    },
+    "tags": [
+      "gym",
+      "back_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "seated_cable_row",
+    "names": {
+      "ru": "Тяга горизонтального блока",
+      "en": "Seated Cable Row",
+      "pt": "Remada baixa sentado",
+      "es": "Remo en polea baja",
+      "fr": "Rowing à la poulie basse"
+    },
+    "aliases": [
+      "cable row",
+      "горизонтальная тяга",
+      "тяга к поясу сидя",
+      "тяга нижнего блока",
+      "тяга нижнего блока сидя"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [
+      "lower_back"
+    ],
+    "equipment": [
+      "seated_row",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Корпус вертикально, колени слегка согнуты. Тяни рукоять к низу живота, лопатки сводятся в конце. Не раскачивайся корпусом вперёд-назад.",
+      "en": "Sit tall with soft knees. Pull the handle to the lower abdomen and let the shoulder blades come together at the end. Do not rock the torso back and forth."
+    },
+    "tags": [
+      "gym",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "t_bar_row",
+    "names": {
+      "ru": "Тяга Т-грифа",
+      "en": "T-Bar Row",
+      "pt": "Remada cavalinho",
+      "es": "Remo en T",
+      "fr": "Rowing T-bar"
+    },
+    "aliases": [
+      "т-гриф",
+      "тяга т грифа",
+      "t bar row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [
+      "lower_back"
+    ],
+    "equipment": [
+      "barbell",
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Наклон около 45 градусов, грудь можно упереть в подушку, если она есть. Тяни к животу, локти близко к корпусу.",
+      "en": "Hinge to about 45 degrees, using the chest pad if the machine has one. Pull to the abdomen with the elbows close to the body."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "machine_row",
+    "names": {
+      "ru": "Тяга в тренажёре сидя",
+      "en": "Machine Row",
+      "pt": "Remada na máquina",
+      "es": "Remo en máquina",
+      "fr": "Rowing à la machine"
+    },
+    "aliases": [
+      "рычажная тяга",
+      "тяга в хаммере",
+      "hammer row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back",
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Грудь прижата к подушке, регулируй высоту сиденья под ручки. Тяни до касания корпуса и не бросай вес обратно.",
+      "en": "Chest against the pad, seat height set to the handles. Pull until the handles reach the torso and control the weight back."
+    },
+    "tags": [
+      "gym",
+      "machine_friendly",
+      "beginner_safe",
+      "back_friendly"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "inverted_row",
+    "names": {
+      "ru": "Австралийские подтягивания",
+      "en": "Inverted Row",
+      "pt": "Remada invertida",
+      "es": "Remo invertido",
+      "fr": "Rowing inversé"
+    },
+    "aliases": [
+      "горизонтальные подтягивания",
+      "тяга в раме",
+      "австралийские",
+      "body row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [
+      "abs",
+      "glutes"
+    ],
+    "equipment": [
+      "bodyweight",
+      "pull_up_bar"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 15,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Корпус прямой линией, пятки на полу. Тяни грудь к грифу, лопатки сводятся. Чем ниже гриф, тем тяжелее.",
+      "en": "Body in a straight line, heels on the floor. Pull the chest to the bar with the shoulder blades squeezing. The lower the bar, the harder it gets."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "face_pull",
+    "names": {
+      "ru": "Лицевая тяга",
+      "en": "Face Pull",
+      "pt": "Face pull",
+      "es": "Face pull",
+      "fr": "Face pull"
+    },
+    "aliases": [
+      "тяга к лицу",
+      "фейс пул",
+      "face pulls"
+    ],
+    "category": "isolation",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "rear_delts"
+    ],
+    "secondary_muscles": [
+      "upper_back",
+      "rotator_cuff"
+    ],
+    "tertiary_muscles": [
+      "traps"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Канат на уровне лица. Тяни к переносице, разводя кисти в стороны и наружу, локти выше кистей. Вес маленький, движение чистое.",
+      "en": "Rope set at face height. Pull toward the bridge of the nose, splitting the hands out and back with the elbows above the wrists. Light weight, clean movement."
+    },
+    "tags": [
+      "gym",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "bb_shrug",
+    "names": {
+      "ru": "Шраги со штангой",
+      "en": "Barbell Shrug",
+      "pt": "Encolhimento com barra",
+      "es": "Encogimientos con barra",
+      "fr": "Shrug à la barre"
+    },
+    "aliases": [
+      "шраги",
+      "шраги со штангой",
+      "shrugs"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "traps"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "forearms"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Поднимай плечи строго вверх, к ушам, без вращения. Задержись наверху на секунду и опусти полностью.",
+      "en": "Shrug the shoulders straight up toward the ears with no rolling. Hold a second at the top and lower all the way."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "db_shrug",
+    "names": {
+      "ru": "Шраги с гантелями",
+      "en": "Dumbbell Shrug",
+      "pt": "Encolhimento com halteres",
+      "es": "Encogimientos con mancuernas",
+      "fr": "Shrug aux haltères"
+    },
+    "aliases": [
+      "шраги с гантелями",
+      "dumbbell shrugs"
+    ],
+    "category": "isolation",
+    "movement_pattern": "isolation",
+    "primary_muscles": [
+      "traps"
+    ],
+    "secondary_muscles": [
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "forearms"
+    ],
+    "equipment": [
+      "dumbbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Гантели по бокам, руки прямые. Плечи вверх и вниз по прямой, корпус неподвижен.",
+      "en": "Dumbbells at your sides, arms straight. Shoulders straight up and down, torso still."
+    },
+    "tags": [
+      "gym",
+      "home"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "back_extension",
+    "names": {
+      "ru": "Гиперэкстензия",
+      "en": "Back Extension",
+      "pt": "Extensão lombar",
+      "es": "Hiperextensiones",
+      "fr": "Extension lombaire"
+    },
+    "aliases": [
+      "гиперэкстензии",
+      "разгибания спины",
+      "hyperextension"
+    ],
+    "category": "isolation",
+    "movement_pattern": "hinge",
+    "primary_muscles": [
+      "lower_back"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "machine",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 12,
+    "default_rep_max": 15,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Подушка чуть ниже тазовых косточек. Опускайся до натяжения задней поверхности и поднимайся до прямой линии, не переразгибаясь назад.",
+      "en": "Pad just below the hip bones. Lower until you feel the hamstrings, rise to a straight line and do not hyperextend past it."
+    },
+    "tags": [
+      "gym",
+      "back_friendly"
+    ],
+    "long_length": true,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "reverse_grip_bb_row",
+    "names": {
+      "ru": "Тяга штанги обратным хватом",
+      "en": "Reverse-Grip Barbell Row",
+      "pt": "Remada curvada com pegada supinada",
+      "es": "Remo con barra supino",
+      "fr": "Rowing barre en supination"
+    },
+    "aliases": [
+      "тяга обратным хватом",
+      "yates row",
+      "reverse grip row"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "upper_back",
+      "biceps"
+    ],
+    "tertiary_muscles": [
+      "lower_back",
+      "forearms"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 8,
+    "default_rep_max": 12,
+    "default_rest_sec": 120,
+    "instructions": {
+      "ru": "Хват снизу на ширине плеч, наклон меньше, чем в обычной тяге. Локти идут вдоль корпуса, широчайшие включаются сильнее верха спины.",
+      "en": "Underhand grip at shoulder width, slightly more upright than a standard row. Elbows track along the torso and the lats take more than the upper back."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "underhand_pulldown",
+    "names": {
+      "ru": "Тяга верхнего блока обратным хватом",
+      "en": "Underhand Lat Pulldown",
+      "pt": "Puxada supinada",
+      "es": "Jalón supino",
+      "fr": "Tirage vertical en supination"
+    },
+    "aliases": [
+      "тяга блока обратным хватом",
+      "обратный хват тяга сверху"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps"
+    ],
+    "tertiary_muscles": [
+      "upper_back"
+    ],
+    "equipment": [
+      "lat_pulldown",
+      "cable"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 90,
+    "instructions": {
+      "ru": "Хват снизу на ширине плеч. Бицепс работает заметно сильнее, чем в прямом хвате, поэтому вес обычно чуть больше.",
+      "en": "Underhand grip at shoulder width. The biceps contribute much more than with an overhand grip, so the weight usually goes up a little."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "neutral_grip_pull_up",
+    "names": {
+      "ru": "Подтягивания параллельным хватом",
+      "en": "Neutral-Grip Pull-Up",
+      "pt": "Barra fixa com pegada neutra",
+      "es": "Dominadas con agarre neutro",
+      "fr": "Tractions prise neutre"
+    },
+    "aliases": [
+      "подтягивания нейтральным хватом",
+      "подтягивания на параллельных ручках"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps",
+      "upper_back"
+    ],
+    "tertiary_muscles": [
+      "forearms",
+      "abs"
+    ],
+    "equipment": [
+      "pull_up_bar",
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 10,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Ладони смотрят друг на друга. Самый щадящий для плеча и локтя вариант подтягиваний, обычно даётся легче прямого хвата.",
+      "en": "Palms facing each other. The kindest pull-up variation for the shoulder and elbow, and usually the easiest of the three."
+    },
+    "tags": [
+      "gym",
+      "home",
+      "bodyweight",
+      "shoulder_health"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "pendlay_row",
+    "names": {
+      "ru": "Тяга Пендли",
+      "en": "Pendlay Row",
+      "pt": "Remada Pendlay",
+      "es": "Remo Pendlay",
+      "fr": "Rowing Pendlay"
+    },
+    "aliases": [
+      "тяга штанги с пола",
+      "пендлей"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [
+      "lower_back",
+      "forearms"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 5,
+    "default_rep_max": 8,
+    "default_rest_sec": 150,
+    "instructions": {
+      "ru": "Корпус параллельно полу, штанга опускается на пол между повторениями. Каждое повторение стартует из мёртвой точки, без раскачки.",
+      "en": "Torso parallel to the floor, the bar returning to the ground between reps. Every rep starts from a dead stop with no swing."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "single_arm_lat_pulldown",
+    "names": {
+      "ru": "Тяга верхнего блока одной рукой",
+      "en": "Single-Arm Lat Pulldown",
+      "pt": "Puxada unilateral",
+      "es": "Jalón a una mano",
+      "fr": "Tirage vertical à un bras"
+    },
+    "aliases": [
+      "тяга блока одной рукой",
+      "односторонняя тяга сверху"
+    ],
+    "category": "compound",
+    "movement_pattern": "vertical_pull",
+    "primary_muscles": [
+      "lats"
+    ],
+    "secondary_muscles": [
+      "biceps"
+    ],
+    "tertiary_muscles": [
+      "obliques"
+    ],
+    "equipment": [
+      "cable"
+    ],
+    "is_unilateral": true,
+    "default_rep_min": 10,
+    "default_rep_max": 12,
+    "default_rest_sec": 75,
+    "instructions": {
+      "ru": "Работа по одной стороне убирает перекос между сторонами и даёт чуть большую амплитуду. Корпус держи неподвижным, не доворачивайся за весом.",
+      "en": "Working one side at a time evens out a side-to-side imbalance and buys a little extra range. Keep the torso still instead of rotating into the weight."
+    },
+    "tags": [
+      "gym"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "superman",
+    "names": {
+      "ru": "Лодочка",
+      "en": "Superman",
+      "pt": "Superman",
+      "es": "Superman",
+      "fr": "Superman"
+    },
+    "aliases": [
+      "супермен",
+      "разгибание спины лёжа на полу"
+    ],
+    "category": "mobility",
+    "movement_pattern": "hinge",
+    "primary_muscles": [
+      "lower_back"
+    ],
+    "secondary_muscles": [
+      "glutes"
+    ],
+    "tertiary_muscles": [
+      "rear_delts"
+    ],
+    "equipment": [
+      "bodyweight"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 10,
+    "default_rep_max": 15,
+    "default_rest_sec": 45,
+    "instructions": {
+      "ru": "Лёжа на животе, одновременно поднимай руки и ноги, задерживайся на пару секунд. Тянись в длину, а не вверх — переразгибать поясницу не нужно.",
+      "en": "Face down, lift the arms and legs together and hold a couple of seconds. Reach long rather than high; no need to crank the lower back."
+    },
+    "tags": [
+      "home",
+      "bodyweight",
+      "back_friendly",
+      "beginner_safe"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "rack_pull",
+    "names": {
+      "ru": "Тяга с плинтов",
+      "en": "Rack Pull",
+      "pt": "Levantamento terra parcial",
+      "es": "Peso muerto desde rack",
+      "fr": "Rack pull"
+    },
+    "aliases": [
+      "тяга с подставок",
+      "частичная становая"
+    ],
+    "category": "compound",
+    "movement_pattern": "hinge",
+    "primary_muscles": [
+      "lower_back",
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "glutes",
+      "traps"
+    ],
+    "tertiary_muscles": [
+      "hamstrings",
+      "forearms",
+      "lats"
+    ],
+    "equipment": [
+      "barbell"
+    ],
+    "is_unilateral": false,
+    "default_rep_min": 4,
+    "default_rep_max": 6,
+    "default_rest_sec": 180,
+    "instructions": {
+      "ru": "Штанга на упорах на уровне колена или чуть ниже. Короткая амплитуда позволяет работать с большим весом, чем в становой с пола.",
+      "en": "Bar on the pins at or just below knee height. The short range lets you handle more than a deadlift from the floor."
+    },
+    "tags": [
+      "gym",
+      "barbell_lift"
+    ],
+    "long_length": false,
+    "dose_unit": "reps"
+  },
+  {
+    "slug": "band_row",
+    "names": {
+      "ru": "Тяга резины сидя",
+      "en": "Seated Band Row",
+      "pt": "Remada sentada com elástico",
+      "es": "Remo sentado con banda",
+      "fr": "Rowing assis à l'élastique"
+    },
+    "aliases": [
+      "тяга с резинкой",
+      "тяга эспандера сидя"
+    ],
+    "category": "compound",
+    "movement_pattern": "horizontal_pull",
+    "primary_muscles": [
+      "upper_back"
+    ],
+    "secondary_muscles": [
+      "lats",
+      "biceps",
+      "rear_delts"
+    ],
+    "tertiary_muscles": [],
+    "equipment": [
+      "resistance_band"
+    ],
+    "is_unilateral": false,
+    "long_length": false,
+    "dose_unit": "reps",
+    "default_rep_min": 12,
+    "default_rep_max": 20,
+    "default_rest_sec": 60,
+    "instructions": {
+      "ru": "Лента вокруг стоп, сиди с прямой спиной. Тяни к животу, сводя лопатки. Единственная нормальная тяга, когда рядом нет ни зала, ни турника.",
+      "en": "Band around the feet, sitting tall. Pull to the abdomen and squeeze the shoulder blades. The one workable row when there is no gym and no bar."
+    },
+    "tags": [
+      "home",
+      "beginner_safe"
+    ]
+  }
+]

@@ -1,0 +1,195 @@
+{
+  "brand": "AIm",
+  "meta": {
+    "title": "AIm : transformez Claude ou ChatGPT en coach AI personnel",
+    "description": "Connectez AIm à Claude ou ChatGPT : le coach AI fixe un objectif avec vous, bâtit un programme pour la salle ou la maison, note vos séances à partir de vos mots et montre la progression. Gratuit."
+  },
+  "nav": {
+    "cta": "Recevoir le lien"
+  },
+  "hero": {
+    "badge": "Gratuit · Inscription en une minute",
+    "title": "Transformez Claude ou ChatGPT",
+    "titleAccent": "en coach AI personnel",
+    "subtitle": "Le coach AI compose une séance pour la salle ou la maison selon votre objectif. Tenez votre journal à la voix ou par écrit : il note les séries, montre la progression et vous aide à avancer vers le résultat."
+  },
+  "form": {
+    "placeholder": "Votre e-mail",
+    "submit": "Recevoir mon lien personnel",
+    "submitting": "Envoi…",
+    "success": "Vérifiez votre boîte mail ✉️ À l'intérieur, le lien vers l'app et l'adresse pour connecter votre IA. Si rien n'arrive d'ici quelques minutes, regardez le dossier Spam.",
+    "micro": "Nous enverrons votre lien personnel par e-mail, ce lien est votre accès.",
+    "invalid": "Entrez un e-mail valide",
+    "errorGeneric": "Une erreur est survenue."
+  },
+  "chat": {
+    "assistantName": "Claude",
+    "chip": "AIm connecté",
+    "user1": "12 12 12 à 25kg, 12 12 12 à 25kg. Poids 92.9kg",
+    "assistant1": "Noté ✅ Volume 11 140 kg, encore un record. J'enregistre le poids et je décale les objectifs.",
+    "cardName": "Volume de la séance",
+    "cardValue": "11 140",
+    "cardSub": "kg · Record ↑",
+    "assistant2": "Tout est dans le tracker ✅ Séance, poids 92.9, objectifs décalés. Le bilan : excellent travail, volume record de 11 140 kg et plusieurs exercices passent un cap."
+  },
+  "benefits": {
+    "b1": "L'IA transforme votre récit libre de la séance en un enregistrement structuré",
+    "b2": "Les objectifs sont visualisés et mis en avant : la progression se voit sur les graphiques et la carte des muscles",
+    "b3": "Le chat IA perd le contexte, AIm le garde : tout votre historique vit dans l'app"
+  },
+  "showcase": {
+    "title": "De l'objectif au résultat avec un coach AI",
+    "subtitle": "Comment l'app fonctionne et ce que vous obtenez",
+    "coach": {
+      "title": "Un coach AI dans votre chat",
+      "text": "Le coach, c'est votre propre Claude ou ChatGPT : AIm lui fournit les instructions de coaching et votre historique. Il vous aide à poser un objectif, bâtit un programme selon votre niveau et vos conditions, puis suit votre plan et fait le point régulièrement : la prochaine séance, le bilan de la semaine, le point mensuel.",
+      "q1": "Quel est l'objectif : muscle, force, endurance ou simplement la forme ?",
+      "a1": "Muscle. Je m'entraîne à la maison, j'ai des haltères jusqu'à 32 kg",
+      "q2": "Noté ✅ J'en tiendrai compte. Encore deux questions : combien de jours par semaine, réalistement ?"
+    },
+    "muscle": {
+      "title": "Carte musculaire",
+      "text": "La silhouette montre la charge que chaque muscle porte encore et à quelle vitesse elle se dissipe. On voit d'un coup d'œil ce qui est récupéré et prêt, et ce qui encaisse encore une séance difficile.",
+      "caption": "Carte musculaire · charge actuelle"
+    },
+    "progress": {
+      "title": "Progression pour chaque exercice",
+      "text": "Des résultats en termes clairs : vos meilleures séries, une projection de votre force maximale, des records datés et la charge semaine par semaine. Plus l'objectif fixé avec le coach et la flamme de régularité, comme sur l'écran d'accueil.",
+      "exercise": "Tirage vertical",
+      "caption": "Meilleure série · 3 mois",
+      "value": "60",
+      "valueSub": "kg · record",
+      "m1": "Janv",
+      "m2": "Mars",
+      "m3": "Sept",
+      "legendTop": "meilleure série",
+      "legend1rm": "1RM est.",
+      "goalLabel": "Objectif",
+      "goalValue": "70 kg",
+      "streakWindow": "séances sur 4 semaines"
+    },
+    "program": {
+      "title": "Le programme sur l'écran d'accueil",
+      "text": "Le plan du jour avec séries et charges cibles : supersets, plages de répétitions, conseils de technique pour chaque exercice.",
+      "caption": "Jour A · À la maison",
+      "r1Tag": "Superset 1",
+      "r1Name": "Pompes",
+      "r1Target": "4×10-15",
+      "r2Tag": "Superset 1",
+      "r2Name": "Tirage élastique assis",
+      "r2Target": "4×12-15",
+      "r3Tag": "Jambes",
+      "r3Name": "Squats avec haltères",
+      "r3Target": "3×12 · 10 kg",
+      "r4Tag": "Gainage",
+      "r4Name": "Planche",
+      "r4Target": "3×30 sec"
+    }
+  },
+  "steps": {
+    "title": "Trois étapes jusqu'à votre première séance notée",
+    "subtitle": "Moins de cinq minutes",
+    "s1": {
+      "title": "Laissez votre e-mail",
+      "text": "Nous enverrons votre lien personnel. C'est votre accès, sans mot de passe.",
+      "emailFrom": "AIm",
+      "emailSubject": "Votre lien personnel",
+      "emailButton": "→ Ouvrir AIm",
+      "emailLink": "…/a7k2xf…"
+    },
+    "s2": {
+      "title": "Connectez votre IA",
+      "text": "Copiez votre adresse depuis l'e-mail et collez-la dans Claude ou ChatGPT, comme un lien ordinaire. Les instructions arrivent dans l'e-mail, deux minutes.",
+      "path": "Settings → Connectors",
+      "url": "…/a7k2xf…/mcp",
+      "hint": "← votre adresse reçue par e-mail"
+    },
+    "s3": {
+      "title": "Entraînez-vous et racontez",
+      "text": "Dites la première phrase : le coach AI fera connaissance, fixera un objectif avec vous et bâtira votre programme. Ensuite, racontez simplement ce que vous avez fait après la séance.",
+      "tile1Label": "Séances",
+      "tile1Value": "4",
+      "tile2Label": "Volume",
+      "tile2Value": "12,5 t",
+      "promptLead": "La première phrase",
+      "prompt": "Crée-moi un programme d'entraînement"
+    }
+  },
+  "connect": {
+    "title": "Comment connecter",
+    "claudeQ": "Claude (téléphone ou web)",
+    "claudeA": "Settings → Connectors → Add custom connector → collez votre adresse reçue par e-mail → c'est prêt. Fonctionne dans l'app Claude sur iPhone et Android, y compris avec le plan gratuit.",
+    "chatgptQ": "ChatGPT (mode développeur)",
+    "chatgptA": "Settings → Security and login → activez Developer mode. Puis Settings → Plugins → ajoutez un plugin avec votre adresse reçue par e-mail. Fonctionne sur les forfaits payants (Plus, Pro, Business, Enterprise, Education) sur le web ; le forfait gratuit ne prend pas en charge les connecteurs personnalisés.",
+    "pwaTitle": "Ajoutez AIm à l'écran d'accueil",
+    "pwaText": "Dans le navigateur : Partager → Sur l'écran d'accueil (iOS) ou le bouton d'installation dans la barre d'adresse (Android). L'app se met à jour toute seule."
+  },
+  "faq": {
+    "title": "Questions et réponses",
+    "f1": {
+      "q": "C'est gratuit ?",
+      "a": "Oui, toutes les fonctions sont gratuites. AIm fonctionne dans le Claude ou le ChatGPT que vous utilisez déjà, sans autre abonnement d'IA à payer."
+    },
+    "f2": {
+      "q": "Faut-il un abonnement payant à Claude ?",
+      "a": "Non. Les connecteurs personnalisés fonctionnent même sur le plan gratuit de Claude."
+    },
+    "f3": {
+      "q": "Mes données sont-elles en sécurité ?",
+      "a": "Vos données vivent dans un stockage personnel : accès uniquement via votre lien secret, avec des sauvegardes automatiques quotidiennes. Téléchargez un fichier Excel depuis Outils dans l'application, ou demandez à votre assistant dans le chat."
+    },
+    "f4": {
+      "q": "Je me suis trompé dans une entrée, que faire ?",
+      "a": "Dites simplement à l'assistant que la troisième série comptait 10 répétitions et il corrigera la série exacte, la charge ou la note."
+    },
+    "f5": {
+      "q": "Pourquoi le coach AI pose-t-il autant de questions ?",
+      "a": "Parce que le résultat commence par un objectif bien posé. Le coach AI vous aide à le formuler selon votre expérience et votre emploi du temps, puis y revient au bilan de la semaine et au point mensuel."
+    },
+    "f6": {
+      "q": "Et si je m'entraîne à la maison sans matériel ?",
+      "a": "Le coach AI vous demandera ce que vous avez et bâtira le plan avec ça : haltères, élastiques, barre de traction ou juste le poids du corps. Le cardio et les marches se notent aussi."
+    },
+    "f7": {
+      "q": "Comment ça marche ?",
+      "a": "L'app repose sur MCP (Model Context Protocol), un protocole ouvert qui permet aux assistants IA de se connecter à des services externes. Votre lien personnel contient l'adresse d'un serveur MCP avec une clé secrète. Quand vous ajoutez cette adresse à Claude comme connecteur, l'assistant reçoit un ensemble d'outils : enregistrer une séance, corriger une série précise, lire l'historique, calculer statistiques et progression, demander les instructions de coach pour bâtir un programme. Vos données vivent dans votre base personnelle sur le serveur : l'assistant les lit et les écrit directement, sans intermédiaires, et l'app montre les mêmes données sous forme de programme, de graphiques et de carte des muscles."
+    },
+    "f8": {
+      "q": "En quoi est-ce mieux qu'un simple chat IA ?",
+      "a": "Un chat oublie : l'historique se noie dans la conversation et le contexte se perd. AIm garde chaque série dans votre base personnelle, le coach AI voit donc tout votre parcours. Racontez librement, l'app en fait une structure, des graphiques clairs et un plan, sans pavés de texte."
+    },
+    "f9": {
+      "q": "Pourquoi sans mot de passe ?",
+      "a": "Votre lien personnel est l'accès : il contient une clé secrète que vous seul connaissez. Ouvrez le lien de l'e-mail et vous êtes dans votre journal depuis n'importe quel appareil. Ne le partagez simplement pas."
+    },
+    "f10": {
+      "q": "Est-ce que ça marche avec ChatGPT ?",
+      "a": "Oui, via le mode développeur de ChatGPT sur le web. Il est disponible sur les forfaits payants : Plus, Pro, Business, Enterprise et Education. Le forfait gratuit ne prend pas en charge les connecteurs personnalisés, donc avec ChatGPT gratuit le chemin le plus simple est Claude : les connecteurs personnalisés y fonctionnent même sur le forfait gratuit."
+    },
+    "f11": {
+      "q": "Je suis déjà mes entraînements dans une autre app, puis-je récupérer mon historique ?",
+      "a": "Oui. Exportez votre historique depuis l'ancienne app (Hevy, Strong, un tableur ou même de simples notes) et donnez le fichier ou le texte à l'assistant dans le chat. Il transforme l'export en enregistrements structurés et les sauvegarde dans AIm : vos graphiques, vos records et la carte musculaire repartent de votre vrai niveau, pas de zéro."
+    },
+    "f12": {
+      "q": "Quels types d'objectifs puis-je fixer ?",
+      "a": "Cinq types : un palier, comme un poids cible sur un exercice ou un poids de corps cible ; le volume hebdomadaire d'un muscle à développer ; une tendance, quand un exercice doit simplement continuer à monter ; le maintien d'un niveau déjà atteint ; et la fréquence d'entraînement. L'objectif principal vit sur l'écran d'accueil sous forme de carte avec progression en direct, et les objectifs atteints ou révisés restent dans l'historique des objectifs."
+    },
+    "f13": {
+      "q": "Est-ce que je perds ma série si je saute un jour ?",
+      "a": "Il n'y a pas de série fragile ici. La flamme montre votre régularité sur les 4 dernières semaines, toujours par rapport à votre propre rythme. Sautez quelques jours et elle faiblit peu à peu ; revenez et elle reprend de la hauteur. Un jour de repos ne remet jamais rien à zéro."
+    }
+  },
+  "cta": {
+    "title": "Racontez simplement votre prochaine séance au coach AI",
+    "subtitle": "AIm l'enregistre, l'analyse et montre votre progression."
+  },
+  "footer": {
+    "copyright": "AIm © 2026",
+    "how": "Comment connecter",
+    "guides": "Guides",
+    "calc": "Calculateur 1RM",
+    "privacy": "Confidentialité",
+    "contact": "Contact"
+  },
+  "slogan": "Workout hard and smart"
+}

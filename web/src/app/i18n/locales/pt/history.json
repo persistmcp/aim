@@ -1,0 +1,8 @@
+{
+  "title": "Histórico",
+  "monthFilterLabel": "Filtrar por mês",
+  "allMonths": "Todos os meses",
+  "emptyTitle": "Ainda não há treinos",
+  "emptyHint": "Registre o primeiro conversando com a sua IA.",
+  "noSessionsForMonth": "Não há treinos no mês escolhido"
+}
