@@ -6,7 +6,14 @@ import { defineConfig, devices } from "@playwright/test";
 // /verify and /manual-qa skills for those.
 export default defineConfig({
   testDir: "./e2e",
-  fullyParallel: true,
+  // Every spec drives the same single Vite dev server below, which compiles modules on demand.
+  // Under unbounded parallelism the workers contend on that one server and specs fail at random
+  // -- observed as 4 failures, then 2 different ones on a rerun, while --workers=1 passes 12/12.
+  // The suite is 12 specs against static fixture data, so serialising it costs seconds and buys
+  // determinism. `retries` was papering over this in CI; a flaky suite on a public repo reads as
+  // a broken project.
+  fullyParallel: false,
+  workers: 1,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"]],

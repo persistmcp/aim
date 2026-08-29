@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "aim": {
+      "type": "http",
+      "url": "https://aim-journal.com/${AIM_TOKEN}/mcp"
+    }
+  }
+}

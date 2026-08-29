@@ -1,7 +1,8 @@
 # Vercel Python build installs from this file.
 # Keep in sync with pyproject.toml [project.dependencies].
-# fastmcp pinned exactly: 3.4.3 enables Host validation (DNS-rebinding protection) that 421s
-# every request behind Vercel's proxy. Bump deliberately after testing against prod domains.
+# fastmcp is held at 3.4.2 on purpose: the NEXT version, 3.4.3, enables Host validation
+# (DNS-rebinding protection) that 421s every request behind Vercel's proxy. Bump deliberately
+# after testing against prod domains.
 fastmcp==3.4.2
 psycopg[binary]>=3.2
 pydantic>=2.7

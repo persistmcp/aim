@@ -1,0 +1,15 @@
+{
+  "name": "aim",
+  "displayName": "AIm workout coach",
+  "version": "1.0.0",
+  "description": "Turn Claude into a strength coach with memory: log workouts in your own words, and have it plan from your logged weights instead of generic advice.",
+  "author": {
+    "name": "AIm",
+    "url": "https://aim-journal.com"
+  },
+  "homepage": "https://aim-journal.com",
+  "repository": "https://github.com/persistmcp/aim",
+  "license": "MIT",
+  "keywords": ["fitness", "workout", "strength-training", "coaching", "mcp"],
+  "mcpServers": "./.mcp.json"
+}

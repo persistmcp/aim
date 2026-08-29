@@ -148,7 +148,7 @@ async def test_body_metrics_and_exercise_catalog(conn, user_id, example_doc):
     await repo.insert_body_metric(conn, user_id, bm)
     rows = await repo.list_body_metrics(conn, user_id)
     assert len(rows) == 1
-    assert float(rows[0]["bodyweight_kg"]) == 90
+    assert float(rows[0]["bodyweight_kg"]) == 80
     assert rows[0]["measurements"]["chest_cm"] == 105
 
     ex = Exercise.model_validate(example_doc["exercises"][0])

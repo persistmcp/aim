@@ -57,6 +57,12 @@ auto detects functions under a root level `api/`, and only installs a root level
 scripts, supabase/) is hidden from the Vercel build by `.vercelignore`, so Vercel treats the repo
 as a static SPA plus one Python function.
 
+One thing to know before you go reading: some code comments cite internal planning documents by
+path, such as `docs/COACHING_PLAN.md`, `docs/TEST_CASES.md` or `docs/DEPLOYMENT.md`. Those are
+product and research notes that are not published here, so the paths will not resolve. Nothing in
+the code depends on them; they are provenance for a decision, not a dependency. Everything you
+need to build, test and run what is in this repository is in this README.
+
 ## Stack
 
 - **Backend** (`backend/`): Python 3.12, FastMCP (stateless HTTP), psycopg3, Supabase Postgres

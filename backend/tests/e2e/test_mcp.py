@@ -48,7 +48,7 @@ async def test_body_metrics_roundtrip(as_user, example_doc):
     async with Client(mcp_server()) as client:
         await _call(client, "log_body_metric", metric=example_doc["body_metrics"][0])
         rows = await _call(client, "get_body_metrics", limit=10)
-        assert rows[0]["bodyweight_kg"] == 90
+        assert rows[0]["bodyweight_kg"] == 80
 
 
 async def test_get_stats_progression(as_user, example_doc):

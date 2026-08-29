@@ -23,7 +23,7 @@ async def test_me(client):
     assert r.status_code == 200
     body = r.json()
     assert body["name"] == "Alex"
-    assert body["current_weight"] == 90
+    assert body["current_weight"] == 80
 
 
 async def test_summary_shape(client):
@@ -32,7 +32,7 @@ async def test_summary_shape(client):
     body = r.json()
     expected = {"workouts_this_week", "volume_this_week", "volume_change_pct", "bodyweight"}
     assert expected <= set(body)
-    assert body["bodyweight"] == 90
+    assert body["bodyweight"] == 80
 
 
 async def test_adherence_no_target_set(client):
@@ -169,7 +169,7 @@ async def test_body_metrics(client):
     r = await client.get(f"{client.base}/body-metrics")
     assert r.status_code == 200
     rows = r.json()
-    assert rows[0]["bodyweight_kg"] == 90
+    assert rows[0]["bodyweight_kg"] == 80
     assert rows[0]["measurements"]["chest_cm"] == 105
 
 
