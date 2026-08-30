@@ -29,7 +29,11 @@ afterEach(() => {
   delete navigator.clipboard;
 });
 
-const mcpUrl = () => `${window.location.origin}/${TOKEN}/mcp`;
+// Claude connects over OAuth, so the address on the default tab carries no token and is the same
+// for everybody. ChatGPT stays on the personal address — its connector is configured with no
+// authentication, so it still needs the token in the URL.
+const oauthUrl = () => `${window.location.origin}/mcp`;
+const personalUrl = () => `${window.location.origin}/${TOKEN}/mcp`;
 
 /**
  * @testing-library/user-event's setup() unconditionally installs its own clipboard stub
@@ -42,9 +46,21 @@ function stubClipboard(writeText: ReturnType<typeof vi.fn>) {
 }
 
 describe("Connect", () => {
-  it("renders the MCP URL built from the token and origin", () => {
+  it("renders the token-less OAuth address on the Claude tab", () => {
     render(<Connect />);
-    expect(screen.getByText(mcpUrl())).toBeInTheDocument();
+    expect(screen.getByText(oauthUrl())).toBeInTheDocument();
+    // The point of the change: no personal credential on screen for the default client.
+    expect(screen.queryByText(personalUrl())).not.toBeInTheDocument();
+  });
+
+  it("switches to the personal address on the ChatGPT tab", async () => {
+    const user = userEvent.setup();
+    render(<Connect />);
+
+    await user.click(screen.getByRole("tab", { name: "ChatGPT" }));
+
+    expect(screen.getByText(personalUrl())).toBeInTheDocument();
+    expect(screen.queryByText(oauthUrl())).not.toBeInTheDocument();
   });
 
   it("copies the URL, tracks success, and reverts the button label after 1.5s", async () => {
@@ -62,7 +78,7 @@ describe("Connect", () => {
         await Promise.resolve();
       });
 
-      expect(writeText).toHaveBeenCalledWith(mcpUrl());
+      expect(writeText).toHaveBeenCalledWith(oauthUrl());
       expect(track).toHaveBeenCalledWith("mcp_url_copied");
       expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument();
 
@@ -87,7 +103,7 @@ describe("Connect", () => {
 
     await user.click(button);
 
-    expect(writeText).toHaveBeenCalledWith(mcpUrl());
+    expect(writeText).toHaveBeenCalledWith(oauthUrl());
     expect(track).toHaveBeenCalledWith("mcp_url_copy_failed");
     expect(track).not.toHaveBeenCalledWith("mcp_url_copied");
     // Button must stay in its non-copied state — the rejection must not be swallowed into a
@@ -120,7 +136,9 @@ describe("Connect", () => {
       } as ReturnType<typeof useConnection>);
       render(<Connect />);
       expect(screen.getByText("Waiting for your first message")).toBeInTheDocument();
-      expect(screen.getByText("Show my workouts")).toBeInTheDocument();
+      // Not "Show my workouts": that returns nothing for a brand new account, so the
+      // assistant's first ever answer would be an empty result.
+      expect(screen.getByText("Build me a training program")).toBeInTheDocument();
     });
 
     it("shows the connected card with last-activity time once a tool call has been seen", () => {

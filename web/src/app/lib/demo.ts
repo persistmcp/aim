@@ -494,18 +494,14 @@ function profileConfig() {
     metrics: { top_e1rm: null, bodyweight_delta_30d: null },
     goals: goalsPayload().filter((g) => g.status === "active"),
     featured_goal: isEmptyProfile() ? null : featuredGoalPayload(),
-    // Level 6 of 6, and it has to be: replaying the seeded generator puts 14-17 distinct training
-    // days in the 4-week window depending on the profile and on which day it is read, against the
-    // `training_days_per_week: 4` stated above — ratio 0.875 (strength) to 1.06 (balanced), all of
-    // which services._streak scores as the top band. Note how little room `strength` has: 0.015
-    // above the 0.86 band edge, so anyone re-tuning _STREAK_BANDS upward moves the demo too.
-    // The previous hardcoded 4 was picked to
-    // look like "a good stretch, not a perfect-record trophy case", but it contradicted the very
-    // data on the same card (16 lit ticks under a two-thirds flame). Holding your plan reading as
-    // a full flame IS the message the scale now makes, so the demo should show it. Without this
-    // key Home falls back to the pre-streak tile grid and never shows the hero widget at all; the
-    // empty profile deliberately omits it, since a lit flame over zero logged training is exactly
-    // the contradiction that profile exists to fix.
+    // Level 6 of 6, and it has to be: the seeded generator trains close to the
+    // `training_days_per_week: 4` stated above and right up to "today", so under the fuel gauge
+    // (services._streak) the store sits at its clip and the score pins at 1.0 — holding your own
+    // plan IS the top of this scale, at any cadence. `heat: 1.0` is the top of the seventh band
+    // after the 2026-08-29 rescale; it is not sensitive to _STREAK_BANDS the way the old ratio
+    // reading was. Without this key Home falls back to the pre-streak tile grid and never shows
+    // the hero widget at all; the empty profile deliberately omits it, since a lit flame over zero
+    // logged training is exactly the contradiction that profile exists to fix.
     streak: isEmptyProfile() ? null : { level: 6, basis: "behavioral", heat: 1.0 },
   };
 }

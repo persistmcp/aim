@@ -78,7 +78,7 @@ async def connection(request: Request) -> JSONResponse:
 
 
 async def profile(request: Request) -> JSONResponse:
-    return JSONResponse(await services.get_profile())
+    return JSONResponse(await services.get_profile(today=_client_date(request)))
 
 
 async def goals(request: Request) -> JSONResponse:

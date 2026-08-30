@@ -39,6 +39,29 @@ function ConnectionStatus() {
 
   if (isLoading || isError || !data) return null;
 
+  // The same prompt in both states, on purpose. Before connecting it is the check; after
+  // connecting it is the next thing to do. It used to be "Show my workouts", which for a brand
+  // new account returns nothing, so the assistant's very first answer was an empty result.
+  // This one triggers the coaching intake instead, which is what the person signed up for.
+  const promptBlock = (
+    <div className="flex items-center gap-2">
+      <p className="ph-no-capture flex-1 rounded-lg border border-border bg-secondary px-3 py-2 text-sm">
+        {t("status.testPrompt")}
+      </p>
+      <Button onClick={() => copyPrompt(t("status.testPrompt"))} variant="secondary" size="sm">
+        {promptCopied ? (
+          <>
+            <Check className="h-4 w-4" aria-hidden /> {t("copied")}
+          </>
+        ) : (
+          <>
+            <Copy className="h-4 w-4" aria-hidden /> {t("copy")}
+          </>
+        )}
+      </Button>
+    </div>
+  );
+
   if (data.connected) {
     const days = data.last_call_at
       ? Math.floor((Date.now() - new Date(data.last_call_at).getTime()) / DAY)
@@ -52,14 +75,19 @@ function ConnectionStatus() {
             ? t("common:home.ago.yesterday")
             : t("common:home.ago.days", { count: days });
     return (
-      <Card className="p-4 flex items-center gap-3 border-accent/40 bg-accent/10">
-        <CheckCircle2 className="h-5 w-5 text-accent shrink-0" aria-hidden />
-        <div>
-          <p className="text-sm font-medium">{t("status.connected")}</p>
-          {when && (
-            <p className="text-xs text-muted-foreground">{t("status.lastActive", { when })}</p>
-          )}
+      <Card className="p-4 space-y-3 border-accent/40 bg-accent/10">
+        <div className="flex items-center gap-3">
+          <CheckCircle2 className="h-5 w-5 text-accent shrink-0" aria-hidden />
+          <div>
+            <p className="text-sm font-medium">{t("status.connected")}</p>
+            {when && (
+              <p className="text-xs text-muted-foreground">{t("status.lastActive", { when })}</p>
+            )}
+          </div>
         </div>
+        {/* Success used to end here, with nothing to do next. */}
+        <p className="text-xs text-muted-foreground">{t("status.connectedNext")}</p>
+        {promptBlock}
       </Card>
     );
   }
@@ -68,22 +96,7 @@ function ConnectionStatus() {
     <Card className="p-4 space-y-3">
       <p className="text-sm font-medium">{t("status.waiting")}</p>
       <p className="text-xs text-muted-foreground">{t("status.waitingHint")}</p>
-      <div className="flex items-center gap-2">
-        <p className="ph-no-capture flex-1 rounded-lg border border-border bg-secondary px-3 py-2 text-sm">
-          {t("status.testPrompt")}
-        </p>
-        <Button onClick={() => copyPrompt(t("status.testPrompt"))} variant="secondary" size="sm">
-          {promptCopied ? (
-            <>
-              <Check className="h-4 w-4" aria-hidden /> {t("copied")}
-            </>
-          ) : (
-            <>
-              <Copy className="h-4 w-4" aria-hidden /> {t("copy")}
-            </>
-          )}
-        </Button>
-      </div>
+      {promptBlock}
     </Card>
   );
 }
@@ -91,9 +104,15 @@ function ConnectionStatus() {
 export function Connect() {
   const { t } = useTranslation("connect");
   const token = getToken();
-  const mcpUrl = `${ORIGIN}/${token}/mcp`;
-  const { copied, copy: copyUrl } = useCopyToClipboard();
   const [client, setClient] = useState<"claude" | "chatgpt">("claude");
+  // Claude connects over OAuth: one address for everybody, no secret in it, and the user is asked
+  // to approve instead of pasting a credential. ChatGPT stays on the personal address — its
+  // connector flow is set up with "Authentication: No Auth" (see guideStepChatgpt5) and was
+  // verified end to end that way; pointing it at the OAuth endpoint would break a working path
+  // for an unverified one.
+  const mcpUrl = client === "claude" ? `${ORIGIN}/mcp` : `${ORIGIN}/${token}/mcp`;
+  const isSecret = client !== "claude";
+  const { copied, copy: copyUrl } = useCopyToClipboard();
 
   const copy = async () => {
     const ok = await copyUrl(mcpUrl);
@@ -114,9 +133,14 @@ export function Connect() {
           <Link2 className="h-4 w-4" aria-hidden />
           <span className="text-sm font-medium">{t("urlLabel")}</span>
         </div>
-        {/* ph-no-capture: the URL is a live credential — session replay must never record it. */}
+        {/* ph-no-capture stays on unconditionally: it is only load-bearing for the personal
+            address, but a class that appears and disappears with a tab is one refactor away from
+            recording a live credential in session replay. */}
         <p className="ph-no-capture text-sm break-all text-muted-foreground tabular-nums">
           {mcpUrl}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {t(isSecret ? "urlHintPersonal" : "urlHintOauth")}
         </p>
         <Button onClick={copy} variant="secondary" className="w-full">
           {copied ? (
@@ -172,7 +196,7 @@ export function Connect() {
         </p>
       </Card>
 
-      <p className="text-xs text-muted-foreground">{t("warning")}</p>
+      {isSecret && <p className="text-xs text-muted-foreground">{t("warning")}</p>}
     </div>
   );
 }

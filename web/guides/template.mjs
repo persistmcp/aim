@@ -3,11 +3,27 @@
 // do not execute JavaScript read the full content. Visual language mirrors the landing (dark
 // theme, lime accent).
 
-import { LANGS, landingPath } from "../shared/languages.mjs";
+import { GUIDE_LANGS, LANGS, isGuideOnlyLang, landingPath } from "../shared/languages.mjs";
 import { CTA_ATTR, analyticsScript } from "./analytics.mjs";
 import { BASE_URL, alternates, esc, ogLocales } from "./seo.mjs";
 
-export { BASE_URL, LANGS };
+export { BASE_URL, GUIDE_LANGS, LANGS };
+
+// The languages one article ships in. Default is every app language; an article may opt into a
+// guide-only language (docs/SEO_PLAN.md P.2 item 3: Italy is one page, not one locale) by listing
+// it in `extraLangs`. Order matters, it drives hreflang and the language nav.
+export const articleLangs = (article) => [...LANGS, ...(article.extraLangs ?? [])];
+
+// A localized slug, where the target query is not a translation of the English one. `calcolo
+// massimale` is the Italian phrase people actually type, so the Italian 1RM page lives at
+// /guides/it/calcolo-massimale/ rather than at the English slug (the do-not-translate-targets rule,
+// Part L). Everything else keeps one slug across languages.
+export const articleSlug = (article, lang) => article.slugs?.[lang] ?? article.slug;
+
+// Where the chrome (home, privacy, CTA) should point for a language. A guide-only language has no
+// landing and no app locale, so its chrome links go to English rather than to a URL that would
+// fall through to the SPA and render "Couldn't load data".
+const chromeLang = (lang) => (isGuideOnlyLang(lang) ? "en" : lang);
 
 const UI = {
   en: {
@@ -45,6 +61,15 @@ const UI = {
     cta: "Recibir tu enlace personal",
     updated: "Actualizado:",
     privacy: "Privacidad",
+  },
+  it: {
+    home: "Home di AIm",
+    guides: "Guide",
+    also: "Da leggere dopo",
+    faq: "Domande frequenti",
+    cta: "Ricevi il tuo link personale",
+    updated: "Aggiornato:",
+    privacy: "Privacy",
   },
   fr: {
     home: "Accueil AIm",
@@ -149,8 +174,12 @@ footer.site a{color:var(--muted)}
 @media(max-width:520px){h1{font-size:27px}article h2{font-size:20px}body{font-size:16px}}
 `;
 
-function head({ lang, title, description, path, ogType, jsonLd }) {
+// `langs` is the hreflang set this page belongs to. A one-language set emits no alternates at all:
+// there is nothing to alternate to, and an x-default pointing at another page's language would be a
+// false claim. `robots` is only passed by pages that must stay out of the index.
+function head({ lang, title, description, path, ogType, jsonLd, langs = LANGS, robots = null }) {
   const canon = `${BASE_URL}${path(lang)}`;
+  const alts = langs.length > 1 ? `${alternates(path, "    ", langs)}\n` : "";
   return `<!DOCTYPE html>
 <html lang="${lang}">
   <head>
@@ -162,14 +191,13 @@ function head({ lang, title, description, path, ogType, jsonLd }) {
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
     <link rel="canonical" href="${canon}" />
-${alternates(path)}
-    <meta property="og:type" content="${ogType}" />
+${robots ? `    <meta name="robots" content="${robots}" />\n` : ""}${alts}    <meta property="og:type" content="${ogType}" />
     <meta property="og:site_name" content="AIm" />
     <meta property="og:url" content="${canon}" />
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
     <meta property="og:image" content="${BASE_URL}/og-cover.png" />
-${ogLocales(lang)}
+${ogLocales(lang, "    ", langs)}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(description)}" />
@@ -181,15 +209,18 @@ ${ogLocales(lang)}
 
 // `track` names this page for analytics (pageType + slug); the inline snippet goes last inside
 // <body> so nothing about it can block parsing or shift layout.
-function chrome({ lang, path, inner, track }) {
+function chrome({ lang, path, inner, track, langs = LANGS }) {
   const ui = UI[lang];
-  const langLinks = LANGS.map((l) =>
-    l === lang ? `<span>${l}</span>` : `<a href="${path(l)}" hreflang="${l}">${l}</a>`,
-  ).join("");
+  const home = landingPath(chromeLang(lang));
+  const langLinks = langs
+    .map((l) =>
+      l === lang ? `<span>${l}</span>` : `<a href="${path(l)}" hreflang="${l}">${l}</a>`,
+    )
+    .join("");
   return `  <body>
     <header class="site">
       <div class="wrap">
-        <a class="brand" href="${landingPath(lang)}" ${CTA_ATTR}="header"><img src="/icon.svg" alt="" width="26" height="26" />AIm</a>
+        <a class="brand" href="${home}" ${CTA_ATTR}="header"><img src="/icon.svg" alt="" width="26" height="26" />AIm</a>
         <nav class="langs" aria-label="Language">${langLinks}</nav>
       </div>
     </header>
@@ -201,7 +232,7 @@ ${inner}
     <footer class="site">
       <div class="wrap">
         <span>AIm · Workout hard and smart</span>
-        <span><a href="${landingPath(lang)}" ${CTA_ATTR}="footer">${ui.home}</a> · <a href="/guides/${lang}/">${ui.guides}</a> · <a href="${lang === "en" ? "/privacy/" : `/privacy/${lang}/`}">${ui.privacy}</a></span>
+        <span><a href="${home}" ${CTA_ATTR}="footer">${ui.home}</a> · <a href="/guides/${lang}/">${ui.guides}</a> · <a href="${privacyPath(chromeLang(lang))}">${ui.privacy}</a></span>
       </div>
     </footer>
     ${analyticsScript({ lang, ...track })}
@@ -212,7 +243,8 @@ ${inner}
 export function renderArticle(article, lang, siblings, buildDate) {
   const a = article[lang];
   const ui = UI[lang];
-  const path = (l) => `/guides/${l}/${article.slug}/`;
+  const langs = articleLangs(article);
+  const path = (l) => `/guides/${l}/${articleSlug(article, l)}/`;
   const faqLd = a.faq?.length
     ? {
         "@type": "FAQPage",
@@ -264,12 +296,12 @@ export function renderArticle(article, lang, siblings, buildDate) {
     ? `        <section class="also">\n        <h2>${ui.also}</h2>\n${siblings
         .map(
           (s) =>
-            `        <a class="card" href="/guides/${lang}/${s.slug}/"><span class="ic">${guideIcon(s.slug)}</span><span class="tx"><span class="t">${s[lang].title}</span><span class="d">${s[lang].description}</span></span></a>`,
+            `        <a class="card" href="/guides/${lang}/${articleSlug(s, lang)}/"><span class="ic">${guideIcon(s.slug)}</span><span class="tx"><span class="t">${s[lang].title}</span><span class="d">${s[lang].description}</span></span></a>`,
         )
         .join("\n")}\n        </section>`
     : "";
 
-  const inner = `        <nav class="crumbs"><a href="${landingPath(lang)}">AIm</a> / <a href="/guides/${lang}/">${ui.guides}</a></nav>
+  const inner = `        <nav class="crumbs"><a href="${landingPath(chromeLang(lang))}">AIm</a> / <a href="/guides/${lang}/">${ui.guides}</a></nav>
         <article>
         <div class="arthero">${guideIcon(article.slug)}</div>
         <h1>${a.title}</h1>
@@ -281,20 +313,33 @@ ${faq}
         <div class="cta">
           <h2>${a.cta.title}</h2>
           <p>${a.cta.text}</p>
-          <a class="btn" href="${landingPath(lang)}" ${CTA_ATTR}="article">${ui.cta}</a>
+          <a class="btn" href="${landingPath(chromeLang(lang))}" ${CTA_ATTR}="article">${ui.cta}</a>
         </div>
 ${also}`;
 
   return (
-    head({ lang, title: a.title, description: a.description, path, ogType: "article", jsonLd }) +
+    head({
+      lang,
+      title: a.title,
+      description: a.description,
+      path,
+      ogType: "article",
+      jsonLd,
+      langs,
+    }) +
     "\n" +
-    chrome({ lang, path, inner, track: { pageType: "guide", slug: article.slug } })
+    chrome({ lang, path, inner, langs, track: { pageType: "guide", slug: article.slug } })
   );
 }
 
-export function renderHub(hub, articles, lang, buildDate) {
+// `robots`/`langs` exist for the guide-only hub: /guides/it/ is plumbing, not a search target. It
+// keeps the one Italian guide off an orphan path (Part L gotcha 1: a missing /guides/it/ falls
+// through Vercel's SPA rewrite and renders "Couldn't load data"), but a one-card index has nothing
+// to rank for, so it is noindex,follow, carries no hreflang and stays out of the sitemap.
+export function renderHub(hub, articles, lang, buildDate, { langs = LANGS, robots = null } = {}) {
   const h = hub[lang];
   const ui = UI[lang];
+  const shown = articles.filter((a) => a[lang]);
   const path = (l) => `/guides/${l}/`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -304,20 +349,20 @@ export function renderHub(hub, articles, lang, buildDate) {
     inLanguage: lang,
     dateModified: buildDate,
     url: `${BASE_URL}${path(lang)}`,
-    hasPart: articles.map((a) => ({
+    hasPart: shown.map((a) => ({
       "@type": "Article",
       headline: a[lang].title,
-      url: `${BASE_URL}/guides/${lang}/${a.slug}/`,
+      url: `${BASE_URL}/guides/${lang}/${articleSlug(a, lang)}/`,
     })),
   };
-  const cards = articles
+  const cards = shown
     .map(
       (a) =>
-        `        <a class="card" href="/guides/${lang}/${a.slug}/"><span class="ic">${guideIcon(a.slug)}</span><span class="tx"><span class="t">${a[lang].title}</span><span class="d">${a[lang].description}</span></span></a>`,
+        `        <a class="card" href="/guides/${lang}/${articleSlug(a, lang)}/"><span class="ic">${guideIcon(a.slug)}</span><span class="tx"><span class="t">${a[lang].title}</span><span class="d">${a[lang].description}</span></span></a>`,
     )
     .join("\n");
   const inner = `        <div class="hub">
-        <nav class="crumbs"><a href="${landingPath(lang)}">AIm</a> / ${ui.guides}</nav>
+        <nav class="crumbs"><a href="${landingPath(chromeLang(lang))}">AIm</a> / ${ui.guides}</nav>
         <h1>${h.title}</h1>
         <p class="lead">${h.lead}</p>
         <section class="also">
@@ -326,13 +371,22 @@ ${cards}
         <div class="cta">
           <h2>${h.cta.title}</h2>
           <p>${h.cta.text}</p>
-          <a class="btn" href="${landingPath(lang)}" ${CTA_ATTR}="hub">${ui.cta}</a>
+          <a class="btn" href="${landingPath(chromeLang(lang))}" ${CTA_ATTR}="hub">${ui.cta}</a>
         </div>
         </div>`;
   return (
-    head({ lang, title: h.title, description: h.description, path, ogType: "website", jsonLd }) +
+    head({
+      lang,
+      title: h.title,
+      description: h.description,
+      path,
+      ogType: "website",
+      jsonLd,
+      langs,
+      robots,
+    }) +
     "\n" +
-    chrome({ lang, path, inner, track: { pageType: "guide_hub" } })
+    chrome({ lang, path, inner, langs: GUIDE_LANGS, track: { pageType: "guide_hub" } })
   );
 }
 
@@ -344,7 +398,7 @@ export function renderGuidesRoot(hub) {
   const alts = LANGS.map(
     (l) => `    <link rel="alternate" hreflang="${l}" href="${BASE_URL}/guides/${l}/" />`,
   ).join("\n");
-  const links = LANGS.map(
+  const links = GUIDE_LANGS.map(
     (l) =>
       `        <a class="card" href="/guides/${l}/" hreflang="${l}"><span class="ic lang">${l.toUpperCase()}</span><span class="tx"><span class="t">${hub[l].title}</span><span class="d">${hub[l].description}</span></span></a>`,
   ).join("\n");
@@ -361,7 +415,7 @@ ${alts}
     <link rel="alternate" hreflang="x-default" href="${BASE_URL}/guides/en/" />
     <script>
       var l = (navigator.language || "en").slice(0, 2).toLowerCase();
-      location.replace("/guides/" + (${JSON.stringify(LANGS)}.indexOf(l) >= 0 ? l : "en") + "/");
+      location.replace("/guides/" + (${JSON.stringify(GUIDE_LANGS)}.indexOf(l) >= 0 ? l : "en") + "/");
     </script>
     <style>${CSS}</style>
   </head>
@@ -414,10 +468,12 @@ ${sections}
 
 export function renderSitemap(articles, buildDate) {
   const urls = [];
-  const entry = (loc, pathFor, priority) => {
-    const alts = LANGS.map(
-      (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}${pathFor(l)}" />`,
-    ).join("\n");
+  const entry = (loc, pathFor, priority, langs = LANGS) => {
+    const alts = langs
+      .map(
+        (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}${pathFor(l)}" />`,
+      )
+      .join("\n");
     return `  <url>
     <loc>${loc}</loc>
     <lastmod>${buildDate}</lastmod>
@@ -436,11 +492,20 @@ ${alts}
   for (const l of LANGS)
     urls.push(entry(`${BASE_URL}/guides/${l}/`, (x) => `/guides/${x}/`, "0.8"));
   for (const l of LANGS) urls.push(entry(`${BASE_URL}${privacyPath(l)}`, privacyPath, "0.3"));
-  for (const a of articles)
-    for (const l of LANGS)
+  // Articles carry their own language set and their own per-language slugs, so an article that
+  // ships one extra guide-only language adds exactly one URL (SEO_PLAN Part R: 45 → 46).
+  for (const a of articles) {
+    const langs = articleLangs(a);
+    for (const l of langs)
       urls.push(
-        entry(`${BASE_URL}/guides/${l}/${a.slug}/`, (x) => `/guides/${x}/${a.slug}/`, "0.7"),
+        entry(
+          `${BASE_URL}/guides/${l}/${articleSlug(a, l)}/`,
+          (x) => `/guides/${x}/${articleSlug(a, x)}/`,
+          "0.7",
+          langs,
+        ),
       );
+  }
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">

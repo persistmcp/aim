@@ -2,12 +2,15 @@
   "title": "Connect to AI",
   "subtitle": "Add this address to Claude or ChatGPT so the AI can log your workouts.",
   "urlLabel": "Your connection address",
+  "urlHintOauth": "Claude will ask you to sign in and approve. Nothing here is secret.",
+  "urlHintPersonal": "This address contains your personal key — treat it like a password.",
   "status": {
     "waiting": "Waiting for your first message",
-    "waitingHint": "Say something to your assistant to test the connection, for example:",
-    "testPrompt": "Show my workouts",
+    "waitingHint": "Say this to your assistant to check the connection:",
+    "testPrompt": "Build me a training program",
     "connected": "Assistant connected",
-    "lastActive": "Last activity: {{when}}"
+    "lastActive": "Last activity: {{when}}",
+    "connectedNext": "Done. Say this and the coach starts by getting to know you:"
   },
   "copy": "Copy",
   "copied": "Copied",
@@ -16,7 +19,7 @@
   "guideStep2": "Choose Connectors",
   "guideStep3": "Click the plus above the connector list",
   "guideStep4": "Choose Add custom connector",
-  "guideStep5": "Type a name, for example Aim workout journal, paste your address and press Add",
+  "guideStep5": "Type a name, for example Aim workout journal, paste the address and press Add. Claude opens AIm in your browser — sign in if it asks, then press Allow.",
   "guideStep6": "Open the connector you just added: under Tool permissions choose Always allow so Claude does not ask before every entry",
   "guideStep7": "In a chat press plus, open Connectors and switch your connector on",
   "mobileNote": "On your phone: open Settings → Connectors in the Claude app and add the connector there. The screens look a bit different, but the fields are the same as in steps 5 and 6.",
@@ -27,7 +30,7 @@
   "guideStepChatgpt4": "Click the plus button next to Search plugins",
   "guideStepChatgpt5": "Type a name, for example Aim, paste your address into Server URL, leave Authentication as No Auth, accept the risk notice and click Create",
   "guideStepChatgpt6": "Reload the page, then press plus next to the message box and make sure Aim is turned on",
-  "chatgptDevModeNote": "ChatGPT calls this Developer mode and shows a red \"elevated risk\" warning — that's normal for any custom connector, not specific to AIm.",
+  "chatgptDevModeNote": "ChatGPT calls this Developer mode and shows a red \"elevated risk\" warning — that's normal for any custom connector, not specific to AIm. Developer mode is only available on paid ChatGPT plans, so check yours before you start.",
   "guideNoteChatgpt": "Screenshots are from the ChatGPT web version.",
   "warning": "Don't share this link: it grants full access to your journal."
 }

@@ -1,5 +1,6 @@
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router";
+import { isGuideOnlyLang } from "../../shared/languages.mjs";
 import { AppErrorBoundary } from "./components/ErrorBoundary";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { isSupportedLanguage } from "./i18n";
@@ -25,7 +26,12 @@ export default function App() {
   // so their language segment must take this branch too. Without the isSupportedLanguage check the
   // segment would be read as a token, the router would mount under basename "/ru" and the visitor
   // would get "Couldn't load data" instead of the landing.
-  if (!pathToken || isSupportedLanguage(pathToken)) {
+  //
+  // Guide-only languages (/it/) have no landing at all, only guide pages — but the segment is still
+  // a language, not a token, so it takes the same branch and gets the English landing rather than a
+  // broken app shell. It must NOT reach i18n's SUPPORTED_LANGUAGES: the app has no Italian catalog,
+  // and the path detector would persist "it" as the saved language.
+  if (!pathToken || isSupportedLanguage(pathToken) || isGuideOnlyLang(pathToken)) {
     const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
     if (stored && isLikelyToken(stored)) {
       window.location.replace(`/${stored}`);

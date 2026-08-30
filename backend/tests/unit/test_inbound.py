@@ -310,10 +310,176 @@ async def test_forward_noop_when_unconfigured(monkeypatch, telegram_capture):
     assert telegram_capture[0][0] == "inbound email forward"
 
 
-async def test_endpoint_ignores_other_events(app_client):
-    """U-INBOUND-5."""
-    body = json.dumps({"type": "email.sent", "data": {}}).encode()
+async def test_endpoint_ignores_events_it_does_not_track(app_client):
+    """U-INBOUND-5.
+
+    Was written when every non-received event was dropped. Delivery events are now recorded
+    (see below), so this asserts the remaining case: a type we have no use for is answered 200
+    rather than retried.
+    """
+    body = json.dumps({"type": "contact.created", "data": {}}).encode()
     async with app_client as c:
         r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
     assert r.status_code == 200
-    assert r.json().get("ignored") == "email.sent"
+    assert r.json().get("ignored") == "contact.created"
+
+
+# --- delivery events (delivered / opened / bounced / ...) ---------------------
+#
+# Same endpoint and same secret as the inbound webhook above: these arrive because the extra
+# event types are enabled on the one Resend webhook, not because a second endpoint exists.
+
+
+def _capture_events(monkeypatch):
+    """Swap the DB out for a list, so these stay unit tests."""
+    from contextlib import asynccontextmanager
+
+    recorded: list[dict] = []
+
+    @asynccontextmanager
+    async def fake_connect(*a, **kw):
+        yield object()
+
+    async def fake_record(conn, **kw):
+        recorded.append(kw)
+
+    async def fake_lookup(conn, email_id):
+        return "user-1" if email_id == "known" else None
+
+    monkeypatch.setattr("workout_storage.inbound.connect", fake_connect)
+    monkeypatch.setattr("workout_storage.inbound.repo.record_email_event", fake_record)
+    monkeypatch.setattr("workout_storage.inbound.repo.user_id_for_email_id", fake_lookup)
+    return recorded
+
+
+async def test_delivered_event_is_recorded_against_the_user(app_client, monkeypatch):
+    recorded = _capture_events(monkeypatch)
+    body = json.dumps(
+        {
+            "type": "email.delivered",
+            "data": {"email_id": "known", "created_at": "2026-08-29T10:00:00.000Z"},
+        }
+    ).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+    assert r.status_code == 200
+    assert len(recorded) == 1
+    assert recorded[0]["kind"] == "delivered"
+    assert recorded[0]["user_id"] == "user-1"
+    assert recorded[0]["resend_email_id"] == "known"
+    # Z-suffixed timestamps must survive, not fall back to now().
+    assert recorded[0]["occurred_at"] is not None
+
+
+async def test_event_for_unknown_message_is_still_stored(app_client, monkeypatch):
+    """An unattributable bounce is still a deliverability signal — keep it, user_id null."""
+    recorded = _capture_events(monkeypatch)
+    body = json.dumps({"type": "email.bounced", "data": {"email_id": "stranger"}}).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+    assert r.status_code == 200
+    assert recorded[0]["user_id"] is None
+    assert recorded[0]["kind"] == "bounced"
+
+
+async def test_bounce_pages_the_owner(app_client, monkeypatch, telegram_capture):
+    """A bounce means a signup silently got nothing; an open does not deserve a page."""
+    _capture_events(monkeypatch)
+    for kind, expected in (("email.bounced", 1), ("email.opened", 1)):
+        body = json.dumps({"type": kind, "data": {"email_id": "known"}}).encode()
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(
+                app=__import__("workout_storage.signup", fromlist=["signup_app"]).signup_app
+            ),
+            base_url="http://t",
+        ) as c:
+            await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+        assert len(telegram_capture) == expected
+
+
+async def test_unknown_event_type_is_accepted_not_retried(app_client, monkeypatch):
+    """Resend adding a new event type must not become a 500 that svix retries forever."""
+    recorded = _capture_events(monkeypatch)
+    body = json.dumps({"type": "email.something_new", "data": {"email_id": "known"}}).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+    assert r.status_code == 200
+    assert recorded == []
+
+
+async def test_event_without_email_id_is_dropped(app_client, monkeypatch):
+    recorded = _capture_events(monkeypatch)
+    body = json.dumps({"type": "email.delivered", "data": {}}).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+    assert r.status_code == 200
+    assert recorded == []
+
+
+async def test_storage_failure_returns_500_so_svix_retries(
+    app_client, monkeypatch, telegram_capture
+):
+    from contextlib import asynccontextmanager
+
+    @asynccontextmanager
+    async def boom(*a, **kw):
+        raise RuntimeError("db down")
+        yield  # pragma: no cover
+
+    monkeypatch.setattr("workout_storage.inbound.connect", boom)
+    body = json.dumps({"type": "email.delivered", "data": {"email_id": "known"}}).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+    assert r.status_code == 500
+    assert telegram_capture
+
+
+async def test_real_resend_bounce_payload_shape(app_client, monkeypatch, telegram_capture):
+    """Built from Resend's own documented payload, not from an invented one.
+
+    The earlier tests here used a payload I made up, which verifies the handler against my
+    assumptions rather than against reality. This is the example from
+    resend.com/docs/webhooks/emails/bounced verbatim, trimmed of nothing that matters:
+    the id lives at data.email_id, created_at appears both at the top level and inside data,
+    and the bounce detail is a nested object.
+    """
+    recorded = _capture_events(monkeypatch)
+    body = json.dumps(
+        {
+            "type": "email.bounced",
+            "created_at": "2026-11-22T23:41:12.126Z",
+            "data": {
+                "broadcast_id": "8b146471-e88e-4322-86af-016cd36fd216",
+                "created_at": "2026-11-22T23:41:11.894Z",
+                "email_id": "known",
+                "message_id": "<111-222-333@email.example.com>",
+                "from": "AIm <coach@aim-journal.com>",
+                "to": ["someone@example.com"],
+                "subject": "Your AIm journal is ready",
+                "bounce": {
+                    "message": "The recipient's address is on the suppression list.",
+                    "subType": "Suppressed",
+                    "type": "Permanent",
+                },
+            },
+        }
+    ).encode()
+    async with app_client as c:
+        r = await c.post("/api/public/inbound-email", content=body, headers=_sign(body))
+
+    assert r.status_code == 200
+    assert len(recorded) == 1
+    ev = recorded[0]
+    assert ev["kind"] == "bounced"
+    assert ev["resend_email_id"] == "known"
+    assert ev["user_id"] == "user-1"
+    # data.created_at, not the envelope's, and it must parse rather than fall back to now().
+    assert ev["occurred_at"] is not None
+    assert ev["occurred_at"].year == 2026
+    # The bounce reason has to survive, that is the whole point of storing a bounce.
+    assert ev["detail"]["bounce"]["type"] == "Permanent"
+    # The recipient address must NOT be copied into telemetry; users.email already holds it.
+    assert "someone@example.com" not in json.dumps(ev["detail"])
+    assert "to" not in ev["detail"]
+    # A bounce means a signup silently got nothing, so it must page.
+    assert telegram_capture

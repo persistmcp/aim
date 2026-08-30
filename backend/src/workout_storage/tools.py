@@ -15,17 +15,34 @@ from . import services
 from .coach import CoachEventType, CoachProfilePatch, GoalInput
 from .models import BodyMetric, Exercise, Session, WorkoutDocument
 
-# MCP behavior hints (readOnlyHint / destructiveHint / idempotentHint) shorthand. Hints are
-# unconditional per tool, so only unconditionally-true ones are set: log_session, upsert_goal
-# and import_document are idempotent only when the model supplies ids, which a hint can't
-# express — they stay at the spec defaults rather than promise a safe retry that can duplicate
-# a workout, a goal, or an imported history.
-_READ_ONLY = {"readOnlyHint": True}
-_IDEMPOTENT_WRITE = {"idempotentHint": True}
+# MCP tool annotations: a human-readable `title` plus behavior hints (readOnlyHint /
+# destructiveHint / idempotentHint). Directory Policy §5.E requires all applicable annotations,
+# `title` among them — it is what a client shows in a permission prompt, so titles read as actions
+# a person would recognise rather than as function names.
+#
+# Hints are unconditional per tool, so only unconditionally-true ones are set: log_session,
+# upsert_goal, log_body_metric, log_coach_event and import_document are idempotent only when the
+# model supplies ids, which a hint can't express — they stay at the spec default rather than
+# promise a safe retry that can duplicate a workout, a goal, or an imported history.
+
+
+def _reads(title: str) -> dict[str, Any]:
+    return {"title": title, "readOnlyHint": True}
+
+
+def _writes(title: str, *, idempotent: bool = False, destructive: bool = False) -> dict[str, Any]:
+    hints: dict[str, Any] = {
+        "title": title,
+        "readOnlyHint": False,
+        "destructiveHint": destructive,
+    }
+    if idempotent:
+        hints["idempotentHint"] = True
+    return hints
 
 
 def register(mcp: FastMCP) -> None:
-    @mcp.tool
+    @mcp.tool(annotations=_writes("Log workout session"))
     async def log_session(session: Session) -> dict[str, Any]:
         """Log a completed workout session (exercises → sets, cardio, wearable metrics) at once.
         Returns the stored session including any auto-created exercise catalog entries.
@@ -37,13 +54,13 @@ def register(mcp: FastMCP) -> None:
         omitting it renders as an empty duration in the app's history and session views."""
         return await services.log_session(session)
 
-    @mcp.tool(annotations=_IDEMPOTENT_WRITE)
+    @mcp.tool(annotations=_writes("Update workout session", idempotent=True))
     async def update_session(session_id: str, patch: dict[str, Any]) -> dict[str, Any] | None:
         """Fix session-level fields. Allowed keys: date, day_label, duration_sec, location,
         bodyweight_kg, session_rpe, energy_level, status, notes, tags, start_time, end_time."""
         return await services.update_session(session_id, patch)
 
-    @mcp.tool(annotations=_IDEMPOTENT_WRITE)
+    @mcp.tool(annotations=_writes("Correct a logged set", idempotent=True))
     async def update_set(
         session_id: str,
         exercise_id: str,
@@ -57,12 +74,12 @@ def register(mcp: FastMCP) -> None:
         exercise appears more than once in the session. Returns the updated set, or null if none."""
         return await services.update_set(session_id, exercise_id, set_number, patch, occurrence)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get a workout session"))
     async def get_session(session_id: str) -> dict[str, Any] | None:
         """Get one session with its full nested entries, sets, cardio and wearable metrics."""
         return await services.get_session(session_id)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("List workout sessions"))
     async def get_sessions(
         date_from: Date | None = None, date_to: Date | None = None, limit: int = 50
     ) -> list[dict[str, Any]]:
@@ -70,22 +87,22 @@ def register(mcp: FastMCP) -> None:
         Optional date range."""
         return await services.list_sessions(date_from=date_from, date_to=date_to, limit=limit)
 
-    @mcp.tool(annotations={"destructiveHint": True, "idempotentHint": True})
+    @mcp.tool(annotations=_writes("Delete a workout session", idempotent=True, destructive=True))
     async def delete_session(session_id: str) -> dict[str, Any]:
         """Delete a session and all its entries/sets. Returns {deleted: bool}."""
         return {"deleted": await services.delete_session(session_id)}
 
-    @mcp.tool
+    @mcp.tool(annotations=_writes("Record a body measurement"))
     async def log_body_metric(metric: BodyMetric) -> dict[str, Any]:
         """Record a body measurement (weight, body-fat %, circumferences) for a date."""
         return await services.log_body_metric(metric)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get body measurements"))
     async def get_body_metrics(limit: int = 100) -> list[dict[str, Any]]:
         """List body measurements, newest first."""
         return await services.get_body_metrics(limit=limit)
 
-    @mcp.tool(annotations=_IDEMPOTENT_WRITE)
+    @mcp.tool(annotations=_writes("Add or update an exercise", idempotent=True))
     async def upsert_exercise(exercise: Exercise) -> dict[str, Any]:
         """Create or update an exercise in the user's catalog (keyed by its id/name).
         Prefer a pool exercise: call search_exercise_pool first and pass its `slug` as the `id`
@@ -96,7 +113,7 @@ def register(mcp: FastMCP) -> None:
         Fields you omit are left as they are, so a partial update is safe."""
         return await services.upsert_exercise(exercise)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Search the exercise catalog"))
     async def search_exercise_pool(
         muscle: str | None = None,
         equipment: list[str] | None = None,
@@ -124,7 +141,7 @@ def register(mcp: FastMCP) -> None:
             locale=locale,
         )
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("List the user's exercises"))
     async def list_exercises(
         muscle: str | None = None,
         equipment: str | None = None,
@@ -143,7 +160,7 @@ def register(mcp: FastMCP) -> None:
             query=query,
         )
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get the training program"))
     async def get_program() -> dict[str, Any] | None:
         """Get the active training program with its day templates (planned blocks/supersets and
         per-exercise targets). Returns null if no active program — to build one, call
@@ -151,7 +168,7 @@ def register(mcp: FastMCP) -> None:
         generic knowledge. Edit via import_document."""
         return await services.get_program()
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get training statistics"))
     async def get_stats(
         kind: Literal["progression", "volume", "prs"],
         exercise_id: str | None = None,
@@ -170,7 +187,7 @@ def register(mcp: FastMCP) -> None:
         with the user's context."""
         return await services.get_stats(kind, exercise_id=exercise_id, date_from=date_from)
 
-    @mcp.tool
+    @mcp.tool(annotations=_writes("Import training history"))
     async def import_document(document: WorkoutDocument) -> dict[str, Any]:
         """Bulk-import a full workout document (exercises, sessions, body metrics, programs).
         Programs must be designed via get_coaching_context(task='new_program') and explicitly
@@ -182,7 +199,7 @@ def register(mcp: FastMCP) -> None:
 
     # --- coaching (docs/COACHING_PLAN.md) --------------------------------------
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get coaching context"))
     async def get_coaching_context(
         task: Literal[
             "intake", "next_workout", "new_program", "weekly_review", "deload_check", "checkin"
@@ -197,7 +214,7 @@ def register(mcp: FastMCP) -> None:
         through update_coach_profile instead."""
         return await services.get_coaching_context(task, constraints=constraints)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Review a program draft"))
     async def review_program_draft(document: WorkoutDocument) -> dict[str, Any]:
         """Server-side checklist for a DRAFT training program. Call it with the same
         WorkoutDocument you intend to import BEFORE presenting the draft to the user: it
@@ -207,7 +224,7 @@ def register(mcp: FastMCP) -> None:
         nothing."""
         return await services.review_program_draft(document)
 
-    @mcp.tool(annotations=_IDEMPOTENT_WRITE)
+    @mcp.tool(annotations=_writes("Update the coaching profile", idempotent=True))
     async def update_coach_profile(patch: CoachProfilePatch) -> dict[str, Any]:
         """Persist facts the user confirmed (goal, experience, schedule, equipment, injuries,
         preferences). Call as soon as a fact is confirmed — one fact per call is fine, don't
@@ -218,7 +235,7 @@ def register(mcp: FastMCP) -> None:
         answer was saved and now shapes their plan."""
         return await services.update_coach_profile(patch)
 
-    @mcp.tool
+    @mcp.tool(annotations=_writes("Add or update a goal"))
     async def upsert_goal(goal: GoalInput) -> dict[str, Any]:
         """Create or update a training goal (pass `id` to update). `target.goal_type` selects the
         shape: milestone (point target — exercise_id+value, or bodyweight+baseline_value),
@@ -250,12 +267,12 @@ def register(mcp: FastMCP) -> None:
         goals — supersede with status=revised/abandoned/achieved so history survives."""
         return await services.upsert_goal(goal)
 
-    @mcp.tool(annotations=_READ_ONLY)
+    @mcp.tool(annotations=_reads("Get goals"))
     async def get_goals(status: str = "active") -> list[dict[str, Any]]:
         """The user's goals (status: active|achieved|abandoned|revised|all)."""
         return await services.get_goals(status)
 
-    @mcp.tool
+    @mcp.tool(annotations=_writes("Record a coaching event"))
     async def log_coach_event(
         type: CoachEventType, payload: dict[str, Any] | None = None
     ) -> dict[str, Any]:

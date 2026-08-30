@@ -14,17 +14,26 @@ you already pay for rather than being a second one. Guides:
 
 ## How it works
 
-One unique URL safe **token** per user serves everything on the same host:
+There are two ways in, on the same host, and both resolve to the same `user_id`:
 
 ```
+https://<app>/mcp                OAuth 2.1 — add as a connector, approve in the browser
 https://<app>/{token}            mobile web app / installable PWA
-https://<app>/{token}/mcp        add as a custom connector in Claude or ChatGPT
+https://<app>/{token}/mcp        the original connector address, still supported
 https://<app>/{token}/api/*      read only JSON the UI consumes
 ```
 
-A token resolver middleware maps the token to a user and scopes every query by `user_id`. There is
-no password and no OAuth dance: the link is the credential, which is what makes it a one paste
-setup in an assistant that supports custom connectors.
+**OAuth** is what a connector uses now. The server is an OAuth 2.1 resource server: an
+unauthenticated call gets a `401` carrying RFC 9728 protected-resource metadata, the client
+discovers the authorization server from it, registers itself dynamically, and the user approves on
+a consent screen this app serves. Supabase Auth is the authorization server, so no authorization
+codes or access tokens are stored here; the access token's `sub` is mapped to an account through
+`users.supabase_user_id`. Nothing secret is pasted by hand.
+
+**The URL token** predates it and still works, which is why every link already in someone's inbox
+kept working when OAuth landed. A token resolver middleware maps the leading path segment to a user
+and scopes every query by `user_id`; the OAuth path sets the same context variable from a verified
+token instead. Two doors, one scoping rule.
 
 ## What the MCP server exposes
 

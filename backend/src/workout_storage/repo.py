@@ -107,6 +107,31 @@ async def rotate_token(conn: Conn, user_id: str) -> str:
     return new_token
 
 
+async def get_user_by_supabase_id(conn: Conn, supabase_user_id: str) -> dict[str, Any] | None:
+    async with conn.cursor() as cur:
+        await cur.execute("select * from users where supabase_user_id = %s", [supabase_user_id])
+        return await cur.fetchone()
+
+
+async def link_supabase_user(conn: Conn, user_id: str, supabase_user_id: str) -> bool:
+    """Attach a Supabase Auth identity to an account, once.
+
+    Returns False if this account is already linked to a *different* Supabase identity, rather than
+    silently repointing it: that would hand one person's training log to whoever last signed in
+    with a matching address. The caller turns a False into a refusal to authorize.
+
+    The email match that leads here is only safe because Supabase verified the address first (see
+    oauth.py) — this function assumes that check has already happened.
+    """
+    async with conn.cursor() as cur:
+        await cur.execute(
+            "update users set supabase_user_id = %s "
+            "where id = %s and (supabase_user_id is null or supabase_user_id = %s)",
+            [supabase_user_id, user_id, supabase_user_id],
+        )
+        return cur.rowcount > 0
+
+
 async def mark_email_verified(conn: Conn, user_id: str) -> None:
     """Stamp email_verified_at on first authenticated visit (the magic link proves ownership)."""
     async with conn.cursor() as cur:
@@ -138,6 +163,49 @@ async def prune_signup_events(conn: Conn, before: datetime) -> None:
     """Drop throttle rows older than the rate-limit window so the table stays bounded."""
     async with conn.cursor() as cur:
         await cur.execute("delete from signup_events where created_at < %s", [before])
+
+
+# --- email delivery telemetry ------------------------------------------------
+
+
+async def record_email_event(
+    conn: Conn,
+    *,
+    resend_email_id: str,
+    kind: str,
+    user_id: str | None = None,
+    occurred_at: datetime | None = None,
+    detail: dict[str, Any] | None = None,
+) -> None:
+    """Record one step in a message's life: our own 'sent', or a Resend webhook event.
+
+    Idempotent on (resend_email_id, kind, occurred_at) because svix retries the whole webhook on
+    any non-2xx, so the same event legitimately arrives more than once.
+    """
+    async with conn.cursor() as cur:
+        await cur.execute(
+            """insert into email_events (user_id, resend_email_id, kind, occurred_at, detail)
+               values (%s, %s, %s, coalesce(%s, now()), %s)
+               on conflict (resend_email_id, kind, occurred_at) do nothing""",
+            [user_id, resend_email_id, kind, occurred_at, Jsonb(detail) if detail else None],
+        )
+
+
+async def user_id_for_email_id(conn: Conn, resend_email_id: str) -> str | None:
+    """Whose message was this? Resolved through the 'sent' row written when we sent it.
+
+    Returns None for a message we have no send record for — a send that predates this table, or
+    one from something other than send_magic_link. The caller stores the event anyway: an
+    unattributable bounce is still a deliverability signal.
+    """
+    async with conn.cursor() as cur:
+        await cur.execute(
+            "select user_id from email_events where resend_email_id = %s and user_id is not null"
+            " limit 1",
+            [resend_email_id],
+        )
+        row = await cur.fetchone()
+    return str(row["user_id"]) if row and row["user_id"] else None
 
 
 # --- exercises ---------------------------------------------------------------

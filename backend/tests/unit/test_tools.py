@@ -56,3 +56,23 @@ async def test_write_hints_are_honest():
         ann = tools_by_name[name].annotations
         assert ann is None or not ann.idempotentHint, f"{name} retries can duplicate data"
     assert tools_by_name["delete_session"].annotations.destructiveHint
+
+
+async def test_every_tool_carries_a_title():
+    """Directory Policy §5.E requires a title on every tool. It is also what a client shows in a
+    permission prompt, so an empty one leaves the user approving a bare function name."""
+    for name, tool in (await _tools()).items():
+        assert tool.annotations is not None, f"{name} has no annotations at all"
+        title = tool.annotations.title
+        assert title, f"{name} has no title"
+        assert title != name, f"{name}: the title should read as an action, not repeat the name"
+
+
+async def test_writes_declare_whether_they_destroy_data():
+    """readOnlyHint=False alone does not tell a client whether a call is safe to allow. Only
+    delete_session removes anything; the rest add or amend, and say so explicitly."""
+    tools_by_name = await _tools()
+    for name in IDEMPOTENT_WRITES | UNHINTED:
+        ann = tools_by_name[name].annotations
+        assert ann.readOnlyHint is False, name
+        assert ann.destructiveHint is (name == "delete_session"), name

@@ -41,6 +41,18 @@ export default {
       text: "Almacenamiento de entrenamientos y entrenador de IA gratis para Claude. Crear tu cuenta toma un minuto.",
     },
   },
+  // Italian is a guide-only surface: one page, no app locale (docs/SEO_PLAN.md P.2 item 3). This
+  // hub is noindex plumbing so /guides/it/ is a real file, and it lists whatever ships in Italian.
+  it: {
+    title: "Guide AIm in italiano",
+    description:
+      "Guide pratiche di allenamento: calcolo del massimale con la formula di Epley e tabella delle percentuali.",
+    lead: "Per ora in italiano c'è il calcolatore del massimale. Le altre guide sono in inglese.",
+    cta: {
+      title: "Prova AIm con il tuo assistente",
+      text: "Diario di allenamento e coach AI gratuiti per Claude e ChatGPT. L'app è in inglese e la registrazione richiede un minuto.",
+    },
+  },
   fr: {
     title: "Guides AIm : Claude comme coach sportif IA",
     description:

@@ -22,8 +22,9 @@ import { useGoals, useMe, usePRs, useProfile, useSessions, useSummary } from "..
 import { daysBetweenIso, localIso, parseLocalDay, todayIso } from "../lib/localDate";
 import type { PersonalRecord, Summary } from "../data/workouts";
 
-// Must match services._STREAK_WINDOW_DAYS: the ring, the count beside it and the flame level all
-// have to describe the same stretch of time, or the card contradicts itself.
+// The bezel's calendar and the count beside it. NOT the flame's scale — since 2026-08-29 the
+// level is a fuel gauge with no window at all (docs/CONSISTENCY_FLAME.md), so this number governs
+// the picture and the count only. Changing it does not change anyone's level.
 const STREAK_WINDOW_DAYS = 28;
 
 // Home stat tiles keyed by what /api/profile can ask for (COACHING_PLAN.md §8.2's per-goal tile

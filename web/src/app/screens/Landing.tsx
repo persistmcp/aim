@@ -328,22 +328,23 @@ function ProgressMockup() {
           <div className="h-full w-[86%] rounded-full bg-accent" />
         </div>
       </div>
-      {/* The Home screen's 4-week consistency widget: the real WindowRing + StreakFlame
-          components with static data, so the mockup stays an honest copy of the app. The three
-          numbers agree with each other and with services._streak: 10 lit ticks, the count "10",
-          and the level 10 training days against a 3x/week plan actually scores (ratio 0.83 →
-          level 5, heat 0.975) — a good stretch, deliberately not a maxed-out trophy case. */}
+      {/* The Home screen's consistency widget: the real WindowRing + StreakFlame components with
+          static data, so the mockup stays an honest copy of the app (LANDING_COPY.md §4 — a
+          mockup that is not a real screen has to go). The three numbers agree with each other and
+          with services._streak, re-verified 2026-08-29 against the fuel gauge: 8 lit ticks, the
+          count "8", and 8 training days at roughly a 2x/week spacing with the last one today
+          score exactly level 5, heat 0.836 — a good stretch, deliberately not a maxed-out trophy
+          case. The previous 10-tick pattern was honest under the old ratio model (0.83 → level 5,
+          heat 0.975) and this change made it dishonest: it now scores 6 / 0.963. */}
       <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
         <div className="relative shrink-0 flex items-center justify-center w-[88px] h-[88px]">
           <WindowRing
-            days={Array.from({ length: 28 }, (_, i) =>
-              [1, 4, 6, 9, 12, 15, 18, 21, 24, 27].includes(i),
-            )}
+            days={Array.from({ length: 28 }, (_, i) => [2, 6, 9, 13, 16, 20, 24, 27].includes(i))}
           />
-          <StreakFlame level={5} heat={0.975} scale={1.12} />
+          <StreakFlame level={5} heat={0.836} scale={1.12} />
         </div>
         <div className="min-w-0">
-          <div className="text-foreground text-2xl font-medium tabular-nums leading-tight">10</div>
+          <div className="text-foreground text-2xl font-medium tabular-nums leading-tight">8</div>
           <div className="text-muted-foreground text-sm">{t("showcase.progress.streakWindow")}</div>
         </div>
       </div>

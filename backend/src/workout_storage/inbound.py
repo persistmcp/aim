@@ -24,13 +24,15 @@ import logging
 import os
 import time
 from collections.abc import Mapping
+from datetime import datetime
 from typing import Any
 
 import httpx
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from . import telegram_alert
+from . import repo, telegram_alert
+from .db import connect
 from .email import RESEND_ENDPOINT
 
 log = logging.getLogger(__name__)
@@ -181,6 +183,75 @@ async def _forward(data: dict[str, Any]) -> bool:
     return ok
 
 
+_DELIVERY_EVENTS = {
+    "email.sent",
+    "email.delivered",
+    "email.delivery_delayed",
+    "email.opened",
+    "email.clicked",
+    "email.bounced",
+    "email.complained",
+    "email.failed",
+}
+
+
+def _parse_ts(value: Any) -> datetime | None:
+    """Resend timestamps are ISO 8601, sometimes with a trailing Z psycopg will not take."""
+    if not isinstance(value, str):
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+async def _record_delivery_event(kind: str | None, data: dict[str, Any]) -> JSONResponse:
+    """Store one delivery event against the person we sent the message to.
+
+    Answers 200 for anything we do not track, including event types Resend adds later: an
+    unrecognised type is not an error, and a non-2xx would make svix retry it forever. Storage
+    failures DO return 500 so the event is retried rather than silently lost.
+    """
+    if kind not in _DELIVERY_EVENTS:
+        return JSONResponse({"ok": True, "ignored": kind})
+
+    email_id = data.get("email_id") or data.get("id")
+    if not isinstance(email_id, str) or not email_id:
+        # Nothing to join on; keeping it would be a row we can never interpret.
+        log.warning("delivery event without email id", extra={"event": "email_event_no_id"})
+        return JSONResponse({"ok": True, "ignored": "no email id"})
+
+    short = kind.removeprefix("email.")
+    # Bounce/complaint context only. Deliberately not the recipient address: users.email already
+    # holds it, and duplicating PII into a telemetry table buys nothing.
+    detail: dict[str, Any] = {}
+    for key in ("bounce_type", "bounce", "reason", "click", "subject"):
+        if key in data:
+            detail[key] = data[key]
+
+    try:
+        async with connect() as conn:
+            user_id = await repo.user_id_for_email_id(conn, email_id)
+            await repo.record_email_event(
+                conn,
+                resend_email_id=email_id,
+                kind=short,
+                user_id=user_id,
+                occurred_at=_parse_ts(data.get("created_at")),
+                detail=detail or None,
+            )
+    except Exception as exc:  # noqa: BLE001 - answer 500 so svix retries instead of losing it
+        log.exception("email event store failed", extra={"event": "email_event_store_failed"})
+        await telegram_alert.notify("email delivery webhook", f"{type(exc).__name__}: {exc}")
+        return JSONResponse({"error": "store failed"}, status_code=500)
+
+    if short in ("bounced", "complained", "failed"):
+        # A bounce means a signup silently got nothing. Worth waking someone, unlike an open.
+        await telegram_alert.notify("activation email", f"{short}: {detail or 'no detail'}")
+    log.info("email delivery event", extra={"event": "email_delivery", "kind": short})
+    return JSONResponse({"ok": True})
+
+
 async def inbound_email(request: Request) -> JSONResponse:
     secret = os.environ.get("RESEND_WEBHOOK_SECRET")
     body = await request.body()
@@ -192,8 +263,16 @@ async def inbound_email(request: Request) -> JSONResponse:
         event = json.loads(body)
     except ValueError:
         return JSONResponse({"error": "invalid body"}, status_code=400)
-    if event.get("type") != "email.received":
-        return JSONResponse({"ok": True, "ignored": event.get("type")})
+    kind = event.get("type")
+    if kind != "email.received":
+        # Everything else Resend sends about OUR outbound mail: delivered, opened, clicked,
+        # bounced, complained, delivery_delayed. These used to be dropped here, which is why
+        # `email_sent=true` (Resend accepted it) was the only thing we ever knew about an
+        # activation email, and two of four August signups vanished with no way to tell an
+        # ignored mail from one that never arrived. Same endpoint and same secret on purpose:
+        # enabling the extra event types on the existing Resend webhook is one checkbox, where a
+        # second endpoint would mean a second signing secret to configure and rotate.
+        return await _record_delivery_event(kind, event.get("data") or {})
 
     forwarded = await _forward(event.get("data") or {})
     if not forwarded:

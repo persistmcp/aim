@@ -1,17 +1,19 @@
-// Home "consistency" hero card — the rolling-30-day regularity computed server-side against the
-// user's OWN baseline (services._streak), never an absolute bar: a 2x/week and a 5x/week trainee
-// both reach the top by holding their own rhythm. Replaces the old 3-tile stat grid; the same
-// three numbers live in a compact row under the hero, and the bodyweight quick-edit affordance
-// moved here with a visible gear icon (the old tappable tile gave no hint it was editable).
+// Home "consistency" hero card — the flame, the day bezel and the three numbers under it.
 //
-// The hero is a BARBELL heating up like steel in a forge (owner, 2026-08-01: the generic flame
-// felt banal — "что-то со штангой, типа она разгорается"). It renders from continuous `heat`
-// (0..1, services._streak's un-banded ratio): the glow starts at the bar's center and spreads
-// outward through the plates, the metal's color runs cold steel → dull red → orange → near-white,
-// the halo builds and, past mid-scale, breathes. Every session nudges it hotter — no per-band
-// jumps. The integer level 0-6 remains the coarse public scale (tooltip, coach context) and the
-// fallback when heat is absent. The barbell sits in a 30-tick bezel — one tick per day of the
-// rolling window, lit = trained that day.
+// The level and the continuous `heat` both come from services._streak, which since 2026-08-29 is
+// a FUEL GAUGE: every training day adds a fixed fraction of a full fire, the fire decays with a
+// half-life of three of the user's own expected intervals, and the score is that store clipped
+// at 1. There is no window and no ratio any more (docs/CONSISTENCY_FLAME.md). Two consequences
+// live in this file: `heat` runs on SEVEN bands rather than saturating at six, and the bezel is a
+// calendar that fades with age plus a cold arc, never a scale — see WindowRing.
+//
+// The flame itself is the owner-picked direction (C of five researched prototypes: turbulence
+// displacement, gooey particles, layered candle, sprite flipbook, path morphing): four teardrop
+// layers, outer body through to a near-white core, each breathing its own border-radius on a
+// separate phase while the whole flame leans and stretches from its base. Pure CSS (no SMIL, no
+// SVG filters): cheap on mobile, and prefers-reduced-motion is handled by the stylesheet media
+// block for free. Size, layer colors, glow and every animation period interpolate from `heat`,
+// so the fire grows with every session instead of jumping once per band.
 import { Settings2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,13 +34,40 @@ const lerpHex = (a: string, b: string, f: number) => {
 // on mobile, and prefers-reduced-motion is handled by the stylesheet media block for free.
 // Size, layer colors, glow and every animation period interpolate from continuous `heat`
 // (services._streak) — the flame grows fuller, hotter-colored and livelier with every session.
+// SEVEN anchors, not six: the backend gave the top band its own segment on 2026-08-29, so `heat`
+// now runs 1/7..1 instead of saturating at 1.0 for every score above 0.86. Without a seventh
+// anchor the whole top band would still render at one size — which was half of the complaint that
+// caused the rework (a full 10-day layoff used to move the flame by under a pixel). Keep this list
+// in step with services._STREAK_BANDS: one anchor per band boundary, plus one for the top.
+// Seven anchors, one per band boundary plus the top (services._STREAK_BANDS + the 2026-08-29
+// seventh segment). Reworked 2026-08-30 after the owner reported that his level-4 flame "looks
+// like a full 6", which measurement confirmed: the old ramp moved SIZE and almost nothing else.
+// Its mid colour was frozen at #f97316 across five of the seven anchors, the layer proportions
+// were constants, and the near-white core was present at every level including the first — so the
+// whole upper half of the scale was one drawing at slightly different sizes, 4-6px apart.
+//
+// What changes now, in order of how much work each channel does:
+//   * `layers` — how many teardrops are drawn at all. A low fire is a shapeless glow (2), a full
+//     one has a distinct envelope, body, inner cone and white-hot core (4). This is a STRUCTURAL
+//     difference, the only kind that survives being 30px wide on a phone.
+//   * `core` — no longer a constant. Near the bottom it equals the mid colour, so there is no
+//     bright centre at all; only the top two anchors are near-white.
+//   * mid/tip ramp dull red → orange → yellow → cream, monotonically brighter.
+//   * halo runs 0.05 → 1 instead of 0.28 → 1, and its alpha now scales too (see StreakFlame).
+//   * size runs 22 → 57 instead of 26 → 53. At scale 1.12 that is 24.6 → 63.8px, and the bezel's
+//     inner tick radius leaves 69px clear, so the top still fits with room for the ring to
+//     stay readable behind it.
+// The outer envelope stays red at every level on purpose: real flames have red edges, and it is
+// the INTERIOR that must brighten. Making the envelope brighter at the bottom is what made a dying
+// fire read as a cheerful amber one.
 const FLAME_ANCHORS = [
-  { size: 26, halo: 0.28, colors: ["#f59e0b", "#fbbf24", "#fde68a"] },
-  { size: 29, halo: 0.42, colors: ["#f97316", "#fb923c", "#fed7aa"] },
-  { size: 33, halo: 0.58, colors: ["#f97316", "#f59e0b", "#fbbf24"] },
-  { size: 37, halo: 0.72, colors: ["#ef4444", "#f97316", "#fbbf24"] },
-  { size: 42, halo: 0.87, colors: ["#dc2626", "#f97316", "#fde047"] },
-  { size: 47, halo: 1, colors: ["#b91c1c", "#f97316", "#fef08a"] },
+  { size: 22, halo: 0.05, layers: 2, colors: ["#6b2020", "#7f2323", "#8a2b1e"], core: "#8a2b1e" },
+  { size: 27, halo: 0.13, layers: 2, colors: ["#8a1f1f", "#a32a20", "#c2410c"], core: "#c2410c" },
+  { size: 33, halo: 0.26, layers: 3, colors: ["#a51f1f", "#c2410c", "#ea580c"], core: "#f59e0b" },
+  { size: 40, halo: 0.43, layers: 3, colors: ["#b91c1c", "#dc2626", "#f59e0b"], core: "#fbbf24" }, // level 4
+  { size: 47, halo: 0.63, layers: 4, colors: ["#b91c1c", "#ea580c", "#fbbf24"], core: "#fde047" }, // level 5
+  { size: 54, halo: 0.84, layers: 4, colors: ["#a41616", "#f97316", "#fde047"], core: "#fef3c7" },
+  { size: 57, halo: 1, layers: 4, colors: ["#991b1b", "#fb923c", "#fef08a"], core: "#fefce8" },
 ] as const;
 const OUTLINE_SIZE = 21;
 const FLAME_PATH =
@@ -46,27 +75,37 @@ const FLAME_PATH =
   "6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z";
 
 function flameSpec(t: number) {
-  const f = Math.min(Math.max(t * 6, 1), 6) - 1;
+  const f = Math.min(Math.max(t * 7, 1), 7) - 1;
   const lo = FLAME_ANCHORS[Math.floor(f)];
   const hi = FLAME_ANCHORS[Math.min(Math.ceil(f), FLAME_ANCHORS.length - 1)];
   const frac = f - Math.floor(f);
   return {
     size: lerp(lo.size, hi.size, frac),
     halo: lerp(lo.halo, hi.halo, frac),
+    // Layer COUNT cannot be interpolated — it is the structural channel, so it steps, and it
+    // steps exactly ON the band boundary (take the low anchor, never round toward the high one).
+    // Rounding at the midpoint was the first attempt and it was wrong in the one place that
+    // matters: the top of level 4 already drew four layers, so it looked identical to 5 and 6 —
+    // which is the exact complaint this rework exists to answer. Constant within a level, changed
+    // when the number changes.
+    layers: lo.layers,
     colors: lo.colors.map((c, i) => lerpHex(c, hi.colors[i], frac)) as [string, string, string],
+    core: lerpHex(lo.core, hi.core, frac),
   };
 }
 
-// Teardrop layers, outer → core: size as a fraction of the flame box, tiny lift off the base,
-// and each one's breathing period/phase. Colors 0-2 come from the heat-interpolated anchor
-// triple; the core stays near-white at any heat (the hottest point of a real flame).
+// Teardrop layers, outer → core: size as a fraction of the flame box, tiny lift off the base, and
+// each one's breathing period/phase. How MANY of them are drawn comes from the heat-interpolated
+// anchor (2 at the bottom, 4 at the top) — that count is the strongest signal on the card, because
+// a shapeless glow and a four-layer flame with a white-hot centre do not read as the same object
+// at any size. Colors 0-2 and the core all come from the anchor too; the core is deliberately NOT
+// a constant, or a dying fire keeps a bright centre and looks healthy.
 const FLAME_LAYERS = [
   { frac: 0.78, lift: 0, period: 2.4, delay: 0 },
   { frac: 0.58, lift: 0.03, period: 1.9, delay: -0.6 },
   { frac: 0.41, lift: 0.045, period: 1.6, delay: -1.0 },
   { frac: 0.24, lift: 0.06, period: 1.3, delay: -0.3 },
 ] as const;
-const CORE_COLOR = "#fefce8";
 
 export function StreakFlame({
   level,
@@ -75,13 +114,13 @@ export function StreakFlame({
   className = "",
 }: {
   level: number;
-  /** Continuous 0..1 intensity; falls back to level/6 when the backend didn't send one. */
+  /** Continuous 0..1 intensity; falls back to level/7 when the backend didn't send one. */
   heat?: number | null;
   /** Shrinks the whole size ramp proportionally (bezel context caps the max size). */
   scale?: number;
   className?: string;
 }) {
-  const t = Math.min(Math.max(heat ?? level / 6, 0), 1);
+  const t = Math.min(Math.max(heat ?? level / 7, 0), 1);
 
   if (t <= 0) {
     return (
@@ -101,7 +140,8 @@ export function StreakFlame({
 
   const spec = flameSpec(t);
   const [base, mid, tip] = spec.colors;
-  const layerColors = [base, mid, tip, CORE_COLOR];
+  const layerColors = [base, mid, tip, spec.core];
+  const layers = FLAME_LAYERS.slice(0, spec.layers);
   const size = spec.size * scale;
   const width = size * 0.82;
   // Livelier with heat: all periods shorten together as t grows.
@@ -128,7 +168,7 @@ export function StreakFlame({
           animationDuration: `${(3.4 - 1.6 * t).toFixed(2)}s`,
         }}
       >
-        {FLAME_LAYERS.map((layer, i) => (
+        {layers.map((layer, i) => (
           <span
             key={i}
             data-flame-layer={i}
@@ -144,9 +184,16 @@ export function StreakFlame({
               animationDuration: `${(layer.period * speed).toFixed(2)}s`,
               animationDelay: `${layer.delay}s`,
               // Only the body layer casts the outer glow — stacking four shadows just muddies.
+              // Alpha scales with heat as well as the blur radius. It used to be a hardcoded
+              // `44` (0.27) at every level, so the glow — the one channel that reads at a glance
+              // on a dark card — was identical for a dying fire and a roaring one.
               boxShadow:
                 i === 0
-                  ? `0 0 ${(6 + 8 * spec.halo).toFixed(0)}px ${(2 + 3 * spec.halo).toFixed(0)}px ${mid}44`
+                  ? `0 0 ${(4 + 14 * spec.halo).toFixed(0)}px ${(1 + 5 * spec.halo).toFixed(0)}px ${mid}${Math.round(
+                      20 + 200 * spec.halo,
+                    )
+                      .toString(16)
+                      .padStart(2, "0")}`
                   : undefined,
             }}
           />
@@ -156,23 +203,65 @@ export function StreakFlame({
   );
 }
 
+// The bezel: one tick per day of the last four weeks, oldest first, filling clockwise from the
+// top. It is a CALENDAR, not the flame's scale — and after 2026-08-29 it had to stop pretending
+// otherwise. The flame is now a fuel gauge with no window at all, so a plain count of lit ticks
+// actively contradicts it: four ticks (1x/week, on rhythm) render a full fire, while eighteen
+// ticks (6x/week, day seven of a rest week) render a nearly dead one. Sitting inside the flame's
+// own tap target, that reads as an explanation, and it was the wrong one.
+//
+// Two changes make it agree with the fire instead. Lit ticks FADE WITH AGE, because that is
+// exactly what the fuel model does to them — an old session warms you less than a recent one, and
+// the ring now shows it without a word of copy. And the stretch from the last session to today is
+// drawn as a COLD ARC: continuous, thicker, in the muted colour. That arc is the single quantity
+// the level actually responds to, so the picture and the number finally answer the same question.
 const BEZEL_SIZE = 88;
 const BEZEL_R = 38;
+// Age → opacity for a lit tick. Mirrors the fuel model's shape, not its arithmetic: a session
+// inside the last week still counts for nearly all of its warmth, and by four weeks it is nearly
+// spent. Deliberately coarse — this is texture, not a readout.
+const TICK_FADE = [
+  { withinDays: 7, opacity: 1 },
+  { withinDays: 14, opacity: 0.7 },
+  { withinDays: 21, opacity: 0.45 },
+  { withinDays: Infinity, opacity: 0.25 },
+] as const;
 
-// The window bezel: one tick per day of the rolling window (oldest first, the ring fills
-// clockwise from the top). The window is 4 weeks, not 30 days, because 30 days is 4.286 weeks
-// and the level computed over it flickered on calendar phase alone (services._streak).
-// Decorative: the count next to it carries the number, the per-day breakdown is texture, not a
-// control. Exported for the landing's showcase mockup, which mirrors this widget with static
-// data. Tick count follows `days.length`, so it needs no change if the window ever moves again.
 export function WindowRing({ days }: { days: boolean[] }) {
   const c = BEZEL_SIZE / 2;
+  const lastTrained = days.lastIndexOf(true);
+  // Days since the last session — the cold arc's length. -1 (never trained in the window) makes
+  // the whole ring cold, which is the honest picture for someone whose fire is out.
+  const coldFrom = lastTrained === -1 ? 0 : lastTrained + 1;
+  const angle = (i: number) => (i / days.length) * 2 * Math.PI - Math.PI / 2;
+  const point = (i: number, r: number) => [c + Math.cos(angle(i)) * r, c + Math.sin(angle(i)) * r];
+
+  let coldPath = "";
+  if (coldFrom < days.length) {
+    // A single arc from the day after the last session through today. Drawn on the tick radius so
+    // it reads as the same ring, not a second one.
+    const [x1, y1] = point(coldFrom - 0.5, BEZEL_R);
+    const [x2, y2] = point(days.length - 0.5, BEZEL_R);
+    const sweep = (days.length - coldFrom) / days.length;
+    coldPath = `M ${x1} ${y1} A ${BEZEL_R} ${BEZEL_R} 0 ${sweep > 0.5 ? 1 : 0} 1 ${x2} ${y2}`;
+  }
+
   return (
     <svg width={BEZEL_SIZE} height={BEZEL_SIZE} className="absolute inset-0" aria-hidden>
+      {coldPath && (
+        <path
+          d={coldPath}
+          fill="none"
+          strokeWidth={3.5}
+          strokeLinecap="round"
+          stroke="color-mix(in srgb, var(--foreground) 18%, transparent)"
+        />
+      )}
       {days.map((trained, i) => {
-        const a = (i / days.length) * 2 * Math.PI - Math.PI / 2;
-        const cos = Math.cos(a);
-        const sin = Math.sin(a);
+        const cos = Math.cos(angle(i));
+        const sin = Math.sin(angle(i));
+        const age = days.length - 1 - i;
+        const opacity = TICK_FADE.find((f) => age < f.withinDays)?.opacity ?? 0.25;
         return (
           <line
             key={i}
@@ -182,6 +271,7 @@ export function WindowRing({ days }: { days: boolean[] }) {
             y2={c + sin * (BEZEL_R + 3.5)}
             strokeWidth={2.2}
             strokeLinecap="round"
+            opacity={trained ? opacity : 1}
             stroke={
               trained ? "var(--accent)" : "color-mix(in srgb, var(--foreground) 10%, transparent)"
             }
@@ -220,9 +310,11 @@ export function StreakWidget({
   const hasRing = (daysWindow?.length ?? 0) > 0;
 
   // Self-dismiss: a tooltip that needs a second, aimed tap to get rid of is a chore on touch.
+  // 4.5s, not 2.5: it carries two lines since 2026-08-29, and the second one is the only place
+  // the app explains what the number means.
   useEffect(() => {
     if (!levelTipOpen) return;
-    const id = setTimeout(() => setLevelTipOpen(false), 2500);
+    const id = setTimeout(() => setLevelTipOpen(false), 4500);
     return () => clearTimeout(id);
   }, [levelTipOpen]);
 
@@ -245,16 +337,17 @@ export function StreakWidget({
             }}
           >
             {hasRing && <WindowRing days={daysWindow as boolean[]} />}
-            {/* Bezel 88 (sized up during the barbell exploration and kept — the hero earned
-                the room): the flame's max size (47 × 1.12 ≈ 53) stays clear of the ticks. */}
+            {/* Bezel 88: the flame's max size (53 × 1.12 ≈ 59) stays clear of the ticks, whose
+                inner radius is 34.5 → 69px of clear diameter. */}
             <StreakFlame level={level} heat={heat} scale={hasRing ? 1.12 : 1} />
           </button>
           {levelTipOpen && (
             <span
               role="status"
-              className="animate-in fade-in-0 zoom-in-95 absolute left-0 top-full z-10 mt-1 whitespace-nowrap rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground"
+              className="animate-in fade-in-0 zoom-in-95 absolute left-0 top-full z-10 mt-1 block w-56 whitespace-normal rounded-md bg-primary px-3 py-1.5 text-left text-xs leading-snug text-primary-foreground"
             >
               {t("home.streak.levelTooltip", { level })}
+              <span className="mt-0.5 block opacity-80">{t("home.streak.levelHint")}</span>
             </span>
           )}
         </div>

@@ -10,6 +10,7 @@ from collections.abc import Iterable
 from datetime import UTC, date, datetime, timedelta
 from time import monotonic
 from typing import Any
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from . import coach, landmarks, present, prompts, repo, stats
 from . import email as email_service
@@ -625,34 +626,127 @@ def _weekly_volume_history(
     ]
 
 
-# Consistency-flame level bands: lower bounds on the frequency ratio (training days per week over
-# the last 4 weeks vs the user's OWN baseline) for levels 2..6; below the first bound is level 1.
-# Always a ratio against the user's own normal, never an absolute count — a 2x/week and a 5x/week
-# trainee both reach level 6 by simply holding their own usual rhythm.
-#
-# The top band opens at 0.86 — BELOW 1.0 — and that is the whole point of the vector. Holding your
-# own rhythm IS the top of the scale, with a constant ~14% proportional tolerance: one missed
-# session in four weeks at a 2x/week plan, three at 6x/week. The previous vector ended at 1.3,
-# which meant the top demanded training 30% MORE than your own normal: a never-missing user never
-# reached level 6 at any target (0 occurrences in 300 simulated phases), level 6 at a 5x/week plan
-# required 28 sessions in 30 days, and under the behavioural baseline — where your bar is your own
-# trailing average — it could only be held by accelerating every month, forever.
-#
-# The five bounds are evenly spaced at 0.86/5 = 0.172. The noise in this measurement is
-# proportional to the ratio, so no region of the scale is measured more precisely than another and
-# nothing justifies a narrower band anywhere; the old vector's narrowest band (0.85→1.0, width
-# 0.15) sat exactly on the mode of a stationary user, which is the worst possible place for one.
-# 0.172 also clears the coarsest quantum — one training day per 28 at a 2x/week plan is 0.125 of
-# ratio — so every level stays reachable at every target from 2 to 6 days per week.
+# Consistency-flame level bands: lower bounds on the fuel score (see _streak) for levels 2..6;
+# below the first bound is level 1. The score is normalized so that 1.0 means "you are holding
+# your own rhythm", whatever that rhythm is — a 2x/week and a 6x/week trainee both sit pinned at
+# the top while on plan. The vector is unchanged from the 2026-08-09 recut and its reasoning still
+# holds: five evenly-spaced bounds at 0.86/5 = 0.172, wide enough that every level is reachable at
+# every cadence, with no narrow band sitting on the mode of a stationary user.
 _STREAK_BANDS = (0.17, 0.34, 0.51, 0.68, 0.86)
 
-# Whole weeks, deliberately, and this matters more than the bands do. A 30-day window is 4.286
-# weeks: a user training the same fixed weekdays every single week lands 12, 13 or 14 sessions in
-# it depending only on which weekday `today` happens to be, so the ratio swept [0.923, 1.154] and
-# the level flickered between two values with no change whatsoever in behaviour. At 28 and 84 days
-# that spread is exactly zero, and a stationary user sits on ratio 1.0 rather than straddling it.
-_STREAK_WINDOW_DAYS = 28
-_STREAK_BASELINE_DAYS = 84
+# --- the fuel gauge -----------------------------------------------------------------------
+# Every session is a log on the fire; the fire decays every day. Both the per-session gain and the
+# decay rate derive from the user's OWN cadence, which is what lets one scale serve a 1x/week and
+# a 7x/week trainee. Replaces the ratio-of-windows model on 2026-08-29 (docs/FLAME_REDESIGN_PLAN.md)
+# because that model had three defects that a band recut cannot reach (the model itself is
+# specified in docs/CONSISTENCY_FLAME.md):
+#
+#   1. Its baseline was the user's own trailing average, and a stationary process divided by its
+#      own mean is 1 by construction — so ANY steady rate read as the top band, including one
+#      session per fortnight, forever. Making the windows disjoint does not fix this; removing
+#      behaviour from the denominator does.
+#   2. The 84-day baseline CONTAINED the 28-day window it judged, so idling shrank numerator and
+#      denominator together and the level could RISE while the user did nothing. It did exactly
+#      that in production on 2026-08-27.
+#   3. The ratio was unbounded above the top band, so a user training above their own plan banked
+#      invisible credit and the first days of a layoff cost nothing at all.
+#
+# The half-life is a HABIT constant, not a physiological one, and the difference matters: a 10-day
+# layoff costs a trained lifter almost nothing in strength (detraining reviews put meaningful
+# strength loss past ~4 weeks), so a physiologically-scaled flame would barely move — which is the
+# complaint that started this. The flame measures whether the habit is being kept, and is
+# deliberately far more sensitive than the body is. Do not "correct" it toward detraining rates.
+#
+# Because the half-life is a fixed number of expected intervals, the decay across one interval is
+# the same for everyone (2**(-1/3)), which makes the gain and the cap plain constants:
+_FUEL_HALF_LIFE_INTERVALS = 3.0  # the fire halves for every three missed expected sessions
+_FUEL_GAIN = 2 ** (1 / 3) - 1  # 0.2599 of a full fire per session, at any cadence
+# Clipping the STORE, not just the published score, is what makes grace exactly one expected
+# interval for everyone — a 3x/week trainee is not "slipping" on day 2, a 6x/week trainee is not
+# slipping on day 1 — and it is what stops out-training your own plan from banking credit.
+_FUEL_CAP = 2 ** (1 / 3)  # steady state saws between 1.0 (trough) and this
+
+# Volume deliberately plays NO part in the score (removed 2026-08-29). It used to cap the level
+# down when recent tonnage cratered against the user's own median, and the idea is defensible —
+# "showed up but did a quarter of the work" is real — but the implementation could not be made
+# honest. The baseline is a median over a window of the user's own recent weeks, so it always
+# drifts onto whatever the user is doing now: a permanent halving read as capped for two months
+# and then released with a TWO-LEVEL JUMP (level 4 -> 6 on day 63, verified). Moving the window to
+# be disjoint from the scored one only moved the jump from week 7 to week 9. Worse, the cap was a
+# sliding today-anchored comparison, so it could flip in either direction on a day with no
+# training: fuzzing 200 random histories with realistic volume spread found 329 days where the
+# LEVEL ROSE WHILE THE USER DID NOTHING — the exact defect this whole rework exists to remove,
+# reintroduced through a side door. The old unit test missed it only because every session it
+# built carried an identical volume.
+# It never once executed on a real user: the branch required 84 days of history and no account
+# reached that until 2026-08-27. So nothing is lost by removing it, the flame is a REGULARITY
+# instrument and stays one, and a real volume decline is something the coach should say out loud
+# in the weekly review — where the actual numbers are — rather than something that silently
+# subtracts from a number the user cannot decompose.
+_STREAK_WINDOW_DAYS = 28  # only the card's 4-week count and the cadence baseline's offset
+_RATE_BASELINE_DAYS = 84  # behavioural cadence is read from the 8 weeks BEFORE that window
+_RATE_MIN_BASELINE_DAYS = 14  # shortest disjoint span we will estimate a cadence from
+# How far back callers must fetch for the flame to be exact. The fuel store never fully forgets a
+# session, so a short fetch silently truncates it; at 1x/week (half-life 21 days) 180 days leaves
+# a residue of 0.003 of score, against a band width of 0.172.
+_STREAK_FETCH_DAYS = 180
+
+
+def _own_cadence(
+    training_days: set[date],
+    *,
+    anchor: date,
+    first_session: date,
+    fetched_from: date | None = None,
+) -> float | None:
+    """The user's own sessions/week, measured over the 8 weeks BEFORE the scoring window.
+
+    Disjoint from the window on purpose (defect 2 above), and `anchor` is the user's LAST TRAINING
+    DAY rather than today: during a layoff a today-anchored window slides forward, the estimate
+    decays, and a shrinking denominator makes the score climb while the user does nothing — the
+    same bug in a new place. Anchoring at the last active day freezes the cadence for the whole
+    layoff."""
+    history = (anchor - first_session).days + 1
+    span = min(_RATE_BASELINE_DAYS, history) - _STREAK_WINDOW_DAYS
+    if span < _RATE_MIN_BASELINE_DAYS:
+        return None
+    hi = anchor - timedelta(days=_STREAK_WINDOW_DAYS)
+    lo = hi - timedelta(days=span - 1)
+    if fetched_from is not None and lo < fetched_from:
+        # The window runs off the front of the rows we were given, so what we would count is a
+        # truncation, not a cadence. Measuring it anyway is not merely imprecise — it is the
+        # rise-while-idle defect all over again: during a long layoff the anchor stops moving, the
+        # window slides off the fetched range, the count collapses, the inferred interval and with
+        # it the half-life balloon, and the fire decays SLOWER every day. On a real 2x/week history
+        # with no stated target the level climbed 1 -> 3 -> 4 across days 140-150 of doing nothing,
+        # then vanished to null on day 160. Refuse to guess instead.
+        return None
+    trained = sum(1 for d in training_days if lo <= d <= hi)
+    return (trained / (span / 7)) if trained else None
+
+
+def _local_today(user: dict[str, Any] | None, client_date: date | None) -> date:
+    """The date the USER is living in, not the one the server is.
+
+    The flame turns "days since you trained" straight into a score, and the server runs in UTC, so
+    east of UTC the session someone logs in the evening carries tomorrow's date as far as the
+    server is concerned and the `<= today` guard drops it — the flame ignores the workout they
+    just finished. The muscle panel on the same screen already solved this with `_client_date`;
+    the flame simply never got it.
+
+    Two sources, in order of trust: the caller's own clock (the web app sends `?today=`, already
+    clamped to +/-2 days in api._client_date), then the timezone stored on the user, which is all
+    the MCP path has because a coaching call arrives with no browser attached. Falling back to the
+    server's UTC date is the last resort and is what everyone got before this."""
+    if client_date is not None:
+        return client_date
+    tz_name = (user or {}).get("timezone")
+    if tz_name:
+        try:
+            return datetime.now(ZoneInfo(tz_name)).date()
+        except (ZoneInfoNotFoundError, ValueError):
+            pass  # a garbage timezone must never 500 a dashboard
+    return date.today()
 
 
 def _streak(
@@ -661,84 +755,108 @@ def _streak(
     first_session: date | None,
     training_days_per_week: int | None,
     today: date,
+    fetched_from: date | None = None,
 ) -> dict[str, Any]:
-    """Consistency level 0-6 over a rolling 4-week window (never a calendar month — no cliff on
-    the 1st) against the user's own baseline. This is a deliberate, explicit evolution of the
-    original anti-streak stance (COACHING_PLAN.md §2.2): a rolling ratio degrades one level at a
-    time as days pass without training — there is no all-or-nothing chain to break, and one
-    missed day never resets anything.
+    """Consistency level 0-6 as a fuel gauge: each training day adds `_FUEL_GAIN`, the store
+    decays continuously with a half-life of three of the user's own expected intervals, and the
+    published score is the store clipped at 1.0.
 
-    Baseline: with >= 84 days of logged history, the user's own last-12-weeks behavior; before
-    that, the training_days_per_week they stated at intake ("stated_target" basis); with neither —
-    < 7 days of history and no intake target — level is null ("insufficient_data").
+    This remains an evolution of COACHING_PLAN.md §2.2's rejection of streaks, not a reversal of
+    it: there is no chain, nothing resets, a single missed day costs less than one band, and one
+    session back is worth a full band at every cadence (five sessions take a cold fire to full,
+    identically at 2x and 6x per week). What changed on 2026-08-29 is that the scale is now
+    responsive and monotone — it CANNOT rise on a day without training — which the ratio model was
+    not. The ~14% tolerance from 2026-08-09 ("one missed session in four weeks still holds the top
+    band") is deliberately withdrawn; see docs/FLAME_REDESIGN_PLAN.md §6.
 
-    The numerator counts distinct training DAYS, not session rows, because the stated baseline is
-    stated in days per week. A coach that splits one training day into a morning and an evening
-    row would otherwise double the ratio (24 rows across 12 days read two levels higher than the
-    same 12 days), and the ring on the card has always counted days.
+    Cadence `r` is `max(stated intake target, own behaviour over the 8 weeks before the window)`.
+    The max is load-bearing in both directions: behaviour alone is degenerate (a stationary user
+    always scores 1.0 against their own mean), and a stale, under-stated intake target alone would
+    let an over-trainer max the scale for free. Neither available -> "insufficient_data".
 
-    Volume acts only as a floor that caps the level DOWN when recent volume has cratered
-    relative to the user's own normal (< 50% → two levels below the top, < 70% → one) — it can
-    never raise a level, so light-but-regular and heavy-but-regular trainees rank equally."""
+    Distinct training DAYS, never session rows: a coach that splits one day into a morning and an
+    evening row would otherwise double the score. Future-dated rows are excluded — nothing
+    constrains a session's date to the past, and "log my sessions for next week" writes real
+    rows."""
     if first_session is None:
         return {"level": None, "basis": "insufficient_data"}
-    history_days = (today - first_session).days + 1
-    if history_days < 7:
+
+    # No minimum history. The ratio model needed a span to divide by, so it withheld the flame for
+    # the first 7 days — which meant a brand-new user, the one person most worth encouraging, saw
+    # nothing at all on the screen they had just signed up for. A fuel gauge needs no span: the
+    # first session is worth _FUEL_GAIN and lights the fire at level 2, the second takes it to 3,
+    # and five take a cold fire to full at any cadence. The only remaining null is "we cannot know
+    # your rhythm yet" (no stated target and too little history to infer one), which is a real
+    # gap in knowledge rather than an arbitrary waiting period.
+    training_days = {v["date"] for v in vols if v["date"] <= today}
+    stated = float(training_days_per_week) if training_days_per_week else None
+    if stated is not None and stated <= 0:
+        stated = None
+
+    if not training_days:
+        # History exists but nothing landed in the fetched range: the fire is out. A statement
+        # about now, and NOT the same as "we have not seen you yet".
+        return {
+            "level": 0,
+            "basis": "stated_target" if stated else "insufficient_data",
+            "heat": 0.0,
+        }
+
+    anchor = max(training_days)
+    behavioural = _own_cadence(
+        training_days, anchor=anchor, first_session=first_session, fetched_from=fetched_from
+    )
+    candidates = [c for c in (stated, behavioural) if c]
+    if not candidates:
+        # No stated target and no measurable cadence. Two very different people land here, and the
+        # difference is how long ago they last trained: someone brand new whose rhythm we genuinely
+        # do not know (null — Home falls back to the tile grid), and someone whose baseline window
+        # has run off the end of their data because they have been gone for months. The second
+        # needs no cadence to answer honestly: at ANY plausible rhythm the fire is out. Returning
+        # null there would make the flame VANISH from a user who had a level yesterday.
+        if (today - anchor).days >= _RATE_BASELINE_DAYS - _STREAK_WINDOW_DAYS:
+            return {"level": 0, "basis": "insufficient_data", "heat": 0.0}
         return {"level": None, "basis": "insufficient_data"}
+    rate = max(candidates)
+    basis = (
+        "behavioral"
+        if behavioural is not None and behavioural >= (stated or 0)
+        else "stated_target"
+    )
 
-    window_from = today - timedelta(days=_STREAK_WINDOW_DAYS - 1)
-    # The `<= today` bound is load-bearing: nothing constrains a session's date to the past, and
-    # a coach asked to "log my sessions for next week" writes real future-dated rows. Without it
-    # they counted as training already done and pinned the flame at maximum for a whole window.
-    recent = [v for v in vols if window_from <= v["date"] <= today]
-    recent_days = len({v["date"] for v in recent})
-    span_weeks = min(_STREAK_WINDOW_DAYS, history_days) / 7
+    interval = 7.0 / rate
+    decay_per_day = 0.5 ** (1.0 / (_FUEL_HALF_LIFE_INTERVALS * interval))
+    fuel = 0.0
+    previous: date | None = None
+    for day in sorted(training_days):  # over sessions, not days: O(sessions), ~1ms at 3 years
+        if previous is not None:
+            fuel *= decay_per_day ** (day - previous).days
+        fuel = min(fuel + _FUEL_GAIN, _FUEL_CAP)
+        previous = day
+    assert previous is not None
+    fuel *= decay_per_day ** (today - previous).days
+    score = min(fuel, 1.0)
 
-    own_avg_volume: float | None = None
-    if history_days >= _STREAK_BASELINE_DAYS:
-        base_from = today - timedelta(days=_STREAK_BASELINE_DAYS - 1)
-        base_days = len({v["date"] for v in vols if base_from <= v["date"] <= today})
-        own_avg_days = base_days / (_STREAK_BASELINE_DAYS / 7)
-        # Median, not mean, so one outlier PR week can't inflate the volume bar. `today` is passed
-        # through so the 13 week buckets are anchored to the date this call was given.
-        weekly = _weekly_volume_history(vols, weeks=13, today=today)
-        mid = sorted(w["value"] for w in weekly)
-        own_avg_volume = mid[len(mid) // 2]  # 13 weeks — odd, no interpolation needed
-        basis = "behavioral"
-    elif training_days_per_week:
-        own_avg_days = float(training_days_per_week)
-        basis = "stated_target"
-    else:
-        return {"level": None, "basis": "insufficient_data"}
-
-    if not recent_days or own_avg_days <= 0:
-        return {"level": 0, "basis": basis, "heat": 0.0}
-
-    ratio = (recent_days / span_weeks) / own_avg_days
-    level = 1 + sum(1 for bound in _STREAK_BANDS if ratio >= bound)  # 1..6
-    # "heat" is the same ratio kept continuous instead of banded: a fractional level that runs
-    # 1→6 piecewise-linearly through the exact _STREAK_BANDS boundaries, normalized to 0..1. The
-    # flame renders from this, growing a little with every session instead of jumping once per
-    # band. floor(fractional) == level holds exactly; the PUBLISHED heat is rounded to 3 decimals,
+    level = 1 + sum(1 for bound in _STREAK_BANDS if score >= bound)  # 1..6
+    # "heat" is the same score kept continuous instead of banded: a fractional level running 1->7
+    # piecewise-linearly through the exact _STREAK_BANDS boundaries, normalized to 0..1. The flame
+    # renders from this, growing a little with every session instead of jumping once per band.
+    #
+    # The top band gets its own segment (0.86 -> 1.0) and the normalizer is 7, not 6. Without that
+    # segment every score from 0.86 to 1.0 published heat exactly 1.0 — 14% of the scale rendered
+    # at zero pixels — and since one flame level is worth ~3.4px, a once-a-week trainee watched a
+    # real, monotone decline render as five consecutive days of identical pixels. That was half of
+    # the complaint the 2026-08-29 rework was for, and no change to the score could have fixed it.
+    # floor(fractional) == level still holds exactly; the PUBLISHED heat is rounded to 3 decimals,
     # so at a band edge it can sit a hair either side — render from it, never re-derive the level
     # from it (that is what `level` is for).
     fractional = float(level)
-    segments = [0.0, *(_STREAK_BANDS)]
-    if level <= len(_STREAK_BANDS):
-        lo, hi = segments[level - 1], segments[level]
-        # Clamped below 1.0: at a boundary, float division can return exactly 1.0 and carry
-        # `fractional` into the next integer while `level` stays put.
-        fractional += min((ratio - lo) / (hi - lo), 0.999999)
-    if own_avg_volume:
-        recent_vol_per_week = sum(float(v["volume_kg"] or 0) for v in recent) / span_weeks
-        vol_ratio = recent_vol_per_week / own_avg_volume
-        cap = 4 if vol_ratio < 0.5 else 5 if vol_ratio < 0.7 else None
-        if cap is not None and level >= cap:
-            # The cap says "not above this band" — heat pins to the band's ceiling, so a
-            # volume-capped flame still reads as full-for-its-level, not mid-band.
-            level = min(level, cap)
-            fractional = min(fractional, cap + 0.99)
-    return {"level": level, "basis": basis, "heat": round(min(fractional, 6.0) / 6, 3)}
+    segments = [0.0, *_STREAK_BANDS, 1.0]
+    lo, hi = segments[level - 1], segments[level]
+    # Clamped below 1.0: at a boundary, float division can return exactly 1.0 and carry
+    # `fractional` into the next integer while `level` stays put.
+    fractional += min((score - lo) / (hi - lo), 0.999999)
+    return {"level": level, "basis": basis, "heat": round(fractional / 7, 3)}
 
 
 def _maintenance_current(weekly_values: Iterable[float]) -> float | None:
@@ -857,19 +975,25 @@ def _featured_goal_progress(
     return None  # milestone/frequency — already covered by the cheap path
 
 
-async def get_profile() -> dict[str, Any]:
+async def get_profile(today: date | None = None) -> dict[str, Any]:
     """Derived, goal-aware dashboard config (COACHING_PLAN.md §8.1): what the coach conversation
     has told the profile drives what Home/Progress show, computed fresh server-side every call —
     nothing here is stored, so the tile/module mapping can evolve without a migration. Pre-intake
-    (no coach_profile row yet) degrades to the original fixed layout, not an empty/broken one."""
+    (no coach_profile row yet) degrades to the original fixed layout, not an empty/broken one.
+
+    `today` is the caller's own date (api._client_date); without one the user's stored timezone
+    decides, and only then the server's UTC clock. See _local_today."""
     uid = get_user_id()
-    today = date.today()
     async with connect() as conn:
+        today = _local_today(await repo.get_user(conn, uid), today)
         profile = await repo.get_coach_profile(conn, uid)
         goals = await repo.list_user_goals(conn, uid, status="active")
-        # One fetch covers both consumers: the streak's 90-day/13-week windows and this week's
-        # session count (sliced below) — cheap rows ({id, date, volume_kg}), still SQL-bounded.
-        streak_from = min(_last_n_week_starts(13)[0], today - timedelta(days=89))
+        # One fetch covers both consumers: the flame (which needs the 8-week cadence baseline
+        # sitting BEHIND the 4-week window, plus enough tail that the decayed fuel is exact) and
+        # this week's session count, sliced below. 180 days rather than 90: the fuel store keeps a
+        # residue of every past session, and at the slowest cadence a 90-day cut-off left ~0.06 of
+        # score on the table, which is a third of a band. Still cheap rows, still SQL-bounded.
+        streak_from = min(_last_n_week_starts(13)[0], today - timedelta(days=_STREAK_FETCH_DAYS))
         vols = await repo.session_volumes(conn, uid, date_from=streak_from)
         first_session = await repo.first_session_date(conn, uid)
         # Enough history to find a ~30-day-old bodyweight reading for the fat-loss delta tile.
@@ -919,7 +1043,7 @@ async def get_profile() -> dict[str, Any]:
 
     primary_goal: str | None = (profile or {}).get("primary_goal")
     # vols now spans the streak's 90-day window — slice this week back out for the tile count.
-    sessions_this_week = len([v for v in vols if v["date"] >= _week_start()])
+    sessions_this_week = len([v for v in vols if v["date"] >= _week_start(today)])
     # bodyweight_kg is a Postgres `numeric` column (decoded as Decimal by psycopg) — float() it
     # before any arithmetic, same convention as volume_kg elsewhere in this file, or mixing it
     # with the plain float/int values parsed out of a goal's jsonb `target` raises TypeError.
@@ -965,7 +1089,7 @@ async def get_profile() -> dict[str, Any]:
     )
     bodyweight_delta_30d = None
     if bodyweight is not None:
-        cutoff = date.today() - timedelta(days=30)
+        cutoff = today - timedelta(days=30)
         older = [
             float(m["bodyweight_kg"])
             for m in recent_bm
@@ -998,6 +1122,7 @@ async def get_profile() -> dict[str, Any]:
                 first_session=first_session,
                 training_days_per_week=(profile or {}).get("training_days_per_week"),
                 today=today,
+                fetched_from=streak_from,
             ),
         }
     )
@@ -1145,8 +1270,20 @@ async def rotate_token(lang: str | None = None) -> dict[str, Any]:
             return {"ok": False, "error": "no_email"}
         new_token = await repo.rotate_token(conn, uid)
     lang = lang or email_service.DEFAULT_LANG
-    sent = await email_service.send_magic_link(email, new_token, lang=lang)
-    return {"ok": True, "email_sent": sent}
+    email_id = await email_service.send_magic_link(email, new_token, lang=lang)
+    if email_id:
+        # Same reason as signup: without this mapping a delivery webhook cannot be traced to a
+        # person. A rotation email that silently fails to arrive locks someone out of their own
+        # account, so this is the send whose delivery we most want to see.
+        async with connect() as conn:
+            await repo.record_email_event(
+                conn,
+                resend_email_id=email_id,
+                kind="queued",
+                user_id=uid,
+                detail={"purpose": "token_rotation", "lang": lang},
+            )
+    return {"ok": True, "email_sent": email_id is not None}
 
 
 async def get_volume(bucket: str = "week", period: str | None = None) -> dict[str, Any]:
@@ -1436,9 +1573,17 @@ async def log_coach_event(type: str, payload: dict[str, Any] | None = None) -> d
     return jsonable(present.present_coach_event(row))
 
 
-async def _training_data(conn: repo.Conn, uid: str, profile: dict[str, Any]) -> dict[str, Any]:
-    """Fresh server-computed numbers for prompt layer 5 (§4). The model gets facts, not math."""
-    week_start = _week_start()
+async def _training_data(
+    conn: repo.Conn, uid: str, profile: dict[str, Any], today: date
+) -> dict[str, Any]:
+    """Fresh server-computed numbers for prompt layer 5 (§4). The model gets facts, not math.
+
+    `today` is the USER's date, resolved once by the caller (_local_today) and threaded through
+    every window below. Half-threading it is worse than not threading it at all: the flame would
+    run on the user's Sunday evening while `sessions_completed_this_week` still ran on the
+    server's Monday, and both numbers go into the same prompt — the coach would be told the user
+    has trained zero times this week while their flame burns full."""
+    week_start = _week_start(today)
 
     # Per-muscle volume uses the SAME rolling window as the Home muscle panel, not the calendar
     # week the adherence count below uses. Otherwise the coach and the app contradict each other
@@ -1446,7 +1591,7 @@ async def _training_data(conn: repo.Conn, uid: str, profile: dict[str, Any]) -> 
     # reports chest as untrained, and the coach then tells the user to train a muscle they just
     # hammered. Adherence stays calendar-based — "sessions this week" really is a calendar
     # question; "have I done enough chest volume" is not.
-    muscle_from = date.today() - timedelta(days=stats.ROLLING_WINDOW_DAYS - 1)
+    muscle_from = today - timedelta(days=stats.ROLLING_WINDOW_DAYS - 1)
     rows = await repo.weekly_muscle_rows(conn, uid, date_from=muscle_from)
     load = stats.weekly_muscle_load(rows)
 
@@ -1484,8 +1629,7 @@ async def _training_data(conn: repo.Conn, uid: str, profile: dict[str, Any]) -> 
 
     # The same consistency level the app's flame shows the user (services._streak) — the coach
     # must reason from the numbers the user is looking at, never re-derive its own version.
-    today = date.today()
-    streak_from = min(_last_n_week_starts(13)[0], today - timedelta(days=89))
+    streak_from = min(_last_n_week_starts(13)[0], today - timedelta(days=_STREAK_FETCH_DAYS))
     vols_90 = await repo.session_volumes(conn, uid, date_from=streak_from)
     first_session = await repo.first_session_date(conn, uid)
     consistency = _streak(
@@ -1493,6 +1637,7 @@ async def _training_data(conn: repo.Conn, uid: str, profile: dict[str, Any]) -> 
         first_session=first_session,
         training_days_per_week=profile.get("training_days_per_week"),
         today=today,
+        fetched_from=streak_from,
     )
 
     # The exercises this user already has, id + name only. Every prompt tells the coach to reuse
@@ -1506,7 +1651,22 @@ async def _training_data(conn: repo.Conn, uid: str, profile: dict[str, Any]) -> 
         "week_start": week_start,
         "sessions_completed_this_week": this_week,
         "target_days_per_week": profile.get("training_days_per_week"),
-        "consistency_last_30d": consistency,
+        "consistency_level": consistency,
+        # Named for the window it actually covers, not "total": the rows are the flame's 180-day
+        # fetch, and a field called `_total` would have the model telling a two-year-old account
+        # "you have logged 47 sessions" — the same class of lie that renamed consistency_last_30d.
+        # The level alone is ambiguous in a way that matters to the coach: a brand-new user who
+        # logged their first session, someone genuinely two weeks off plan, and an athlete on the
+        # last day of a prescribed rest week ALL read level 2. Without these two the model cannot
+        # tell them apart, and the checkin rules would open with "what got in the way?" to a
+        # two-day-old account and prescribe a lighter session to someone completing the deload it
+        # advised. Both numbers are free — the dates are already in hand.
+        "days_since_last_session": (
+            (today - max(v["date"] for v in vols_90 if v["date"] <= today)).days
+            if any(v["date"] <= today for v in vols_90)
+            else None
+        ),
+        "training_days_last_180d": len({v["date"] for v in vols_90 if v["date"] <= today}),
         "weekly_sets_by_muscle": landmarks.annotate_weekly_sets(load["muscles"]),
         "recent_sessions": recent,
         "bodyweight_kg": latest_bm[0]["bodyweight_kg"] if latest_bm else None,
@@ -1622,7 +1782,10 @@ async def get_coaching_context(task: str, constraints: str | None = None) -> dic
         goals = await repo.list_user_goals(conn, uid, status="active")
         featured_row = next((g for g in goals if g.get("featured")), None)
         templates = await _templates(conn)
-        training = {} if effective_task == "intake" else await _training_data(conn, uid, profile)
+        today = _local_today(user, None)
+        training = (
+            {} if effective_task == "intake" else await _training_data(conn, uid, profile, today)
+        )
         featured_progress = (
             None
             if effective_task == "intake"

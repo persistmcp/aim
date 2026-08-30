@@ -145,7 +145,8 @@
       "weight": "Peso",
       "workoutsWeek": "Sesiones · sem",
       "volumeWeek": "Volumen · sem",
-      "levelTooltip": "Nivel {{level}} de 6"
+      "levelTooltip": "Nivel {{level}} de 6",
+      "levelHint": "El fuego arde mientras mantienes tu ritmo. Una pausa lo apaga poco a poco; una sesión devuelve un nivel."
     },
     "lastWorkoutShort": "Último entrenamiento: {{when}}"
   },

@@ -145,7 +145,8 @@
       "weight": "Weight",
       "workoutsWeek": "Sessions · wk",
       "volumeWeek": "Volume · wk",
-      "levelTooltip": "Level {{level}} of 6"
+      "levelTooltip": "Level {{level}} of 6",
+      "levelHint": "The fire burns while you keep your own rhythm. A gap dims it a little; one session brings a level back."
     },
     "lastWorkoutShort": "Last workout: {{when}}"
   },

@@ -6,10 +6,13 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { landingPath } from "../shared/languages.mjs";
+import { GUIDE_ONLY_LANGS, landingPath } from "../shared/languages.mjs";
 import { withLandingHead } from "../guides/landing.mjs";
 import {
+  GUIDE_LANGS,
   LANGS,
+  articleLangs,
+  articleSlug,
   privacyPath,
   renderArticle,
   renderGuidesRoot,
@@ -45,7 +48,8 @@ for (const [name, mod] of [
   ["privacy", privacy],
   ...articles.map((a) => [a.slug, a]),
 ]) {
-  const missing = LANGS.filter((l) => !mod[l]);
+  const required = mod.extraLangs ? articleLangs(mod) : LANGS;
+  const missing = required.filter((l) => !mod[l]);
   if (missing.length)
     throw new Error(
       `guides/content/${name}.mjs is missing language block(s): ${missing.join(", ")}. ` +
@@ -53,17 +57,39 @@ for (const [name, mod] of [
     );
 }
 
+// A guide-only language must be declared in shared/languages.mjs, or App.tsx would read its path
+// segment as an auth token and /it/ would boot a broken app shell (Part L gotcha 1).
+for (const a of articles)
+  for (const l of a.extraLangs ?? [])
+    if (!GUIDE_ONLY_LANGS.includes(l))
+      throw new Error(
+        `guides/content/${a.slug}.mjs declares extraLangs "${l}", which is not in ` +
+          `GUIDE_ONLY_LANGS in shared/languages.mjs.`,
+      );
+
+// The Italian hub carries the single Italian guide. It exists so /guides/it/ is a real file rather
+// than an SPA fallback; hub.mjs supplies its copy.
+const langsWithGuides = GUIDE_LANGS.filter(
+  (l) => LANGS.includes(l) || articles.some((a) => articleLangs(a).includes(l)),
+);
+
 let pages = 0;
-for (const lang of LANGS) {
+for (const lang of langsWithGuides) {
+  const guideOnly = !LANGS.includes(lang);
   await mkdir(join(dist, "guides", lang), { recursive: true });
   await writeFile(
     join(dist, "guides", lang, "index.html"),
-    renderHub(hub, articles, lang, buildDate),
+    renderHub(hub, articles, lang, buildDate, {
+      langs: guideOnly ? [lang] : LANGS,
+      robots: guideOnly ? "noindex,follow" : null,
+    }),
   );
   pages += 1;
-  for (const article of articles) {
-    const siblings = articles.filter((a) => a.slug !== article.slug);
-    const dir = join(dist, "guides", lang, article.slug);
+  for (const article of articles.filter((a) => a[lang])) {
+    // Siblings are the other guides that exist in THIS language: a "Read next" card pointing at a
+    // page the language does not have would be a 404 (and an SPA shell, at that).
+    const siblings = articles.filter((a) => a.slug !== article.slug && a[lang]);
+    const dir = join(dist, "guides", lang, articleSlug(article, lang));
     await mkdir(dir, { recursive: true });
     await writeFile(join(dir, "index.html"), renderArticle(article, lang, siblings, buildDate));
     pages += 1;

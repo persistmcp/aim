@@ -145,7 +145,8 @@
       "weight": "Poids",
       "workoutsWeek": "Séances · sem",
       "volumeWeek": "Volume · sem",
-      "levelTooltip": "Niveau {{level}} sur 6"
+      "levelTooltip": "Niveau {{level}} sur 6",
+      "levelHint": "La flamme brûle tant que ton rythme habituel tient. Une pause la fait baisser peu à peu ; une séance rend un niveau."
     },
     "lastWorkoutShort": "Dernière séance : {{when}}"
   },

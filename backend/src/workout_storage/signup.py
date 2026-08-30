@@ -99,7 +99,23 @@ async def signup(request: Request) -> JSONResponse:
         return JSONResponse({"error": "internal error"}, status_code=500)
 
     # Send outside the DB transaction; failure is logged, never surfaced (would leak signup state).
-    sent = await email_service.send_magic_link(email, user["token"], lang=lang)
+    email_id = await email_service.send_magic_link(email, user["token"], lang=lang)
+    sent = email_id is not None
+    if email_id:
+        # Write the mapping from Resend's message id to this person, so a later delivered/opened/
+        # bounced webhook can be traced back to them. Best effort on purpose: the account exists
+        # and the mail is away, and losing telemetry must never fail a signup.
+        try:
+            async with connect() as conn:
+                await repo.record_email_event(
+                    conn,
+                    resend_email_id=email_id,
+                    kind="queued",
+                    user_id=str(user["id"]),
+                    detail={"purpose": "magic_link", "lang": lang},
+                )
+        except Exception:  # noqa: BLE001 - telemetry must not break the signup path
+            log.exception("email event record failed", extra={"event": "email_event_failed"})
     log.info(
         "signup accepted",
         extra={"event": "signup", "email": email, "new_user": created, "email_sent": sent},

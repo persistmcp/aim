@@ -177,8 +177,11 @@ export interface Profile {
   };
   goals: Goal[];
   featured_goal: FeaturedGoal | null;
-  // Rolling 4-week consistency level vs the user's own baseline (services._streak).
-  // level null = not enough history to say anything yet ("insufficient_data" basis).
+  // Consistency level 0-6 from the fuel gauge (services._streak, docs/CONSISTENCY_FLAME.md):
+  // each training day feeds the fire, the fire decays against the user's OWN cadence. `heat` is
+  // the same score kept continuous over seven bands, 0..1 — render from it, never re-derive the
+  // level from it. level 0 = the fire is out; level null = we do not know their rhythm yet
+  // ("insufficient_data"), and Home falls back to the tile grid.
   streak: { level: number | null; basis: string; heat?: number | null } | null;
 }
 

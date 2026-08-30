@@ -7,6 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 import { withLandingHead } from "./guides/landing.mjs";
 import { LANGS } from "./shared/languages.mjs";
+import { navigateFallbackDenylist } from "./shared/swDenylist.mjs";
 
 function figmaAssetResolver(): Plugin {
   return {
@@ -109,24 +110,10 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true,
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
-        // Don't treat API/MCP/cron requests as SPA navigations. /guides/ and /privacy/ pages
-        // and /instructions/ are static HTML outside the app bundle, and file-looking paths
-        // (/sitemap.xml, /robots.txt, /llms.txt) are real files — all of them must hit the
-        // network, or a returning visitor's service worker serves the app shell instead
-        // (seen in prod: /sitemap.xml rendered the app saying "Couldn't load data").
-        navigateFallbackDenylist: [
-          /^\/[^/]+\/(api|mcp)/,
-          /^\/_cron/,
-          /^\/api\//,
-          /^\/guides(\/|$)/,
-          /^\/privacy(\/|$)/,
-          /^\/instructions(\/|$)/,
-          // The non-English landings are prerendered files (dist/<lng>/index.html) with their own
-          // localized head. Without this a returning visitor's worker would answer /ru/ with the
-          // cached English shell — same failure the /sitemap.xml note above describes.
-          new RegExp(`^/(${LANGS.filter((l) => l !== "en").join("|")})(/|$)`),
-          /\.[a-z0-9]+$/i,
-        ],
+        // Anything not owned by the React app must hit the network, or a returning visitor's
+        // service worker serves the cached app shell instead. The list lives in shared/ so it can
+        // be tested — see swDenylist.mjs for why that matters.
+        navigateFallbackDenylist: navigateFallbackDenylist(LANGS),
         runtimeCaching: [
           {
             urlPattern: ({ url }) => /\/[^/]+\/api\//.test(url.pathname),

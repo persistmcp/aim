@@ -14,6 +14,7 @@ import type {
   Summary,
 } from "../data/workouts";
 import * as A from "./adapter";
+import { todayIso } from "./localDate";
 import { ApiError, apiGet } from "./api";
 import { fetchMuscleVolume } from "./muscleVolume";
 import { fetchMuscleBreakdown } from "./muscleBreakdown";
@@ -36,7 +37,10 @@ export const useAdherence = () =>
 export const useProfile = () =>
   useQuery({
     queryKey: ["profile"],
-    queryFn: () => apiGet<Profile>("/profile"),
+    // The flame turns "days since you trained" straight into a score and the server runs in UTC,
+    // so east of UTC the session logged this evening reads as future-dated and is dropped — the
+    // flame ignores the workout you just finished. Same reason the muscle panel sends it.
+    queryFn: () => apiGet<Profile>("/profile", { today: todayIso() }),
     staleTime: STALE,
   });
 

@@ -26,6 +26,9 @@
     { "source": "/_cron/backup", "destination": "/api/index" },
     { "source": "/_cron/reset-demo", "destination": "/api/index" },
     { "source": "/api/public/:path*", "destination": "/api/index" },
+    { "source": "/mcp", "destination": "/api/index" },
+    { "source": "/oauth/:path*", "destination": "/api/index" },
+    { "source": "/:token/oauth/:path*", "destination": "/api/index" },
     { "source": "/:token/mcp", "destination": "/api/index" },
     { "source": "/:token/mcp/:path*", "destination": "/api/index" },
     { "source": "/:token/api", "destination": "/api/index" },
@@ -37,6 +40,14 @@
     { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ],
   "headers": [
+    {
+      "source": "/mcp",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/oauth/:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
     {
       "source": "/:token/mcp",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]

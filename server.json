@@ -3,18 +3,12 @@
   "name": "com.aim-journal/aim",
   "title": "AIm",
   "description": "Chat forgets your training. AIm doesn't — an AI coach for Claude with persistent memory.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "websiteUrl": "https://aim-journal.com/guides/en/connect-workout-tracker-mcp/",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://aim-journal.com/{token}/mcp",
-      "variables": {
-        "token": {
-          "description": "Personal access token from your AIm sign-up link (aim-journal.com)",
-          "isRequired": true
-        }
-      }
+      "url": "https://aim-journal.com/mcp"
     }
   ]
 }

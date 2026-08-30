@@ -2,12 +2,15 @@
   "title": "Conectar com a IA",
   "subtitle": "Adicione este endereço ao Claude ou ao ChatGPT para que a IA registre os seus treinos.",
   "urlLabel": "O seu endereço de conexão",
+  "urlHintOauth": "O Claude vai pedir que você entre e aprove. Não há nada secreto aqui.",
+  "urlHintPersonal": "Este endereço contém a sua chave pessoal — trate-o como uma senha.",
   "status": {
     "waiting": "Aguardando a sua primeira mensagem",
-    "waitingHint": "Diga algo ao seu assistente para testar a conexão, por exemplo:",
-    "testPrompt": "Mostre os meus treinos",
+    "waitingHint": "Diga isto ao seu assistente para testar a conexão:",
+    "testPrompt": "Monte um programa de treino para mim",
     "connected": "Assistente conectado",
-    "lastActive": "Última atividade: {{when}}"
+    "lastActive": "Última atividade: {{when}}",
+    "connectedNext": "Pronto. Diga isto e o treinador começa conhecendo você:"
   },
   "copy": "Copiar",
   "copied": "Copiado",
@@ -16,7 +19,7 @@
   "guideStep2": "Escolha Connectors",
   "guideStep3": "Toque no mais acima da lista de conectores",
   "guideStep4": "Escolha Add custom connector",
-  "guideStep5": "Escreva um nome, por exemplo Aim workout journal, cole o seu endereço e toque em Add",
+  "guideStep5": "Digite um nome, por exemplo Aim workout journal, cole o endereço e pressione Add. O Claude abre o AIm no navegador — entre, se pedir, e pressione Allow.",
   "guideStep6": "Abra o conector que acabou de adicionar: em Tool permissions escolha Always allow para que o Claude não pergunte antes de cada registro",
   "guideStep7": "No chat toque no mais, abra Connectors e ative o seu conector",
   "mobileNote": "Pelo celular: abra Settings → Connectors no app do Claude e adicione o conector ali. As telas são um pouco diferentes, mas os campos são os mesmos dos passos 5 e 6.",
@@ -27,7 +30,7 @@
   "guideStepChatgpt4": "Toque no botão mais ao lado de Search plugins",
   "guideStepChatgpt5": "Escreva um nome, por exemplo Aim, cole o seu endereço em Server URL, deixe Authentication como No Auth, aceite o aviso de risco e toque em Create",
   "guideStepChatgpt6": "Recarregue a página, depois toque no mais ao lado do campo de mensagem e confira se o Aim está ativado",
-  "chatgptDevModeNote": "O ChatGPT chama isso de Developer mode e mostra um aviso vermelho de «elevated risk»: é normal para qualquer conector personalizado, não é algo específico do AIm.",
+  "chatgptDevModeNote": "O ChatGPT chama isso de Developer mode e mostra um aviso vermelho de «elevated risk»: é normal para qualquer conector personalizado, não é algo específico do AIm. O Developer mode só existe nos planos pagos do ChatGPT, então confira o seu antes de começar.",
   "guideNoteChatgpt": "As capturas são da versão web do ChatGPT.",
   "warning": "Não compartilhe este link: ele dá acesso completo ao seu diário."
 }

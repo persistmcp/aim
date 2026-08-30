@@ -63,6 +63,15 @@ const CALCULATOR = (t) => `        <div class="calc">
 export default {
   slug: "one-rep-max-calculator",
 
+  // Italy is one page, not one locale (docs/SEO_PLAN.md P.2 item 3): `calcolo massimale` measured
+  // 0.99 of Italian Hevy, the strongest relative capability term in the whole research, and it is
+  // this page type. The slug is the Italian phrase verbatim rather than a translation of the
+  // English slug, because keyword targets are never translated (Part L) - `calcolatore 1rm` is not
+  // what Italians type. `extraLangs` puts the page in the article's hreflang set and the sitemap
+  // without adding Italian to LANGS, which would demand a full app locale.
+  extraLangs: ["it"],
+  slugs: { it: "calcolo-massimale" },
+
   en: {
     title: "1RM calculator: Epley one rep max with a percentage table",
     description:
@@ -458,6 +467,110 @@ export default {
     cta: {
       title: "Suivez l'estimation automatiquement",
       text: "Décrivez vos séries à Claude ou ChatGPT et AIm les enregistre, calcule le 1RM estimé de chaque exercice et trace la tendance.",
+    },
+  },
+  it: {
+    title: "Calcolo massimale: calcolatore 1RM con formula di Epley",
+    description:
+      "Calcola il massimale da una serie qualsiasi: inserisci peso e ripetizioni. Formula di Epley, tabella delle percentuali e il calcolo su panca, squat e stacco.",
+    lead: "Inserisci quanto hai sollevato davvero e ottieni il massimale stimato con le percentuali di lavoro da usare in scheda. Non serve provare un massimale vero.",
+    sections: [
+      {
+        h2: "Calcolatore del massimale",
+        html: CALCULATOR({
+          weight: "Peso sollevato",
+          reps: "Ripetizioni eseguite",
+          result: "Massimale stimato",
+          pctHeader: "Percentuale del massimale",
+          weightHeader: "Peso",
+          repsHeader: "Ripetizioni tipiche",
+        }),
+      },
+      {
+        h2: "Come si calcola il massimale: la formula di Epley",
+        html: `        <p>Per calcolare il massimale prendi una serie recente eseguita con buona tecnica e moltiplica il peso per (1 + ripetizioni / 30). È la formula di Epley, la stima più usata:</p>
+        <p><strong>massimale stimato = peso x (1 + ripetizioni / 30)</strong></p>
+        <p>Quindi una serie di 100 kg per 5 ripetizioni stima un massimale di circa 116.7 kg. Il conto si fa a mente in pochi secondi, cosa che torna utile quando sei in palestra senza telefono.</p>
+        <p>È la stessa formula che AIm usa internamente, quindi il numero che leggi qui coincide con quello che l'app calcola per una serie registrata.</p>`,
+      },
+      {
+        h2: "Calcolo del massimale su panca, squat e stacco",
+        html: `        <p>La formula vale per tutti gli esercizi, la sua precisione no. Da quale alzata parti cambia quanto puoi fidarti del numero.</p>
+        <h3>Panca piana</h3>
+        <p>È il calcolo più affidabile dei tre. La serie di panca finisce quasi sempre perché cedono pettorali e tricipiti, cioè per la forza che stai misurando, non per altro. Su una serie da 3 a 6 ripetizioni la stima è di solito vicina al vero.</p>
+        <h3>Squat</h3>
+        <p>Sullo squat la stima tende a essere ottimista quando arriva da serie lunghe. Le gambe reggono le alte ripetizioni meglio di quanto la formula assuma: fai più ripetizioni a parità di percentuale e l'aritmetica legge quella resistenza come forza in più. Con 10 o 12 ripetizioni il numero esce gonfiato.</p>
+        <h3>Stacco da terra</h3>
+        <p>Lo stacco è quello che si allontana di più. Presa e lombari cedono prima del resto e chiudono la serie in anticipo, quindi una serie da 10 sottostima quello che alzeresti in singola. Se ti interessa il massimale nello stacco, stimalo da serie corte.</p>
+        <p>Regola pratica: calcola da serie di 3 a 6 ripetizioni, soprattutto nello stacco, e confronta sempre stime che arrivano dallo stesso numero di ripetizioni. Il tuo squat da 5 di questo mese contro il tuo squat da 5 del mese scorso è un confronto pulito. Contro il tuo squat da 12 non lo è.</p>`,
+      },
+      {
+        h2: "A cosa servono le percentuali",
+        html: `        <p>Quasi tutte le schede prescrivono il carico come percentuale del massimale: cinque serie da tre all'85 per cento, tre serie da dieci al 70. La tabella qui sopra converte la tua stima in quei carichi di lavoro, così puoi seguire un programma senza aver mai testato un massimale.</p>
+        <p>Arrotonda a quello che la tua palestra ha davvero. Se la tabella dice 87.5 kg e i dischi ti danno 85 o 90, prendi 85 e punta a fare una ripetizione in più.</p>
+        <p>Una precisazione sulla colonna delle ripetizioni: è una corrispondenza tipica, non una regola. Quante ripetizioni fai tu all'80 per cento dipende dall'alzata e da come ti alleni. Sullo squat di solito ne escono più che sullo stacco, e chi vive nel range delle 5 ne farà meno al 70 per cento di chi si allena a 12.</p>`,
+      },
+      {
+        h2: "Quanto è preciso il calcolo del massimale",
+        html: `        <p>Buono nel mezzo, poco affidabile agli estremi. Tra circa 3 e 8 ripetizioni la stima di solito ci prende. Sopra le 10 ripetizioni sale troppo, perché a quel punto la serie finisce per resistenza muscolare e cedimento della tecnica, non per forza pura. Una serie da 20 produce un numero che quasi sicuramente non sollevi.</p>
+        <p>Poi c'è la parte individuale. Due persone con la stessa serie da 5 possono avere massimali reali diversi, a seconda del tipo di fibre e di quanto sono abituate alle singole pesanti. Chi si allena soprattutto tra le 8 e le 12 ripetizioni di solito resta sotto la propria stima il giorno della prova.</p>
+        <p>L'uso corretto: è un modo per confrontare le tue serie nel tempo, non una previsione di quanto alzeresti oggi. Se la stima sale, stai diventando più forte, che è la domanda che conta davvero.</p>`,
+      },
+      {
+        h2: "Epley, Brzycki e le altre formule",
+        html: `        <p>Epley non è l'unica formula. Le altre due comuni sono Brzycki e Lombardi:</p>
+        <ul>
+        <li><strong>Epley:</strong> peso x (1 + ripetizioni / 30)</li>
+        <li><strong>Brzycki:</strong> peso / (1.0278 - 0.0278 x ripetizioni)</li>
+        <li><strong>Lombardi:</strong> peso x ripetizioni elevato a 0.10</li>
+        </ul>
+        <p>A 5 ripetizioni dicono quasi la stessa cosa. Prendi 100 kg per 5: Epley dà 116.7, Brzycki 112.5, Lombardi 117.5. A 10 ripetizioni si sono già separate, e oltre le 12 il disaccordo tra loro è più grande della differenza che un mese di allenamento produrrebbe.</p>
+        <p>Il che vuol dire che la scelta conta meno della coerenza. Scegline una, usala per tutte le serie e confronta il numero con i tuoi numeri passati, non con quelli di qualcun altro. Cambiare formula a metà di un blocco ti mostra un salto o un calo che in palestra non è mai successo.</p>`,
+      },
+      {
+        h2: "Perché stimare invece di testare il massimale",
+        html: `        <p>Testare il massimale vero serve ogni tanto e costa spesso. È uno sforzo massimale con un rischio di infortunio reale, su alcune alzate richiede qualcuno che ti assista, e ti lascia troppo affaticato per allenarti bene nei giorni seguenti. Se non gareggi in uno sport di forza, non c'è motivo di farlo se non di rado.</p>
+        <p>Una stima presa da una normale serie di lavoro non costa nulla e si ricalcola dopo ogni allenamento. Come segnale di progresso è migliore, perché ne hai uno ogni settimana invece che uno per ciclo.</p>`,
+      },
+      {
+        h2: "Se segni l'RPE",
+        html: `        <p>L'RPE entra nella stessa formula attraverso le ripetizioni di riserva. RPE 8 vuol dire che ne avevi ancora circa 2 nel serbatoio, RPE 9 circa 1. Somma quelle ripetizioni a quelle che hai fatto davvero e inserisci il totale nel calcolatore qui sopra: 100 kg per 5 a RPE 8 vale come uno sforzo da 7 ripetizioni, cioè circa 123 kg.</p>
+        <p>È una stima costruita sopra un'altra stima, perché l'RPE stesso è un giudizio personale, quindi aspettati un errore più ampio che da una serie portata vicino al cedimento. Lo scambio conviene quando vuoi il numero senza tirare le ultime ripetizioni.</p>`,
+      },
+      {
+        h2: "Usare il massimale per far progredire la scheda",
+        html: `        <p>Il motivo per cui vale la pena seguire il massimale stimato è che rende confrontabili serie diverse. Guarda due settimane:</p>
+        <ul>
+        <li>Settimana uno: 100 kg x 5. Stima circa 116.7.</li>
+        <li>Settimana due: 95 kg x 8. Stima circa 120.</li>
+        </ul>
+        <p>Nella seconda settimana il bilanciere era più leggero e la prestazione è stata migliore. Guardando solo il peso penseresti di essere tornato indietro. È il motivo più comune per cui la gente crede di essersi bloccata quando non è vero.</p>
+        <p>Tenerlo a mano su ogni esercizio diventa noioso in fretta. Se preferisci evitarlo, descrivi la serie a un assistente AI e lascia che tenga lui il diario:</p>
+        <div class="prompt"><span class="who">Tu</span>Oggi squat 5x5 a 100 kg. Qual è il mio massimale stimato e sta salendo?</div>
+        <p>Con AIm collegato, l'assistente registra l'allenamento e risponde dallo storico vero: la stima per quell'esercizio e il suo andamento nelle ultime settimane. Puoi scrivergli in italiano; l'app e le altre guide sono in inglese.</p>`,
+      },
+    ],
+    faq: [
+      {
+        q: "Come si calcola il massimale?",
+        a: "Prendi una serie completata con buona tecnica e applica la formula di Epley: peso moltiplicato per (1 + ripetizioni diviso 30). Una serie di 100 kg per 5 ripetizioni dà circa 116.7 kg. Il calcolatore qui sopra lo fa per te e converte il risultato nelle percentuali di lavoro.",
+      },
+      {
+        q: "Come si calcola il massimale nella panca piana?",
+        a: "Con la stessa formula, ed è l'alzata su cui funziona meglio: la serie di panca finisce quando cedono pettorali e tricipiti, cioè per la forza che stai misurando. Usa una serie da 3 a 6 ripetizioni. Sullo stacco la stima è meno affidabile, perché presa e lombari chiudono la serie prima.",
+      },
+      {
+        q: "Il calcolo del massimale è affidabile?",
+        a: "Abbastanza tra circa 3 e 8 ripetizioni. Sopra le 10 tende a sovrastimare, perché la serie diventa una prova di resistenza più che di forza. Usalo per confrontare le tue serie nel tempo, non come previsione di quanto alzeresti oggi.",
+      },
+      {
+        q: "Conviene testare il massimale vero?",
+        a: "Raramente, e solo se hai un motivo come una gara. Comporta un rischio di infortunio e ti costa qualche giorno di allenamento di qualità. Una stima presa da una normale serie di lavoro ti dà la stessa informazione sull'andamento ogni settimana, senza costi.",
+      },
+    ],
+    cta: {
+      title: "Fai calcolare il massimale in automatico",
+      text: "Racconta le tue serie a Claude o ChatGPT e AIm le registra, calcolando il massimale stimato di ogni esercizio e seguendone l'andamento. L'app è in inglese, l'assistente ti risponde in italiano.",
     },
   },
 };

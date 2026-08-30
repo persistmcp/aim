@@ -2,12 +2,15 @@
   "title": "Connexion à l'IA",
   "subtitle": "Ajoutez cette adresse à Claude ou ChatGPT pour que l'IA enregistre vos entraînements.",
   "urlLabel": "Votre adresse de connexion",
+  "urlHintOauth": "Claude vous demandera de vous connecter et d'approuver. Rien ici n'est secret.",
+  "urlHintPersonal": "Cette adresse contient votre clé personnelle : traitez-la comme un mot de passe.",
   "status": {
     "waiting": "En attente de votre premier message",
-    "waitingHint": "Dites quelque chose à votre assistant pour tester la connexion, par exemple :",
-    "testPrompt": "Montre-moi mes séances",
+    "waitingHint": "Dites ceci à votre assistant pour tester la connexion :",
+    "testPrompt": "Crée-moi un programme d'entraînement",
     "connected": "Assistant connecté",
-    "lastActive": "Dernière activité : {{when}}"
+    "lastActive": "Dernière activité : {{when}}",
+    "connectedNext": "C'est fait. Dites ceci et le coach commence par vous connaître :"
   },
   "copy": "Copier",
   "copied": "Copié",
@@ -16,7 +19,7 @@
   "guideStep2": "Choisissez Connectors",
   "guideStep3": "Cliquez sur le plus au-dessus de la liste des connecteurs",
   "guideStep4": "Choisissez Add custom connector",
-  "guideStep5": "Saisissez un nom, par exemple Aim workout journal, collez votre adresse et cliquez sur Add",
+  "guideStep5": "Saisissez un nom, par exemple Aim workout journal, collez l'adresse et appuyez sur Add. Claude ouvre AIm dans le navigateur : connectez-vous si on vous le demande, puis appuyez sur Allow.",
   "guideStep6": "Ouvrez le connecteur que vous venez d'ajouter : dans Tool permissions, choisissez Always allow pour que Claude ne demande pas avant chaque enregistrement",
   "guideStep7": "Dans le chat, cliquez sur le plus, ouvrez Connectors et activez votre connecteur",
   "mobileNote": "Sur téléphone : ouvrez Settings → Connectors dans l'app Claude et ajoutez le connecteur là. Les écrans diffèrent un peu, mais les champs sont les mêmes qu'aux étapes 5 et 6.",
@@ -27,7 +30,7 @@
   "guideStepChatgpt4": "Cliquez sur le bouton plus à côté de Search plugins",
   "guideStepChatgpt5": "Saisissez un nom, par exemple Aim, collez votre adresse dans Server URL, laissez Authentication sur No Auth, acceptez l'avertissement de risque et cliquez sur Create",
   "guideStepChatgpt6": "Rechargez la page, puis cliquez sur le plus à côté du champ de message et vérifiez que Aim est activé",
-  "chatgptDevModeNote": "ChatGPT appelle cela Developer mode et affiche un avertissement rouge « elevated risk » : c'est normal pour tout connecteur personnalisé, rien de spécifique à AIm.",
+  "chatgptDevModeNote": "ChatGPT appelle cela Developer mode et affiche un avertissement rouge « elevated risk » : c'est normal pour tout connecteur personnalisé, rien de spécifique à AIm. Developer mode n'existe que sur les offres payantes de ChatGPT, vérifiez la vôtre avant de commencer.",
   "guideNoteChatgpt": "Les captures viennent de la version web de ChatGPT.",
   "warning": "Ne partagez pas ce lien : il donne un accès complet à votre journal."
 }
