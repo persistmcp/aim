@@ -1,0 +1,12 @@
+# Third party assets
+
+The code in this repository is MIT licensed. See LICENSE.
+
+The exercise illustrations under `web/public/exercises/` are **not** covered by that license. They
+are third party works licensed under CC BY-SA, credited individually in `web/ATTRIBUTIONS.md`, and
+they remain under their own license and its share-alike terms.
+
+This note lives here rather than at the end of LICENSE on purpose. GitHub detects a repository's
+license by matching the file against the known license texts, and any paragraph appended after the
+MIT body makes the match fail: the repository then reports `NOASSERTION` instead of `MIT`, which is
+what several directory listings read when they score a project.
