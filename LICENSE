@@ -19,8 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-NOTE ON THIRD PARTY ASSETS: the exercise illustrations under web/public/exercises/
-are not covered by this license. They are third party works licensed under
-CC BY-SA and are credited individually in web/ATTRIBUTIONS.md; they remain under
-their own license and its share alike terms.
