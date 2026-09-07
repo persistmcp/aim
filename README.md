@@ -1,4 +1,4 @@
-# AIm
+# AIm Workout Journal
 
 A workout tracker your AI assistant writes to. AIm is an **MCP server** plus a **mobile web app
 (PWA)**: you describe a session in Claude or ChatGPT in your own words, the assistant logs it
