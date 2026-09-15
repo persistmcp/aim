@@ -991,28 +991,35 @@ async def delete_body_metric_by_external_id(
 # --- body metrics ------------------------------------------------------------
 
 
+_BODY_METRIC_SCALARS = ("bodyweight_kg", "body_fat_pct", "source", "notes")
+_BODY_METRIC_MAPS = ("measurements", "custom_fields")
+
+
 async def insert_body_metric(conn: Conn, user_id: str, bm: BodyMetric) -> dict[str, Any]:
-    # Manual/chat-logged entries (no external_id) upsert by date: re-logging today's weight
-    # corrects the existing row instead of leaving two ambiguous rows for the same day. Imported
+    # Manual/chat-logged entries (no external_id) are one row per date, and a second write for
+    # that date ADDS to the row rather than replacing it. Until 2026-09-15 it replaced every
+    # column, so "my waist is 84" after this morning's weigh-in silently wiped the weight: the
+    # assistant sends only what the user just said. Now only the fields the caller actually sent
+    # are written (an explicit null still clears one), and the two maps merge key by key, so a
+    # new circumference joins the ones already there and a repeated key is corrected. Imported
     # entries (external_id set, matched/cleaned up by external_id elsewhere) are exempt — a real
     # source document may legitimately carry more than one measurement per date.
     if bm.id is None:
+        sent = bm.model_fields_set
+        assignments = [f"{col} = %s" for col in _BODY_METRIC_SCALARS if col in sent]
+        values: list[Any] = [getattr(bm, col) for col in _BODY_METRIC_SCALARS if col in sent]
+        for col in _BODY_METRIC_MAPS:
+            if col in sent:
+                assignments.append(f"{col} = coalesce({col}, '{{}}'::jsonb) || %s")
+                values.append(Jsonb(getattr(bm, col)))
+        # Nothing to change still has to find the row, so the no-op assignment keeps one query.
+        sets_sql = ", ".join(assignments) or "date = date"
         async with conn.cursor() as cur:
             await cur.execute(
-                "update body_metrics set bodyweight_kg=%s, body_fat_pct=%s, measurements=%s, "
-                "source=%s, notes=%s, custom_fields=%s "
+                f"update body_metrics set {sets_sql} "
                 "where user_id=%s and date=%s and external_id is null "
                 "returning *",
-                [
-                    bm.bodyweight_kg,
-                    bm.body_fat_pct,
-                    Jsonb(bm.measurements),
-                    bm.source,
-                    bm.notes,
-                    Jsonb(bm.custom_fields),
-                    user_id,
-                    bm.date,
-                ],
+                [*values, user_id, bm.date],
             )
             updated = await cur.fetchone()
             if updated is not None:

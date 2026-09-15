@@ -68,6 +68,23 @@ async def test_every_tool_carries_a_title():
         assert title != name, f"{name}: the title should read as an action, not repeat the name"
 
 
+async def test_every_body_metric_field_and_coach_event_parameter_is_described():
+    """Glama's review of 2026-09-14 scored log_body_metric lowest of all twenty tools (2.7/5) with
+    "schema description coverage 0%", and log_coach_event next (3.3) for an unexplained `payload`.
+    The same gap misleads any assistant filling these in, so full coverage is the floor now."""
+    tools_by_name = await _tools()
+    body = tools_by_name["log_body_metric"].parameters
+    metric = body["properties"]["metric"]
+    # fastmcp inlines nested models; fall back to $defs in case a version stops doing so.
+    body_fields = (metric if "properties" in metric else body["$defs"]["BodyMetric"])["properties"]
+    assert set(body_fields) == set(models.BodyMetric.model_fields)
+    assert all(field.get("description") for field in body_fields.values()), [
+        name for name, field in body_fields.items() if not field.get("description")
+    ]
+    coach = tools_by_name["log_coach_event"].parameters["properties"]
+    assert coach["type"].get("description") and coach["payload"].get("description")
+
+
 async def test_writes_declare_whether_they_destroy_data():
     """readOnlyHint=False alone does not tell a client whether a call is safe to allow. Only
     delete_session removes anything; the rest add or amend, and say so explicitly."""

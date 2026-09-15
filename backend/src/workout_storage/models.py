@@ -388,15 +388,55 @@ class Session(_Base):
 
 
 class BodyMetric(_Base):
-    id: str | None = None
-    athlete_id: str | None = None
-    date: Date
-    bodyweight_kg: float | None = Field(default=None, ge=0)
-    body_fat_pct: float | None = Field(default=None, ge=0, le=100)
-    measurements: dict[str, float] = Field(default_factory=dict)
-    source: str | None = None
-    notes: str | None = None
-    custom_fields: dict[str, Any] = Field(default_factory=dict)
+    id: str | None = Field(
+        default=None,
+        description=(
+            "Leave empty when recording a measurement the user gives you: the entry is then keyed"
+            " by its date. An id marks an entry copied from a source document (an export, a"
+            " spreadsheet); import_document manages those, and recording the same id twice fails."
+        ),
+    )
+    athlete_id: str | None = Field(
+        default=None,
+        description="Ignored when recording: every entry belongs to the signed-in user.",
+    )
+    date: Date = Field(
+        description=(
+            "Day the measurement was taken, YYYY-MM-DD in the user's own calendar. Without an id"
+            " there is one entry per day: recording the same date again adds to that day's entry,"
+            " overwriting only the fields and keys you send."
+        ),
+    )
+    bodyweight_kg: float | None = Field(
+        default=None,
+        ge=0,
+        description="Body weight in kilograms. Convert pounds first (1 lb = 0.4536 kg).",
+    )
+    body_fat_pct: float | None = Field(
+        default=None, ge=0, le=100, description="Body-fat percentage, 0 to 100."
+    )
+    measurements: dict[str, float] = Field(
+        default_factory=dict,
+        description=(
+            "Circumferences in centimetres, keyed `<site>_cm`. The app shows `chest_cm`,"
+            " `arm_cm`, `waist_cm` and `thigh_cm`; any other site is stored but not displayed."
+        ),
+    )
+    source: str | None = Field(
+        default=None,
+        description="Where the number came from, free text: `scale`, `tape`, `dexa`, `smart_scale`",
+    )
+    notes: str | None = Field(
+        default=None,
+        description="Context the user gave with the number (fasted, evening, after travel).",
+    )
+    custom_fields: dict[str, Any] = Field(
+        default_factory=dict,
+        description=(
+            "Anything worth keeping that has no field above, such as `resting_hr`. Stored and"
+            " exported, not displayed."
+        ),
+    )
 
 
 # --- top-level document (for import / export) --------------------------------

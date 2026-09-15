@@ -7,9 +7,10 @@ models so the schema Claude sees matches workout_tracker.schema.json.
 from __future__ import annotations
 
 from datetime import date as Date
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from fastmcp import FastMCP
+from pydantic import Field
 
 from . import services
 from .coach import CoachEventType, CoachProfilePatch, GoalInput
@@ -94,7 +95,15 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool(annotations=_writes("Record a body measurement"))
     async def log_body_metric(metric: BodyMetric) -> dict[str, Any]:
-        """Record a body measurement (weight, body-fat %, circumferences) for a date."""
+        """Record the user's body weight, body-fat % or circumferences for one day.
+        Use it whenever the user states a current measurement; training goes to log_session,
+        and reading measurements back is get_body_metrics. The app's weight tile and charts
+        and the coaching context read these entries, not the profile's bodyweight field.
+        One entry per date, and recording the same date again ADDS to it: send only what the
+        user just told you. Fields you leave out keep their stored value, new `measurements` or
+        `custom_fields` keys join the existing ones, and a repeated key or field is overwritten,
+        which is how a wrong number is corrected. Send a field as null to clear it. Returns the
+        whole stored entry for that day. There is no delete."""
         return await services.log_body_metric(metric)
 
     @mcp.tool(annotations=_reads("Get body measurements"))
@@ -274,10 +283,30 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool(annotations=_writes("Record a coaching event"))
     async def log_coach_event(
-        type: CoachEventType, payload: dict[str, Any] | None = None
+        type: Annotated[
+            CoachEventType,
+            Field(description="Which milestone happened. Record it once, when it happens."),
+        ],
+        payload: Annotated[
+            dict[str, Any] | None,
+            Field(
+                description=(
+                    "A small JSON object with the gist, in the user's language, e.g."
+                    ' {"summary": "…", "goal_id": "…"} for a goal_review or'
+                    ' {"reason": "…"} for deload_advised or red_flag_raised. Omit when there'
+                    " is nothing to add."
+                )
+            ),
+        ] = None,
     ) -> dict[str, Any]:
-        """Record a coaching lifecycle event (checkin held, goal review outcome, deload advised,
-        red flag raised) so future conversations can reference it."""
+        """Append a dated milestone to the user's coaching history: a check-in held, a goal
+        reviewed or achieved, a deload advised, a red flag raised, intake started or finished,
+        the profile changed. Call it at the end of the step the coaching prompt names (for
+        example type='checkin' after a check-in), not for ordinary chat, logged workouts
+        (log_session) or goal edits themselves (upsert_goal). Each call adds a new entry, so
+        do not repeat one. The history is kept with the user's data export; no tool reads it
+        back, so it does not replace saving facts through update_coach_profile or upsert_goal.
+        Returns the stored event."""
         return await services.log_coach_event(type.value, payload)
 
     # MCP prompts: slash-command style entry points for clients that surface them (Claude

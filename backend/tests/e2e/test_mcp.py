@@ -51,6 +51,39 @@ async def test_body_metrics_roundtrip(as_user, example_doc):
         assert rows[0]["bodyweight_kg"] == 80
 
 
+async def test_a_second_measurement_for_the_day_adds_to_the_first(as_user):
+    """E-3b (2026-09-15). The assistant sends only what the user just said. A morning weigh-in
+    followed by "my waist is 84" used to leave a row with a waist and no weight, because a second
+    write for the date replaced every column. Driven through the real MCP client, since the rule
+    depends on which keys arrived in the JSON — something only the full path can prove."""
+    async with Client(mcp_server()) as client:
+        await _call(
+            client,
+            "log_body_metric",
+            metric={"date": "2026-09-01", "bodyweight_kg": 82.4, "measurements": {"arm_cm": 38}},
+        )
+        await _call(
+            client,
+            "log_body_metric",
+            metric={"date": "2026-09-01", "measurements": {"waist_cm": 84, "arm_cm": 38.5}},
+        )
+        day = await _call(
+            client, "log_body_metric", metric={"date": "2026-09-01", "notes": "fasted"}
+        )
+        assert day["bodyweight_kg"] == 82.4
+        assert day["measurements"] == {"arm_cm": 38.5, "waist_cm": 84}
+        assert day["notes"] == "fasted"
+
+        cleared = await _call(
+            client, "log_body_metric", metric={"date": "2026-09-01", "bodyweight_kg": None}
+        )
+        assert cleared["bodyweight_kg"] is None
+        assert cleared["measurements"] == {"arm_cm": 38.5, "waist_cm": 84}
+
+        rows = await _call(client, "get_body_metrics", limit=10)
+        assert len([r for r in rows if r["date"] == "2026-09-01"]) == 1
+
+
 async def test_get_stats_progression(as_user, example_doc):
     """E-4."""
     async with Client(mcp_server()) as client:
