@@ -2,7 +2,7 @@
 
 from fastmcp import FastMCP
 
-from workout_storage import tools
+from workout_storage import models, tools
 
 READ_ONLY = {
     "get_session",
