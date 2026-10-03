@@ -13,7 +13,8 @@ CATALOG = {
     "shoulder-press": {
         "name": "Shoulder press",
         "equipment": ["dumbbell"],
-        "primary_muscles": ["shoulders"],
+        "primary_muscles": ["front_delts"],
+        "movement_pattern": "vertical_push",
     },
 }
 
@@ -98,12 +99,43 @@ def test_equipment_mismatch_fails():
     assert any("needs" in v and "barbell" in v for v in out["violations"])
 
 
-def test_injury_overlap_warns_but_does_not_block():
+def test_an_exercise_loading_an_active_injury_is_a_violation():
+    """Matching the area's text ("shoulder") against the exercise's name and muscles missed most
+    real cases (a squat for "right knee" passed). The area is resolved to a body region and
+    matched on movement pattern and primary muscles; a plan that loads it is refused."""
     out = _review_draft(
         _doc([_item(exercise_id="shoulder-press", target_weight_kg=10)]), PROFILE, CATALOG
     )
-    assert out["ok"]
-    assert any("shoulder" in w for w in out["warnings"])
+    assert not out["ok"]
+    [flagged] = [v for v in out["violations"] if "active injury" in v]
+    assert "shoulder-press" in flagged and "region shoulder" in flagged
+
+
+def test_a_knee_injury_flags_the_squat_and_nothing_else():
+    knee = {**PROFILE, "injuries": [{"area": "right knee", "active": True}]}
+    catalog = {
+        **CATALOG,
+        "barbell-squat": {**CATALOG["barbell-squat"], "movement_pattern": "squat"},
+    }
+    out = _review_draft(
+        _doc([_item(target_weight_kg=40), _item(exercise_id="push-up")]), knee, catalog
+    )
+    flagged = [v for v in out["violations"] if "right knee" in v]
+    assert len(flagged) == 1 and "barbell-squat" in flagged[0]
+
+
+def test_a_resolved_injury_flags_nothing():
+    healed = {**PROFILE, "injuries": [{"area": "shoulder", "active": False}]}
+    out = _review_draft(
+        _doc([_item(exercise_id="shoulder-press", target_weight_kg=10)]), healed, CATALOG
+    )
+    assert out["ok"], out["violations"]
+
+
+def test_the_review_reports_and_carries_no_next_step():
+    """The review is data: what passed and what did not, never an order for the next call."""
+    for doc in (_doc([_item(target_weight_kg=40)]), _doc([_item()])):
+        assert set(_review_draft(doc, PROFILE, CATALOG)) == {"ok", "violations", "warnings"}
 
 
 def test_budget_overruns_fail():

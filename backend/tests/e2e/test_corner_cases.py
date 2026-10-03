@@ -254,18 +254,23 @@ async def test_intake_gate_blocks_every_coaching_task(as_user):
             assert ctx["task"] == "intake", task
 
 
-async def test_home_addendum_keys_off_locations_not_equipment(as_user):
-    """A gym-only user gets no home addendum even with bodyweight-only equipment —
-    documents that the switch reads `locations`, not `equipment`."""
+async def test_context_reports_locations_independently_of_equipment(as_user):
+    """Where the user trains and what kit they own are two facts, and the context reports both
+    as stored. The prompt's home addendum used to switch on `locations`, not `equipment`; with
+    the addendum gone, the assistant reads the same switch from `user_profile.locations`, so a
+    gym-only user with bodyweight-only equipment must not come back as a home trainer, and
+    adding home must not touch the equipment."""
     async with Client(mcp_server()) as client:
         gym_patch = {**CORE_PATCH, "locations": ["gym"], "equipment": ["bodyweight"]}
         await _call(client, "update_coach_profile", patch=gym_patch)
         ctx = await _call(client, "get_coaching_context", task="new_program")
-        assert "Home / minimal-equipment addendum" not in ctx["prompt"]
+        assert ctx["user_profile"]["locations"] == ["gym"]
+        assert ctx["user_profile"]["equipment"] == ["bodyweight"]
 
         await _call(client, "update_coach_profile", patch={"locations": ["gym", "home"]})
         ctx2 = await _call(client, "get_coaching_context", task="new_program")
-        assert "Home / minimal-equipment addendum" in ctx2["prompt"]
+        assert sorted(ctx2["user_profile"]["locations"]) == ["gym", "home"]
+        assert ctx2["user_profile"]["equipment"] == ["bodyweight"]
 
 
 async def test_autocreated_exercise_without_muscles_does_not_break_context(as_user):
@@ -280,7 +285,9 @@ async def test_autocreated_exercise_without_muscles_does_not_break_context(as_us
 
         ctx = await _call(client, "get_coaching_context", task="weekly_review")
         assert ctx["task"] == "weekly_review"
-        assert "<training_data>" in ctx["prompt"]
+        data = ctx["training_data"]
+        assert "ex_corner_press" in {e["id"] for e in data["exercise_catalog"]}
+        assert "weekly_sets_by_muscle" in data
 
 
 async def test_deleted_session_leaves_no_stats_behind(as_user):

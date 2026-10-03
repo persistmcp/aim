@@ -93,3 +93,98 @@ async def test_writes_declare_whether_they_destroy_data():
         ann = tools_by_name[name].annotations
         assert ann.readOnlyHint is False, name
         assert ann.destructiveHint is (name == "delete_session"), name
+
+
+def _descriptions(node: object) -> set[str]:
+    """Every `description` string anywhere in a JSON schema, nested models included."""
+    found: set[str] = set()
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if isinstance(current, dict):
+            text = current.get("description")
+            if isinstance(text, str):
+                found.add(text)
+            stack.extend(current.values())
+        elif isinstance(current, list):
+            stack.extend(current)
+    return found
+
+
+async def test_no_text_tells_claude_to_obey_what_the_server_returns():
+    """Behaviour rules live only in the server instructions; tool and parameter descriptions say
+    what a tool does and what a field means, and nothing points the model at a result as
+    instructions to follow. Every text the model reads from us is checked: the server
+    instructions, every tool and prompt description, every rendered prompt body, and every
+    parameter description at any depth of every input schema."""
+    from workout_storage.coaching import SERVER_INSTRUCTIONS
+    from workout_storage.server import mcp as server
+
+    assert server.instructions == SERVER_INSTRUCTIONS
+    registered = FastMCP("test")
+    tools.register(registered)
+    texts = {"server instructions": SERVER_INSTRUCTIONS}
+    for name, t in (await _tools()).items():
+        texts[f"tool {name}"] = t.description or ""
+        for i, d in enumerate(sorted(_descriptions(t.parameters))):
+            texts[f"tool {name} parameter description #{i}"] = d
+    for p in await registered.list_prompts():
+        texts[f"prompt {p.name}"] = p.description or ""
+        rendered = await registered.render_prompt(p.name)
+        texts[f"prompt {p.name} body"] = " ".join(
+            getattr(m.content, "text", "") for m in rendered.messages
+        )
+
+    obey = (
+        "as your instructions",
+        "as instructions",
+        "treat the returned",
+        "the returned prompt",
+        "returned `prompt`",
+        "follow the prompt",
+        "follow the instructions",
+        "follow its",
+        "and follow it",
+        "obey",
+        "do what the",
+        "run it",
+        "instructions it returns",
+        "instructions in the result",
+        "coaching prompt",
+    )
+    directives = (
+        "never push",
+        "drop the subject",
+        "coaching note:",
+        "tell the user and ask",
+        "confirm to the user",
+        "call search_exercise_pool first",
+        "the coaching prompt names",
+        "invent your own",
+        "ask how long",
+        "fix each one",
+        "call import_document again",
+        "never invent a program",
+    )
+    for where, text in texts.items():
+        flat = " ".join(text.split()).lower()
+        for phrase in obey:
+            assert phrase not in flat, f"{where} tells Claude to obey the server: {phrase!r}"
+        if where == "server instructions":
+            continue
+        for phrase in directives:
+            assert phrase not in flat, f"{where} tells Claude how to behave: {phrase!r}"
+
+
+def test_results_carry_no_next_step_order():
+    """review_program_draft and import_document's refusals used to end in `next_step` ("Fix every
+    violation and call import_document again"), log_session in a `coach_hint` note, and the pool
+    search in a `usage` note: orders in a tool result. The import refusals, the nudge and the
+    pool result are built inline in services.py, so the source is checked for the keys."""
+    import inspect
+
+    from workout_storage import services
+
+    source = inspect.getsource(services)
+    for key in ('"next_step"', '"coach_hint"', '"usage"'):
+        assert key not in source, f"services.py still builds a {key} into a tool result"

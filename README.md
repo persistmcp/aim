@@ -3,8 +3,8 @@
 A workout tracker your AI assistant writes to. AIm is an **MCP server** plus a **mobile web app
 (PWA)**: you describe a session in Claude or ChatGPT in your own words, the assistant logs it
 through MCP, and the app shows the program, the history, records, estimated 1RM and per muscle
-load. The coaching prompts live on the server, so the assistant plans from your logged weights
-instead of generic advice.
+load. The server hands the assistant your goal, injuries and logged weights as data, so it plans
+from your training instead of generic advice.
 
 Live at [aim-journal.com](https://aim-journal.com). Free, and it runs inside the AI subscription
 you already pay for rather than being a second one. Guides:
@@ -45,10 +45,11 @@ token instead. Two doors, one scoping rule.
   Epley), `get_program`, `get_goals`, `get_body_metrics`.
 - **Catalogue**: `search_exercise_pool` (a curated global pool with illustrations),
   `list_exercises`, `upsert_exercise`.
-- **Coaching**: `get_coaching_context` is the important one. It returns this user's goal,
-  experience, equipment, injuries and recent loads together with the prompt for the task at hand
-  (next workout, new program, weekly review), so the assistant plans from data rather than from
-  nothing. `review_program_draft`, `update_coach_profile`, `upsert_goal`, `log_coach_event`,
+- **Coaching**: `get_coaching_context` is the important one. It returns data only: this user's
+  goal, experience, equipment, injuries (with the movement patterns that load them), recent
+  working weights, goal-matched planning ranges and the intake state, for the task at hand (next
+  workout, new program, weekly review), so the assistant plans from data rather than from
+  nothing. How the assistant uses it lives in the server's MCP instructions. `review_program_draft`, `update_coach_profile`, `upsert_goal`, `log_coach_event`,
   `log_body_metric` keep that context current.
 
 ## Repo layout

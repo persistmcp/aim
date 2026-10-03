@@ -149,7 +149,7 @@ class InjuryReport(_Base):
 
 
 class CoachProfilePatch(_Base):
-    """One patch = the facts confirmed in conversation right now. Everything optional."""
+    """User-confirmed profile facts; every field is optional and omitted fields are unchanged."""
 
     # Anthropometrics (stored on the users row, see USER_PROFILE_FIELDS): starting-load
     # anchors depend on them, so intake asks — but they are skippable, never blocking.
@@ -216,21 +216,21 @@ class GoalTarget(_Base):
         if self.goal_type == GoalType.trend and self.metric not in (None, "e1rm", "weight"):
             raise ValueError(
                 f"trend goals only support metric='e1rm' or metric='weight' (got {self.metric!r})"
-                " — a trend goal tracks one exercise's climbing number; for volume tracking use"
-                " goal_type='maintenance' (unscoped) or 'weekly_volume' (per-muscle) instead"
+                " — a trend goal tracks one exercise's climbing number; volume is tracked by"
+                " goal_type='maintenance' (unscoped) or 'weekly_volume' (per-muscle)"
             )
         if self.goal_type == GoalType.milestone and self.metric in ("e1rm", "weight", "reps"):
             if not self.exercise_id:
                 raise ValueError(
                     f"milestone goals with metric={self.metric!r} need exercise_id — progress is"
-                    " resolved from that exercise's logged sets; pick the id from list_exercises"
-                    " (create it with upsert_exercise first if it's new)"
+                    " resolved from that exercise's logged sets. Catalog ids are listed by"
+                    " list_exercises; a new exercise enters the catalog through upsert_exercise"
                 )
             if self.value is None:
                 raise ValueError(
                     f"milestone goals with metric={self.metric!r} need a target `value` — a"
-                    " milestone is a point target; for open-ended 'just keep climbing' use"
-                    " goal_type='trend' instead"
+                    " milestone is a point target; an open-ended 'keep climbing' goal is"
+                    " goal_type='trend'"
                 )
         if (
             self.goal_type == GoalType.milestone
@@ -249,8 +249,8 @@ class GoalTarget(_Base):
             )
         if self.goal_type == GoalType.maintenance and self.baseline_value is None:
             raise ValueError(
-                "maintenance goals need baseline_value — the level to hold; use the user's"
-                " current e1rm/weekly sets/weekly volume for the chosen scope"
+                "maintenance goals need baseline_value — the level to hold, in the scope's own"
+                " unit (e1rm, weekly sets or weekly volume)"
             )
         return self
 
@@ -285,7 +285,7 @@ class GoalInput(_Base):
         ):
             raise ValueError(
                 "frequency goals (sessions_per_week) can never be featured — they live in the"
-                " weekly adherence widget; feature the paired outcome goal instead"
+                " weekly adherence widget; an outcome goal can be featured"
             )
         return self
 
@@ -363,7 +363,8 @@ UI_IMPACT: dict[str, list[str]] = {
     "sex": [],
     "birth_date": [],
     "height_cm": [],
-    "bodyweight_kg": ["body_metrics_chart"],
+    # The weight tile and chart read body_metrics rows (log_body_metric), never this field.
+    "bodyweight_kg": [],
     "primary_goal": ["dashboard_layout", "stat_tiles", "progress_default"],
     "goal_detail": [],
     "motivation": [],

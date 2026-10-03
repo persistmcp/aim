@@ -414,3 +414,134 @@ def test_goal_input_featured_and_supersedes_default_and_round_trip():
     ).model_dump(mode="json", exclude_unset=True)
     assert dumped["featured"] is True
     assert dumped["supersedes_goal_id"] == "abc-123"
+
+
+# --- the coaching surface: server instructions plus data-only context (coaching.py) -------------
+
+
+def test_the_server_does_not_send_someone_logging_a_workout_into_the_intake() -> None:
+    """Someone whose first message is "I benched 60 for 10" wants a saved workout, not an
+    interview. The carve-out is pinned: recording is saved directly by log_session or
+    import_document and is named as not using the coaching context, and it sits in the first 512
+    characters, the part every client is known to keep."""
+    from workout_storage.coaching import SERVER_INSTRUCTIONS
+    from workout_storage.server import mcp
+
+    assert mcp.instructions == SERVER_INSTRUCTIONS
+    assert len(SERVER_INSTRUCTIONS) <= 2048
+    text = " ".join(SERVER_INSTRUCTIONS.lower().split())
+    head = text[:512]
+    assert "recording does not use the coaching context" in head
+    assert "saved directly with log_session" in head
+    assert "import_document" in head
+    assert "at the start of any training-related conversation" not in text
+
+
+def test_the_instructions_name_only_fields_the_context_returns() -> None:
+    """The instructions describe the payload by field name; a field they name that the server
+    never returns is an instruction the assistant cannot follow."""
+    from workout_storage.coaching import SERVER_INSTRUCTIONS
+
+    for absent in ("residual_load_by_muscle", "logged_in_app", "runner"):
+        assert absent not in SERVER_INSTRUCTIONS, absent
+
+
+@pytest.mark.parametrize(
+    ("area", "region"),
+    [
+        ("right knee", "knee"),
+        ("правое колено", "knee"),
+        ("поясница", "lower_back"),
+        ("left shoulder", "shoulder"),
+        # "предплечье" (forearm) contains "плеч" (shoulder): wrist must be tried first, or a
+        # forearm strain would take overhead pressing off the plan and leave curls on it.
+        ("предплечье", "wrist"),
+    ],
+)
+def test_an_injury_area_resolves_to_the_region_that_loads_it(area, region):
+    from workout_storage import coaching
+
+    resolved = coaching.injury_region(area)
+    assert resolved is not None, area
+    assert resolved["region"] == region
+
+
+@pytest.mark.parametrize("area", ["upper back", "qwerty zzz", "", None])
+def test_an_area_the_map_cannot_place_is_reported_unplaced_rather_than_guessed(area):
+    """ "upper back" contains "back", which would read as lower back and take every hinge off the
+    plan for a trapezius strain. Unplaced is None, and the context then says loads=null."""
+    from workout_storage import coaching
+
+    assert coaching.injury_region(area) is None
+
+
+def test_the_context_names_the_users_exercises_that_load_an_injury():
+    from workout_storage import coaching
+
+    profile = {**_core_profile(), "injuries": [{"area": "right knee", "active": True}]}
+    catalog = [
+        {"id": "goblet_squat", "movement_pattern": "squat", "primary_muscles": ["quads"]},
+        {"id": "leg_extension", "movement_pattern": "isolation", "primary_muscles": ["quads"]},
+        {"id": "push_up", "movement_pattern": "horizontal_push", "primary_muscles": ["chest"]},
+    ]
+    ctx = coaching.build_context(
+        "next_workout", profile, [], {}, intake_complete=True, catalog=catalog
+    )
+    [injury] = ctx["safety"]["injuries"]
+    assert injury["loads"]["region"] == "knee"
+    assert injury["catalog_exercises_loading_it"] == ["goblet_squat", "leg_extension"]
+    assert "prompt" not in ctx
+
+
+def test_unknown_screening_does_not_read_as_a_clean_one():
+    """parq_flags=None means the health questions were never asked; a bare
+    medical_clearance_advised=false would hide that, so the status says it outright."""
+    from workout_storage import coaching
+
+    never_asked = {k: v for k, v in _core_profile().items() if k != "parq_flags"}
+    ctx = coaching.build_context("next_workout", never_asked, [], {}, intake_complete=False)
+    assert ctx["safety"]["screening_status"] == "not_assessed"
+    assert ctx["safety"]["medical_clearance_advised"] is None
+    answered = coaching.build_context("next_workout", _core_profile(), [], {}, intake_complete=True)
+    assert answered["safety"]["screening_status"] == "answered"
+
+
+def test_intake_offers_exactly_the_values_the_profile_patch_accepts():
+    """`next_field_options` is what the assistant shows the user to pick from. A value the patch
+    accepts but the options leave out is one nobody is offered — here "returning", the level for
+    someone back after a long break."""
+    from workout_storage import coaching
+
+    options = coaching.intake_field_options()
+    assert set(options["experience_level"]) == {e.value for e in coach.CoachExperience}
+    assert set(options["primary_goal"]) == {g.value for g in coach.PrimaryGoal}
+    assert set(options["locations"]) == {loc.value for loc in coach.Location}
+
+
+def test_first_load_estimates_cover_only_the_kit_the_user_has():
+    """A home trainee with dumbbells and a band gets no barbell numbers, and their dumbbell lower
+    bound comes from their own range, not the bar's 20 kg floor. Unknown equipment (empty) is
+    unknown, not "none", so every kit is given then."""
+    from workout_storage import coaching
+
+    home = coaching.first_session_load_estimates(
+        {"sex": "female", "bodyweight_kg": 72, "equipment": ["dumbbell", "resistance_band"]}
+    )
+    assert "barbell_compound_kg" not in home and "empty_barbell_kg" not in home
+    assert home["dumbbell_compound_kg_per_hand"] == [5.0, 11.0]
+    assert home["dumbbell_isolation_kg_per_hand"] == [3, 6]
+
+    gym = coaching.first_session_load_estimates(
+        {"sex": "male", "bodyweight_kg": 82, "equipment": ["barbell"]}
+    )
+    assert gym["barbell_compound_kg"] == [22.5, 50.0]
+    assert "dumbbell_compound_kg_per_hand" not in gym
+
+    unknown = coaching.first_session_load_estimates({})
+    assert {"barbell_compound_kg", "dumbbell_compound_kg_per_hand"} <= set(unknown)
+
+
+def test_bodyweight_in_the_profile_feeds_no_app_surface():
+    """The weight tile and chart read body_metrics rows (log_body_metric), never the profile
+    field, so a write to it must not claim to update the chart."""
+    assert coach.ui_impact_for(["bodyweight_kg"]) == []

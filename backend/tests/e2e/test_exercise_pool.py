@@ -273,13 +273,30 @@ async def test_rename_does_not_repoint_the_pool_link(as_user):
 
 async def test_empty_equipment_means_no_equipment(as_user):
     """`equipment=[]` is how a caller says "this user has nothing" — it used to be falsy and drop
-    the filter entirely, answering a bodyweight beginner with barbell work."""
-    async with Client(mcp_server()) as client:
-        nothing = await _call(client, "search_exercise_pool", equipment=[], limit=100)
-        unfiltered = await _call(client, "search_exercise_pool", limit=100)
+    the filter entirely, answering a bodyweight beginner with barbell work.
+
+    Through the service layer with the app's ceiling: the MCP tool caps a call at 25 entries, and
+    the assertion is about the whole no-equipment set, which is larger than one MCP page."""
+    nothing = await services.search_exercise_pool(equipment=[], limit=100)
+    unfiltered = await services.search_exercise_pool(limit=100)
     assert nothing["count"] < unfiltered["count"]
     for entry in nothing["exercises"]:
         assert set(entry["equipment"]) <= {"bodyweight"}, entry["slug"]
+
+
+async def test_the_mcp_tool_caps_a_search_at_25_entries(as_user):
+    """A large page overflows a model's tool-result budget, so the MCP tool clamps to 25 whatever
+    it is asked for; the app's picker goes through the service layer and still reaches the whole
+    pool. The result is data only: no usage note rides along with the entries."""
+    from workout_storage.tools import MCP_POOL_SEARCH_LIMIT
+
+    assert MCP_POOL_SEARCH_LIMIT == 25
+    async with Client(mcp_server()) as client:
+        capped = await _call(client, "search_exercise_pool", limit=500)
+    assert capped["count"] == MCP_POOL_SEARCH_LIMIT
+    assert set(capped) == {"exercises", "count"}
+    app = await services.search_exercise_pool(limit=100)
+    assert app["count"] > MCP_POOL_SEARCH_LIMIT
 
 
 async def test_generic_names_do_not_resolve_to_a_specific_exercise(as_user):

@@ -391,8 +391,8 @@ class BodyMetric(_Base):
     id: str | None = Field(
         default=None,
         description=(
-            "Leave empty when recording a measurement the user gives you: the entry is then keyed"
-            " by its date. An id marks an entry copied from a source document (an export, a"
+            "Absent for a measurement the user states in conversation: that entry is keyed by its"
+            " date. An id marks an entry copied from a source document (an export, a"
             " spreadsheet); import_document manages those, and recording the same id twice fails."
         ),
     )
@@ -404,13 +404,13 @@ class BodyMetric(_Base):
         description=(
             "Day the measurement was taken, YYYY-MM-DD in the user's own calendar. Without an id"
             " there is one entry per day: recording the same date again adds to that day's entry,"
-            " overwriting only the fields and keys you send."
+            " overwriting only the fields and keys sent."
         ),
     )
     bodyweight_kg: float | None = Field(
         default=None,
         ge=0,
-        description="Body weight in kilograms. Convert pounds first (1 lb = 0.4536 kg).",
+        description="Body weight in kilograms (1 lb = 0.4536 kg).",
     )
     body_fat_pct: float | None = Field(
         default=None, ge=0, le=100, description="Body-fat percentage, 0 to 100."

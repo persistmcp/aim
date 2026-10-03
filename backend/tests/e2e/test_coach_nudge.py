@@ -1,6 +1,9 @@
-"""The coach nudge: a user who only logs workouts gets a throttled server hint in the
-log_session response offering intake (no profile) or a program (profile but no program),
-so the coach isn't dead weight for pure loggers."""
+"""The coach nudge: a user who only logs workouts gets a throttled `coaching_setup` block in the
+log_session response saying the intake (no profile) or a program (profile but no program) is
+missing, so the coach isn't dead weight for pure loggers.
+
+It is data, not a note: a tool result carries no behavioural prose, so the
+block states what is missing and SERVER_INSTRUCTIONS says what an assistant does about it."""
 
 import pytest
 from fastmcp import Client
@@ -26,24 +29,32 @@ SESSION = {
 async def test_first_log_without_intake_carries_intake_hint(as_user):
     async with Client(mcp_server()) as client:
         logged = await _call(client, "log_session", session=SESSION)
-        assert "coach_hint" in logged
-        assert "intake" in logged["coach_hint"]
+        setup = logged["coaching_setup"]
+        assert setup["missing"] == "no_intake"
+        assert setup["intake_complete"] is False
+        assert setup["active_program"] is False
+        assert setup["features_using_intake"]
+        # No prose note travels alongside the data any more.
+        assert "coach_hint" not in logged
 
 
 async def test_nudge_is_throttled_within_cooldown(as_user):
     async with Client(mcp_server()) as client:
         first = await _call(client, "log_session", session=SESSION)
-        assert "coach_hint" in first
+        assert "coaching_setup" in first
         second = await _call(client, "log_session", session={**SESSION, "date": "2026-07-04"})
-        assert "coach_hint" not in second
+        assert "coaching_setup" not in second
 
 
 async def test_intake_done_but_no_program_offers_program(as_user):
     async with Client(mcp_server()) as client:
         await _call(client, "update_coach_profile", patch=CORE_PATCH)
         logged = await _call(client, "log_session", session=SESSION)
-        assert "coach_hint" in logged
-        assert "new_program" in logged["coach_hint"]
+        setup = logged["coaching_setup"]
+        assert setup["missing"] == "no_program"
+        assert setup["intake_complete"] is True
+        assert setup["active_program"] is False
+        assert setup["features_using_program"]
 
 
 async def test_no_nudge_when_intake_and_program_exist(as_user, example_doc):
@@ -51,7 +62,7 @@ async def test_no_nudge_when_intake_and_program_exist(as_user, example_doc):
         await _call(client, "update_coach_profile", patch=CORE_PATCH_GYM)
         await _call(client, "import_document", document=example_doc)
         logged = await _call(client, "log_session", session=SESSION)
-        assert "coach_hint" not in logged
+        assert "coaching_setup" not in logged
 
 
 async def test_nudge_returns_after_cooldown_expires(as_user):
@@ -59,7 +70,7 @@ async def test_nudge_returns_after_cooldown_expires(as_user):
 
     async with Client(mcp_server()) as client:
         first = await _call(client, "log_session", session=SESSION)
-        assert "coach_hint" in first
+        assert "coaching_setup" in first
         # age the throttle event past the 7-day cooldown
         async with connect() as conn:
             await conn.execute(
@@ -67,4 +78,4 @@ async def test_nudge_returns_after_cooldown_expires(as_user):
                 "where type = 'coach_offered'"
             )
         third = await _call(client, "log_session", session={**SESSION, "date": "2026-07-05"})
-        assert "coach_hint" in third
+        assert "coaching_setup" in third

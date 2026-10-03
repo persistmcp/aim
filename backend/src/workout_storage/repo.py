@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 import secrets
 from collections import defaultdict
+from collections.abc import Iterable
 from datetime import date, datetime
 from typing import Any
 
@@ -1055,6 +1056,33 @@ async def list_body_metrics(conn: Conn, user_id: str, *, limit: int = 100) -> li
 
 
 # --- stats source queries ----------------------------------------------------
+
+
+async def sets_for_exercises(
+    conn: Conn, user_id: str, exercise_ids: Iterable[str]
+) -> dict[str, list[dict[str, Any]]]:
+    """``sets_for_exercise`` for several exercises at once, grouped by exercise id.
+
+    One query however many exercises are asked for. Rows carry the same columns and the same
+    per-exercise ordering as ``sets_for_exercise``; an id with no logged sets maps to ``[]``.
+    """
+    out: dict[str, list[dict[str, Any]]] = {ex_id: [] for ex_id in exercise_ids}
+    if not out:
+        return out
+    async with conn.cursor() as cur:
+        await cur.execute(
+            "select e.exercise_id, se.date, s.set_number, s.type, s.weight_kg, s.reps, "
+            "s.rir, s.rpe "
+            "from sets s "
+            "join session_entries e on s.entry_id = e.id "
+            "join sessions se on e.session_id = se.id "
+            "where s.user_id = %s and e.exercise_id = any(%s) "
+            "order by e.exercise_id, se.date, s.set_number",
+            [user_id, list(out)],
+        )
+        for row in await cur.fetchall():
+            out[row["exercise_id"]].append(row)
+    return out
 
 
 async def sets_for_exercise(conn: Conn, user_id: str, exercise_id: str) -> list[dict[str, Any]]:

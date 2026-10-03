@@ -40,9 +40,10 @@ teaches people to paste a live credential into a chat.
 
 Do not plan training from general knowledge. Call `get_coaching_context` first with the matching
 task — `next_workout` to plan a session, `new_program` to build a program, `weekly_review` to
-review the week — and follow the prompt it returns. It carries this person's goal, experience,
+review the week — and build on the data it returns. It carries this person's goal, experience,
 equipment, injuries and logged weights; without it the plan will be wrong for them. If their
-intake is incomplete it returns an intake conversation instead — run that.
+intake is incomplete it returns the intake state instead (`intake.next_field` and the values it
+accepts): ask about that one topic and save the answer with `update_coach_profile`.
 
 Record durable facts the user confirms as they come up, with `update_coach_profile` and
 `upsert_goal`, rather than keeping them only in the conversation. One-off circumstances ("travelling

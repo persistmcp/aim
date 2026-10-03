@@ -54,8 +54,8 @@ _WRITE_RATE_WINDOW = timedelta(hours=1)
 _MAX_DEMO_SESSIONS = 100
 
 _DEMO_LIMIT_MESSAGE = (
-    "This is the public demo account and has reached its {what} limit. Data resets nightly — "
-    "try again later, or get your own free account at https://aim-journal.com/."
+    "This is the public demo account and has reached its {what} limit. Data resets nightly; a "
+    "personal account (https://aim-journal.com/) has no such limit."
 )
 
 
@@ -71,8 +71,8 @@ class DemoGuardMiddleware(Middleware):
         tool = context.message.name
         if tool in _BLOCKED_ON_DEMO:
             raise ValueError(
-                "Bulk import is disabled on the public demo account. Log a session with "
-                "log_session instead, or get your own free account at https://aim-journal.com/."
+                "Bulk import is disabled on the public demo account; log_session works there, "
+                "and a personal account (https://aim-journal.com/) imports files."
             )
         if tool in _WRITE_TOOLS:
             user_id = current_user_id.get()

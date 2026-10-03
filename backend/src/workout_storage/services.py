@@ -8,11 +8,10 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from datetime import UTC, date, datetime, timedelta
-from time import monotonic
 from typing import Any
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from . import coach, landmarks, present, prompts, repo, stats
+from . import coach, coaching, landmarks, present, repo, stats
 from . import email as email_service
 from .context import get_user_id
 from .db import connect
@@ -72,35 +71,45 @@ def _last_n_week_starts(n: int, today: date | None = None) -> list[date]:
 # throttled, because a nag on every log would poison the main loop.
 _NUDGE_EVENT = "coach_offered"
 _NUDGE_COOLDOWN = timedelta(days=7)
-_NUDGE_TEXTS = {
-    "no_intake": (
-        "Coaching note: this user has never met the coach (intake not complete). After "
-        "confirming the log, offer once: a ~2-minute intake to co-create a goal and get a "
-        "program built for their equipment. If they agree, call get_coaching_context with "
-        "task='intake' and follow it. If they decline, drop the subject."
-    ),
-    "no_program": (
-        "Coaching note: this user has no active training program. After confirming the log, "
-        "offer once to build one from their history (if they agree, call get_coaching_context "
-        "with task='new_program' and follow it). If they decline, drop the subject."
-    ),
+_SETUP_FACTS: dict[str, dict[str, Any]] = {
+    "no_intake": {
+        "intake_minutes": 2,
+        "features_using_intake": [
+            "program planning from equipment, schedule and injuries",
+            "starting-weight estimates for exercises with no history",
+            "the goal card in the app",
+        ],
+    },
+    "no_program": {
+        "features_using_program": [
+            "the program section in the app, with each day's exercises and targets",
+        ],
+    },
 }
 
 
-async def _coach_nudge(conn: repo.Conn, uid: str) -> str | None:
-    """A throttled coach_hint for log_session, or None when coaching is already in place."""
+async def _coach_nudge(conn: repo.Conn, uid: str) -> dict[str, Any] | None:
+    """log_session's throttled `coaching_setup`, or None when coaching is already in place.
+
+    Data, not a note: a tool result carries no behavioural text, so this states what is missing
+    and SERVER_INSTRUCTIONS says what an assistant does about it."""
     profile = await repo.ensure_coach_profile(conn, uid)
-    if not coach.is_intake_complete(profile["intake_status"]):
-        reason = "no_intake"
-    elif await repo.get_active_program(conn, uid) is None:
-        reason = "no_program"
-    else:
+    intake_complete = coach.is_intake_complete(profile["intake_status"])
+    has_program = intake_complete and await repo.get_active_program(conn, uid) is not None
+    if intake_complete and has_program:
         return None
+    reason = "no_intake" if not intake_complete else "no_program"
     last = await repo.latest_coach_event(conn, uid, _NUDGE_EVENT)
     if last and datetime.now(UTC) - last["created_at"] < _NUDGE_COOLDOWN:
         return None
     await repo.insert_coach_event(conn, uid, _NUDGE_EVENT, {"reason": reason})
-    return _NUDGE_TEXTS[reason]
+    # What is missing and what it would add, as facts.
+    return {
+        "intake_complete": intake_complete,
+        "active_program": has_program,
+        "missing": reason,
+        **_SETUP_FACTS[reason],
+    }
 
 
 async def log_session(session: Session) -> dict[str, Any]:
@@ -115,9 +124,9 @@ async def log_session(session: Session) -> dict[str, Any]:
         inserted = await repo.get_session(conn, uid, session_id)
         assert inserted is not None  # just inserted in this same transaction
         result = jsonable(present.present_session(inserted))
-        hint = await _coach_nudge(conn, uid)
-        if hint:
-            result["coach_hint"] = hint
+        setup = await _coach_nudge(conn, uid)
+        if setup:
+            result["coaching_setup"] = setup
         return result
 
 
@@ -388,10 +397,6 @@ async def search_exercise_pool(
         {
             "exercises": entries,
             "count": len(entries),
-            "usage": (
-                "Reuse `slug` verbatim as the exercise_id when you write a program, a session or a "
-                "goal. Only invent your own exercise when nothing here fits."
-            ),
         }
     )
 
@@ -404,13 +409,12 @@ async def get_stats(
     async with connect() as conn:
         if kind in ("progression", "prs"):
             if not exercise_id:
-                # The message is read by an LLM that just made this mistake — say what to do next,
-                # not only what was wrong. ("exercise_id is required for this kind" was 4 of the
-                # 7 get_stats calls on the demo account.)
+                # Says where valid ids live and which kind needs none, as facts rather than an
+                # order for the model's next step.
                 raise ValueError(
-                    f"exercise_id is required for kind='{kind}' (it reports on one exercise). "
-                    "Pick an id from list_exercises, or call kind='volume' for overall training "
-                    "volume."
+                    f"exercise_id is required for kind='{kind}' (it reports on one exercise); "
+                    "the user's exercise ids are listed by list_exercises, and kind='volume' "
+                    "reports overall training volume without one."
                 )
             rows = await repo.sets_for_exercise(conn, uid, exercise_id)
             prs = stats.detect_prs(rows)
@@ -1481,7 +1485,9 @@ async def update_coach_profile(patch: coach.CoachProfilePatch) -> dict[str, Any]
                 fields["next_review_date"] = date.today() + timedelta(days=cadence)
 
         after = await repo.update_coach_profile_fields(conn, uid, fields)
+        active_goals = await repo.list_user_goals(conn, uid, status="active")
         user_after = await repo.update_user_anthropometrics(conn, uid, anthro) if anthro else None
+        user_now = user_after or await repo.get_user(conn, uid) or {}
 
         # Full-diff audit trail: nothing the user tells the coach is ever lost (§9.4).
         changed = sorted(
@@ -1505,16 +1511,26 @@ async def update_coach_profile(patch: coach.CoachProfilePatch) -> dict[str, Any]
             await repo.insert_coach_event(conn, uid, "intake_completed", {})
 
     profile_out = present.present_coach_profile(after)
+    profile_out["medical_clearance_advised"] = coaching.clearance_view(after)
     if user_after:
         profile_out.update({k: user_after.get(k) for k in coach.USER_PROFILE_FIELDS})
-    return jsonable(
-        {
-            "profile": profile_out,
-            "changed": changed,
-            "intake_status": after["intake_status"],
-            "ui_impact": coach.ui_impact_for(changed),
-        }
-    )
+    # The intake's state after this write, as data: what is still empty and the values the
+    # enumerated fields take. And once a goal direction is on file but no goal is, two or three
+    # computed candidates in upsert_goal's shape — none of them saved.
+    anthro_now = {k: user_now.get(k) for k in coach.USER_PROFILE_FIELDS}
+    intake_profile = {**profile_out, **anthro_now, "age": anthro_now.get("birth_date")}
+    result: dict[str, Any] = {
+        "profile": profile_out,
+        "changed": changed,
+        "intake_status": after["intake_status"],
+        "intake": coaching.intake_view(
+            intake_profile, complete=coach.is_intake_complete(after["intake_status"])
+        ),
+        "ui_impact": coach.ui_impact_for(changed),
+    }
+    if profile_out.get("primary_goal") and not active_goals:
+        result["goal_candidates"] = coaching.goal_candidates(intake_profile, [], date.today())
+    return jsonable(result)
 
 
 async def upsert_goal(goal: coach.GoalInput) -> dict[str, Any]:
@@ -1544,9 +1560,9 @@ async def upsert_goal(goal: coach.GoalInput) -> dict[str, Any]:
             if exercise_id not in known:
                 sample = ", ".join(sorted(known)[:15]) or "(catalog is empty)"
                 raise ValueError(
-                    f"exercise_id {exercise_id!r} is not in the user's exercise catalog —"
-                    f" goal progress would never resolve. Pick an existing id ({sample}) or"
-                    " create the exercise first with upsert_exercise, then retry."
+                    f"exercise_id {exercise_id!r} is not in the user's exercise catalog, so"
+                    f" goal progress would never resolve. Catalog ids include: {sample}."
+                    " An exercise enters the catalog through upsert_exercise."
                 )
         row = await repo.upsert_user_goal(conn, uid, dumped)
         if dumped.get("status") == coach.GoalStatus.achieved:
@@ -1576,7 +1592,7 @@ async def log_coach_event(type: str, payload: dict[str, Any] | None = None) -> d
 async def _training_data(
     conn: repo.Conn, uid: str, profile: dict[str, Any], today: date
 ) -> dict[str, Any]:
-    """Fresh server-computed numbers for prompt layer 5 (§4). The model gets facts, not math.
+    """Fresh server-computed numbers for the coaching context. The model gets facts, not math.
 
     `today` is the USER's date, resolved once by the caller (_local_today) and threaded through
     every window below. Half-threading it is worse than not threading it at all: the flame would
@@ -1646,6 +1662,10 @@ async def _training_data(
     # frequently did (the observed result is the same movement stored twice under two slugs).
     # Names only: full metadata stays behind list_exercises / search_exercise_pool.
     catalog = await repo.list_exercises(conn, uid)
+    lifts = coaching.recent_lifts(
+        await repo.sets_for_exercises(conn, uid, [e["id"] for e in catalog]),
+        {e["id"]: e["name"] for e in catalog},
+    )
 
     return {
         "week_start": week_start,
@@ -1672,21 +1692,8 @@ async def _training_data(
         "bodyweight_kg": latest_bm[0]["bodyweight_kg"] if latest_bm else None,
         "active_program": program_summary,
         "exercise_catalog": [{"id": e["id"], "name": e["name"]} for e in catalog],
+        "recent_lifts": lifts,
     }
-
-
-# Production prompt rows override the code fallback; cache them briefly so warm serverless
-# invocations don't re-fetch every template body per coaching call (Langfuse-style TTL).
-_PROMPT_CACHE_TTL_SEC = 60.0
-_prompt_cache: dict[str, Any] = {"at": 0.0, "data": None}
-
-
-async def _templates(conn: repo.Conn) -> dict[str, str]:
-    now = monotonic()
-    if _prompt_cache["data"] is None or now - _prompt_cache["at"] > _PROMPT_CACHE_TTL_SEC:
-        _prompt_cache["data"] = await repo.production_prompts(conn)
-        _prompt_cache["at"] = now
-    return {**prompts.TEMPLATES, **_prompt_cache["data"]}
 
 
 def _age_years(birth_date: date | None) -> int | None:
@@ -1757,7 +1764,8 @@ async def _featured_goal_progress_for_prompt(
 
 
 async def get_coaching_context(task: str, constraints: str | None = None) -> dict[str, Any]:
-    """Assembled per-user coaching prompt for the task (COACHING_PLAN.md §4, §5.1)."""
+    """This user's coaching data for the task: profile, safety, intake state, goals, planning
+    parameters and fresh training numbers. Data only (see coaching.build_context)."""
     uid = get_user_id()
     async with connect() as conn:
         profile = await repo.ensure_coach_profile(conn, uid)
@@ -1781,8 +1789,8 @@ async def get_coaching_context(task: str, constraints: str | None = None) -> dic
 
         goals = await repo.list_user_goals(conn, uid, status="active")
         featured_row = next((g for g in goals if g.get("featured")), None)
-        templates = await _templates(conn)
         today = _local_today(user, None)
+        catalog_rows = await repo.list_exercises(conn, uid)
         training = (
             {} if effective_task == "intake" else await _training_data(conn, uid, profile, today)
         )
@@ -1812,17 +1820,20 @@ async def get_coaching_context(task: str, constraints: str | None = None) -> dic
         if featured_progress is not None and g.get("featured"):
             presented["progress"] = featured_progress
         goals_presented.append(presented)
-    result = prompts.assemble(
+    result = coaching.build_context(
         effective_task,
-        templates,
         profile_view,
         goals_presented,
         training,
+        intake_complete=coach.is_intake_complete(profile["intake_status"]),
         constraints=constraints,
+        catalog=catalog_rows,
+        today=today,
     )
     result["intake_required"] = intake_required
-    result["intake_status"] = profile["intake_status"]
-    return jsonable(result)
+    # The task asked for, kept when the answer is the intake instead of it.
+    result["requested_task"] = task
+    return result
 
 
 # Exercises whose only equipment is here need no starting weight (effort comes from reps/variation).
@@ -1845,6 +1856,7 @@ def _review_draft(
             "name": e.name,
             "equipment": [q.value for q in e.equipment],
             "primary_muscles": [m.value for m in e.primary_muscles],
+            "movement_pattern": e.movement_pattern.value if e.movement_pattern else None,
         }
         for e in doc.exercises
     }
@@ -1883,10 +1895,13 @@ def _review_draft(
             )
 
     user_equipment = set(profile.get("equipment") or [])
-    active_injuries = [
-        (i.get("area") or "").lower()
+    # Each active injury resolved to the movement patterns and muscles that load it. Matching the
+    # area's text ("right knee") inside the exercise's name and muscles never matched anything, so
+    # a squat for a knee that hurts in squats passed silently.
+    injury_regions = [
+        (i.get("area"), region)
         for i in (profile.get("injuries") or [])
-        if i.get("active", True)
+        if i.get("active", True) and (region := coaching.injury_region(i.get("area")))
     ]
     session_cap = profile.get("session_length_min")
 
@@ -1903,8 +1918,8 @@ def _review_draft(
                 if ex is None:
                     violations.append(
                         f"{label}: exercise_id not in the user's catalog and not in the "
-                        "document's `exercises` list — add a catalog entry with equipment "
-                        "and primary_muscles"
+                        "document's `exercises` list — a catalog entry needs equipment and "
+                        "primary_muscles"
                     )
                 if item.target_sets is None or item.target_reps is None:
                     violations.append(f"{label}: missing target_sets or target_reps")
@@ -1915,9 +1930,8 @@ def _review_draft(
                 )
                 if needs_load and item.target_weight_kg is None and not has_calibration_note:
                     violations.append(
-                        f"{label}: no target_weight_kg and no calibration note — every loaded "
-                        "exercise needs a starting weight, or a first-session calibration "
-                        "instruction in `notes`"
+                        f"{label}: loaded exercise with no target_weight_kg and no "
+                        "calibration note in `notes`"
                     )
                 if (
                     equipment
@@ -1929,25 +1943,18 @@ def _review_draft(
                         f"{sorted(user_equipment)}"
                     )
                 if ex:
-                    searchable = " ".join(
-                        [ex.get("name") or "", item.exercise_id, *(ex.get("primary_muscles") or [])]
-                    ).lower()
-                    for area in active_injuries:
-                        if area and area in searchable:
-                            warnings.append(
-                                f"{label}: may load the injured area '{area}' — substitute or "
-                                "confirm it is pain-free"
+                    for area, region in injury_regions:
+                        why = coaching.loads_region(ex, region)
+                        if why:
+                            violations.append(
+                                f"{label}: loads the active injury '{area}' "
+                                f"(region {region['region']}, {why})"
                             )
 
     return {
         "ok": not violations,
         "violations": violations,
         "warnings": warnings,
-        "next_step": (
-            "All checks passed — present the draft to the user."
-            if not violations
-            else "Fix every violation and call review_program_draft again before presenting."
-        ),
     }
 
 
@@ -1974,6 +1981,7 @@ async def _review_catalog(conn: Any, uid: str, doc: WorkoutDocument) -> dict[str
             "name": e.get("name"),
             "equipment": e.get("equipment") or [],
             "primary_muscles": e.get("primary_muscles") or [],
+            "movement_pattern": e.get("movement_pattern"),
         }
         for e in await repo.list_exercises(conn, uid)
     }
@@ -1985,6 +1993,7 @@ async def _review_catalog(conn: Any, uid: str, doc: WorkoutDocument) -> dict[str
                 "name": present.present_pool_exercise(row)["name"],
                 "equipment": row.get("equipment") or [],
                 "primary_muscles": row.get("primary_muscles") or [],
+                "movement_pattern": row.get("movement_pattern"),
             },
         )
     return catalog
@@ -2005,7 +2014,7 @@ async def import_document(doc: WorkoutDocument, *, validate: bool = True) -> dic
     Active programs run the same server-side checklist as `review_program_draft`
     (FUNCTIONAL_IMPROVEMENTS_PLAN.md #1) before anything is written: a client that skipped the
     review step (or ignored its violations) can no longer persist a program with missing weights
-    or an equipment mismatch. Violations → `{ok: False, violations, next_step}`, nothing saved
+    or an equipment mismatch. Violations → `{ok: False, violations, written: False}`, nothing saved
     (atomic reject). Only the active program(s) and their own day_templates are checked — an
     archived/completed program bundled into the same document (the "replace" flow's own
     instruction: include the old program as archived) is left alone, and a document with no
@@ -2033,7 +2042,8 @@ async def import_document(doc: WorkoutDocument, *, validate: bool = True) -> dic
             return {
                 "ok": False,
                 "violations": review["violations"],
-                "next_step": "Fix every violation and call import_document again.",
+                "code": "validation_failed",
+                "written": False,
             }
 
     async with connect() as conn:

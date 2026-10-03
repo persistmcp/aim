@@ -1,7 +1,9 @@
 """End-to-end coaching flow through the real FastMCP server (in-memory Client).
 
-Covers the Phase-1 loop from docs/COACHING_PLAN.md: intake gate → eager profile writes with
-ui_impact → goal co-creation → assembled context with methodology/safety/stats layers.
+Covers the Phase-1 loop: intake gate → eager profile writes with ui_impact → goal co-creation →
+the data-only context (intake, safety, planning parameters, training data). The context carries
+no prompt: every test here asserts on a field, which is also what makes a dropped field break a
+test.
 """
 
 import httpx
@@ -42,7 +44,13 @@ async def test_intake_gate_then_unlock(as_user):
         gated = await _call(client, "get_coaching_context", task="next_workout")
         assert gated["intake_required"] is True
         assert gated["task"] == "intake"
-        assert "intake conversation" in gated["prompt"]
+        assert gated["requested_task"] == "next_workout"
+        assert gated["intake"]["complete"] is False
+        assert gated["intake"]["next_field"] == "motivation"  # first topic in intake order
+        # Gated means gated: no planning numbers or training data leak out before the intake.
+        assert "planning_parameters" not in gated
+        assert "training_data" not in gated
+        assert "prompt" not in gated
 
         result = await _call(client, "update_coach_profile", patch=CORE_PATCH)
         assert result["intake_status"] == "core_complete"
@@ -51,9 +59,13 @@ async def test_intake_gate_then_unlock(as_user):
         ctx = await _call(client, "get_coaching_context", task="next_workout")
         assert ctx["intake_required"] is False
         assert ctx["task"] == "next_workout"
-        assert "Hypertrophy methodology" in ctx["prompt"]
-        assert "Home / minimal-equipment addendum" in ctx["prompt"]  # home-only user
-        assert "<training_data>" in ctx["prompt"]
+        assert ctx["intake"]["complete"] is True
+        # The goal's methodology travels as numbers, keyed by the stored primary goal.
+        assert ctx["planning_parameters"]["primary_goal"] == "hypertrophy"
+        assert ctx["planning_parameters"]["weekly_hard_sets_per_muscle"] == [10, 20]
+        assert ctx["user_profile"]["locations"] == ["home"]  # home-only user
+        assert "first_session_load_estimates" in ctx  # a generation task
+        assert "training_data" in ctx
 
 
 async def test_incremental_patches_and_ui_impact(as_user):
@@ -90,14 +102,23 @@ async def test_injury_lifecycle_reaches_safety_layer(as_user):
         assert len(retried["profile"]["injuries"]) == 1
 
         ctx = await _call(client, "get_coaching_context", task="next_workout")
-        assert "shoulder" in ctx["prompt"].split("<user_profile>")[0]  # in the safety layer
+        # In the safety block, resolved to the region and the patterns that load it.
+        assert ctx["safety"]["active_injury_areas"] == ["shoulder"]
+        [injury] = ctx["safety"]["injuries"]
+        assert injury["area"] == "shoulder"
+        assert injury["note"] == "ноет на жиме"
+        assert injury["loads"]["region"] == "shoulder"
+        assert "vertical_push" in injury["loads"]["movement_patterns"]
 
         healed = await _call(
             client, "update_coach_profile", patch={"resolve_injury_areas": ["shoulder"]}
         )
         assert healed["profile"]["injuries"][0]["active"] is False
         ctx2 = await _call(client, "get_coaching_context", task="next_workout")
-        assert "shoulder" not in ctx2["prompt"].split("<user_profile>")[0]
+        assert ctx2["safety"]["active_injury_areas"] == []
+        assert ctx2["safety"]["injuries"] == []
+        # A healed injury is not reported as current anywhere in the context.
+        assert ctx2["user_profile"]["injuries"] == []
 
         # A recurrence after resolution is a NEW report, not a duplicate — it must append.
         again = await _call(
@@ -116,7 +137,52 @@ async def test_red_flag_escalates_deterministically(as_user):
         assert r["profile"]["parq_flags"]["heart_condition"] is False  # from CORE_PATCH
         assert r["profile"]["parq_flags"]["chest_pain"] is True
         ctx = await _call(client, "get_coaching_context", task="next_workout")
-        assert "medical clearance is advised" in ctx["prompt"]
+        # Deterministic: the server sets the flag from the answer, the model does not judge it.
+        assert ctx["safety"]["medical_clearance_advised"] is True
+        assert ctx["safety"]["screening_status"] == "answered"
+        assert ctx["safety"]["parq_flags"]["chest_pain"] is True
+
+
+async def test_update_coach_profile_returns_the_next_intake_field_and_goal_candidates(as_user):
+    """Each intake write answers with where the intake now stands — one next field, not the list
+    of nine — and once a goal direction is on file with no goal saved, computed candidates in
+    upsert_goal's shape. They are offered, not assigned: ratified=false, and none is written."""
+    async with Client(mcp_server()) as client:
+        first = await _call(client, "update_coach_profile", patch={"motivation": "здоровье"})
+        assert first["intake"]["complete"] is False
+        assert first["intake"]["next_field"] == "experience_level"
+        # The offered values are exactly the ones the patch accepts, "returning" included.
+        from workout_storage.coach import CoachExperience
+
+        options = first["intake"]["next_field_options"]
+        assert set(options) == {e.value for e in CoachExperience}
+        assert "goal_candidates" not in first  # no primary_goal yet
+
+        r = await _call(client, "update_coach_profile", patch=CORE_PATCH)
+        assert r["intake"]["complete"] is True
+        candidates = r["goal_candidates"]
+        assert candidates
+        for c in candidates:
+            assert c["ratified"] is False
+            assert c["source"] == "coach_proposed"
+            assert c["basis"]
+        assert await _call(client, "get_goals") == [], "a candidate must not be saved"
+
+        await _call(client, "upsert_goal", goal={"kind": "process", "title": "3 раза в неделю"})
+        after = await _call(client, "update_coach_profile", patch={"schedule_cue": "утром"})
+        assert "goal_candidates" not in after, "a user with an active goal gets no candidates"
+
+
+async def test_never_asked_health_questions_read_as_not_assessed(as_user):
+    """No parq answers on file is not a clean screening: the context says `not_assessed`, and
+    medical_clearance_advised is null rather than false, since false reads as a cleared
+    screening."""
+    async with Client(mcp_server()) as client:
+        no_parq = {k: v for k, v in CORE_PATCH.items() if k != "parq_flags"}
+        await _call(client, "update_coach_profile", patch=no_parq)
+        ctx = await _call(client, "get_coaching_context", task="next_workout")
+        assert ctx["safety"]["screening_status"] == "not_assessed"
+        assert ctx["safety"]["medical_clearance_advised"] is None
 
 
 async def test_explicit_null_clears_a_field(as_user):
@@ -164,7 +230,11 @@ async def test_goal_cocreation_flow(as_user):
 
         await _call(client, "update_coach_profile", patch=CORE_PATCH)
         ctx = await _call(client, "get_coaching_context", task="weekly_review")
-        assert "Жим гантелей 30 кг × 8" in ctx["prompt"]
+        [goal] = ctx["goals"]
+        assert goal["title"] == "Жим гантелей 30 кг × 8"
+        assert goal["ratified"] is True
+        # A user with an active goal is not offered fresh candidates on top of it.
+        assert "goal_candidates" not in ctx
 
 
 async def test_milestone_achieved_then_superseded_by_maintenance_goal(as_user):
@@ -302,7 +372,7 @@ async def test_goal_with_unknown_exercise_id_rejected_with_catalog_hint(as_user)
         assert "bench_press" in str(err.value)  # the hint lists real catalog ids
 
 
-async def test_featured_goal_progress_reaches_the_coaching_prompt(as_user):
+async def test_featured_goal_progress_reaches_the_coaching_context(as_user):
     """weekly_review's "did they hit their goal" check reads the same computed progress the app
     shows — get_coaching_context must attach it, not just the bare goal facts."""
     async with Client(mcp_server()) as client:
@@ -345,21 +415,52 @@ async def test_featured_goal_progress_reaches_the_coaching_prompt(as_user):
         # GoalInput rejects featured frequency goals since 2026-07-21.) The richer
         # weekly_bands/trend/tolerance envelopes are unit-tested directly in
         # test_goal_progress.py, which doesn't need a live MCP round trip to exercise the math.
-        assert "Bench 100kg" in ctx["prompt"]
-        assert '"type": "bar"' in ctx["prompt"]
-        assert '"pct": 80' in ctx["prompt"]  # top weight 80 of the 100 target
+        goal = next(g for g in ctx["goals"] if g["title"] == "Bench 100kg")
+        assert goal["progress"]["type"] == "bar"
+        assert goal["progress"]["pct"] == 80  # top weight 80 of the 100 target
 
 
 async def test_context_carries_program_and_logged_training(as_user, example_doc):
-    """A user with real data gets it in the prompt: program summary, weekly sets, sessions —
+    """A user with real data gets it in the context: program summary, weekly sets, sessions —
     the coach must never plan blind next to an existing program."""
     async with Client(mcp_server()) as client:
         await _call(client, "update_coach_profile", patch=CORE_PATCH_GYM)
         await _call(client, "import_document", document=example_doc)
         ctx = await _call(client, "get_coaching_context", task="next_workout")
-        assert "Верх тела — Тяга/Жим (суперсеты)" in ctx["prompt"]  # active_program summary
-        assert "direct_sets_last_7d" in ctx["prompt"] or "weekly_sets_by_muscle" in ctx["prompt"]
-        assert "recent_sessions" in ctx["prompt"]
+        data = ctx["training_data"]
+        assert "Верх тела — Тяга/Жим (суперсеты)" in str(data["active_program"])
+        assert "weekly_sets_by_muscle" in data
+        assert data["recent_sessions"], "the imported history must reach the coach"
+        assert "recent_lifts" in data
+
+
+async def test_context_carries_the_last_logged_working_sets(as_user):
+    """Starting weights come from what the user last lifted, so the context carries it: per
+    exercise, the working sets of the last day it was trained, warm-ups left out."""
+    async with Client(mcp_server()) as client:
+        await _call(client, "update_coach_profile", patch=CORE_PATCH)
+        for day, weight in (("2026-07-01", 20), ("2026-07-03", 22.5)):
+            await _call(
+                client,
+                "log_session",
+                session={
+                    "date": day,
+                    "entries": [
+                        {
+                            "exercise_id": "ex_db_press",
+                            "sets": [
+                                {"set_number": 1, "weight_kg": 10, "reps": 10, "type": "warmup"},
+                                {"set_number": 2, "weight_kg": weight, "reps": 8},
+                            ],
+                        }
+                    ],
+                },
+            )
+        ctx = await _call(client, "get_coaching_context", task="next_workout")
+    [lift] = [x for x in ctx["training_data"]["recent_lifts"] if x["exercise_id"] == "ex_db_press"]
+    assert lift["last_date"] == "2026-07-03"
+    assert lift["last_sets"] == [{"weight_kg": 22.5, "reps": 8}]
+    assert lift["days_logged"] == 2
 
 
 async def test_constraints_are_transient(as_user):
@@ -371,9 +472,10 @@ async def test_constraints_are_transient(as_user):
             task="next_workout",
             constraints="сегодня только 30 минут",
         )
-        assert "сегодня только 30 минут" in ctx["prompt"]
+        assert ctx["todays_constraints"] == "сегодня только 30 минут"
         again = await _call(client, "get_coaching_context", task="next_workout")
-        assert "сегодня только 30 минут" not in again["prompt"]
+        assert "todays_constraints" not in again
+        assert "сегодня только 30 минут" not in str(again)  # not written into the profile
 
 
 async def test_coach_event_tool_and_me(as_user):
