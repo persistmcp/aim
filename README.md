@@ -1,16 +1,22 @@
 # AIm Workout Journal
 
-A workout tracker your AI assistant writes to. AIm is an **MCP server** plus a **mobile web app
-(PWA)**: you describe a session in Claude or ChatGPT in your own words, the assistant logs it
-through MCP, and the app shows the program, the history, records, estimated 1RM and per muscle
-load. The server hands the assistant your goal, injuries and logged weights as data, so it plans
-from your training instead of generic advice.
+A workout journal that Claude and ChatGPT write to. Tell your assistant what you trained and it
+saves the exercises, sets, reps and weights. Ask it for a program and it builds one from your goal,
+schedule and equipment, checked by AIm before it is kept. The journal opens in the browser on any phone,
+in English, Spanish, French, Portuguese or Russian. Live at [aim-journal.com](https://aim-journal.com).
 
-Live at [aim-journal.com](https://aim-journal.com). Free, and it runs inside the AI subscription
-you already pay for rather than being a second one. Guides:
-[connect a workout tracker over MCP](https://aim-journal.com/guides/en/connect-workout-tracker-mcp/),
-[AI personal trainer](https://aim-journal.com/guides/en/ai-personal-trainer/),
-[1RM calculator](https://aim-journal.com/guides/en/one-rep-max-calculator/).
+**Add it to your assistant**
+
+- **Claude:** open [AIm in the Claude directory](https://claude.ai/directory/aim-workout-journal) and press Connect.
+- **ChatGPT:** open [AIm in the ChatGPT plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ad644464c18819189242a20ca18f1c5) and press Install plugin.
+- **Any other MCP client with OAuth:** add `https://aim-journal.com/mcp` (streamable HTTP).
+
+An AIm window asks for your email and a code it sends you. If you do not have a journal yet, AIm creates
+one there. Press Allow, then try:
+*Make me a workout program in AIm for 3 days a week.*
+
+PT: diário de treino em que o Claude e o ChatGPT registram por você. Adicione pelo diretório do Claude ou do ChatGPT.
+ES: diario de entrenamiento en el que Claude y ChatGPT anotan por usted. Añádalo desde el directorio de Claude o de ChatGPT.
 
 ## How it works
 
@@ -89,7 +95,7 @@ need to build, test and run what is in this repository is in this README.
 ```bash
 cd web
 npm install
-echo 'VITE_API_ORIGIN=https://workout-storage.vercel.app' > .env.local  # dev against prod API
+echo 'VITE_API_ORIGIN=https://aim-journal.com' > .env.local  # dev against prod API
 npm run dev              # http://localhost:5173/{token}
 npm run test             # vitest: pure function + component tests
 npx playwright install chromium   # one time, before the first test:e2e run
