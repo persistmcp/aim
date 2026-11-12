@@ -1,10 +1,31 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.aim-journal/aim",
-  "title": "AIm",
-  "description": "Chat forgets your training. AIm doesn't — an AI coach for Claude with persistent memory.",
-  "version": "1.1.0",
+  "title": "AIm Workout Journal",
+  "description": "Workout journal Claude and ChatGPT write to: log workouts, get a program, see your progress.",
+  "version": "1.3.1",
   "websiteUrl": "https://aim-journal.com/guides/en/connect-workout-tracker-mcp/",
+  "repository": {
+    "url": "https://github.com/persistmcp/aim",
+    "source": "github",
+    "id": "1306678673"
+  },
+  "icons": [
+    {
+      "src": "https://aim-journal.com/icon.svg",
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "src": "https://aim-journal.com/pwa-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    },
+    {
+      "src": "https://aim-journal.com/pwa-192.png",
+      "mimeType": "image/png",
+      "sizes": ["192x192"]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",

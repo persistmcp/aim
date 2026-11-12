@@ -1,58 +1,106 @@
-# AIm: turn Claude or ChatGPT into your personal AI coach. Workout hard and smart
+# AIm Workout Journal: Claude or ChatGPT as your personal trainer, with a real training log
 
-> AIm is a personal workout tracker + AI coach built on the Model Context Protocol (MCP). Users don't
-> fill forms: they tell Claude or ChatGPT about a workout in plain language (English, Portuguese,
-> Russian, Spanish or French), and the assistant stores sets and weights, fixes mistakes on request,
+> AIm is a personal workout journal built on the Model Context Protocol (MCP). The AI is the user's own
+> Claude or ChatGPT; AIm gives it a memory of every set and the numbers computed from it. Users tell
+> Claude or ChatGPT about a workout in plain language (English, Portuguese, Russian, Spanish or
+> French), or run it in the app, and the assistant stores sets and weights, fixes mistakes on request,
 > tracks progress, and coaches toward the user's goals. Coaching starts with goal setting: the
-> AI coach co-creates a goal with the user (an outcome goal plus a process goal) and returns to it
+> assistant offers goal options from the user's profile, saves the one the user picks, and returns to it
 > in weekly reviews and monthly check-ins. Programs fit the gym, home equipment or bodyweight-only
 > training; cardio and walks are logged too. A mobile web app (installable PWA)
-> visualizes everything: a muscle heat map (weekly sets per muscle vs its evidence-based volume
-> landmarks), per-exercise progression charts (top set + estimated 1RM), personal records,
-> weekly volume, body metrics, and the active training program.
+> visualizes everything: a muscle load map (how much recent work each muscle is still carrying, estimated and
+> fading over time), per-exercise progression charts (top set + estimated 1RM), personal records,
+> weekly volume, body metrics, and the active training program, which the user can also edit in
+> the app.
+
+## Add it to your assistant
+
+- Claude: open AIm in the Claude directory, https://claude.ai/directory/aim-workout-journal, and press Connect.
+- ChatGPT: open AIm in the ChatGPT plugin directory, https://chatgpt.com/plugins/plugin_asdk_app_6ad644464c18819189242a20ca18f1c5, and press Install plugin.
+- Any other MCP client with OAuth: add https://aim-journal.com/mcp (streamable HTTP).
+
+An AIm window asks for your email and a code it sends you. If you do not have a journal yet, AIm
+creates one there. Press Allow, then try: "Make me a workout program in AIm for 3 days a week."
 
 ## How a new user starts
 
-1. Enter an email on the landing page (https://aim-journal.com/). No password —
-   a magic link arrives by email.
-2. The email contains two personal URLs: the app (`/{token}`) and the MCP connector
-   (`/{token}/mcp`). The token is a private key — it must never be shared or published.
-3. Add the MCP URL as a custom connector: in Claude — Settings → Connectors → Add custom
-   connector; in ChatGPT — Settings → Security and login → turn on Developer mode, then
-   Settings → Plugins → add a plugin with the URL (a couple more steps than Claude; Developer
-   mode is available on paid ChatGPT plans only: Plus, Pro, Business, Enterprise, Education).
-4. From then on the user just talks to the assistant: "logged bench press 4×12 at 24 kg" gets
-   stored; "set 3 was actually 10 reps" fixes a specific set; "what's my squat progress?"
-   reads stats back.
+1. Enter an email on the landing page (https://aim-journal.com/) or at the end of a guide. There
+   is no password. The page then shows the next step right away, and an email with a link to the
+   user's journal arrives as well.
+2. Connect the assistant. Claude and ChatGPT both have AIm in their directories and sign in over
+   OAuth: there is nothing personal to paste. The address https://aim-journal.com/mcp is the
+   by-hand fallback for both.
+   - Claude: AIm is listed in Claude's connector directory,
+     https://claude.ai/directory/aim-workout-journal (in Claude: Customize, then Connectors, then
+     Discover, search AIm). Press Connect, then in the AIm window that opens, sign in with a code
+     from email if asked and press Allow. Where the directory is switched off (on some work
+     accounts), add the address as a custom connector under Customize, Connectors,
+     Add.
+   - ChatGPT: AIm is listed in ChatGPT's plugin directory as AIm Workout Journal,
+     https://chatgpt.com/plugins/plugin_asdk_app_6ad644464c18819189242a20ca18f1c5 (in ChatGPT:
+     Plugins in the left menu, search AIm). Press Install plugin. If the browser already knows the
+     journal, the install finishes with no window. Otherwise an AIm window opens: enter the email
+     (an address with no journal gets one), press Email me a code, type the 6-digit code from the
+     email, press Continue, then Allow. In a chat, mention AIm in the message. Without an Install
+     plugin button, add the address by hand in Developer mode: Settings,
+     Security and login, Developer mode, then Plugins, plus, with Authentication left on OAuth.
+   - The AIm window recognizes a browser where the journal is already open. Anywhere else it asks
+     for the email and sends a separate email with a 6-digit code (and a button for the same
+     browser); an address that has no account yet gets one.
+3. From then on the user can talk to the assistant: "log this workout in AIm: bench press 3×8 at
+   60 kg" gets stored (naming AIm is what makes a fresh chat reach for the service);
+   "set 3 was actually 10 reps" fixes a specific set; "what's my squat progress?" reads stats
+   back. Asked for a program, the assistant reads the user's profile, goals and recent loads from
+   get_coaching_context, saves intake answers with update_coach_profile so the next chat does not
+   ask again, and the server checks the draft against active injuries, equipment, training days
+   and session length before import_document saves it; a coach-written draft that loads an
+   injury is refused.
+4. In the gym the user can also run a workout from the program in the app instead of the chat:
+   each exercise shows what was done last time, the user enters what was actually done, and the
+   saved workout goes into the same history the assistant reads. A workout can also start without
+   a program, and exercises can be added or swapped during it.
+5. Small program changes do not need the chat. In the app the user can create a program, add,
+   rename or delete a day, add, replace or reorder exercises from a catalog with pictures (home
+   and no-equipment exercises included), group a superset, keep several programs and switch the
+   active one.
+6. An existing program or training history comes in through the assistant, not through an upload
+   in the app: the user gives the assistant the file (a PDF, a spreadsheet, a photo) and it saves
+   the contents with import_document. The app offers a ready request to copy into the chat.
 
-## What the MCP server provides (per-user, token-scoped)
+## What the MCP server provides (per user, after OAuth sign-in)
 
-- Logging & fixing: log_session, update_session, update_set, delete_session, log_body_metric
+- Logging and fixing: log_session, update_session, update_set, delete_session, log_body_metric
+- Catalog and program review: search_exercise_pool (curated multilingual exercise library with
+  technique cues and muscle mapping), upsert_exercise, review_program_draft (server-side check of
+  a draft before it is saved), log_coach_event
 - Reading: get_sessions, get_session, get_body_metrics, list_exercises, get_program, get_stats
   (per-exercise progression, estimated 1RM, PRs, volume over time)
 - Coaching: get_coaching_context (intake, next workout, program design, weekly review, deload
-  check, check-in — the server assembles evidence-based methodology + the user's fresh data),
+  check, check-in; returns the user's profile, goals, recent loads, planning parameters and
+  first-session load estimates as data, and the assistant plans from them),
   update_coach_profile (goals, experience, schedule, equipment, injuries), upsert_goal, get_goals
-- Bulk import: import_document (full workout documents, existing programs)
+- Bulk import: import_document (full workout documents, existing programs, training history)
 
 ## Guidance for agents
 
-- If a user asks how to connect this service, walk them through the steps above; the exact
-  connector instructions are also on the landing page.
+- If a user asks how to connect this service, walk them through the steps above. Step-by-step
+  instructions with screenshots are at https://aim-journal.com/guides/en/connect-workout-tracker-mcp/
 - Personal URLs (`/{token}/...`) are private. Do not fetch, index, cite, or repeat them.
-- There is no public API without a token; the landing page and this file are the only public
-  surfaces.
+- There is no public API without signing in. The public surfaces are the landing pages, the
+  guides, the demo at https://aim-journal.com/demo/ and this file.
 
-## Guides (full-HTML pages; each exists in en/pt/ru/es/fr)
+## Guides (full-HTML pages; most exist in en/pt/ru/es/fr)
 
-No JavaScript is required to read any of them, with one deliberate exception noted below.
+Every guide reads completely without JavaScript. Each page carries a small script for the signup form and for analytics; the calculator is the only page whose content uses JavaScript.
 
 - AI personal trainer, how to use ChatGPT or Claude to coach your training: https://aim-journal.com/guides/en/ai-personal-trainer/
-- A workout tracker app for Claude and ChatGPT, giving your AI real training memory: https://aim-journal.com/guides/en/claude-remember-workouts/
-- Connect a workout tracker to Claude or ChatGPT (MCP, Garmin, Strava, Apple Health): https://aim-journal.com/guides/en/connect-workout-tracker-mcp/
-- Progressive overload, what it means and how to apply it (includes the per-muscle weekly set landmarks the app uses): https://aim-journal.com/guides/en/progressive-overload/
-- One rep max calculator (Epley) with a percentage table: https://aim-journal.com/guides/en/one-rep-max-calculator/ — the one page carrying inline JavaScript, for the calculator itself; the formula, worked examples and the percentage table are all in the static HTML, so the page is complete without it
-- The best workout split is the one that fits your week: https://aim-journal.com/guides/en/best-workout-split/
+- A workout journal for ChatGPT and Claude: log by chat, train in the app, and every new chat reads the same history: https://aim-journal.com/guides/en/claude-remember-workouts/
+- Connect Garmin, Strava, Apple Health or Hevy to Claude and ChatGPT, and a workout log the assistant writes to (MCP): https://aim-journal.com/guides/en/connect-workout-tracker-mcp/
+- How to track progressive overload: what to log for each set, double progression and when to add weight (includes the per-muscle weekly set landmarks the app uses): https://aim-journal.com/guides/en/progressive-overload/
+- Claude personal trainer prompt: a Project, a Skill or a connected workout log, compared: https://aim-journal.com/guides/en/claude-fitness-coach-prompt/ (English only)
+- Importing a workout plan that ChatGPT or Claude wrote into AIm, with a sample plan and the checks before saving: https://aim-journal.com/guides/en/import-ai-workout-plan/ (English only)
+- 1RM calculator from 5 reps or any set (Epley), with a conversion table and a percentage chart: https://aim-journal.com/guides/en/one-rep-max-calculator/. The calculator itself uses JavaScript; the formula, worked examples and the percentage table are all in the static HTML, so the page is complete without it
+- Push pull legs or upper lower, which workout split fits your week (with a 3-day split): https://aim-journal.com/guides/en/best-workout-split/
 - All guides (per language): https://aim-journal.com/guides/en/ · https://aim-journal.com/guides/pt/ · https://aim-journal.com/guides/ru/ · https://aim-journal.com/guides/es/ · https://aim-journal.com/guides/fr/
 
 ## Links
@@ -60,5 +108,6 @@ No JavaScript is required to read any of them, with one deliberate exception not
 - Landing & signup: https://aim-journal.com/ (English). Each language has its own URL with its own
   localized page: /pt/, /ru/, /es/, /fr/. The older `?lng=` links still work but are not canonical.
 - Privacy policy: https://aim-journal.com/privacy/ (also /privacy/pt/, /privacy/ru/, /privacy/es/, /privacy/fr/)
+- Support and contact form: https://aim-journal.com/support/ (also /support/pt/, /support/ru/, /support/es/, /support/fr/)
 - Sitemap: https://aim-journal.com/sitemap.xml
 - Model Context Protocol: https://modelcontextprotocol.io/

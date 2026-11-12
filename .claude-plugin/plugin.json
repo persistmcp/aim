@@ -1,8 +1,8 @@
 {
   "name": "aim",
-  "displayName": "AIm workout coach",
-  "version": "1.0.0",
-  "description": "Turn Claude into a strength coach with memory: log workouts in your own words, and have it plan from your logged weights instead of generic advice.",
+  "displayName": "AIm Workout Journal",
+  "version": "1.0.1",
+  "description": "A workout journal Claude writes to. Claude plans your program and logs your workouts.",
   "author": {
     "name": "AIm",
     "url": "https://aim-journal.com"

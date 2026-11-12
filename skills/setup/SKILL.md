@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Connect the AIm workout coach to this account. Use when the AIm tools are missing, when a tool call fails with an authentication error, or when the user asks how to set up, connect, sign up for, or reconnect AIm.
+description: Connect the AIm workout journal to this account. Use when the AIm tools are missing, when a tool call fails with an authentication error, or when the user asks how to set up, connect, sign up for, or reconnect AIm.
 ---
 
 # Connecting AIm
@@ -25,8 +25,8 @@ connection is done. Most of this skill is therefore about *not* getting in the w
    a link; opening that link on the same device returns them to the same screen, signed in. That
    is the whole recovery path.
 
-4. **If they do not have an account yet**, they can sign up free at <https://aim-journal.com>. No
-   card, and it runs inside the AI subscription they already pay for. If they only want to look
+4. **If they do not have an account yet**, they can sign up at <https://aim-journal.com> with an
+   email. It runs inside the AI subscription they already pay for. If they only want to look
    around first, point them at the demo at <https://aim-journal.com/demo> — it is shared, resets
    nightly, and is not a place to log real training.
 
